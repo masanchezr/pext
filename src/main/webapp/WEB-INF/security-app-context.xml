@@ -1,0 +1,103 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                    http://www.springframework.org/schema/security
+                    http://www.springframework.org/schema/security/spring-security-4.2.xsd ">
+	<beans:import resource="classpath*:applicationContext.xml" />
+
+	<http pattern="/employee/**" authentication-manager-ref="authenticationMgr">
+		<access-denied-handler error-page="/403employee" />
+		<intercept-url pattern="/employee/admin"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/myincidents"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/beforeday"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/againday"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/in"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/out"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newoperation"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/daily"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newconcept"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newincome"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newincident"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newentrymoney"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/searchschedule"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/entrymoneychangemachine"
+			access="hasRole('ROLE_RD')" />
+		<form-login login-page="/employee/login"
+			default-target-url="/employee/admin" authentication-failure-url="/employee/login"
+			always-use-default-target="true" login-processing-url="/employee/jspringsecuritychecke" />
+	</http>
+
+	<http pattern="/admin/**" authentication-manager-ref="authenticationMgr">
+		<access-denied-handler error-page="/403admin" />
+		<logout logout-url="/admin/j_spring_security_logout"
+			logout-success-url="/admin/login" invalidate-session="true" />
+		<intercept-url pattern="/admin/admin" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newcalendar" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/searchschedule" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/calendar" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/daily" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/calendar" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newentrysafe" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newentrymoney" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newentrymachine" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/againday*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/beforeday*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/updateoperation*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/pendingissues" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newproviding" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/providingtotal" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/totalsafe" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/luckiaAward" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/resetcm" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/searchmonthreset" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/searchticketsByDay"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/changemachinetotal"
+			access="hasRole('ROLE_ADMIN')" />
+		<form-login login-page="/admin/login" default-target-url="/admin/admin"
+			authentication-failure-url="/admin/login" always-use-default-target="true"
+			login-processing-url="/admin/jspringsecuritycheck" />
+	</http>
+
+	<http authentication-manager-ref="authenticationMgr">
+		<access-denied-handler error-page="/403" />
+		<logout logout-url="/j_spring_security_logout"
+			logout-success-url="/login" invalidate-session="true" />
+		<form-login login-page="/login" default-target-url="/adminboss"
+			authentication-failure-url="/login" always-use-default-target="true" />
+		<intercept-url pattern="/adminboss" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/newuser" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/newentrymoney" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchschedule" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/summaryincome" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/summaryexpenses" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchregister" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchrecharges" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/daily" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchtpv" access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchentrysortsafe" access="hasRole('ROLE_BOSS')" />
+	</http>
+
+	<authentication-manager id="authenticationMgr">
+		<authentication-provider>
+			<jdbc-user-service role-prefix="ROLE_"
+				data-source-ref="dataSource"
+				users-by-username-query="select username,password, enabled from users where username=?"
+				authorities-by-username-query="select username, role from roles where username =?  " />
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>  

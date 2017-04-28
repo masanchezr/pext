@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<import resource="classpath*:spring-db-context.xml" />
+	<bean id="mapper" class="org.dozer.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>mapping-dozer.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="userValidator" class="com.co.validators.UserValidator" />
+	<bean id="entrymoneyFormValidator" class="com.co.validators.EntryMoneyValidator" />
+	<bean id="searchDatesFormValidator" class="com.co.validators.SearchDatesFormValidator" />
+	<bean id="incidentValidator" class="com.co.validators.IncidentValidator" />
+	<bean id="incomeValidator" class="com.co.validators.IncomeValidator" />
+	<bean id="incidentService" class="com.co.services.incidents.IncidentServiceImpl" />
+	<bean id="mailIncidentService" class="com.co.services.mails.MailServiceImpl" />
+	<bean id="entryMoneyService" class="com.bar.services.entrymoney.EntryMoneyServiceImpl" />
+	<bean id="userService" class="com.co.services.users.UserServiceImpl" />
+	<bean id="paymentService" class="com.co.services.payments.PaymentServiceImpl" />
+	<bean id="incomeService" class="com.bar.services.income.IncomeServiceImpl" />
+	<bean id="dailyService" class="com.bar.services.dailies.DailyServiceImpl" />
+</beans>

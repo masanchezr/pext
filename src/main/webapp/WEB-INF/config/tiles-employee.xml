@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- employee -->
+	<definition name="templateEmployee" template="/WEB-INF/views/employee/template.jsp" />
+	<definition name="templateLoginEmployee" template="/WEB-INF/views/employee/templateLogin.jsp" />
+	<definition name="adminemployee" extends="templateEmployee">
+		<put-attribute name="body" value="/WEB-INF/views/employee/admin.jsp" />
+	</definition>
+	<definition name="loginemployee" extends="templateLoginEmployee">
+		<put-attribute name="body" value="/WEB-INF/views/employee/login.jsp" />
+	</definition>
+	<definition name="successemployee" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/success.jsp" />
+	</definition>
+	<definition name="newconcept" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/otherconcepts/newotherconcept.jsp" />
+	</definition>
+	<definition name="daily" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/daily/daily.jsp" />
+	</definition>
+	<definition name="searchdailyem" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/daily/searchdaily.jsp" />
+	</definition>
+	<definition name="403employee" extends="templateLoginEmployee">
+		<put-attribute name="body" value="/WEB-INF/views/employee/403.jsp" />
+	</definition>
+	<definition name="noselected" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/noselected.jsp" />
+	</definition>
+	<definition name="notdaily" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/daily/notdaily.jsp" />
+	</definition>
+	<definition name="in" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/inout/in.jsp" />
+	</definition>
+	<definition name="out" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/inout/out.jsp" />
+	</definition>
+	<definition name="inoutsuccess" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/inout/inoutsuccess.jsp" />
+	</definition>
+	<definition name="newincident" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/incidents/newincident.jsp" />
+	</definition>
+	<definition name="saveincident" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/incidents/resultsaveincident.jsp" />
+	</definition>
+	<definition name="myincidents" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/incidents/myincidents.jsp" />
+	</definition>
+	<definition name="newoperation" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/operations/newoperation.jsp" />
+	</definition>
+	<definition name="updateoperation" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/operations/updateoperation.jsp" />
+	</definition>
+	<definition name="newincome" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/newincome.jsp" />
+	</definition>
+	<definition name="searchschedulee" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/calendar/searchschedule.jsp" />
+	</definition>
+	<definition name="schedulee" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/calendar/schedule.jsp" />
+	</definition>
+	<definition name="newentrymoney" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/newentrymoney.jsp" />
+	</definition>
+	<definition name="newentrymachine" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/newentrymachine.jsp" />
+	</definition>
+</tiles-definitions>
