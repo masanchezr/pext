@@ -19,14 +19,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${summary}" var="s">
+							<c:forEach items="${expenses}" var="s">
 								<tr>
 									<td><c:out value="${s.award.name}" /></td>
 									<td><c:out value="${s.amount}" /><i class="fa fa-euro"></i></td>
 								</tr>
 							</c:forEach>
+							<tr>
+								<td><spring:message code="gratifications" /></td>
+								<td><c:out value="${gratifications}" /><i
+									class="fa fa-euro"></i></td>
+							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div>
+					<spring:message code="total" />
+					<c:out value="${total}" />
+					<i class="fa fa-euro"></i>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,62 @@
+package com.gu.dbaccess.entities;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "safe")
+public class SafeEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idsafe")
+	private Long idsafe;
+
+	@Column(name = "creationdate")
+	private Date creationdate;
+
+	@Column(name = "amount")
+	private BigDecimal amount;
+
+	@Column(name = "total")
+	private BigDecimal total;
+
+	public Long getIdsafe() {
+		return idsafe;
+	}
+
+	public void setIdsafe(Long idsafe) {
+		this.idsafe = idsafe;
+	}
+
+	public Date getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		this.creationdate = creationdate;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+}

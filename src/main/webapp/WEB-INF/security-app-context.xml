@@ -36,6 +36,12 @@
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/entrymoneychangemachine"
 			access="hasRole('ROLE_RD')" />
+		<intercept-url pattern="/employee/newgratification"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/registernumber"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/lastgratifications"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<form-login login-page="/employee/login"
 			default-target-url="/employee/admin" authentication-failure-url="/employee/login"
 			always-use-default-target="true" login-processing-url="/employee/jspringsecuritychecke" />

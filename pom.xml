@@ -1,15 +1,86 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.bar.web</groupId>
-		<artifactId>web</artifactId>
+	<groupId>com.gu.web</groupId>
+	<artifactId>web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springframework-version>4.3.8.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.10.RELEASE</org.springframework-version>
 		<spring-security-version>4.2.1.RELEASE</spring-security-version>
 		<tiles-version>3.0.7</tiles-version>
 	</properties>
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<property>
+					<name>environment.type</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<properties>
+				<database.url>jdbc:mysql://localhost:3306/usera</database.url>
+				<database.user>root</database.user>
+				<database.password>Noviembre2012</database.password>
+				<anyvalue.name>God</anyvalue.name>
+			</properties>
+			<build>
+				<finalName>usera</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+						</configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<!-- mvn install -Denvironment.type=production -->
+		<profile>
+			<id>openshift</id>
+			<activation>
+				<property>
+					<name>environment.type</name>
+					<value>production</value>
+				</property>
+			</activation>
+			<properties>
+				<database.url>jdbc:mysql://172.30.182.33:3306/useradb</database.url>
+				<database.user>user4R4</database.user>
+				<database.password>JIwBbTOI3PJE1RkH</database.password>
+				<anyvalue.name>Satan</anyvalue.name>
+			</properties>
+			<build>
+				<finalName>usera</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+							<outputDirectory>deployments</outputDirectory>
+							<warName>ROOT</warName>
+						</configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -95,11 +166,6 @@
 			<version>1.11.0.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.1.8.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
@@ -124,7 +190,6 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-
 		<!-- Log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -132,81 +197,4 @@
 			<version>1.2.17</version>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>development</id>
-			<activation>
-				<property>
-					<name>environment.type</name>
-					<value>dev</value>
-				</property>
-			</activation>
-			<properties>
-				<database.url>jdbc:mysql://localhost:3306/bar</database.url>
-				<database.user>root</database.user>
-				<database.password>Noviembre2012</database.password>
-				<anyvalue.name>God</anyvalue.name>
-			</properties>
-			<build>
-				<finalName>bar</finalName>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>3.0.0</version>
-						<configuration>
-							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-						</configuration>
-					</plugin>
-				</plugins>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-		<!-- mvn install -Denvironment.type=production -->
-		<profile>
-			<id>openshift</id>
-			<activation>
-				<property>
-					<name>environment.type</name>
-					<value>production</value>
-				</property>
-			</activation>
-			<properties>
-				<database.url>jdbc:mysql://127.2.75.1:3306/bar</database.url>
-				<database.user>admin3nHqeJC</database.user>
-				<database.password>gZb2lpIlwpzP</database.password>
-				<anyvalue.name>Satan</anyvalue.name>
-			</properties>
-			<build>
-				<finalName>bar</finalName>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-							<outputDirectory>deployments</outputDirectory>
-							<warName>ROOT</warName>
-						</configuration>
-					</plugin>
-				</plugins>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-	</profiles>
-	<!-- parent>
-		<groupId>com.comun</groupId>
-		<artifactId>parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent> -->
 </project>

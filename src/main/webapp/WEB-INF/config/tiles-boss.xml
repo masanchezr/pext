@@ -6,6 +6,7 @@
 <tiles-definitions>
 	<!-- workshop -->
 	<definition name="templateBoss" template="/WEB-INF/views/boss/template.jsp" />
+	<definition name="templateDate" template="/WEB-INF/views/boss/templateDate.jsp" />
 	<definition name="templateLogin" template="/WEB-INF/views/boss/templateLogin.jsp" />
 	<definition name="loginboss" extends="templateLogin">
 		<put-attribute name="body" value="/WEB-INF/views/boss/login.jsp" />
@@ -105,6 +106,10 @@
 	<definition name="recharges" extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/recharges/recharges.jsp" />
+	</definition>
+	<definition name="searchdaily" extends="templateDate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/dailies/searchdaily.jsp" />
 	</definition>
 	<definition name="403" extends="templateLogin">
 		<put-attribute name="body" value="/WEB-INF/views/boss/403.jsp" />

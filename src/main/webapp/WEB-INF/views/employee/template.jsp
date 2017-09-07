@@ -67,9 +67,39 @@
 								var="operations">
 							</spring:url> <a href="${operations}"> <i class="fa fa-euro fa-fw"></i> <spring:message
 									code="expenses" /></a></li>
-						<li><spring:url value="/employee/newincome" var="income">
-							</spring:url> <a href="${income}"> <i class="fa fa-beer fa-fw"></i> <spring:message
-									code="income" /></a></li>
+						<li><a href="#"><i class="fa fa-money fa-fw"></i> <spring:message
+									code="gratifications" /><span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><spring:url value="/employee/registernumber"
+										var="registernumber">
+									</spring:url> <a href="${registernumber}"> <spring:message
+											code="registergratification" /></a></li>
+								<li><spring:url value="/employee/newgratification"
+										var="gratifications">
+									</spring:url> <a href="${gratifications}"> <spring:message
+											code="paygratification" /></a></li>
+								<li><spring:url value="/employee/lastgratifications"
+										var="lastgratifications">
+									</spring:url> <a href="${lastgratifications}"> <spring:message
+											code="lastgratifications" /></a></li>
+							</ul></li>
+						<li><a href="#"><i class="fa fa-beer fa-fw"></i> <spring:message
+									code="income" /><span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><spring:url value="/employee/newincome" var="income">
+									</spring:url> <a href="${income}"><spring:message code="bardrinks" /></a></li>
+								<li><spring:url value="/employee/newincomeluckia"
+										var="incomeluckia">
+									</spring:url> <a href="${incomeluckia}"><spring:message
+											code="incomeluckia" /></a></li>
+								<li><spring:url value="/employee/newincomemachine"
+										var="incomemachine">
+									</spring:url> <a href="${incomemachine}"><spring:message
+											code="incomemachine" /></a></li>
+								<li><spring:url value="/employee/newreturn" var="return">
+									</spring:url> <a href="${return}"><spring:message
+											code="returnmoneyemployee" /></a></li>
+							</ul></li>
 						<li><spring:url value="/employee/searchschedule"
 								var="searchschedule" /><a href="${searchschedule}"> <i
 								class="fa fa-calendar fa-fw"></i> <spring:message
@@ -122,6 +152,8 @@
 		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
+	<script
+		src="<spring:url value="/resources/js/employee/operations.js"/>"></script>
 	<script>
 		$(function() {
 			$("#sandbox-container input").datepicker({

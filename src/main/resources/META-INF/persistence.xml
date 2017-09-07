@@ -4,17 +4,35 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 	http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	<persistence-unit name="barPU" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="useraPU" transaction-type="RESOURCE_LOCAL">
 		<properties>
 			<property name="hibernate.query.factory_class"
 				value="org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 		</properties>
-		<class>com.bar.dbaccess.entities.PaymentEntity</class>
-		<class>com.bar.dbaccess.entities.DailyEntity</class>
-		<class>com.bar.dbaccess.entities.IncomeEntity</class>
-		<class>com.bar.dbaccess.entities.IncidentEntity</class>
-		<class>com.bar.dbaccess.entities.UserEntity</class>
-		<class>com.bar.dbaccess.entities.EntryMoneyEntity</class>		
+		<class>com.gu.dbaccess.entities.EntryMoneyEntity</class>
+		<class>com.gu.dbaccess.entities.UserEntity</class>
+		<class>com.gu.dbaccess.entities.RegisterEntity</class>
+		<class>com.gu.dbaccess.entities.EmployeeEntity</class>
+		<class>com.gu.dbaccess.entities.TimeEntity</class>
+		<class>com.gu.dbaccess.entities.ScheduleEntity</class>
+		<class>com.gu.dbaccess.entities.MachineEntity</class>
+		<class>com.gu.dbaccess.entities.ChangeMachineEntity</class>
+		<class>com.gu.dbaccess.entities.OperationEntity</class>
+		<class>com.gu.dbaccess.entities.OperationNotAllowedEntity</class>
+		<class>com.gu.dbaccess.entities.AwardEntity</class>
+		<class>com.gu.dbaccess.entities.PaymentEntity</class>
+		<class>com.gu.dbaccess.entities.DailyEntity</class>
+		<class>com.gu.dbaccess.entities.IncidentEntity</class>
+		<class>com.gu.dbaccess.entities.BarDrinkEntity</class>
+		<class>com.gu.dbaccess.entities.SafeEntity</class>
+		<class>com.gu.dbaccess.entities.TakeEntity</class>
+		<class>com.gu.dbaccess.entities.ProvidingEntity</class>
+		<class>com.gu.dbaccess.entities.ChangeMachineTotalEntity</class>
+		<class>com.gu.dbaccess.entities.RoleEntity</class>
+		<class>com.gu.dbaccess.entities.IncomeLuckiaEntity</class>
+		<class>com.gu.dbaccess.entities.IncomeMachineEntity</class>
+		<class>com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity</class>
+		<class>com.gu.dbaccess.entities.GratificationEntity</class>
 	</persistence-unit>
 </persistence>

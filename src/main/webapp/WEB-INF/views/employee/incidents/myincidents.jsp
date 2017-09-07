@@ -34,7 +34,7 @@
 										<td><c:out value="${incident.idincident}" /></td>
 										<td><c:out value="${incident.description}" /></td>
 										<td><fmt:formatDate value="${incident.creationdate}"
-												type="time" /></td>
+												type="both" dateStyle="short" /></td>
 										<td><c:if test="${incident.state}">
 												<spring:message code="resolved" />
 											</c:if> <c:if test="${!incident.state}">

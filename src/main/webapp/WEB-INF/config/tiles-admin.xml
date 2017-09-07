@@ -16,7 +16,7 @@
 	<definition name="successadmin" extends="templateAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/success.jsp" />
 	</definition>
-	<definition name="searchdaily" extends="templateAdmin">
+	<definition name="searchdailyadmin" extends="templateAdmin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/searchdaily.jsp" />
 	</definition>

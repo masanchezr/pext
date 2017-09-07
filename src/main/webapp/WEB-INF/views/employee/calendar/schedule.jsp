@@ -41,7 +41,9 @@
 									<c:forEach items="${schedule}" var="s" varStatus="statusdate"
 										begin="${statusdate.index+(status.index*7)}"
 										end="${statusdate.index+(status.index*7)+6}">
-										<td><c:out value="${s.employee.alias}" /></td>
+										<td><c:forEach items="${s.employees}" var="employee">
+												<c:out value="${employee.alias}" />
+											</c:forEach></td>
 									</c:forEach>
 								</tr>
 							</c:forEach>

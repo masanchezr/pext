@@ -11,7 +11,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<spring:message code="amount" />
 								<form:input class="form-control" path="amount" />
@@ -19,6 +19,11 @@
 									<label class="control-label" for="inputSuccess"><form:errors
 											path="amount" /></label>
 								</div>
+							</div>
+							<div class="form-group">
+								<spring:message code="lastdate" />
+								<form:input class="form-control" path="creationdate"
+									disabled="true" />
 							</div>
 							<div class="form-group">
 								<form:button class="btn btn-success" value="submit">

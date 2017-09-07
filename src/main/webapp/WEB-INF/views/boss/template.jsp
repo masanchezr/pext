@@ -78,7 +78,7 @@
 					<ul class="nav" id="side-menu">
 						<li><spring:url value="/daily" var="daily"></spring:url> <a
 							href="${daily}"><i class="fa fa-calendar fa-fw"></i> <spring:message
-									code="daily" /></a></li>
+									code="dailies" /></a></li>
 						<li><spring:url value="/searchtpv" var="searchtpv"></spring:url>
 							<a href="${searchtpv}"><i class="fa fa-credit-card fa-fw"></i>
 								<spring:message code="operationstpv" /></a></li>

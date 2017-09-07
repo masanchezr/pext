@@ -74,7 +74,19 @@
 	</definition>
 	<definition name="newincome" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/newincome.jsp" />
+			value="/WEB-INF/views/employee/income/newincome.jsp" />
+	</definition>
+	<definition name="incomeluckia" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/income/newincomeluckia.jsp" />
+	</definition>
+	<definition name="incomemachine" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/income/incomemachine.jsp" />
+	</definition>
+	<definition name="returnmoneyemployee" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/income/returnmoneyemployee.jsp" />
 	</definition>
 	<definition name="searchschedulee" extends="templateEmployee">
 		<put-attribute name="body"
@@ -91,5 +103,17 @@
 	<definition name="newentrymachine" extends="templateEmployee">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/newentrymachine.jsp" />
+	</definition>
+	<definition name="newgratification" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/gratifications/gratification.jsp" />
+	</definition>
+	<definition name="registergratification" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/gratifications/registergratification.jsp" />
+	</definition>
+	<definition name="lastgratifications" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/gratifications/lastgratifications.jsp" />
 	</definition>
 </tiles-definitions>

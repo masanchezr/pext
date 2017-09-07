@@ -12,16 +12,36 @@
 					<div class="col-lg-6">
 						<div class="row">
 							<div class="form-group">
-								<spring:message code="username" />
-								<form:input class="form-control" path="username" />
+								<spring:message code="fullname" var="fullname" />
+								<form:input class="form-control" path="name"
+									placeholder="${fullname}" />
+								<div class="form-group has-error">
+									<label class="control-label" for="inputSuccess"> <form:errors
+											path="name" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<spring:message code="alias" var="alias" />
+								<form:input class="form-control" path="alias"
+									placeholder="${alias}" />
+								<div class="form-group has-error">
+									<label class="control-label" for="inputSuccess"> <form:errors
+											path="alias" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<spring:message code="username" var="username" />
+								<form:input class="form-control" path="username"
+									placeholder="${username}" />
 								<div class="form-group has-error">
 									<label class="control-label" for="inputSuccess"> <form:errors
 											path="username" /></label>
 								</div>
 							</div>
 							<div class="form-group">
-								<spring:message code="password" />
-								<form:input class="form-control" path="password" />
+								<spring:message code="password" var="password" />
+								<form:input class="form-control" path="password"
+									placeholder="${password}" />
 								<div class="form-group has-error">
 									<label class="control-label" for="inputSuccess"> <form:errors
 											path="password" /></label>
@@ -30,6 +50,15 @@
 							<div class="form-group">
 								<spring:message code="active" />
 								<form:checkbox path="enabled" />
+							</div>
+							<div class="form-group">
+								<spring:message code="role" var="role" />
+								<form:input class="form-control" path="role"
+									placeholder="${role}" />
+								<div class="form-group has-error">
+									<label class="control-label" for="inputSuccess"> <form:errors
+											path="role" /></label>
+								</div>
 							</div>
 							<div class="form-group">
 								<form:button class="btn btn-success" value="submit">
