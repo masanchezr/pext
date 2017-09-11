@@ -18,8 +18,6 @@ public class Constants {
 	/** EXTENSION PNG **/
 	public static final String PNG = ".png";
 
-	public static final String OPENSHIFT_DATA_DIR = "OPENSHIFT_DATA_DIR";
-
 	public static final String[] ORIGIN = { "CAJA FUERTE", "EXTERIOR (BANCO)" };
 
 	public static final String CAJAFUERTE = "CAJA FUERTE";
