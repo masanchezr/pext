@@ -14,7 +14,7 @@ import com.gu.dbaccess.entities.GratificationEntity;
 
 public interface GratificationsRepository extends CrudRepository<GratificationEntity, Long> {
 
-	@Query("select o from GratificationEntity o where DATE(o.paydate)=:cdate order by o.creationdate")
+	@Query("select o from GratificationEntity o where DATE(o.paydate)=:cdate order by o.paydate")
 	public List<GratificationEntity> searchByPaydate(@Param("cdate") @Temporal(TemporalType.DATE) Date creationdate);
 
 	public List<GratificationEntity> findByCreationdateBetweenAndPaydateIsNull(Date lastdate, Date creationdate);
