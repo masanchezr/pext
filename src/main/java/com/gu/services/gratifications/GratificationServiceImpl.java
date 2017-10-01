@@ -45,10 +45,35 @@ public class GratificationServiceImpl implements GratificationService {
 			Calendar t = Calendar.getInstance();
 			c.setTime(g.getCreationdate());
 			t.setTime(new Date());
-			if (t.get(Calendar.DAY_OF_MONTH) - c.get(Calendar.DAY_OF_MONTH) == 1) {
-				return g;
+			if (t.get(Calendar.YEAR) == c.get(Calendar.YEAR)) {
+				if (t.get(Calendar.MONTH) == c.get(Calendar.MONTH)) {
+					if (t.get(Calendar.DAY_OF_MONTH) - c.get(Calendar.DAY_OF_MONTH) == 1) {
+						return g;
+					} else {
+						return null;
+					}
+				} else {
+					if (t.get(Calendar.MONTH) - c.get(Calendar.MONTH) == 1) {
+						if (c.getActualMaximum(Calendar.DAY_OF_MONTH) == c.get(Calendar.DAY_OF_MONTH)
+								&& t.get(Calendar.DAY_OF_MONTH) == 1) {
+							return g;
+						} else {
+							return null;
+						}
+					} else {
+						return null;
+					}
+				}
 			} else {
-				return null;
+				if (t.get(Calendar.MONTH) == Calendar.JANUARY && c.get(Calendar.MONTH) == Calendar.DECEMBER) {
+					if (t.get(Calendar.DAY_OF_MONTH) == 1 && c.get(Calendar.DAY_OF_MONTH) == 31) {
+						return g;
+					} else {
+						return null;
+					}
+				} else {
+					return null;
+				}
 			}
 		} else {
 			return null;
