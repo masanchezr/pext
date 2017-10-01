@@ -49,6 +49,7 @@
 							<c:forEach items="${daily.gratifications}" var="operation">
 								<tr>
 									<td><spring:message code="gratification" /> <c:out
+											value="${operation.idgratification}" /> <c:out
 											value="${operation.machine.name}" /></td>
 									<td><fmt:formatDate value="${operation.paydate}"
 											type="time" /></td>
