@@ -84,20 +84,4 @@ public class OperationsBossController {
 		model.addObject("recharges", operationService.recharges(searchForm.getDatefrom()));
 		return model;
 	}
-
-	@RequestMapping(value = "/searchtpv")
-	public ModelAndView searchtpv() {
-		ModelAndView model = new ModelAndView("searchtpv");
-		model.addObject("searchForm", new SearchByDatesForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/resulttpv")
-	public ModelAndView resulttpv(@ModelAttribute("searchForm") SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView();
-		model.addAllObjects(operationService.getOperationsTpv(searchForm.getDatefrom()));
-		model.setViewName("resulttpv");
-		return model;
-	}
-
 }

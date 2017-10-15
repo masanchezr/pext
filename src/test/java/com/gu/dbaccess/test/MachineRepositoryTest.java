@@ -21,7 +21,7 @@ public class MachineRepositoryTest {
 
 	@Test
 	public void findByOrderByOrderTest() {
-		List<MachineEntity> machines = machinerepository.findByOrderByOrder();
+		List<MachineEntity> machines = machinerepository.findByOrderByOrdermachine();
 		Iterator<MachineEntity> imachines = machines.iterator();
 		while (imachines.hasNext()) {
 			System.out.println(imachines.next().getName());

@@ -20,7 +20,7 @@ public class MachineEntity {
 	private Boolean onoff;
 
 	@Column(name = "order")
-	private Long order;
+	private Long ordermachine;
 
 	public Long getIdmachine() {
 		return idmachine;
@@ -46,12 +46,12 @@ public class MachineEntity {
 		this.onoff = onoff;
 	}
 
-	public Long getOrder() {
-		return order;
+	public Long getOrdermachine() {
+		return ordermachine;
 	}
 
-	public void setOrder(Long order) {
-		this.order = order;
+	public void setOrdermachine(Long order) {
+		this.ordermachine = order;
 	}
 
 }

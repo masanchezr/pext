@@ -24,7 +24,7 @@ public class IncomeMachinesController {
 	@RequestMapping(value = "/employee/newincomemachine")
 	public ModelAndView newincomemachine() {
 		ModelAndView model = new ModelAndView("incomemachine");
-		model.addObject("machines", machineservice.searchAllMachinesOrder());
+		model.addObject("machines", machineservice.searchMachinesOrder());
 		model.addObject("incomeForm", new IncomeMachineEntity());
 		return model;
 	}

@@ -35,12 +35,16 @@
 		<intercept-url pattern="/employee/searchschedule"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/entrymoneychangemachine"
-			access="hasRole('ROLE_RD')" />
+			access="hasAnyRole('ROLE_BOSS','ROLE_RD')" />
 		<intercept-url pattern="/employee/newgratification"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/registernumber"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/lastgratifications"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newtpv"
+			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
+		<intercept-url pattern="/employee/newpaymentchangemachine"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<form-login login-page="/employee/login"
 			default-target-url="/employee/admin" authentication-failure-url="/employee/login"

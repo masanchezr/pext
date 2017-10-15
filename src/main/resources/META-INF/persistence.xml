@@ -34,5 +34,8 @@
 		<class>com.gu.dbaccess.entities.IncomeMachineEntity</class>
 		<class>com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity</class>
 		<class>com.gu.dbaccess.entities.GratificationEntity</class>
+		<class>com.gu.dbaccess.entities.MessageEntity</class>
+		<class>com.gu.dbaccess.entities.TPVEntity</class>
+		<class>com.gu.dbaccess.entities.AwardsChangeMachineEntity</class>
 	</persistence-unit>
 </persistence>

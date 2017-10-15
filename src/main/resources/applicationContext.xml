@@ -20,8 +20,10 @@
 	<bean id="operationsValidator" class="com.gu.validators.OperationsValidator" />
 	<bean id="incidentValidator" class="com.gu.employee.validators.IncidentValidator" />
 	<bean id="incomeValidator" class="com.gu.employee.validators.IncomeValidator" />
+	<bean id="tpvalidator" class="com.gu.employee.validators.TPValidator" />
+	<bean id="changeMachineValidator" class="com.gu.employee.validators.ChangeMachineValidator" />
 	<bean id="safevalidator" class="com.gu.admin.validators.SafeValidator" />
-	<bean id="changeMachineValidator" class="com.gu.admin.validators.ChangeMachineValidator" />
+	<bean id="changeMachineAdminValidator" class="com.gu.admin.validators.ChangeMachineValidator" />
 	<bean id="providingValidator" class="com.gu.admin.validators.ProvidingValidator" />
 	<bean id="incidentService" class="com.gu.services.incidents.IncidentServiceImpl" />
 	<bean id="mailIncidentService" class="com.gu.services.mails.MailServiceImpl" />
@@ -44,4 +46,6 @@
 	<bean id="incomeLuckiaService" class="com.gu.services.incomeluckia.IncomeLuckiaServiceImpl" />
 	<bean id="incomemachineService" class="com.gu.services.incomemachines.IncomeMachineServiceImpl" />
 	<bean id="gratificationservice" class="com.gu.services.gratifications.GratificationServiceImpl" />
+	<bean id="messageservice" class="com.gu.services.messages.MessageServiceImpl" />
+	<bean id="tpvservice" class="com.gu.services.tpv.TPVServiceImpl" />
 </beans>

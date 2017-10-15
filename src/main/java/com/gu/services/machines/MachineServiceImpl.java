@@ -13,7 +13,11 @@ public class MachineServiceImpl implements MachineService {
 	private MachinesRepository machinesRepository;
 
 	public List<MachineEntity> searchAllMachinesOrder() {
-		return machinesRepository.findByOrderByOrder();
+		return machinesRepository.findByOrderByOrdermachine();
+	}
+
+	public List<MachineEntity> searchMachinesOrder() {
+		return machinesRepository.findByOnoffTrueOrderByOrdermachine();
 	}
 
 }

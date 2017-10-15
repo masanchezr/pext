@@ -1,6 +1,5 @@
 package com.gu.services.operations;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +20,6 @@ public interface OperationService {
 	public void delete(OperationEntity operation);
 
 	public List<OperationEntity> recharges(String month);
-
-	public Map<String, ?> ticketsByDay(Date date);
-
-	public Map<String, ?> getOperationsTpv(String month);
 
 	public OperationNotAllowedEntity getOperationNotAllowed(OperationEntity operation);
 

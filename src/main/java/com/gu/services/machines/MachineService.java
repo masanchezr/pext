@@ -8,4 +8,6 @@ public interface MachineService {
 
 	public List<MachineEntity> searchAllMachinesOrder();
 
+	public List<MachineEntity> searchMachinesOrder();
+
 }

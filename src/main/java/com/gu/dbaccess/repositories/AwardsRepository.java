@@ -8,7 +8,7 @@ import com.gu.dbaccess.entities.AwardEntity;
 
 public interface AwardsRepository extends CrudRepository<AwardEntity, Long> {
 
-	public List<AwardEntity> findByActive(boolean b);
+	public List<AwardEntity> findByActive(Boolean b);
 
 	public List<AwardEntity> findByActiveOrderByOrder(boolean b);
 

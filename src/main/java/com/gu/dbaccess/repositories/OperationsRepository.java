@@ -1,6 +1,5 @@
 package com.gu.dbaccess.repositories;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -30,11 +29,6 @@ public interface OperationsRepository extends CrudRepository<OperationEntity, Lo
 	@Query("select o from OperationEntity o where DATE(o.creationdate)=:cdate and o.pay=:pay")
 	public List<OperationEntity> findByPayAndCreationdate(@Param("pay") PaymentEntity pay,
 			@Param("cdate") @Temporal(TemporalType.DATE) Date date);
-
-	@Query("select sum(o.amount) from OperationEntity o where DATE(o.creationdate)>=:from and DATE(o.creationdate)<=:until and o.award=:award")
-	public BigDecimal sumByAwardAndCreationdate(@Param("award") AwardEntity award,
-			@Param("from") @Temporal(TemporalType.DATE) Date from,
-			@Param("until") @Temporal(TemporalType.DATE) Date until);
 
 	public List<OperationEntity> findByCreationdateBetween(Date from, Date until);
 

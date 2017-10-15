@@ -47,11 +47,14 @@ public class SafeServiceImpl implements SafeService {
 				.getTotal();
 		ChangeMachineEntity entity = new ChangeMachineEntity();
 		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
+		Long id = changeMachineRepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
+				.getIdchangemachine();
 		Date today = new Date();
 		totalcm.setCreationdate(today);
 		totalcm.setTotal(amount.add(changemachinetotal));
 		entity.setCreationdate(today);
 		entity.setAmount(amount);
+		entity.setIdchangemachine(id + 1);
 		safe.setCreationdate(today);
 		safe.setTotal(totalsafe.subtract(amount));
 		safe.setAmount(amount.negate());

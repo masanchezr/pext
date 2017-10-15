@@ -15,7 +15,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/boss/admin.jsp" />
 	</definition>
 	<definition name="success" extends="templateBoss">
-		<put-attribute name="body" value="/WEB-INF/views/boss/success.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/success.jsp" />
 	</definition>
 	<definition name="enabledisableuser" extends="templateBoss">
 		<put-attribute name="body"

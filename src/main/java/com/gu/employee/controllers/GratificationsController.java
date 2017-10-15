@@ -24,7 +24,7 @@ public class GratificationsController {
 	@RequestMapping(value = "/employee/newgratification")
 	public ModelAndView newgratification() {
 		ModelAndView model = new ModelAndView("newgratification");
-		model.addObject("machines", machineservice.searchAllMachinesOrder());
+		model.addObject("machines", machineservice.searchMachinesOrder());
 		model.addObject("gratification", new GratificationEntity());
 		return model;
 	}
@@ -34,21 +34,16 @@ public class GratificationsController {
 		ModelAndView model = new ModelAndView();
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
 		if (arg1.hasErrors()) {
-			model.addObject("machines", machineservice.searchAllMachinesOrder());
+			model.addObject("machines", machineservice.searchMachinesOrder());
 			model.addObject("gratification", g);
 			model.setViewName("newgratification");
-		} else if (g.getMachine().getIdmachine().equals(0L)) {
-			model.addObject("machines", machineservice.searchAllMachinesOrder());
-			model.addObject("gratification", g);
-			model.setViewName("newgratification");
-			arg1.rejectValue("idgratification", "selectmachine");
 		} else {
 			GratificationEntity gratification = gratificationservice.searchGratificationActive(g.getIdgratification());
 			if (gratification == null) {
-				model.addObject("machines", machineservice.searchAllMachinesOrder());
+				arg1.rejectValue("idgratification", "gratificationsproblem");
+				model.addObject("machines", machineservice.searchMachinesOrder());
 				model.addObject("gratification", g);
 				model.setViewName("newgratification");
-				arg1.rejectValue("idgratification", "gratificationsproblem");
 			} else {
 				gratification.setMachine(g.getMachine());
 				model.addObject("daily", gratificationservice.save(gratification));
@@ -67,7 +62,8 @@ public class GratificationsController {
 	}
 
 	@RequestMapping(value = "/employee/registergratification")
-	public ModelAndView registerGratification(GratificationEntity g, BindingResult arg1) {
+	public ModelAndView registerGratification(@ModelAttribute("gratification") GratificationEntity g,
+			BindingResult arg1) {
 		ModelAndView model = new ModelAndView("successemployee");
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
 		if (arg1.hasErrors()) {

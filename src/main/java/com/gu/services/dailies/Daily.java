@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.gu.dbaccess.entities.BarDrinkEntity;
+import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.EntryMoneyEntity;
 import com.gu.dbaccess.entities.GratificationEntity;
 import com.gu.dbaccess.entities.IncomeLuckiaEntity;
 import com.gu.dbaccess.entities.IncomeMachineEntity;
 import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
+import com.gu.dbaccess.entities.TPVEntity;
 
 /**
  * The Class Daily.
@@ -37,6 +39,10 @@ public class Daily {
 	private Date date;
 
 	private List<GratificationEntity> gratifications;
+
+	private List<TPVEntity> tpvs;
+
+	private List<ChangeMachineEntity> listchangemachine;
 
 	public BigDecimal getFinalamount() {
 		return finalamount;
@@ -116,5 +122,21 @@ public class Daily {
 
 	public List<GratificationEntity> getGratifications() {
 		return gratifications;
+	}
+
+	public void setTpvs(List<TPVEntity> tpvs) {
+		this.tpvs = tpvs;
+	}
+
+	public List<TPVEntity> getTpvs() {
+		return tpvs;
+	}
+
+	public List<ChangeMachineEntity> getListchangemachine() {
+		return listchangemachine;
+	}
+
+	public void setListchangemachine(List<ChangeMachineEntity> listchangemachine) {
+		this.listchangemachine = listchangemachine;
 	}
 }

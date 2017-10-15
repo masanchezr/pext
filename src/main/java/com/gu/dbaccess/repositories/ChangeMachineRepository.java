@@ -12,23 +12,27 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.gu.dbaccess.entities.ChangeMachineEntity;
-import com.gu.dbaccess.entities.OperationEntity;
 
 public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEntity, Long> {
 
-	public List<ChangeMachineEntity> findByCreationdateBetween(@Temporal(TemporalType.DATE) Date from,
-			@Temporal(TemporalType.DATE) Date until);
-
-	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.operation is null and c.amount<0")
+	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.award is null and c.amount<0")
 	public BigDecimal sumByCreationdateBetweenLuckia(@Param("from") Date from, @Param("until") Date until);
 
 	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.amount>0")
 	public BigDecimal sumBetweenDates(@Param("from") Date from, @Param("until") Date until);
 
-	public ChangeMachineEntity findByOperation(OperationEntity entityoperation);
-
-	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.operation is not null")
+	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.award is not null")
 	public BigDecimal sumByCreationdateBetween(@Param("from") Date from, @Param("until") Date until);
 
-	public ChangeMachineEntity findFirstByOperationIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal amount);
+	public ChangeMachineEntity findFirstByAwardIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal amount);
+
+	public ChangeMachineEntity findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc();
+
+	public List<ChangeMachineEntity> findByCreationdate(Date date);
+
+	@Query("select o from ChangeMachineEntity o where DATE(o.creationdate)=:cdate and o.award is not null and o.machine is not null")
+	public List<ChangeMachineEntity> searchByCreationdate(@Param("cdate") @Temporal(TemporalType.DATE) Date date);
+
+	public List<ChangeMachineEntity> findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetween(Date date,
+			Date date2);
 }

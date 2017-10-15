@@ -13,13 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.boss.forms.Expense;
 import com.gu.dbaccess.entities.AwardEntity;
-import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.GratificationEntity;
 import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.OperationNotAllowedEntity;
 import com.gu.dbaccess.entities.PaymentEntity;
 import com.gu.dbaccess.entities.ProvidingEntity;
-import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.GratificationsRepository;
 import com.gu.dbaccess.repositories.OperationsNotAllowedRepository;
 import com.gu.dbaccess.repositories.OperationsRepository;
@@ -42,9 +40,6 @@ public class OperationServiceImpl implements OperationService {
 	private ProvidingRepository providingRepository;
 
 	@Autowired
-	private ChangeMachineRepository changeMachineRepository;
-
-	@Autowired
 	private OperationsNotAllowedRepository operationsnotallowedrepository;
 
 	@Autowired
@@ -65,13 +60,6 @@ public class OperationServiceImpl implements OperationService {
 			entity.setAmount(amount.negate());
 			entity.setTotal(providing.getTotal().subtract(amount));
 			providingRepository.save(entity);
-		} else if (idpayment.equals(Constants.CHANGEMACHINE)) {
-			ChangeMachineEntity entity = new ChangeMachineEntity();
-			BigDecimal amount = operation.getAmount();
-			entity.setCreationdate(new Date());
-			entity.setAmount(amount.negate());
-			entity.setOperation(operation);
-			changeMachineRepository.save(entity);
 		}
 		return dailyService.getDailyEmployee(new Date());
 	}
@@ -80,9 +68,7 @@ public class OperationServiceImpl implements OperationService {
 		OperationEntity entityoperation = operationRepository.findOne(operation.getIdoperation());
 		PaymentEntity pay = operation.getPay();
 		Long idpayment = pay.getIdpayment();
-		Long idpaymentback = entityoperation.getPay().getIdpayment();
 		BigDecimal amount = operation.getAmount();
-		BigDecimal amountback = entityoperation.getAmount();
 		if (operation.getMachine().getIdmachine().equals(0L)) {
 			entityoperation.setMachine(null);
 		} else {
@@ -92,34 +78,7 @@ public class OperationServiceImpl implements OperationService {
 		entityoperation.setPay(pay);
 		entityoperation.setAmount(operation.getAmount());
 		operationRepository.save(entityoperation);
-		if (Constants.CHANGEMACHINE.equals(idpaymentback) && !idpayment.equals(Constants.CHANGEMACHINE)) {
-			/**
-			 * si la operación era de máquina de cambio y la actualización no, hay que
-			 * borrar el registro y actualizar toda la suma
-			 */
-			ChangeMachineEntity cm = changeMachineRepository.findByOperation(entityoperation);
-			changeMachineRepository.delete(cm);
-		} else if (idpayment.equals(Constants.CHANGEMACHINE) && !Constants.CHANGEMACHINE.equals(idpaymentback)) {
-			/**
-			 * si la operación no era de máquina de cambio y la actualización si
-			 */
-			ChangeMachineEntity entity = new ChangeMachineEntity();
-			entity.setCreationdate(entityoperation.getCreationdate());
-			entity.setAmount(amount.negate());
-			entity.setOperation(entityoperation);
-			changeMachineRepository.save(entity);
-		} else if (idpayment.equals(Constants.CHANGEMACHINE) && Constants.CHANGEMACHINE.equals(idpaymentback)
-				&& !amount.equals(amountback)) {
-			/**
-			 * si la operación era de máquina de cambio y la actualización también y lo
-			 * único que hay que cambiar es el importe, tenemos que actualizar el importe y
-			 * todas las operaciones posteriores
-			 */
-			ChangeMachineEntity cm = changeMachineRepository.findByOperation(entityoperation);
-			cm.setAmount(amount.negate());
-			// actualizo
-			changeMachineRepository.save(cm);
-		} else if (idpayment.equals(Constants.PROVIDING)) {
+		if (idpayment.equals(Constants.PROVIDING)) {
 			ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
 			ProvidingEntity entity = new ProvidingEntity();
 			entity.setCreationdate(new Date());
@@ -188,45 +147,6 @@ public class OperationServiceImpl implements OperationService {
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		until = calendar.getTime();
 		return operationRepository.findByAwardAndCreationdateBetween(pay, from, until);
-	}
-
-	public Map<String, ?> getOperationsTpv(String month) {
-		Map<String, Object> map = null;
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from, until;
-		AwardEntity pay = new AwardEntity();
-		pay.setIdaward(Constants.TPV);
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
-		List<OperationEntity> operations = operationRepository.findByAwardAndCreationdateBetween(pay, from, until);
-		if (operations != null) {
-			map = new HashMap<String, Object>();
-			map.put("operations", operations);
-			map.put("amount", operationRepository.sumByAwardAndCreationdate(pay, from, until));
-		}
-		return map;
-	}
-
-	public Map<String, ?> ticketsByDay(Date date) {
-		Map<String, Object> map = null;
-		PaymentEntity pay = new PaymentEntity();
-		BigDecimal amount = BigDecimal.ZERO;
-		pay.setIdpayment(Constants.CHANGEMACHINE);
-		List<OperationEntity> lcm = operationRepository.findByPayAndCreationdate(pay, date);
-		if (lcm != null && !lcm.isEmpty()) {
-			Iterator<OperationEntity> ilcm = lcm.iterator();
-			while (ilcm.hasNext()) {
-				amount = amount.add(ilcm.next().getAmount());
-			}
-			map = new HashMap<String, Object>();
-			map.put("operations", lcm);
-			map.put("amount", amount.plus());
-		}
-		return map;
 	}
 
 	public OperationNotAllowedEntity getOperationNotAllowed(OperationEntity operation) {

@@ -14,9 +14,7 @@ import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
-import com.gu.util.date.DateUtil;
 import com.gu.validators.OperationsValidator;
-import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
 public class OperationsAdminController {
@@ -35,9 +33,6 @@ public class OperationsAdminController {
 
 	@Autowired
 	private OperationsValidator operationsValidator;
-
-	@Autowired
-	private SearchDatesFormValidator searchDatesFormValidator;
 
 	@RequestMapping(value = "/admin/updateoperation{id}")
 	public ModelAndView updateoperation(@PathVariable("id") long id) {
@@ -78,19 +73,6 @@ public class OperationsAdminController {
 	public ModelAndView searchticketsByDay() {
 		ModelAndView model = new ModelAndView("searchticketsbyday");
 		model.addObject("searchform", new SearchByDatesForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/admin/ticketsByDay")
-	public ModelAndView ticketsByDay(@ModelAttribute("searchform") SearchByDatesForm date, BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		searchDatesFormValidator.validate(date, result);
-		if (result.hasErrors()) {
-			model.setViewName("searchticketsbyday");
-		} else {
-			model.setViewName("ticketsbyday");
-			model.addAllObjects(operationService.ticketsByDay(DateUtil.getDate(date.getDatefrom())));
-		}
 		return model;
 	}
 }

@@ -14,8 +14,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/employee/login.jsp" />
 	</definition>
 	<definition name="successemployee" extends="templateEmployee">
-		<put-attribute name="body"
-			value="/WEB-INF/views/employee/success.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/success.jsp" />
 	</definition>
 	<definition name="newconcept" extends="templateEmployee">
 		<put-attribute name="body"
@@ -66,11 +65,19 @@
 	</definition>
 	<definition name="newoperation" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/operations/newoperation.jsp" />
+			value="/WEB-INF/views/employee/expenses/operations/newoperation.jsp" />
 	</definition>
 	<definition name="updateoperation" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/operations/updateoperation.jsp" />
+			value="/WEB-INF/views/employee/expenses/operations/updateoperation.jsp" />
+	</definition>
+	<definition name="newtpv" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/expenses/tpv.jsp" />
+	</definition>
+	<definition name="newpaymentchangemachine" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/expenses/newpaymentchangemachine.jsp" />
 	</definition>
 	<definition name="newincome" extends="templateEmployee">
 		<put-attribute name="body"

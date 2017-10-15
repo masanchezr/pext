@@ -17,7 +17,7 @@ public class SearchDatesFormValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		SearchByDatesForm dailyForm = (SearchByDatesForm) arg0;
 		Date date = DateUtil.getDate(dailyForm.getDatefrom());
-		if (date == null && new Date().before(date)) {
+		if (date == null || new Date().before(date)) {
 			arg1.rejectValue("date", "datecannotbegreater");
 		}
 	}

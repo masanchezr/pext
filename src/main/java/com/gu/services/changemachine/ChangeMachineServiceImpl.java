@@ -2,6 +2,10 @@ package com.gu.services.changemachine;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,8 +15,13 @@ import com.gu.dbaccess.entities.TakeEntity;
 import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.gu.dbaccess.repositories.TakingsRepository;
+import com.gu.services.dailies.Daily;
+import com.gu.services.dailies.DailyService;
 
 public class ChangeMachineServiceImpl implements ChangeMachineService {
+
+	@Autowired
+	private DailyService dailyservice;
 
 	@Autowired
 	private ChangeMachineRepository changeMachineRepository;
@@ -24,6 +33,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	private TakingsRepository takingsRepository;
 
 	public void saveLuckiaAward(ChangeMachineEntity cmachine) {
+		Long id = changeMachineRepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
+				.getIdchangemachine();
+		cmachine.setIdchangemachine(id);
 		cmachine.setAmount(cmachine.getAmount().negate());
 		cmachine.setCreationdate(new Date());
 		changeMachineRepository.save(cmachine);
@@ -63,6 +75,33 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	public ChangeMachineEntity getLastLuckia() {
 		return changeMachineRepository
-				.findFirstByOperationIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal.ZERO);
+				.findFirstByAwardIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal.ZERO);
+	}
+
+	public Map<String, ?> ticketsByDay(Date date) {
+		Map<String, Object> map = null;
+		BigDecimal amount = BigDecimal.ZERO;
+		List<ChangeMachineEntity> lcm = changeMachineRepository.findByCreationdate(date);
+		if (lcm != null && !lcm.isEmpty()) {
+			Iterator<ChangeMachineEntity> ilcm = lcm.iterator();
+			while (ilcm.hasNext()) {
+				amount = amount.add(ilcm.next().getAmount());
+			}
+			map = new HashMap<String, Object>();
+			map.put("operations", lcm);
+			map.put("amount", amount.plus());
+		}
+		return map;
+	}
+
+	public ChangeMachineEntity findOne(Long idchangemachine) {
+		return changeMachineRepository.findOne(idchangemachine);
+	}
+
+	public Daily save(ChangeMachineEntity cm) {
+		Date today = new Date();
+		cm.setCreationdate(today);
+		changeMachineRepository.save(cm);
+		return dailyservice.getDailyEmployee(today);
 	}
 }

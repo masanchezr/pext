@@ -5,10 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,7 +16,6 @@ import javax.persistence.Table;
 public class ChangeMachineEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idchangemachine")
 	private Long idchangemachine;
 
@@ -28,8 +26,12 @@ public class ChangeMachineEntity {
 	private BigDecimal amount;
 
 	@OneToOne
-	@JoinColumn(name = "idoperation", referencedColumnName = "idoperation")
-	private OperationEntity operation;
+	@JoinColumn(name = "idawardchangemachine", referencedColumnName = "idawardchangemachine")
+	private AwardsChangeMachineEntity award;
+
+	@ManyToOne
+	@JoinColumn(name = "idmachine", referencedColumnName = "idmachine")
+	private MachineEntity machine;
 
 	public Long getIdchangemachine() {
 		return idchangemachine;
@@ -55,12 +57,28 @@ public class ChangeMachineEntity {
 		this.amount = amount;
 	}
 
-	public OperationEntity getOperation() {
-		return operation;
+	public AwardsChangeMachineEntity getOperation() {
+		return award;
 	}
 
-	public void setOperation(OperationEntity operation) {
-		this.operation = operation;
+	public void setOperation(AwardsChangeMachineEntity operation) {
+		this.award = operation;
+	}
+
+	public AwardsChangeMachineEntity getAward() {
+		return award;
+	}
+
+	public void setAward(AwardsChangeMachineEntity award) {
+		this.award = award;
+	}
+
+	public MachineEntity getMachine() {
+		return machine;
+	}
+
+	public void setMachine(MachineEntity machine) {
+		this.machine = machine;
 	}
 
 }

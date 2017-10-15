@@ -8,5 +8,7 @@ import com.gu.dbaccess.entities.MachineEntity;
 
 public interface MachinesRepository extends CrudRepository<MachineEntity, Long> {
 
-	public List<MachineEntity> findByOrderByOrder();
+	public List<MachineEntity> findByOrderByOrdermachine();
+
+	public List<MachineEntity> findByOnoffTrueOrderByOrdermachine();
 }

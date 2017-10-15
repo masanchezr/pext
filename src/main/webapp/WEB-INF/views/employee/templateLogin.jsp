@@ -2,40 +2,19 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <head>
-
 <!-- Bootstrap Core CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
+<link href="<spring:url value="/resources/styles/bootstrap.min.css"/>"
 	rel="stylesheet">
-
-<!-- MetisMenu CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/metisMenu.min.css"/>"
-	rel="stylesheet">
-
 <!-- Custom CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/sb-admin-2.css"/>"
+<link href="<spring:url value="/resources/styles/sb-admin.css"/>"
 	rel="stylesheet">
-
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/admin/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/font-awesome-4.5.0/css/font-awesome.min.css"/>"
 	rel="stylesheet" type="text/css">
-
-<!-- Timeline CSS -->
-<link href="<spring:url value="/resources/styles/admin/timeline.css"/>"
-	rel="stylesheet">
-
-<!-- Morris Charts CSS -->
-<link href="<spring:url value="/resources/styles/admin/morris.css"/>"
-	rel="stylesheet">
-<link rel="shortcut icon"
-	href="<spring:url value="/resources/img/admin/favicon.png"/>"
-	type="image/png">
 <title><spring:message code="titleAdmin" /></title>
 </head>
-<body>
+<body class="bg-dark">
 	<tiles:insertAttribute name="body" />
 </body>
 </html>

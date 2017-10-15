@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.BarDrinkEntity;
+import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.DailyEntity;
 import com.gu.dbaccess.entities.EntryMoneyEntity;
 import com.gu.dbaccess.entities.GratificationEntity;
@@ -16,7 +17,9 @@ import com.gu.dbaccess.entities.IncomeLuckiaEntity;
 import com.gu.dbaccess.entities.IncomeMachineEntity;
 import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
+import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.repositories.BarDrinksRepository;
+import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.DailyRepository;
 import com.gu.dbaccess.repositories.EntryMoneyRepository;
 import com.gu.dbaccess.repositories.GratificationsRepository;
@@ -24,6 +27,7 @@ import com.gu.dbaccess.repositories.IncomeLuckiaRepository;
 import com.gu.dbaccess.repositories.IncomeMachinesRepository;
 import com.gu.dbaccess.repositories.OperationsRepository;
 import com.gu.dbaccess.repositories.ReturnMoneyEmployeesRepository;
+import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.util.constants.Constants;
 
 /**
@@ -56,6 +60,12 @@ public class DailyServiceImpl implements DailyService {
 	@Autowired
 	private GratificationsRepository gratificationRepository;
 
+	@Autowired
+	private TPVRepository tpvrepository;
+
+	@Autowired
+	private ChangeMachineRepository changeMachineRepository;
+
 	public Daily getDaily(Date date) {
 		Daily daily = new Daily();
 		List<OperationEntity> operations = operationsRepository.findByCreationdate(date);
@@ -65,6 +75,8 @@ public class DailyServiceImpl implements DailyService {
 		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdate(date);
 		List<GratificationEntity> gratifications = gratificationRepository.searchByPaydate(date);
 		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByCreationdate(date);
+		List<TPVEntity> tpvs = tpvrepository.findByCreationdate(date);
+		List<ChangeMachineEntity> changemachine = changeMachineRepository.searchByCreationdate(date);
 		int numoperations = 0;
 		BigDecimal finalamount = BigDecimal.ZERO;
 		// busco el parte de hoy si ya está calculado
@@ -75,7 +87,7 @@ public class DailyServiceImpl implements DailyService {
 			while (ioperations.hasNext()) {
 				operation = ioperations.next();
 				numoperations = numoperations + 1;
-				if (!operation.getPay().getIdpayment().equals(Constants.MAQUINACAMBIO)) {
+				if (!operation.getPay().getIdpayment().equals(Constants.PROVIDING)) {
 					finalamount = finalamount.subtract(operation.getAmount());
 				}
 			}
@@ -140,6 +152,20 @@ public class DailyServiceImpl implements DailyService {
 			}
 			daily.setReturns(returns);
 		}
+		if (tpvs != null && !tpvs.isEmpty()) {
+			Iterator<TPVEntity> itpvs = tpvs.iterator();
+			TPVEntity tpv;
+			while (itpvs.hasNext()) {
+				tpv = itpvs.next();
+				finalamount = finalamount.subtract(tpv.getAmount());
+				numoperations = numoperations + 1;
+			}
+			daily.setTpvs(tpvs);
+		}
+		if (changemachine != null && !changemachine.isEmpty()) {
+			numoperations = numoperations + changemachine.size();
+			daily.setListchangemachine(changemachine);
+		}
 		BigDecimal previousamount = BigDecimal.ZERO;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -190,6 +216,9 @@ public class DailyServiceImpl implements DailyService {
 		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date, new Date());
 		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
 				new Date());
+		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
+		List<ChangeMachineEntity> changemachine = changeMachineRepository
+				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetween(date, new Date());
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);
@@ -197,6 +226,8 @@ public class DailyServiceImpl implements DailyService {
 		daily.setIncomemachines(incomemachines);
 		daily.setGratifications(gratifications);
 		daily.setReturns(returns);
+		daily.setTpvs(tpvs);
+		daily.setListchangemachine(changemachine);
 		return daily;
 	}
 }

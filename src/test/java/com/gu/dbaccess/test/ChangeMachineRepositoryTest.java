@@ -18,9 +18,9 @@ public class ChangeMachineRepositoryTest {
 	private ChangeMachineRepository changemachinerepository;
 
 	@Test
-	public void findFirstByOperationIsNullAndAmountLessThanOrderByIdchangemachineTest() {
+	public void findFirstByAwardIsNullAndAmountLessThanOrderByIdchangemachineTest() {
 		ChangeMachineEntity cm = changemachinerepository
-				.findFirstByOperationIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal.ZERO);
+				.findFirstByAwardIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal.ZERO);
 		if (cm != null) {
 			System.out.println(cm.getAmount());
 		}
