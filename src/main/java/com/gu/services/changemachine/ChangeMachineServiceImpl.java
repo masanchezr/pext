@@ -42,7 +42,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public BigDecimal getIncomeTotalMonth() {
-		return changeMachineRepository.sumBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(),
+		return changeMachineRepository.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(),
 				new Date());
 	}
 
