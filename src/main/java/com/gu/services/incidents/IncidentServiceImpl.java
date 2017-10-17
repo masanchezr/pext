@@ -14,18 +14,15 @@ import com.gu.services.mails.MailService;
 public class IncidentServiceImpl implements IncidentService {
 
 	@Autowired
-	private MailService mailIncidentService;
-
-	@Autowired
 	private IncidentRepository incidentRepository;
 
 	public void save(IncidentEntity incident) {
+		MailService mailService;
 		incident.setCreationdate(new Date());
 		incident.setState(Boolean.FALSE);
 		incident = incidentRepository.save(incident);
-		mailIncidentService.sendMail(
-				"Numero de incidencia: " + incident.getIdincident() + " descripcion: " + incident.getDescription(),
-				null, "NUEVA INCIDENCIA");
+		mailService = new MailService(incident.getDescription(), null, "NUEVA INCIDENCIA GOLDEN USERA");
+		mailService.start();
 	}
 
 	public void resolve(IncidentEntity incident) {

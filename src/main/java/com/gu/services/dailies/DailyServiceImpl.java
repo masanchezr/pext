@@ -218,7 +218,7 @@ public class DailyServiceImpl implements DailyService {
 				new Date());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
 		List<ChangeMachineEntity> changemachine = changeMachineRepository
-				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetween(date, new Date());
+				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(date, new Date());
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);

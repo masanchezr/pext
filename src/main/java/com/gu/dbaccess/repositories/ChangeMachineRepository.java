@@ -21,7 +21,7 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.amount>0 and c.award is null and c.machine is null")
 	public BigDecimal sumIncomeBetweenDates(@Param("from") Date from, @Param("until") Date until);
 
-	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.award is not null")
+	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.award is not null and c.machine is not null")
 	public BigDecimal sumByCreationdateBetween(@Param("from") Date from, @Param("until") Date until);
 
 	public ChangeMachineEntity findFirstByAwardIsNullAndAmountLessThanOrderByIdchangemachineDesc(BigDecimal amount);
@@ -30,9 +30,9 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 
 	public List<ChangeMachineEntity> findByCreationdate(Date date);
 
-	@Query("select o from ChangeMachineEntity o where DATE(o.creationdate)=:cdate and o.award is not null and o.machine is not null")
+	@Query("select o from ChangeMachineEntity o where DATE(o.creationdate)=:cdate and o.award is not null and o.machine is not null order by o.creationdate")
 	public List<ChangeMachineEntity> searchByCreationdate(@Param("cdate") @Temporal(TemporalType.DATE) Date date);
 
-	public List<ChangeMachineEntity> findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetween(Date date,
-			Date date2);
+	public List<ChangeMachineEntity> findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(
+			Date date, Date date2);
 }

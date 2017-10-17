@@ -26,7 +26,6 @@
 	<bean id="changeMachineAdminValidator" class="com.gu.admin.validators.ChangeMachineValidator" />
 	<bean id="providingValidator" class="com.gu.admin.validators.ProvidingValidator" />
 	<bean id="incidentService" class="com.gu.services.incidents.IncidentServiceImpl" />
-	<bean id="mailIncidentService" class="com.gu.services.mails.MailServiceImpl" />
 	<bean id="entryMoneyService" class="com.gu.services.entrymoney.EntryMoneyServiceImpl" />
 	<bean id="userService" class="com.gu.services.users.UserServiceImpl" />
 	<bean id="employeeService" class="com.gu.services.employees.EmployeeServiceImpl" />
