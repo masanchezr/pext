@@ -35,15 +35,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public void saveLuckiaAward(ChangeMachineEntity cmachine) {
 		Long id = changeMachineRepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
-		cmachine.setIdchangemachine(id);
+		cmachine.setIdchangemachine(id + 1);
 		cmachine.setAmount(cmachine.getAmount().negate());
 		cmachine.setCreationdate(new Date());
 		changeMachineRepository.save(cmachine);
 	}
 
 	public BigDecimal getIncomeTotalMonth() {
-		return changeMachineRepository.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(),
-				new Date());
+		return changeMachineRepository
+				.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new Date());
 	}
 
 	public void reset() {
