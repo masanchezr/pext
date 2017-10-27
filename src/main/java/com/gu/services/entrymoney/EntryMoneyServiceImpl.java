@@ -88,6 +88,8 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entryMoneyRepository.save(entrymoney);
 		machine.setAmount(amount);
 		machine.setCreationdate(new Date());
+		machine.setIdchangemachine(changemachinerepository
+				.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc().getIdchangemachine() + 1);
 		machinetotal.setCreationdate(new Date());
 		machinetotal.setTotal(changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc().getTotal()
 				.add(entryMoney.getAmount()));
