@@ -35,7 +35,10 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public void saveLuckiaAward(ChangeMachineEntity cmachine) {
 		Long id = changeMachineRepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
-		cmachine.setIdchangemachine(id + 1);
+		while (changeMachineRepository.exists(id)) {
+			id++;
+		}
+		cmachine.setIdchangemachine(id);
 		cmachine.setAmount(cmachine.getAmount().negate());
 		cmachine.setCreationdate(new Date());
 		changeMachineRepository.save(cmachine);
