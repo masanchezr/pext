@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.validators.SafeValidator;
 import com.gu.dbaccess.entities.SafeEntity;
-import com.gu.services.safe.SafeService;
+import com.gu.services.entrymoney.EntryMoneyService;
 
 @Controller
 public class SafeController {
 
 	@Autowired
-	private SafeService safeService;
+	private EntryMoneyService safeService;
 
 	@Autowired
 	private SafeValidator safevalidator;
@@ -65,7 +65,7 @@ public class SafeController {
 	@RequestMapping(value = "/admin/totalsafe")
 	public ModelAndView totalsafe() {
 		ModelAndView model = new ModelAndView("totalsafe");
-		model.addObject("totalamount", safeService.searchTotal());
+		model.addObject("totalamount", safeService.searchTotalSafe());
 		return model;
 	}
 }

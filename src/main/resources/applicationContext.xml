@@ -36,9 +36,7 @@
 	<bean id="paymentService" class="com.gu.services.payments.PaymentServiceImpl" />
 	<bean id="awardService" class="com.gu.services.awards.AwardServiceImpl" />
 	<bean id="operationService" class="com.gu.services.operations.OperationServiceImpl" />
-	<bean id="safeService" class="com.gu.services.safe.SafeServiceImpl" />
 	<bean id="incomeService" class="com.gu.services.income.IncomeServiceImpl" />
-	<bean id="providingService" class="com.gu.services.providing.ProvidingServiceImpl" />
 	<bean id="changeMachineService" class="com.gu.services.changemachine.ChangeMachineServiceImpl" />
 	<bean id="returnmoneyemployeeservice"
 		class="com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeServiceImpl" />

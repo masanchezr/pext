@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.validators.ProvidingValidator;
 import com.gu.dbaccess.entities.ProvidingEntity;
-import com.gu.services.providing.ProvidingService;
+import com.gu.services.entrymoney.EntryMoneyService;
 
 @Controller
 public class ProvidingAdminController {
 
 	@Autowired
-	private ProvidingService providingService;
+	private EntryMoneyService providingService;
 
 	@Autowired
 	private ProvidingValidator providingValidator;
@@ -44,7 +44,7 @@ public class ProvidingAdminController {
 	@RequestMapping(value = "/admin/providingtotal")
 	public ModelAndView providingtotal() {
 		ModelAndView model = new ModelAndView("providingtotal");
-		model.addObject("totalamount", providingService.searchTotal());
+		model.addObject("totalamount", providingService.searchTotalProviding());
 		return model;
 	}
 }

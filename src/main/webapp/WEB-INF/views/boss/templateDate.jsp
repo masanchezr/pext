@@ -136,6 +136,10 @@
 			<tiles:insertAttribute name="body" />
 		</div>
 	</div>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fa fa-angle-up"></i>
+	</a>
 	<script type="text/javascript"
 		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>

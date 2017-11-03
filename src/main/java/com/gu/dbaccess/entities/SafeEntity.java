@@ -28,6 +28,17 @@ public class SafeEntity {
 	@Column(name = "total")
 	private BigDecimal total;
 
+	@Column(name = "description")
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Long getIdsafe() {
 		return idsafe;
 	}

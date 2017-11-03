@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
-import com.gu.services.safe.SafeService;
+import com.gu.services.entrymoney.EntryMoneyService;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
 public class SafeBossController {
 
 	@Autowired
-	private SafeService safeService;
+	private EntryMoneyService safeService;
 
 	@Autowired
 	private SearchDatesFormValidator searchdatesformvalidator;
@@ -23,7 +23,7 @@ public class SafeBossController {
 	@RequestMapping(value = "/safetotal")
 	public ModelAndView safetotal() {
 		ModelAndView model = new ModelAndView("safetotal");
-		model.addObject("totalamount", safeService.searchTotal());
+		model.addObject("totalamount", safeService.searchTotalSafe());
 		return model;
 	}
 

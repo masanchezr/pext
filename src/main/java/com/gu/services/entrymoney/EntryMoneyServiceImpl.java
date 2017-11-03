@@ -1,6 +1,7 @@
 package com.gu.services.entrymoney;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import com.gu.dbaccess.repositories.SafeRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
+import com.gu.util.date.DateUtil;
 
 public class EntryMoneyServiceImpl implements EntryMoneyService {
 
@@ -54,6 +56,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 			safe.setTotal(safe.getTotal().subtract(amount));
 			safe.setAmount(amount.negate());
 			safe.setCreationdate(new Date());
+			safe.setDescription("CAJA COMÚN");
 			safeRepository.save(safe);
 		}
 		return dailyService.getDaily(new Date());
@@ -96,5 +99,78 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
 		return dailyService.getDailyEmployee(new Date());
+	}
+
+	/**
+	 * El dinero procederá de la caja fuerte
+	 * 
+	 * @param providing
+	 */
+	public void save(ProvidingEntity providing) {
+		ProvidingEntity entity = providingRepository.findFirstByOrderByIdprovidingDesc();
+		SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc(), newsafe = new SafeEntity();
+		BigDecimal amount = providing.getAmount();
+		providing.setCreationdate(new Date());
+		providing.setTotal(entity.getTotal().add(providing.getAmount()));
+		newsafe.setAmount(amount.negate());
+		newsafe.setTotal(safe.getTotal().subtract(amount));
+		newsafe.setCreationdate(new Date());
+		newsafe.setDescription(Constants.STRINGPROVIDING);
+		providingRepository.save(providing);
+		safeRepository.save(newsafe);
+	}
+
+	public BigDecimal searchTotalProviding() {
+		return providingRepository.findFirstByOrderByIdprovidingDesc().getTotal();
+	}
+
+	public BigDecimal saveAdd(SafeEntity safe) {
+		BigDecimal total = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
+		safe.setCreationdate(new Date());
+		safe.setTotal(total.add(safe.getAmount()));
+		return safeRepository.save(safe).getTotal();
+	}
+
+	public BigDecimal searchTotalSafe() {
+		return safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
+	}
+
+	/**
+	 * Entrada a máquina de cambio
+	 */
+	public BigDecimal saveSub(SafeEntity safe) {
+		BigDecimal amount = safe.getAmount();
+		BigDecimal totalsafe = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
+		BigDecimal changemachinetotal = changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc()
+				.getTotal();
+		ChangeMachineEntity entity = new ChangeMachineEntity();
+		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
+		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
+				.getIdchangemachine();
+		Date today = new Date();
+		totalcm.setCreationdate(today);
+		totalcm.setTotal(amount.add(changemachinetotal));
+		entity.setCreationdate(today);
+		entity.setAmount(amount);
+		entity.setIdchangemachine(id + 1);
+		safe.setCreationdate(today);
+		safe.setTotal(totalsafe.subtract(amount));
+		safe.setAmount(amount.negate());
+		safe.setDescription("CHANGEMACHINE");
+		changemachinerepository.save(entity);
+		changemachinetotalrepository.save(totalcm);
+		return safeRepository.save(safe).getTotal();
+	}
+
+	public List<SafeEntity> searchByDates(String month) {
+		Date date = DateUtil.getDate(month);
+		Calendar calendar = Calendar.getInstance();
+		Date from, until;
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+		from = calendar.getTime();
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		until = calendar.getTime();
+		return safeRepository.findByCreationdateBetween(from, until);
 	}
 }
