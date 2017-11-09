@@ -18,6 +18,7 @@
 							<th><spring:message code="date" /></th>
 							<th><spring:message code="amount" /></th>
 							<th><spring:message code="total" /></th>
+							<th><spring:message code="description" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,6 +28,7 @@
 								<td><c:out value="${result.amount}" /><i
 									class="fa fa-euro"></i></td>
 								<td><c:out value="${result.total}" /><i class="fa fa-euro"></i></td>
+								<td><c:out value="${result.description}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

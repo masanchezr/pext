@@ -21,24 +21,17 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${daily.operations}" var="operation">
-							<c:choose>
-								<c:when test="${operation.pay.idpayment==2}">
-									<tr class="success">
-								</c:when>
-								<c:otherwise>
-									<tr>
-								</c:otherwise>
-							</c:choose>
-							<td><c:if test="${operation.machine!=null}">
-									<c:out value="${operation.machine.name}" />
-								</c:if> <c:if test="${operation.award!=null}">
-									<c:out value="${operation.award.name}" />
-								</c:if></td>
-							<td><fmt:formatDate value="${operation.creationdate}"
-									type="time" /></td>
-							<td><c:out value="${operation.amount}" /><i
-								class="fa fa-euro"></i></td>
-							<td><c:out value="${operation.pay.name}" /></td>
+							<tr>
+								<td><c:if test="${operation.machine!=null}">
+										<c:out value="${operation.machine.name}" />
+									</c:if> <c:if test="${operation.award!=null}">
+										<c:out value="${operation.award.name}" />
+									</c:if></td>
+								<td><fmt:formatDate value="${operation.creationdate}"
+										type="time" /></td>
+								<td><c:out value="${operation.amount}" /><i
+									class="fa fa-euro"></i></td>
+								<td><c:out value="${operation.pay.name}" /></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${daily.gratifications}" var="operation">
@@ -116,7 +109,8 @@
 						<c:forEach items="${daily.listchangemachine}" var="lcm">
 							<tr>
 								<td><spring:message code="changemachine" /> <c:out
-										value="${lcm.idchangemachine}" /></td>
+										value="${lcm.idchangemachine}" /> <c:out
+										value="${lcm.machine.name}" /></td>
 								<td><fmt:formatDate value="${lcm.creationdate}" type="time" /></td>
 								<td><c:out value="${lcm.amount}" /><i class="fa fa-euro"></i></td>
 								<td></td>
