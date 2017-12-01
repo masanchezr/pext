@@ -54,7 +54,11 @@ public class GratificationServiceImpl implements GratificationService {
 		try {
 			writer = new PdfWriter(file);
 			PdfDocument pdf = new PdfDocument(writer);
-			Document document = new Document(pdf, PageSize.A8);
+			/*
+			 * PageRotationEventHandler eventHandler = new PageRotationEventHandler();
+			 * pdf.addEventHandler(PdfDocumentEvent.START_PAGE, eventHandler);
+			 */
+			Document document = new Document(pdf, PageSize.A8.rotate());
 			PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_BOLD);
 			document.add(new Paragraph("10 DRAGONES").setFont(font).setFontSize(7));
 			// Create a List
@@ -68,9 +72,9 @@ public class GratificationServiceImpl implements GratificationService {
 					.add(new ListItem(
 							"Caduca a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getExpirationdate())))
 					.add(new ListItem("Cliente:" + g.getClient()))
-					.add(new ListItem("Empleado:" + g.getEmployee().getName()));
-			// Add the listç
-			list.setFontSize(7);
+					.add(new ListItem("Empleado:" + g.getEmployee().getAlias()));
+			// Add the list
+			list.setFontSize(6);
 			document.add(list);
 			document.close();
 		} catch (IOException e) {
