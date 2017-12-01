@@ -50,7 +50,7 @@ public class EmployeeController {
 			ipAddress = request.getRemoteAddr();
 		}
 		registerService.register(user, ipAddress, Boolean.TRUE);
-		model.addObject("messages", messageservice.getMessages());
+		model.addObject("messages", messageservice.getMessagesActiveNow());
 		return model;
 	}
 

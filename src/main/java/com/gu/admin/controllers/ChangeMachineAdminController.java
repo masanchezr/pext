@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.admin.validators.ChangeMachineValidator;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.forms.SearchByDatesForm;
+import com.gu.services.awards.AwardService;
 import com.gu.services.changemachine.ChangeMachineService;
+import com.gu.services.machines.MachineService;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -29,6 +31,12 @@ public class ChangeMachineAdminController {
 
 	@Autowired
 	private ChangeMachineService changeMachineService;
+
+	@Autowired
+	private MachineService machineService;
+
+	@Autowired
+	private AwardService awardservice;
 
 	@Autowired
 	private ChangeMachineValidator changeMachineAdminValidator;
@@ -112,6 +120,39 @@ public class ChangeMachineAdminController {
 			model.addAllObjects(changeMachineService.ticketsByDay(new Date()));
 		} else {
 			model.addAllObjects(changeMachineService.ticketsByDay(DateUtil.getDate(sfrom)));
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/admin/updatechangemachine{id}")
+	public ModelAndView updatechangemachine(long id) {
+		ModelAndView model = new ModelAndView("updatechangemachine");
+		model.addObject("changemachine", changeMachineService.findOne(id));
+		return model;
+	}
+
+	@RequestMapping(value = "/admin/savepaymentchangemachine")
+	public ModelAndView savepaymentchangemachine(@ModelAttribute("changemachine") ChangeMachineEntity cm,
+			BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		changeMachineAdminValidator.validate(cm, result);
+		if (result.hasErrors()) {
+			model.addObject("machines", machineService.searchMachinesOrder());
+			model.addObject("awards", awardservice.getAwardsChangeMachine());
+			model.addObject("changemachine", cm);
+			model.setViewName("updatechangemachine");
+		} else {
+			ChangeMachineEntity cmentity = changeMachineService.findOne(cm.getIdchangemachine());
+			if (cmentity != null) {
+				model.addObject("machines", machineService.searchMachinesOrder());
+				model.addObject("awards", awardservice.getAwardsChangeMachine());
+				model.addObject("changemachine", cm);
+				model.setViewName("updatechangemachine");
+				result.rejectValue("idchangemachine", "selectid");
+			} else {
+				model.addObject("daily", changeMachineService.save(cm));
+				model.setViewName("daily");
+			}
 		}
 		return model;
 	}

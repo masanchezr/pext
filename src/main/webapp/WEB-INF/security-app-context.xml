@@ -74,6 +74,8 @@
 		<intercept-url pattern="/admin/luckiaAward" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/resetcm" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/searchmonthreset" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newmessage" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/allmessages" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/searchticketsByDay"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/changemachinetotal"

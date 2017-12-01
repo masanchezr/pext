@@ -20,7 +20,7 @@
 						</div>
 						<div class="form-group">
 							<spring:message code="description" />
-							<form:textarea path="description" />
+							<form:textarea class="form-control" path="description" />
 							<p class="text-danger">
 								<form:errors path="description" />
 							</p>

@@ -47,5 +47,4 @@ public class CalendarServiceTest {
 		// calendarservice.save(schedule);
 
 	}
-
 }

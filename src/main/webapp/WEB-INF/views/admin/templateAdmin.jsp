@@ -156,6 +156,20 @@
 								var="pendingissues" /> <a href="${pendingissues}"><spring:message
 									code="pendingissues" /></a></li>
 					</ul></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="messages"/>"><a
+					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+					href="#collapsemessages" data-parent="#exampleAccordion"> <i
+						class="fa fa-file-text"></i> <span class="nav-link-text"><spring:message
+								code="messages" /></span>
+				</a>
+					<ul class="sidenav-second-level collapse" id="collapsemessages">
+						<li><spring:url value="/admin/newmessage" var="newmessage"></spring:url>
+							<a href="${newmessage}"><spring:message code="newmessage" /></a></li>
+						<li><spring:url value="/admin/messages" var="messages"></spring:url>
+							<a href="${messages}"><spring:message code="messages" /></a></li>
+					</ul></li>
 			</ul>
 			<ul class="navbar-nav sidenav-toggler">
 				<li class="nav-item"><a class="nav-link text-center"

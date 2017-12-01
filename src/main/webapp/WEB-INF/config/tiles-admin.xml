@@ -6,6 +6,8 @@
 <tiles-definitions>
 	<!-- admin -->
 	<definition name="templateAdmin" template="/WEB-INF/views/admin/templateAdmin.jsp" />
+	<definition name="templateAdminTime"
+		template="/WEB-INF/views/admin/templateAdminTime.jsp" />
 	<definition name="templateLogin" template="/WEB-INF/views/admin/templateLogin.jsp" />
 	<definition name="admin" extends="templateAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/admin/admin.jsp" />
@@ -112,5 +114,17 @@
 	<definition name="ticketsbyday" extends="templateAdmin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/operations/ticketsbyday.jsp" />
+	</definition>
+	<definition name="updatechangemachine" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/changemachine/updatechangemachine.jsp" />
+	</definition>
+	<definition name="newmessage" extends="templateAdminTime">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/messages/newmessage.jsp" />
+	</definition>
+	<definition name="allmessages" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/messages/allmessages.jsp" />
 	</definition>
 </tiles-definitions>

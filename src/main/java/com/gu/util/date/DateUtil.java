@@ -97,6 +97,11 @@ public class DateUtil {
 		return sdf.format(date);
 	}
 
+	public static String getStringDateFormatdd_MM_yyyyHHmm(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		return sdf.format(date);
+	}
+
 	public static List<Date> getDates(String sweek) {
 		List<Date> dates = new ArrayList<Date>(7);
 		Calendar calendar = Calendar.getInstance();

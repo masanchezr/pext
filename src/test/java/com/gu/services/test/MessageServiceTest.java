@@ -21,7 +21,7 @@ public class MessageServiceTest {
 
 	@Test
 	public void getMessagesTest() {
-		List<MessageEntity> messages = messageservice.getMessages();
+		List<MessageEntity> messages = messageservice.getMessagesActiveNow();
 		Iterator<MessageEntity> imessages = messages.iterator();
 		while (imessages.hasNext()) {
 			System.out.println(imessages.next().getMessage());

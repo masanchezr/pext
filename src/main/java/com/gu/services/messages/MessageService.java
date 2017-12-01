@@ -6,6 +6,12 @@ import com.gu.dbaccess.entities.MessageEntity;
 
 public interface MessageService {
 
-	public List<MessageEntity> getMessages();
+	public List<MessageEntity> getMessagesActiveNow();
+
+	public Iterable<MessageEntity> getAllMessages();
+
+	public void save(MessageEntity message);
+
+	public MessageEntity findById(Long idmessage);
 
 }

@@ -7,13 +7,11 @@ import com.gu.services.dailies.Daily;
 
 public interface GratificationService {
 
-	public Daily save(GratificationEntity g);
-
-	public boolean exists(Long idgratification);
+	public Daily save(GratificationEntity g, String user);
 
 	public List<GratificationEntity> lastNumGratifications();
 
-	public void registerNumberGratification(GratificationEntity g);
+	public void registerNumberGratification(GratificationEntity g, String user, String path);
 
 	public GratificationEntity searchGratificationActive(Long idgratification);
 

@@ -1,6 +1,15 @@
 package com.gu.employee.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -11,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.dbaccess.entities.GratificationEntity;
 import com.gu.services.gratifications.GratificationService;
 import com.gu.services.machines.MachineService;
+import com.gu.util.constants.Constants;
 
 @Controller
 public class GratificationsController {
@@ -29,9 +39,17 @@ public class GratificationsController {
 		return model;
 	}
 
+	/**
+	 * pagamos propina
+	 * 
+	 * @param g
+	 * @param arg1
+	 * @return
+	 */
 	@RequestMapping(value = "/employee/savegratification")
-	public ModelAndView save(@ModelAttribute("gratification") GratificationEntity g, BindingResult arg1) {
+	public void save(@ModelAttribute("gratification") GratificationEntity g, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
 		if (arg1.hasErrors()) {
 			model.addObject("machines", machineservice.searchMachinesOrder());
@@ -46,12 +64,11 @@ public class GratificationsController {
 				model.setViewName("newgratification");
 			} else {
 				gratification.setMachine(g.getMachine());
-				model.addObject("daily", gratificationservice.save(gratification));
+				model.addObject("daily", gratificationservice.save(gratification, user));
 				model.setViewName("daily");
 			}
 		}
-		return model;
-
+		// return model;
 	}
 
 	@RequestMapping(value = "/employee/registernumber")
@@ -63,18 +80,28 @@ public class GratificationsController {
 
 	@RequestMapping(value = "/employee/registergratification")
 	public ModelAndView registerGratification(@ModelAttribute("gratification") GratificationEntity g,
-			BindingResult arg1) {
+			BindingResult arg1, HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("successemployee");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "client", "client");
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 		if (arg1.hasErrors()) {
 			model.addObject("gratification", g);
 			model.setViewName("registergratification");
-		} else if (!gratificationservice.exists(g.getIdgratification())) {
-			gratificationservice.registerNumberGratification(g);
 		} else {
-			model.addObject("gratification", g);
-			model.setViewName("registergratification");
-			arg1.reject("idgratification", "exists");
+			gratificationservice.registerNumberGratification(g, user, path);
+			File file = new File(path.concat("ticket.pdf"));
+			InputStream inputStream;
+			try {
+				inputStream = new FileInputStream(file);
+				response.setContentType("application/force-download");
+				response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
+				IOUtils.copy(inputStream, response.getOutputStream());
+				response.flushBuffer();
+				inputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return model;
 	}

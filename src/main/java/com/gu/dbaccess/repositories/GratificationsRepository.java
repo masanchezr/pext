@@ -21,5 +21,7 @@ public interface GratificationsRepository extends CrudRepository<GratificationEn
 
 	public List<GratificationEntity> findByPaydateBetween(Date date, Date date2);
 
-	public GratificationEntity findByIdgratificationAndPaydateIsNull(Long idgratification);
+	@Query("select o from GratificationEntity o where o.idgratification=:id and o.paydate is null and o.usefromdate<=:date and o.expirationdate>=:date")
+	public GratificationEntity findByIdgratificationAndPaydateIsNull(@Param("id") Long idgratification,
+			@Param("date") Date date);
 }

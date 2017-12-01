@@ -16,10 +16,10 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<div class="form-group">
-							<spring:message code="number" />
-							<form:input class="form-control" path="idgratification" />
+							<spring:message code="client" />
+							<form:input class="form-control" path="client" />
 							<p class="text-danger">
-								<form:errors path="idgratification" />
+								<form:errors path="client" />
 							</p>
 						</div>
 						<div class="form-group">

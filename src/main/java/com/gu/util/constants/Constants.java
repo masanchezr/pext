@@ -37,5 +37,6 @@ public class Constants {
 	public static final Long EVERYBODY = 12L;
 
 	public static final Integer OTHERAWARDS = 16;
+	public static final String OPENSHIFT_DATA_DIR = "OPENSHIFT_DATA_DIR";
 
 }

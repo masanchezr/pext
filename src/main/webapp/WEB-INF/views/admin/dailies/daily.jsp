@@ -117,7 +117,10 @@
 										value="${lcm.idchangemachine}" /> <c:out
 										value="${lcm.machine.name}" /></td>
 								<td><fmt:formatDate value="${lcm.creationdate}" type="time" /></td>
-								<td><c:out value="${lcm.amount}" /><i class="fa fa-euro"></i></td>
+								<td><spring:url value="/admin/updatechangemachine"
+										var="updatechangemachine<c:out value="${lcm.idchangemachine}" />" /><a
+									href="${updateoperation}"><c:out value="${lcm.amount}" /><i
+										class="fa fa-euro"></i></a></td>
 								<td></td>
 							</tr>
 						</c:forEach>

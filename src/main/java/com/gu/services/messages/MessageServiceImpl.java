@@ -13,10 +13,21 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private MessagesRepository messagesrepository;
 
-	public List<MessageEntity> getMessages() {
+	public List<MessageEntity> getMessagesActiveNow() {
 		Date now = new Date();
 		List<MessageEntity> messages = messagesrepository.findByActiveTrueAndDatefromBeforeAndDateuntilAfter(now, now);
 		return messages;
 	}
 
+	public Iterable<MessageEntity> getAllMessages() {
+		return messagesrepository.findAll();
+	}
+
+	public void save(MessageEntity message) {
+		messagesrepository.save(message);
+	}
+
+	public MessageEntity findById(Long idmessage) {
+		return messagesrepository.findOne(idmessage);
+	}
 }
