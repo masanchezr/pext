@@ -18,8 +18,7 @@
 						<div class="form-group">
 							<div class="form-group">
 								<spring:message code="id" />
-								<form:input disabled="true" class="form-control"
-									path="idchangemachine" />
+								<form:input class="form-control" path="idchangemachine" />
 							</div>
 							<spring:message code="amount" var="amountmessage" />
 							<form:input class="form-control" path="amount"

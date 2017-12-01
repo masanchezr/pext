@@ -24,6 +24,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 
 public class GratificationServiceImpl implements GratificationService {
 
@@ -58,23 +59,22 @@ public class GratificationServiceImpl implements GratificationService {
 			 * PageRotationEventHandler eventHandler = new PageRotationEventHandler();
 			 * pdf.addEventHandler(PdfDocumentEvent.START_PAGE, eventHandler);
 			 */
-			Document document = new Document(pdf, PageSize.A8.rotate());
+			Document document = new Document(pdf, PageSize.A4.rotate());
 			PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_BOLD);
-			document.add(new Paragraph("10 DRAGONES").setFont(font).setFontSize(7));
+			document.add(
+					new Paragraph("10 DRAGONES").setFont(font).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
 			// Create a List
 			com.itextpdf.layout.element.List list = new com.itextpdf.layout.element.List();
 			// Add ListItem objects
-			list.add(new ListItem("Ticket número:" + g.getIdgratification()))
-					.add(new ListItem(
-							"Entrega de ticket:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getCreationdate())))
+			list.add(new ListItem("Ticket número:" + g.getIdgratification() + " Entrega de ticket:"
+					+ DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getCreationdate())))
 					.add(new ListItem(
 							"Utilizar a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getUsefromdate())))
 					.add(new ListItem(
 							"Caduca a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getExpirationdate())))
-					.add(new ListItem("Cliente:" + g.getClient()))
-					.add(new ListItem("Empleado:" + g.getEmployee().getAlias()));
+					.add(new ListItem("Cliente:" + g.getClient() + " Empleado:" + g.getEmployee().getAlias()));
 			// Add the list
-			list.setFontSize(6);
+			list.setFontSize(14).setTextAlignment(TextAlignment.CENTER);
 			document.add(list);
 			document.close();
 		} catch (IOException e) {
