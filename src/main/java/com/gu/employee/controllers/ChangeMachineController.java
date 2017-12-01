@@ -57,7 +57,7 @@ public class ChangeMachineController {
 				result.rejectValue("idchangemachine", "selectid");
 			} else {
 				model.addObject("daily", changeMachineService.save(cm));
-				model.setViewName("dailyadmin");
+				model.setViewName("daily");
 			}
 		}
 		return model;

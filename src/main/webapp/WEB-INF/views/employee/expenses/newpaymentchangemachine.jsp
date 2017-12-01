@@ -17,8 +17,9 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<div class="form-group">
-								<spring:message code="id" />
-								<form:input class="form-control" path="idchangemachine" />
+								<spring:message code="id" var="identificator" />
+								<form:input class="form-control" placeholder="${identificator}"
+									path="idchangemachine" />
 							</div>
 							<spring:message code="amount" var="amountmessage" />
 							<form:input class="form-control" path="amount"

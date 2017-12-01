@@ -59,10 +59,11 @@ public class GratificationServiceImpl implements GratificationService {
 			 * PageRotationEventHandler eventHandler = new PageRotationEventHandler();
 			 * pdf.addEventHandler(PdfDocumentEvent.START_PAGE, eventHandler);
 			 */
-			Document document = new Document(pdf, PageSize.A4.rotate());
+			PageSize page = PageSize.A4.rotate();
+			Document document = new Document(pdf, page);
 			PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_BOLD);
-			document.add(
-					new Paragraph("10 DRAGONES").setFont(font).setFontSize(14).setTextAlignment(TextAlignment.CENTER));
+			document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n10 DRAGONES").setFont(font).setFontSize(14)
+					.setTextAlignment(TextAlignment.CENTER));
 			// Create a List
 			com.itextpdf.layout.element.List list = new com.itextpdf.layout.element.List();
 			// Add ListItem objects
