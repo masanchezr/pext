@@ -47,7 +47,7 @@ public class GratificationsController {
 	 * @return
 	 */
 	@RequestMapping(value = "/employee/savegratification")
-	public void save(@ModelAttribute("gratification") GratificationEntity g, BindingResult arg1) {
+	public ModelAndView save(@ModelAttribute("gratification") GratificationEntity g, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
@@ -68,7 +68,7 @@ public class GratificationsController {
 				model.setViewName("daily");
 			}
 		}
-		// return model;
+		return model;
 	}
 
 	@RequestMapping(value = "/employee/registernumber")

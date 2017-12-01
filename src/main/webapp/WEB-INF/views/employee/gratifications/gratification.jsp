@@ -14,7 +14,7 @@
 		<div class="col-lg-8">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<spring:message code="number" />
 							<form:input class="form-control" path="idgratification" />

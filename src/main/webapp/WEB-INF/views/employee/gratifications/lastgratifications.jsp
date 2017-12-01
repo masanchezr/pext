@@ -28,8 +28,7 @@
 										value="${operation.idgratification}" /></td>
 								<td><fmt:formatDate value="${operation.creationdate}"
 										type="both" dateStyle="short" /></td>
-								<td><spring:message code="client" /> <c:out
-										value="${operation.client}" /></td>
+								<td><c:out value="${operation.client}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
