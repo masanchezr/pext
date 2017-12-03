@@ -9,7 +9,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newpaymentchangemachine" /></li>
 </ol>
-<form:form action="savepaymentchangemachine" commandName="changemachine">
+<form:form action="updatepaymentchangemachine"
+	commandName="changemachine">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -18,8 +19,7 @@
 						<div class="form-group">
 							<div class="form-group">
 								<spring:message code="id" />
-								<form:input disabled="true" class="form-control"
-									path="idchangemachine" />
+								<form:input class="form-control" path="idchangemachine" />
 							</div>
 							<spring:message code="amount" var="amountmessage" />
 							<form:input class="form-control" path="amount"

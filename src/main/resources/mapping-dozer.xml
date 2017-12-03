@@ -3,13 +3,24 @@
 	xmlns='http://dozer.sourceforge.net'
 	xsi:schemaLocation='http://dozer.sourceforge.net 
                    http://dozer.sourceforge.net/schema/beanmapping.xsd'>
-		
 	<mapping>
 		<class-a>com.gu.admin.forms.Schedule</class-a>
 		<class-b>com.gu.dbaccess.entities.ScheduleEntity</class-b>
 		<field custom-converter="com.gu.converters.StringToDateConverter">
 			<a>dateschedule</a>
 			<b>dateschedule</b>
+		</field>
+	</mapping>
+	<mapping>
+		<class-a>com.gu.services.messages.Message</class-a>
+		<class-b>com.gu.dbaccess.entities.MessageEntity</class-b>
+		<field custom-converter="com.gu.converters.StringToDateConverter">
+			<a>datefrom</a>
+			<b>datefrom</b>
+		</field>
+		<field custom-converter="com.gu.converters.StringToDateConverter">
+			<a>dateuntil</a>
+			<b>dateuntil</b>
 		</field>
 	</mapping>
 </mappings>

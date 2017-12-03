@@ -9,6 +9,7 @@
 			code="newmessage" /></li>
 </ol>
 <form:form action="savemessage" commandName="message">
+	<form:hidden path="idmessage" />
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -27,24 +28,20 @@
 							<form:checkbox path="active" />
 						</div>
 						<div class="form-group">
-							<div class="input-group bootstrap-timepicker timepicker">
+							<div class="jt-configuration-demo-example-timepicker-container">
 								<spring:message code="datefrom" var="datefrom" />
-								<form:input id="timepicker1" type="text" path="datefrom"
-									class="form-control input-small" placeholder="${datefrom}" />
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-time"></i></span>
+								<form:input type="text" path="datefrom"
+									class="timepicker text-center" placeholder="${datefrom}" />
 								<p class="text-danger">
 									<form:errors path="datefrom" />
 								</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="input-group bootstrap-timepicker timepicker">
-								<spring:message code="datefrom" var="dateuntil" />
-								<form:input id="timepicker2" type="text" path="dateuntil"
-									class="form-control input-small" placeholder="${dateuntil}" />
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-time"></i></span>
+							<div class="jt-configuration-demo-example-timepicker-container">
+								<spring:message code="dateuntil" var="dateuntil" />
+								<form:input type="text" path="dateuntil"
+									class="timepicker text-center" placeholder="${dateuntil}" />
 								<p class="text-danger">
 									<form:errors path="dateuntil" />
 								</p>

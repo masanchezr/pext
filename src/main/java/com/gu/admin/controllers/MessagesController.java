@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.validators.MessageValidator;
 import com.gu.dbaccess.entities.MessageEntity;
+import com.gu.services.messages.Message;
 import com.gu.services.messages.MessageService;
 
 @Controller
@@ -23,12 +24,12 @@ public class MessagesController {
 	@RequestMapping(value = "/admin/newmessage")
 	public ModelAndView newMessage() {
 		ModelAndView model = new ModelAndView("newmessage");
-		model.addObject("message", new MessageEntity());
+		model.addObject("message", new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/savemessage")
-	public ModelAndView savemessage(@ModelAttribute("message") MessageEntity message, BindingResult result) {
+	public ModelAndView savemessage(@ModelAttribute("message") Message message, BindingResult result) {
 		messagevalidator.validate(message, result);
 		if (result.hasErrors()) {
 			ModelAndView model = new ModelAndView("newmessage");
@@ -45,11 +46,12 @@ public class MessagesController {
 		ModelAndView model = new ModelAndView("allmessages");
 		Iterable<MessageEntity> messages = messageservice.getAllMessages();
 		model.addObject("messages", messages);
+		model.addObject("message", new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/updatemessage")
-	public ModelAndView updatemessage(@ModelAttribute("message") MessageEntity message) {
+	public ModelAndView updatemessage(@ModelAttribute("message") Message message) {
 		ModelAndView model = new ModelAndView("newmessage");
 		model.addObject("message", messageservice.findById(message.getIdmessage()));
 		return model;

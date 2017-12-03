@@ -18,9 +18,8 @@
 <!-- Custom CSS -->
 <link href="<spring:url value="/resources/styles/sb-admin.css"/>"
 	rel="stylesheet">
-<link
-	href="<spring:url value="/resources/styles/bootstrap-timepicker.css"/>"
-	rel="stylesheet">
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <link rel="shortcut icon"
 	href="<spring:url value="/resources/img/admin/favicon.png"/>"
 	type="image/png">
@@ -142,20 +141,11 @@
 									code="searchschedule" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message code="incidents" />"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseIncidents" data-parent="#exampleAccordion"><i
-						class="fa fa-exclamation-triangle fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="incidents" /></span>
-				</a>
-					<ul id="collapseIncidents" class="sidenav-second-level collapse">
-						<li><spring:url value="/admin/allincidents"
-								var="allincidents" /> <a href="${allincidents}"><spring:message
-									code="allincidents" /></a></li>
-						<li><spring:url value="/admin/pendingissues"
-								var="pendingissues" /> <a href="${pendingissues}"><spring:message
-									code="pendingissues" /></a></li>
-					</ul></li>
+					title="<spring:message code="pendingissues" />"><spring:url
+						value="/admin/pendingissues" var="pendingissues" /> <a
+					href="${pendingissues}" class="nav-link"><i
+						class="fa fa-exclamation-triangle fa-fw"></i><span
+						class="nav-link-text"> <spring:message code="pendingissues" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="messages"/>"><a
@@ -200,11 +190,16 @@
 	<script
 		src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
 	<script
-		src="<spring:url value="/resources/js/bootstrap-timepicker.min.js"/>"></script>
+		src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script>
-		$(function() {
-			$('#timepicker1').timepicker();
-			$('#timepicker2').timepicker();
+		$('.timepicker').timepicker({
+			timeFormat : 'hh:mm p',
+			interval : 60,
+			dynamic : true,
+			minTime : '00',
+			maxTime : '23',
+			dropdown : true,
+			scrollbar : true
 		});
 	</script>
 </body>

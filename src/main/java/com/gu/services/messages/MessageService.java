@@ -10,7 +10,7 @@ public interface MessageService {
 
 	public Iterable<MessageEntity> getAllMessages();
 
-	public void save(MessageEntity message);
+	public void save(Message message);
 
 	public MessageEntity findById(Long idmessage);
 

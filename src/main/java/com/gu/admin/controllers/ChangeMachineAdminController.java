@@ -1,20 +1,12 @@
 package com.gu.admin.controllers;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.FieldPosition;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.Date;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,39 +64,6 @@ public class ChangeMachineAdminController {
 		return model;
 	}
 
-	@InitBinder
-	public void bigDecimalCustomBinder(WebDataBinder binder) {
-		final DecimalFormat FORMATTER = (DecimalFormat) NumberFormat.getNumberInstance(new Locale("es"));
-		binder.addValidators(changeMachineAdminValidator);
-
-		// Creation of a new binder for the type "BigDecimal"
-		CustomNumberEditor cbinder = new CustomNumberEditor(BigDecimal.class, new NumberFormat() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public Number parse(String source, ParsePosition parsePosition) {
-				if (source != null) {
-					source = source.replace('.', ',');
-				}
-				return FORMATTER.parse(source, parsePosition);
-			}
-
-			@Override
-			public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
-				return FORMATTER.format(number, toAppendTo, pos);
-			}
-
-			@Override
-			public StringBuffer format(double number, StringBuffer toAppendTo, FieldPosition pos) {
-				return FORMATTER.format(number, toAppendTo, pos);
-			}
-		}, true);
-
-		// Registration of the binder
-		binder.registerCustomEditor(BigDecimal.class, cbinder);
-	}
-
 	@RequestMapping(value = "/admin/resetcm")
 	public ModelAndView resetcm() {
 		changeMachineService.reset();
@@ -125,9 +84,11 @@ public class ChangeMachineAdminController {
 	}
 
 	@RequestMapping(value = "/admin/updatechangemachine{id}")
-	public ModelAndView updatechangemachine(long id) {
+	public ModelAndView updatechangemachine(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("updatechangemachine");
 		model.addObject("changemachine", changeMachineService.findOne(id));
+		model.addObject("machines", machineService.searchMachinesOrder());
+		model.addObject("awards", awardservice.getAwardsChangeMachine());
 		return model;
 	}
 
@@ -151,8 +112,25 @@ public class ChangeMachineAdminController {
 				result.rejectValue("idchangemachine", "selectid");
 			} else {
 				model.addObject("daily", changeMachineService.save(cm));
-				model.setViewName("daily");
+				model.setViewName("dailyadmin");
 			}
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/admin/updatepaymentchangemachine")
+	public ModelAndView updatepaymentchangemachine(@ModelAttribute("changemachine") ChangeMachineEntity cm,
+			BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		changeMachineAdminValidator.validate(cm, result);
+		if (result.hasErrors()) {
+			model.addObject("machines", machineService.searchMachinesOrder());
+			model.addObject("awards", awardservice.getAwardsChangeMachine());
+			model.addObject("changemachine", cm);
+			model.setViewName("updatechangemachine");
+		} else {
+			model.addObject("daily", changeMachineService.save(cm));
+			model.setViewName("dailyadmin");
 		}
 		return model;
 	}

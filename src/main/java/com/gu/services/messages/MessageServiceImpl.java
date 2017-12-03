@@ -3,6 +3,7 @@ package com.gu.services.messages;
 import java.util.Date;
 import java.util.List;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.MessageEntity;
@@ -12,6 +13,9 @@ public class MessageServiceImpl implements MessageService {
 
 	@Autowired
 	private MessagesRepository messagesrepository;
+
+	@Autowired
+	private Mapper mapper;
 
 	public List<MessageEntity> getMessagesActiveNow() {
 		Date now = new Date();
@@ -23,8 +27,10 @@ public class MessageServiceImpl implements MessageService {
 		return messagesrepository.findAll();
 	}
 
-	public void save(MessageEntity message) {
-		messagesrepository.save(message);
+	public void save(Message message) {
+		MessageEntity entity = mapper.map(message, MessageEntity.class);
+		entity.setCreationdate(new Date());
+		messagesrepository.save(entity);
 	}
 
 	public MessageEntity findById(Long idmessage) {

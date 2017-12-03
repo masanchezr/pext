@@ -21,7 +21,6 @@
 									<th></th>
 									<th><spring:message code="message" /></th>
 									<th><spring:message code="active" /></th>
-									<th><spring:message code="description" /></th>
 									<th><spring:message code="datefrom" /></th>
 									<th><spring:message code="dateuntil" /></th>
 								</tr>
@@ -31,8 +30,8 @@
 									<tr>
 										<td><form:radiobutton path="idmessage"
 												value="${message.idmessage}" /></td>
-										<td><c:out value="${message.active}" /></td>
 										<td><c:out value="${message.message}" /></td>
+										<td><c:out value="${message.active}" /></td>
 										<td><c:out value="${message.datefrom}" /></td>
 										<td><c:out value="${message.dateuntil}" /></td>
 									</tr>

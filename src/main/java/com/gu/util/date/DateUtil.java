@@ -37,6 +37,8 @@ public class DateUtil {
 		patterns.put("\\w{3}\\s\\w{3}\\s\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\sCET\\s\\d{4}", "EEE MMM dd HH:mm:ss zzz yyyy");
 		patterns.put("\\w{3}\\s\\w{3}\\s\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\sCEST\\s\\d{4}",
 				"EEE MMM dd HH:mm:ss zzzz yyyy");
+		patterns.put("\\d{2}:\\d{2}\\s\\w{2}", "hh:mm aa");
+		patterns.put("\\d{2}:\\d{2}:\\d{2}", "hh:mm:ss");
 		Set<String> spatterns = patterns.keySet();
 		Iterator<String> ipatterns = spatterns.iterator();
 		while (ipatterns.hasNext() && sdf == null) {
