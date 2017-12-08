@@ -1,5 +1,8 @@
 package com.gu.services.test;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +24,14 @@ public class GratificationServiceTest {
 		GratificationEntity g = new GratificationEntity();
 		g.setClient("chinoFeo");
 		gratificationservice.registerNumberGratification(g, "masanchez", "F://");
+	}
+
+	@Test
+	public void lastnumgratificationsTest() {
+		List<GratificationEntity> gratifications = gratificationservice.lastNumGratifications();
+		Iterator<GratificationEntity> igratifications = gratifications.iterator();
+		while (igratifications.hasNext()) {
+			System.out.println(igratifications.next().getIdgratification());
+		}
 	}
 }

@@ -17,7 +17,8 @@ public interface GratificationsRepository extends CrudRepository<GratificationEn
 	@Query("select o from GratificationEntity o where DATE(o.paydate)=:cdate order by o.paydate")
 	public List<GratificationEntity> searchByPaydate(@Param("cdate") @Temporal(TemporalType.DATE) Date creationdate);
 
-	public List<GratificationEntity> findByCreationdateBetweenAndPaydateIsNull(Date lastdate, Date creationdate);
+	public List<GratificationEntity> findByCreationdateBetweenAndPaydateIsNull(
+			@Temporal(TemporalType.DATE) Date lastdate, @Temporal(TemporalType.DATE) Date creationdate);
 
 	public List<GratificationEntity> findByPaydateBetween(Date date, Date date2);
 
