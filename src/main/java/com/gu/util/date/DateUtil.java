@@ -90,6 +90,9 @@ public class DateUtil {
 	public static Date addDays(Date date, int days) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
 		calendar.add(Calendar.DAY_OF_MONTH, days);
 		return calendar.getTime();
 	}

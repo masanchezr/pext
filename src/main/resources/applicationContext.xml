@@ -21,6 +21,7 @@
 	<bean id="incidentValidator" class="com.gu.employee.validators.IncidentValidator" />
 	<bean id="incomeValidator" class="com.gu.employee.validators.IncomeValidator" />
 	<bean id="tpvalidator" class="com.gu.employee.validators.TPValidator" />
+	<bean id="gvalidator" class="com.gu.employee.validators.GratificationsValidator" />
 	<bean id="changeMachineValidator" class="com.gu.employee.validators.ChangeMachineValidator" />
 	<bean id="safevalidator" class="com.gu.admin.validators.SafeValidator" />
 	<bean id="changeMachineAdminValidator" class="com.gu.admin.validators.ChangeMachineValidator" />

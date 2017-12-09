@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.GratificationEntity;
+import com.gu.employee.validators.GratificationsValidator;
 import com.gu.services.gratifications.GratificationService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
@@ -30,6 +31,9 @@ public class GratificationsController {
 
 	@Autowired
 	private MachineService machineservice;
+
+	@Autowired
+	private GratificationsValidator gvalidator;
 
 	@RequestMapping(value = "/employee/newgratification")
 	public ModelAndView newgratification() {
@@ -82,9 +86,9 @@ public class GratificationsController {
 	public ModelAndView registerGratification(@ModelAttribute("gratification") GratificationEntity g,
 			BindingResult arg1, HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("successemployee");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "client", "client");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		gvalidator.validate(g, arg1);
 		if (arg1.hasErrors()) {
 			model.addObject("gratification", g);
 			model.setViewName("registergratification");
