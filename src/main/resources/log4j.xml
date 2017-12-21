@@ -12,7 +12,7 @@
 	</appender>
 
 	<!-- Application logger -->
-	<logger name="jemp">
+	<logger name="usera">
 		<level value="info" />
 	</logger>
 

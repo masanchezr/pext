@@ -53,7 +53,7 @@ public class MessagesController {
 	@RequestMapping(value = "/admin/updatemessage")
 	public ModelAndView updatemessage(@ModelAttribute("message") Message message) {
 		ModelAndView model = new ModelAndView("newmessage");
-		model.addObject("message", messageservice.findById(message.getIdmessage()));
+		model.addObject("message", messageservice.findOne(message.getIdmessage()));
 		return model;
 	}
 }

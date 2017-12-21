@@ -33,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
 		messagesrepository.save(entity);
 	}
 
-	public MessageEntity findById(Long idmessage) {
+	public MessageEntity findOne(Long idmessage) {
 		return messagesrepository.findOne(idmessage);
 	}
 }

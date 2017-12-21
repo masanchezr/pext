@@ -127,7 +127,7 @@ public class OperationServiceImpl implements OperationService {
 		return result;
 	}
 
-	public OperationEntity findById(long id) {
+	public OperationEntity findOne(long id) {
 		return operationRepository.findOne(id);
 	}
 

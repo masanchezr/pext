@@ -13,7 +13,7 @@ public interface OperationService {
 
 	public Map<String, Object> findExpensesByMonth(String month);
 
-	public OperationEntity findById(long id);
+	public OperationEntity findOne(long id);
 
 	public Daily update(OperationEntity operation);
 

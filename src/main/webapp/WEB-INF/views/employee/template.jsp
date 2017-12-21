@@ -100,13 +100,13 @@
 							</spring:url> <a href="${return}"><spring:message
 									code="returnmoneyemployee" /></a></li>
 					</ul></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				<!--li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 								code="searchschedule" />"><spring:url
 						value="/employee/searchschedule" var="searchschedule" /><a
 					href="${searchschedule}" class="nav-link"> <i
 						class="fa fa-calendar fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="searchschedule" /></span></a></li>
+								code="searchschedule" /></span></a></li-->
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 								code="newentrymoney" />"><spring:url

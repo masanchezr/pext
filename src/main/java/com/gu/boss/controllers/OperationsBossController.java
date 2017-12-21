@@ -36,7 +36,7 @@ public class OperationsBossController {
 
 	@RequestMapping(value = "/updateoperation{id}")
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
-		OperationEntity operation = operationService.findById(id);
+		OperationEntity operation = operationService.findOne(id);
 		ModelAndView model = new ModelAndView("updateoperationboss");
 		model.addObject("machines", machineService.searchAllMachinesOrder());
 		model.addObject("payments", paymentService.findAllActive());
