@@ -30,7 +30,7 @@ public class TPVServiceImpl implements TPVService {
 	}
 
 	public TPVEntity findById(TPVEntity tpv) {
-		return tpvrepository.findById(tpv.getIdtpv()).get();
+		return tpvrepository.findById(tpv.getIdtpv()).orElse(null);
 	}
 
 	public Map<String, ?> getOperationsTpv(String month) {
