@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="recharges" /></a></li>
 </ol>
-<form:form action="recharges" commandName="searchForm">
+<form:form action="recharges" modelAttribute="searchForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

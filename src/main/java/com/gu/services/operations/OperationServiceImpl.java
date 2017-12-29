@@ -65,7 +65,7 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	public Daily update(OperationEntity operation) {
-		OperationEntity entityoperation = operationRepository.findOne(operation.getIdoperation());
+		OperationEntity entityoperation = operationRepository.findById(operation.getIdoperation()).get();
 		PaymentEntity pay = operation.getPay();
 		Long idpayment = pay.getIdpayment();
 		BigDecimal amount = operation.getAmount();
@@ -127,8 +127,8 @@ public class OperationServiceImpl implements OperationService {
 		return result;
 	}
 
-	public OperationEntity findOne(long id) {
-		return operationRepository.findOne(id);
+	public OperationEntity findById(long id) {
+		return operationRepository.findById(id).get();
 	}
 
 	public void delete(OperationEntity operation) {

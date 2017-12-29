@@ -14,7 +14,7 @@
 		<div class="card-body">
 			<c:if test="${not empty incidents}">
 				<div class="table-responsive">
-					<form:form action="/admin/searchincident" commandName="incident">
+					<form:form action="/admin/searchincident" modelAttribute="incident">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>

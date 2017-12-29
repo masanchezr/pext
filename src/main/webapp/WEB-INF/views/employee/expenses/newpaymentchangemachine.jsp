@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newpaymentchangemachine" /></li>
 </ol>
-<form:form action="savepaymentchangemachine" commandName="changemachine">
+<form:form action="savepaymentchangemachine" modelAttribute="changemachine">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

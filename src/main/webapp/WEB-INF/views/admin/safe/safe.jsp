@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="safe" /></a></li>
 </ol>
-<form:form action="savesafe" commandName="safeForm" role="form">
+<form:form action="savesafe" modelAttribute="safeForm" role="form">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

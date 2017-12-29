@@ -22,6 +22,9 @@ public class MachineEntity {
 	@Column(name = "order")
 	private Long ordermachine;
 
+	@Column(name = "nameticket")
+	private String nameticket;
+
 	public Long getIdmachine() {
 		return idmachine;
 	}
@@ -52,6 +55,14 @@ public class MachineEntity {
 
 	public void setOrdermachine(Long order) {
 		this.ordermachine = order;
+	}
+
+	public String getNameticket() {
+		return nameticket;
+	}
+
+	public void setNameticket(String nameticket) {
+		this.nameticket = nameticket;
 	}
 
 }

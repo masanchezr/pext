@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<c:if test="${not empty messages}">
 				<div class="table-responsive">
-					<form:form action="updatemessage" commandName="message">
+					<form:form action="updatemessage" modelAttribute="message">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>

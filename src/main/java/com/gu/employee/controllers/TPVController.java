@@ -36,7 +36,7 @@ public class TPVController {
 			model.addObject("tpv", tpv);
 		} else {
 			// miro si existe ya
-			TPVEntity tpventity = tpvservice.findOne(tpv);
+			TPVEntity tpventity = tpvservice.findById(tpv);
 			if (tpventity != null) {
 				model.setViewName("newtpv");
 				model.addObject("tpv", tpv);

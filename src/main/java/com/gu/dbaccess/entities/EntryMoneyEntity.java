@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class EntryMoneyEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "identrymoney")
 	private Long identrymoney;
 

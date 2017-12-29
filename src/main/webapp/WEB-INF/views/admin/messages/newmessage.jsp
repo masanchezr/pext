@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newmessage" /></li>
 </ol>
-<form:form action="savemessage" commandName="message">
+<form:form action="savemessage" modelAttribute="message">
 	<form:hidden path="idmessage" />
 	<div class="row">
 		<div class="col-lg-12">

@@ -12,6 +12,6 @@ public interface MessageService {
 
 	public void save(Message message);
 
-	public MessageEntity findOne(Long idmessage);
+	public MessageEntity findById(Long idmessage);
 
 }

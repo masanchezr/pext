@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="bardrinks" /></li>
 </ol>
-<form:form action="saveincome" commandName="incomeForm" role="form">
+<form:form action="saveincome" modelAttribute="incomeForm" role="form">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

@@ -38,29 +38,7 @@ public class ChangeMachineAdminController {
 		ModelAndView model = new ModelAndView("changemachinetotal");
 		model.addObject("totalmonth", changeMachineService.getIncomeTotalMonth());
 		model.addObject("total", changeMachineService.getTotal());
-		model.addObject("awardsluckia", changeMachineService.getAwardsLuckia());
 		model.addObject("awards", changeMachineService.getAwards());
-		return model;
-	}
-
-	@RequestMapping(value = "/admin/luckiaAward")
-	public ModelAndView luckiaAward() {
-		ModelAndView model = new ModelAndView("luckia");
-		model.addObject("cmachineForm", changeMachineService.getLastLuckia());
-		return model;
-	}
-
-	@RequestMapping(value = "/admin/saveawardluckia")
-	public ModelAndView saveAwardLuckia(@ModelAttribute("cmachineForm") ChangeMachineEntity cmachine,
-			BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		if (result.hasErrors()) {
-			model.setViewName("luckia");
-			model.addObject("cmachineForm", cmachine);
-		} else {
-			changeMachineService.saveLuckiaAward(cmachine);
-			model = changemachinetotal();
-		}
 		return model;
 	}
 
@@ -86,7 +64,7 @@ public class ChangeMachineAdminController {
 	@RequestMapping(value = "/admin/updatechangemachine{id}")
 	public ModelAndView updatechangemachine(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("updatechangemachine");
-		model.addObject("changemachine", changeMachineService.findOne(id));
+		model.addObject("changemachine", changeMachineService.findById(id));
 		model.addObject("machines", machineService.searchMachinesOrder());
 		model.addObject("awards", awardservice.getAwardsChangeMachine());
 		return model;
@@ -103,7 +81,7 @@ public class ChangeMachineAdminController {
 			model.addObject("changemachine", cm);
 			model.setViewName("updatechangemachine");
 		} else {
-			ChangeMachineEntity cmentity = changeMachineService.findOne(cm.getIdchangemachine());
+			ChangeMachineEntity cmentity = changeMachineService.findById(cm.getIdchangemachine());
 			if (cmentity != null) {
 				model.addObject("machines", machineService.searchMachinesOrder());
 				model.addObject("awards", awardservice.getAwardsChangeMachine());

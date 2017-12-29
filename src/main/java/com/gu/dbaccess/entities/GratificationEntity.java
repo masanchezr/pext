@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class GratificationEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDGRATIFICATION")
 	private Long idgratification;
 

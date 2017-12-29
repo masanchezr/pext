@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="incomemachine" /></li>
 </ol>
-<form:form action="saveincomemachine" commandName="incomeForm"
+<form:form action="saveincomemachine" modelAttribute="incomeForm"
 	role="form">
 	<div class="row">
 		<div class="col-lg-12">

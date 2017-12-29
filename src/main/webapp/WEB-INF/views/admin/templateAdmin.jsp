@@ -113,8 +113,6 @@
 								var="changemachinetotal"></spring:url> <a
 							href="${changemachinetotal}"><spring:message
 									code="changemachinetotal" /></a></li>
-						<li><spring:url value="/admin/luckiaAward" var="luckiaAward"></spring:url>
-							<a href="${luckiaAward}"><spring:message code="luckiaAward" /></a></li>
 						<li><spring:url value="/admin/searchticketsByDay"
 								var="ticketsbyday"></spring:url> <a href="${ticketsbyday}"><spring:message
 									code="ticketsbyday" /></a></li>

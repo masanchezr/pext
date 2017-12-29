@@ -10,7 +10,7 @@
 			code="newpaymentchangemachine" /></li>
 </ol>
 <form:form action="updatepaymentchangemachine"
-	commandName="changemachine">
+	modelAttribute="changemachine">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

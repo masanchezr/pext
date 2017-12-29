@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="gratification" /></li>
 </ol>
-<form:form action="registergratification" commandName="gratification"
+<form:form action="registergratification" modelAttribute="gratification"
 	role="form">
 	<div class="row">
 		<div class="col-lg-8">

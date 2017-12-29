@@ -33,7 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
 	 *            Long id; while (ilin.hasNext()) { id =
 	 *            ilin.next().getIdemployee(); if (id != null) { in = new
 	 *            InEntity(); in.setDate(new Date());
-	 *            in.setEmployee(employeesRepository.findOne(id));
+	 *            in.setEmployee(employeesRepository.findById(id));
 	 *            inRepository.save(in); inout.add(mapper.map(in, InOut.class));
 	 *            } }
 	 * 

@@ -5,7 +5,8 @@
                     http://www.springframework.org/schema/security
                     http://www.springframework.org/schema/security/spring-security.xsd">
 	<beans:import resource="classpath*:applicationContext.xml" />
-
+	<beans:bean name="noopEncoder"
+		class="org.springframework.security.crypto.password.NoOpPasswordEncoder" />
 	<http pattern="/employee/**" authentication-manager-ref="authenticationMgr">
 		<access-denied-handler error-page="/403employee" />
 		<intercept-url pattern="/employee/admin"
@@ -106,6 +107,7 @@
 
 	<authentication-manager id="authenticationMgr">
 		<authentication-provider>
+			<password-encoder ref="noopEncoder" />
 			<jdbc-user-service role-prefix="ROLE_"
 				data-source-ref="dataSource"
 				users-by-username-query="select username,password, enabled from users where username=?"

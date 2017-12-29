@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	public User disableEnableUser(String username) {
 		User user = null;
-		UserEntity entity = usersRepository.findOne(username);
+		UserEntity entity = usersRepository.findById(username).get();
 		if (entity != null) {
 			Boolean state = entity.getEnabled();
 			if (state.equals(Boolean.TRUE)) {

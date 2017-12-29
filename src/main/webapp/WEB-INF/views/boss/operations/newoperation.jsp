@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newoperation" /></li>
 </ol>
-<form:form action="saveoperation" commandName="operation">
+<form:form action="saveoperation" modelAttribute="operation">
 	<form:hidden path="idoperation" />
 	<div class="row">
 		<div class="col-lg-6"></div>
@@ -64,7 +64,7 @@
 		</div>
 	</div>
 </form:form>
-<form:form action="deleteoperation" commandName="operation">
+<form:form action="deleteoperation" modelAttribute="operation">
 	<form:hidden path="idoperation" />
 	<div class="row">
 		<div class="col-lg-6">

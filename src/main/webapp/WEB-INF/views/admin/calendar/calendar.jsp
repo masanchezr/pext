@@ -9,7 +9,7 @@
 				code="schedule" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="calendar" /></li>
 </ol>
-<form:form action="saveschedule" commandName="scheduleForm" role="form">
+<form:form action="saveschedule" modelAttribute="scheduleForm" role="form">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

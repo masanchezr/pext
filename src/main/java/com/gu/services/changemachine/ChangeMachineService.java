@@ -9,24 +9,20 @@ import com.gu.services.dailies.Daily;
 
 public interface ChangeMachineService {
 
-	public void saveLuckiaAward(ChangeMachineEntity cmachine);
-
 	public BigDecimal getIncomeTotalMonth();
 
 	public void reset();
 
 	public BigDecimal getTotal();
 
-	public BigDecimal getAwardsLuckia();
-
 	public BigDecimal getAwards();
-
-	public ChangeMachineEntity getLastLuckia();
 
 	public Map<String, ?> ticketsByDay(Date date);
 
-	public ChangeMachineEntity findOne(Long idchangemachine);
+	public ChangeMachineEntity findById(Long idchangemachine);
 
 	public Daily save(ChangeMachineEntity cm);
+
+	public void loadDataTicketServer();
 
 }

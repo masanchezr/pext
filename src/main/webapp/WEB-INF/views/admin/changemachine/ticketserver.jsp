@@ -6,27 +6,14 @@
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="changemachine" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="luckiaAward" /></li>
+			code="entrymachine" /></li>
 </ol>
-<form:form action="saveawardluckia" commandName="cmachineForm"
-	role="form">
+<form:form action="http://88.27.244.77:3080/TicketServer/reportTicketsDateTime.php" role="form">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-6">
-						<div class="form-group">
-							<spring:message code="amount" />
-							<form:input class="form-control" path="amount" />
-							<p class="text-danger">
-								<form:errors path="amount" />
-							</p>
-						</div>
-						<div class="form-group">
-							<spring:message code="lastdate" />
-							<form:input class="form-control" path="creationdate"
-								disabled="true" />
-						</div>
+					<div class="col-lg-3">
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="save" />

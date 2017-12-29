@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="providing" /></li>
 </ol>
-<form:form action="providing" commandName="providing" role="form">
+<form:form action="providing" modelAttribute="providing" role="form">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

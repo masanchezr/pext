@@ -15,19 +15,6 @@
 		</div>
 	</div>
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-warning o-hidden">
-			<div class="card-body">
-				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
-				</div>
-				<div class="mr-5">
-					<spring:message code="luckiaAward" />
-					<c:out value="${awardsluckia}" />
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-3 col-sm-6 mb-3">
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">

@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="returnmoneyemployee" /></li>
 </ol>
-<form:form action="savereturn" commandName="incomeForm" role="form">
+<form:form action="savereturn" modelAttribute="incomeForm" role="form">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

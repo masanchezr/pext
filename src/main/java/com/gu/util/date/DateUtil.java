@@ -32,6 +32,7 @@ public class DateUtil {
 		patterns.put("\\d{2}/\\d{2}/\\d{4}", "dd/MM/yyyy");
 		patterns.put("(\\d{2})-(\\d{2})-(\\d{4})", "dd-MM-yyyy");
 		patterns.put("(\\d{4})-(\\d{2})-(\\d{2})", "yyyy-MM-dd");
+		patterns.put("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}", "yyyy-MM-dd HH:mm:ss");
 		patterns.put("(\\d{4})(\\d{2})(\\d{2})", "yyyyMMdd");
 		patterns.put("\\d{2}/\\d{4}", "MM/yyyy");
 		patterns.put("\\w{3}\\s\\w{3}\\s\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\sCET\\s\\d{4}", "EEE MMM dd HH:mm:ss zzz yyyy");
@@ -107,6 +108,11 @@ public class DateUtil {
 		return sdf.format(date);
 	}
 
+	public static String getStringDateFormatHHmm(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		return sdf.format(date);
+	}
+
 	public static List<Date> getDates(String sweek) {
 		List<Date> dates = new ArrayList<Date>(7);
 		Calendar calendar = Calendar.getInstance();
@@ -120,5 +126,10 @@ public class DateUtil {
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		return dates;
+	}
+
+	public static String getStringDateFormatyyyy_MM_dd(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
 	}
 }

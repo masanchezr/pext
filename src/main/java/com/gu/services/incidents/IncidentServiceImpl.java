@@ -26,7 +26,7 @@ public class IncidentServiceImpl implements IncidentService {
 	}
 
 	public void resolve(IncidentEntity incident) {
-		IncidentEntity entity = incidentRepository.findOne(incident.getIdincident());
+		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).get();
 		entity.setDescription(incident.getDescription());
 		entity.setState(Boolean.TRUE);
 		incidentRepository.save(entity);
@@ -51,6 +51,6 @@ public class IncidentServiceImpl implements IncidentService {
 	}
 
 	public IncidentEntity searchIncident(IncidentEntity incident) {
-		return incidentRepository.findOne(incident.getIdincident());
+		return incidentRepository.findById(incident.getIdincident()).get();
 	}
 }

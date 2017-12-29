@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="selectweek" /></li>
 </ol>
-<form:form action="resultschedule" commandName="weekForm">
+<form:form action="resultschedule" modelAttribute="weekForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

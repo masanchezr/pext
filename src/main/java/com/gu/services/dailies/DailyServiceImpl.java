@@ -28,6 +28,8 @@ import com.gu.dbaccess.repositories.IncomeMachinesRepository;
 import com.gu.dbaccess.repositories.OperationsRepository;
 import com.gu.dbaccess.repositories.ReturnMoneyEmployeesRepository;
 import com.gu.dbaccess.repositories.TPVRepository;
+import com.gu.services.changemachine.ChangeMachineService;
+import com.gu.services.changemachine.TicketServer;
 import com.gu.util.constants.Constants;
 
 /**
@@ -66,7 +68,11 @@ public class DailyServiceImpl implements DailyService {
 	@Autowired
 	private ChangeMachineRepository changeMachineRepository;
 
+	@Autowired
+	private ChangeMachineService changeMachineService;
+
 	public Daily getDaily(Date date) {
+		TicketServer ticketserver = new TicketServer(changeMachineService);
 		Daily daily = new Daily();
 		List<OperationEntity> operations = operationsRepository.findByCreationdate(date);
 		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdate(date);
@@ -80,7 +86,7 @@ public class DailyServiceImpl implements DailyService {
 		int numoperations = 0;
 		BigDecimal finalamount = BigDecimal.ZERO;
 		// busco el parte de hoy si ya está calculado
-		DailyEntity dEntity = dailyRepository.findOne(date);
+		DailyEntity dEntity = dailyRepository.findById(date).orElse(null);
 		if (operations != null && !operations.isEmpty()) {
 			Iterator<OperationEntity> ioperations = operations.iterator();
 			OperationEntity operation;
@@ -172,12 +178,12 @@ public class DailyServiceImpl implements DailyService {
 		calendar.add(Calendar.DAY_OF_MONTH, -1);
 		if (dEntity == null) {
 			// tengo que sacar el importe del día anterior para calcularlo
-			DailyEntity previousdaily = dailyRepository.findOne(calendar.getTime());
+			DailyEntity previousdaily = dailyRepository.findById(calendar.getTime()).get();
 			previousamount = previousdaily.getFinalamount();
 			dEntity = new DailyEntity();
 			dEntity.setDailydate(date);
 		} else {
-			DailyEntity dailyprevious = dailyRepository.findOne(calendar.getTime());
+			DailyEntity dailyprevious = dailyRepository.findById(calendar.getTime()).get();
 			if (dailyprevious == null) {
 				return daily;
 			} else {
@@ -190,6 +196,7 @@ public class DailyServiceImpl implements DailyService {
 		daily.setNumoperations(numoperations);
 		daily.setDate(date);
 		dailyRepository.save(dEntity);
+		ticketserver.run();
 		return daily;
 	}
 
@@ -218,7 +225,7 @@ public class DailyServiceImpl implements DailyService {
 				new Date());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
 		List<ChangeMachineEntity> changemachine = changeMachineRepository
-				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(date, new Date());
+				.findByCreationdateBetweenOrderByCreationdate(date, new Date());
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);

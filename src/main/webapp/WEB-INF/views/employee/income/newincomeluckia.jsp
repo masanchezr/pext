@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="incomeluckia" /></li>
 </ol>
-<form:form action="saveincomeluckia" commandName="iluckia" role="form">
+<form:form action="saveincomeluckia" modelAttribute="iluckia" role="form">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

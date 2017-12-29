@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="entrymoneymachine" /></li>
 </ol>
-<form:form action="saveEntrymachine" commandName="entrymoneyForm"
+<form:form action="saveEntrymachine" modelAttribute="entrymoneyForm"
 	role="form">
 	<div class="row">
 		<div class="col-lg-6">

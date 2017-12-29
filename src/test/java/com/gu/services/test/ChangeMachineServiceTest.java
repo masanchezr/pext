@@ -2,14 +2,14 @@ package com.gu.services.test;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.services.changemachine.ChangeMachineService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,24 +19,16 @@ public class ChangeMachineServiceTest {
 	@Autowired
 	private ChangeMachineService changeMachineService;
 
-	private static final Logger logger = Logger.getLogger(ChangeMachineServiceTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ChangeMachineServiceTest.class);
 
 	@Test
 	public void getAwardsTest() {
 		BigDecimal awards = changeMachineService.getAwards();
-		logger.trace(awards);
+		logger.trace(awards.toString());
 	}
 
 	@Test
-	public void getAwardsLuckiaTest() {
-		BigDecimal awards = changeMachineService.getAwardsLuckia();
-		logger.trace(awards);
-	}
-
-	@Test
-	public void saveLuckiaAwardTest() {
-		ChangeMachineEntity cm = new ChangeMachineEntity();
-		cm.setAmount(new BigDecimal(90));
-		changeMachineService.saveLuckiaAward(cm);
+	public void getIncomeTotalMonthTest() {
+		changeMachineService.getIncomeTotalMonth();
 	}
 }

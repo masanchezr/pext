@@ -29,8 +29,8 @@ public class TPVServiceImpl implements TPVService {
 		return dailyService.getDailyEmployee(today);
 	}
 
-	public TPVEntity findOne(TPVEntity tpv) {
-		return tpvrepository.findOne(tpv.getIdtpv());
+	public TPVEntity findById(TPVEntity tpv) {
+		return tpvrepository.findById(tpv.getIdtpv()).get();
 	}
 
 	public Map<String, ?> getOperationsTpv(String month) {

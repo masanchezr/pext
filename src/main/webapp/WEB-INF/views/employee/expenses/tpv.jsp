@@ -8,7 +8,7 @@
 				code="operations" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="tpv" /></li>
 </ol>
-<form:form action="tpv" commandName="tpv">
+<form:form action="tpv" modelAttribute="tpv">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
