@@ -167,11 +167,13 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 								} else {
 									machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
 								}
+								cm.setMachine(machine);
 							}
 						} else {
 							award = node.getWholeText();
 							awardentity.setIdawardchangemachine(1L);
 							machine = machinesRepository.findByNameticket(award);
+							cm.setMachine(machine);
 						}
 					} else {
 						awardentity.setIdawardchangemachine(1L);
