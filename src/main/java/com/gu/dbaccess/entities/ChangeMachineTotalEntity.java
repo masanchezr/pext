@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class ChangeMachineTotalEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idchangemachinetotal")
 	private Long idchangemachinetotal;
 

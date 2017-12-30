@@ -66,8 +66,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		ChangeMachineTotalEntity cmtn = new ChangeMachineTotalEntity();
 		take.setTakedate(new Date());
 		cmtn.setCreationdate(new Date());
-		cmtn.setTotal(cmt.getTotal().add(changeMachineRepository.sumByCreationdateBetweenLuckia(from, new Date()))
-				.add(changeMachineRepository.sumByCreationdateBetween(from, new Date())));
+		cmtn.setTotal(cmt.getTotal().subtract(changeMachineRepository.sumByCreationdateBetween(from, new Date())));
 		changeMachineTotalRepository.save(cmtn);
 		takingsRepository.save(take);
 	}
