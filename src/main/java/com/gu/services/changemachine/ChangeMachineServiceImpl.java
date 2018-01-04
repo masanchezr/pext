@@ -159,12 +159,17 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 							award = node.getWholeText();
 							awardentity.setIdawardchangemachine(2L);
 							if (award.startsWith("(")) {
-								String sub = award.substring(1, 3);
+								String sub = award.substring(1, 4);
 								machine = new MachineEntity();
 								if (Util.isNumeric(sub)) {
 									machine.setIdmachine(Long.valueOf(sub));
 								} else {
-									machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
+									sub = award.substring(1, 3);
+									if (Util.isNumeric(sub)) {
+										machine.setIdmachine(Long.valueOf(sub));
+									} else {
+										machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
+									}
 								}
 								cm.setMachine(machine);
 							}

@@ -30,7 +30,7 @@ public class DailyServiceTest {
 	@Test
 	public void getDailyTest() {
 		Calendar c = Calendar.getInstance();
-		c.set(2017, 11, 23);
+		c.set(2017, 11, 30);
 		Daily daily = dailyService.getDaily(c.getTime());
 		if (daily != null) {
 			System.out.println(
