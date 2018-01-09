@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -196,5 +197,20 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<Long> findLostNumbers() {
+		List<Long> lostNumbers = new ArrayList<Long>();
+		TakeEntity take = takingsRepository.findFirstByOrderByIdtakeDesc();
+		ChangeMachineEntity firstcm = changeMachineRepository.findFirstByCreationdateAfter(take.getTakedate());
+		System.out.println(firstcm.getIdchangemachine());
+		ChangeMachineEntity lastcm = changeMachineRepository.findFirstByOrderByCreationdateDesc();
+		System.out.println(lastcm.getIdchangemachine());
+		for (long l = firstcm.getIdchangemachine(); l < lastcm.getIdchangemachine(); l++) {
+			if (!changeMachineRepository.existsById(l)) {
+				lostNumbers.add(l);
+			}
+		}
+		return lostNumbers;
 	}
 }

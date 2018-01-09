@@ -2,6 +2,7 @@ package com.gu.services.changemachine;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.gu.dbaccess.entities.ChangeMachineEntity;
@@ -24,5 +25,7 @@ public interface ChangeMachineService {
 	public Daily save(ChangeMachineEntity cm);
 
 	public void loadDataTicketServer();
+
+	public List<Long> findLostNumbers();
 
 }

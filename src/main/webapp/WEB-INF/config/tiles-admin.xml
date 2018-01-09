@@ -119,6 +119,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/updatechangemachine.jsp" />
 	</definition>
+	<definition name="lostnumbers" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/changemachine/lostnumbers.jsp" />
+	</definition>
 	<definition name="newmessage" extends="templateAdminTime">
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/messages/newmessage.jsp" />

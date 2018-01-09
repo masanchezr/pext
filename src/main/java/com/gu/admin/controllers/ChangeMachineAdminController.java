@@ -112,4 +112,11 @@ public class ChangeMachineAdminController {
 		}
 		return model;
 	}
+
+	@RequestMapping(value = "/admin/lostnumbers")
+	public ModelAndView lostnumbers() {
+		ModelAndView model = new ModelAndView("lostnumbers");
+		model.addObject("lostnumbers", changeMachineService.findLostNumbers());
+		return model;
+	}
 }

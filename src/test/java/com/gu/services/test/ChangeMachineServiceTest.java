@@ -1,6 +1,7 @@
 package com.gu.services.test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,5 +31,13 @@ public class ChangeMachineServiceTest {
 	@Test
 	public void getIncomeTotalMonthTest() {
 		changeMachineService.getIncomeTotalMonth();
+	}
+
+	@Test
+	public void findLostNumbersTest() {
+		List<Long> ln = changeMachineService.findLostNumbers();
+		for (Long long1 : ln) {
+			logger.trace(long1.toString());
+		}
 	}
 }
