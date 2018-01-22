@@ -132,4 +132,9 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
 	}
+
+	public static String getStringDateFormatdd_MM_yyyyHHmmss(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return sdf.format(date);
+	}
 }

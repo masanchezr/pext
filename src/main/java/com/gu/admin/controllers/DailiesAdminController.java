@@ -35,24 +35,26 @@ public class DailiesAdminController {
 		ModelAndView model = new ModelAndView();
 		String sdate = searchForm.getDatefrom();
 		Date date;
+		String view;
 		if (Util.isEmpty(sdate)) {
 			date = new Date();
+			view = "dailyadminarrow";
 		} else {
 			date = DateUtil.getDate(sdate);
+			view = "dailyadminarrows";
 		}
 		Calendar c = Calendar.getInstance();
-		c.set(2016, 11, 12);
-		if (date.after(c.getTime())) {
+		if (date.before(c.getTime())) {
 			Daily daily = dailyService.getDaily(date);
 			if (daily.getFinalamount() == null) {
-				model.setViewName("notdaily");
+				model.setViewName("notdailyadmin");
 			} else {
 				model.addObject("daily", daily);
-				model.setViewName("dailyadmin");
+				model.setViewName(view);
 				model.addObject("datedaily", date);
 			}
 		} else {
-			model.setViewName("notdaily");
+			model.setViewName("notdailyadmin");
 		}
 		return model;
 	}
@@ -72,7 +74,7 @@ public class DailiesAdminController {
 					model.setViewName("notdailyadmin");
 				} else {
 					model.addObject("daily", daily);
-					model.setViewName("dailyadmin");
+					model.setViewName("dailyadminarrows");
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}
@@ -96,8 +98,16 @@ public class DailiesAdminController {
 				if (daily.getFinalamount() == null) {
 					model.setViewName("notdailyadmin");
 				} else {
+					String view;
+					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
+					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					if (stoday.compareTo(sdate) == 0) {
+						view = "dailyadminarrow";
+					} else {
+						view = "dailyadminarrows";
+					}
 					model.addObject("daily", daily);
-					model.setViewName("dailyadmin");
+					model.setViewName(view);
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}

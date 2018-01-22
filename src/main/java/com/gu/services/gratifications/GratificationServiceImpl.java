@@ -68,7 +68,7 @@ public class GratificationServiceImpl implements GratificationService {
 			com.itextpdf.layout.element.List list = new com.itextpdf.layout.element.List();
 			// Add ListItem objects
 			list.add(new ListItem("Ticket número:" + g.getIdgratification() + " Entrega de ticket:"
-					+ DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getCreationdate())))
+					+ DateUtil.getStringDateFormatdd_MM_yyyyHHmmss(g.getCreationdate())))
 					.add(new ListItem(
 							"Utilizar a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getUsefromdate())))
 					.add(new ListItem(

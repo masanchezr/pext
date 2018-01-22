@@ -17,6 +17,7 @@ import com.gu.forms.SearchByDatesForm;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
+import com.gu.util.string.Util;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
@@ -55,7 +56,7 @@ public class DailiesController {
 		ModelAndView model;
 		String sdate = sdf.getDatefrom();
 		Date date;
-		if (sdate == null) {
+		if (Util.isEmpty(sdate)) {
 			date = new Date();
 			return getDailyModel(date);
 		} else {
@@ -78,8 +79,16 @@ public class DailiesController {
 		if (daily.getFinalamount() == null) {
 			model.setViewName("notdailyadmin");
 		} else {
+			String view;
+			String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
+			String sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+			if (stoday.compareTo(sdate) == 0) {
+				view = "dailybossarrow";
+			} else {
+				view = "dailybossarrows";
+			}
 			model.addObject("daily", daily);
-			model.setViewName("dailyboss");
+			model.setViewName(view);
 			model.addObject("datedaily", date);
 		}
 		return model;
@@ -125,7 +134,7 @@ public class DailiesController {
 					model.setViewName("notdailyadmin");
 				} else {
 					model.addObject("daily", daily);
-					model.setViewName("dailyboss");
+					model.setViewName("dailybossarrows");
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}
@@ -149,8 +158,16 @@ public class DailiesController {
 				if (daily.getFinalamount() == null) {
 					model.setViewName("notdailyadmin");
 				} else {
+					String view;
+					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
+					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					if (stoday.compareTo(sdate) == 0) {
+						view = "dailybossarrow";
+					} else {
+						view = "dailybossarrows";
+					}
 					model.addObject("daily", daily);
-					model.setViewName("dailyboss");
+					model.setViewName(view);
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}

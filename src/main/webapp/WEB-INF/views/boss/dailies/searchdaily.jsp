@@ -12,20 +12,24 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">
-				<div class="form-group">
-					<spring:message code="date" var="datemessage" />
-					<div id="sandbox-container">
-						<form:input class="form-control" type="text" path="datefrom"
-							placeholder="${datemessage}" />
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<spring:message code="date" var="datemessage" />
+							<div id="sandbox-container">
+								<form:input class="form-control" type="text" path="datefrom"
+									placeholder="${datemessage}" />
+							</div>
+							<p class="text-danger">
+								<form:errors path="datefrom" />
+							</p>
+						</div>
+						<div class="form-group">
+							<form:button class="btn btn-primary" value="submit">
+								<spring:message code="search" />
+							</form:button>
+						</div>
 					</div>
-					<p class="text-danger">
-						<form:errors path="datefrom" />
-					</p>
-				</div>
-				<div class="form-group">
-					<form:button class="btn btn-primary" value="submit">
-						<spring:message code="search" />
-					</form:button>
 				</div>
 			</div>
 		</div>

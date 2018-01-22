@@ -60,13 +60,6 @@
 						class="nav-link-text"><spring:message code="operationstpv" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
-							code="searchschedule" />"><spring:url
-						value="/searchschedule" var="searchschedule" /><a
-					href="${searchschedule}" class="nav-link"><i
-						class="fa fa-calendar fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="searchschedule" /></span></a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
 							code="summaryexpenses" />"><spring:url
 						value="/summaryexpenses" var="summaryexpenses" /><a
 					href="${summaryexpenses}" class="nav-link"><i

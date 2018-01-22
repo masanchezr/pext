@@ -83,9 +83,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/expenses/searchexpenses.jsp" />
 	</definition>
-	<definition name="dailyboss" extends="templateBoss">
+	<definition name="dailybossarrows" extends="templateBoss">
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/dailies/daily.jsp" />
+			value="/WEB-INF/views/boss/dailies/dailyarrows.jsp" />
+	</definition>
+	<definition name="dailybossarrow" extends="templateBoss">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/dailies/dailyarrow.jsp" />
 	</definition>
 	<definition name="updateoperationboss" extends="templateBoss">
 		<put-attribute name="body"
