@@ -43,8 +43,7 @@ public class DailiesAdminController {
 			date = DateUtil.getDate(sdate);
 			view = "dailyadminarrows";
 		}
-		Calendar c = Calendar.getInstance();
-		if (date.before(c.getTime())) {
+		if (date.before(new Date()) || date.equals(new Date())) {
 			Daily daily = dailyService.getDaily(date);
 			if (daily.getFinalamount() == null) {
 				model.setViewName("notdailyadmin");
