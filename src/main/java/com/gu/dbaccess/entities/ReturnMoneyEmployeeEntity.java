@@ -28,6 +28,9 @@ public class ReturnMoneyEmployeeEntity {
 	@Column(name = "creationdate")
 	private Date creationdate;
 
+	@Column(name = "returndate")
+	private Date returndate;
+
 	@Column(name = "amount")
 	private BigDecimal amount;
 
@@ -72,5 +75,13 @@ public class ReturnMoneyEmployeeEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Date getReturndate() {
+		return returndate;
+	}
+
+	public void setReturndate(Date returndate) {
+		this.returndate = returndate;
 	}
 }

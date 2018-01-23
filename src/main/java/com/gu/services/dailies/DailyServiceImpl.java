@@ -80,7 +80,8 @@ public class DailyServiceImpl implements DailyService {
 		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdate(date);
 		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdate(date);
 		List<GratificationEntity> gratifications = gratificationRepository.searchByPaydate(date);
-		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByCreationdate(date);
+		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndate(date);
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdate(date);
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdate(date);
 		List<ChangeMachineEntity> changemachine = changeMachineRepository.searchByCreationdate(date);
 		int numoperations = 0;
@@ -157,6 +158,16 @@ public class DailyServiceImpl implements DailyService {
 				numoperations = numoperations + 1;
 			}
 			daily.setReturns(returns);
+		}
+		if (moneyadvance != null && !moneyadvance.isEmpty()) {
+			Iterator<ReturnMoneyEmployeeEntity> iincome = moneyadvance.iterator();
+			ReturnMoneyEmployeeEntity ie;
+			while (iincome.hasNext()) {
+				ie = iincome.next();
+				finalamount = finalamount.subtract(ie.getAmount());
+				numoperations = numoperations + 1;
+			}
+			daily.setMoneyAdvance(moneyadvance);
 		}
 		if (tpvs != null && !tpvs.isEmpty()) {
 			Iterator<TPVEntity> itpvs = tpvs.iterator();

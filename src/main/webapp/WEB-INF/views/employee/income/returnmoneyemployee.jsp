@@ -1,5 +1,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
@@ -8,41 +9,43 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="returnmoneyemployee" /></li>
 </ol>
-<form:form action="savereturn" modelAttribute="incomeForm" role="form">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="form-group">
-							<spring:message code="amount" var="amount" />
-							<form:input class="form-control" path="amount"
-								placeholder="${amount}" />
-							<p class="text-danger">
-								<form:errors path="amount" />
-							</p>
-						</div>
-						<div class="form-group">
-							<spring:message code="description" var="description" />
-							<form:input class="form-control" path="description"
-								placeholder="${description}" />
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="form-group">
-							<form:select class="form-control" path="employee.idemployee">
-								<form:options items="${employees}" itemValue="idemployee"
-									itemLabel="alias" />
-							</form:select>
-						</div>
-						<div class="form-group">
-							<form:button class="btn btn-primary" value="submit">
-								<spring:message code="save" />
-							</form:button>
-						</div>
-					</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card-body">
+			<c:if test="${not empty moneyadvance}">
+				<div class="table-responsive">
+					<form:form action="savereturn" modelAttribute="incomeForm">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th></th>
+									<th><spring:message code="amount" /></th>
+									<th><spring:message code="date" /></th>
+									<th><spring:message code="description" /></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${moneyadvance}" var="money">
+									<tr>
+										<td><form:radiobutton path="idreturnmoneyemployee"
+												value="${money.idreturnmoneyemployee}" /></td>
+										<td><c:out value="${money.amount}" /></td>
+										<td><c:out value="${money.creationdate}" /></td>
+										<td><c:out value="${money.description}" /></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<form:button class="btn btn-primary" value="submit">
+							<spring:message code="returnmoney" />
+						</form:button>
+					</form:form>
 				</div>
-			</div>
+			</c:if>
+			<c:if test="${empty moneyadvance}">
+				<spring:message code="nomoneyadvance" />
+			</c:if>
 		</div>
 	</div>
-</form:form>
+</div>

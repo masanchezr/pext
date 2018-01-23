@@ -123,4 +123,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/gratifications/lastgratifications.jsp" />
 	</definition>
+	<definition name="newmoneyadvance" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/expenses/newmoneyadvance.jsp" />
+	</definition>
 </tiles-definitions>

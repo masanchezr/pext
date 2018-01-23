@@ -44,6 +44,8 @@ public class Daily {
 
 	private List<ChangeMachineEntity> listchangemachine;
 
+	private List<ReturnMoneyEmployeeEntity> moneyadvance;
+
 	public BigDecimal getFinalamount() {
 		return finalamount;
 	}
@@ -138,5 +140,17 @@ public class Daily {
 
 	public void setListchangemachine(List<ChangeMachineEntity> listchangemachine) {
 		this.listchangemachine = listchangemachine;
+	}
+
+	public void setMoneyAdvance(List<ReturnMoneyEmployeeEntity> moneyadvance) {
+		this.setMoneyadvance(moneyadvance);
+	}
+
+	public List<ReturnMoneyEmployeeEntity> getMoneyadvance() {
+		return moneyadvance;
+	}
+
+	public void setMoneyadvance(List<ReturnMoneyEmployeeEntity> moneyadvance) {
+		this.moneyadvance = moneyadvance;
 	}
 }

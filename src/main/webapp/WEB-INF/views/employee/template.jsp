@@ -47,6 +47,10 @@
 					<ul class="sidenav-second-level collapse" id="collapsexpenses">
 						<li><spring:url value="/employee/newtpv" var="newtpv">
 							</spring:url> <a href="${newtpv}"><spring:message code="tpv" /></a></li>
+						<li><spring:url value="/employee/newmoneyadvance"
+								var="moneyadvance">
+							</spring:url> <a href="${moneyadvance}"><spring:message
+									code="moneyadvance" /></a></li>
 						<li><spring:url value="/employee/newoperation"
 								var="operations">
 							</spring:url> <a href="${operations}"><spring:message
