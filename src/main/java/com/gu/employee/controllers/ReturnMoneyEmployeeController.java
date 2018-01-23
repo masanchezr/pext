@@ -30,6 +30,7 @@ public class ReturnMoneyEmployeeController {
 		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnmoneyemployeeservice.findAdvanceByEmployee(employee);
 		model.addObject("moneyadvance", moneyadvance);
+		model.addObject("incomeForm", new ReturnMoneyEmployeeEntity());
 		return model;
 	}
 
