@@ -232,9 +232,9 @@ public class DailyServiceImpl implements DailyService {
 		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdateBetween(date, new Date());
 		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdateBetween(date, new Date());
 		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date, new Date());
-		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
+		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndateBetween(date,
 				new Date());
-		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByReturndateBetween(date,
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
 				new Date());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
 		List<ChangeMachineEntity> changemachine = changeMachineRepository
