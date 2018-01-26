@@ -29,4 +29,6 @@ public interface ReturnMoneyEmployeesRepository extends CrudRepository<ReturnMon
 
 	List<ReturnMoneyEmployeeEntity> findByEmployeeAndReturndateIsNull(EmployeeEntity employee);
 
+	List<ReturnMoneyEmployeeEntity> findByReturndateBetween(Date date, Date date2);
+
 }

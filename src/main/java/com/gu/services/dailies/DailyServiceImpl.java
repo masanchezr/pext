@@ -234,6 +234,8 @@ public class DailyServiceImpl implements DailyService {
 		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date, new Date());
 		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
 				new Date());
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByReturndateBetween(date,
+				new Date());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
 		List<ChangeMachineEntity> changemachine = changeMachineRepository
 				.findByCreationdateBetweenOrderByCreationdate(date, new Date());
@@ -246,6 +248,7 @@ public class DailyServiceImpl implements DailyService {
 		daily.setReturns(returns);
 		daily.setTpvs(tpvs);
 		daily.setListchangemachine(changemachine);
+		daily.setMoneyadvance(moneyadvance);
 		return daily;
 	}
 }
