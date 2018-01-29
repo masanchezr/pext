@@ -24,6 +24,8 @@
 								<form:errors path="datefrom" />
 							</p>
 						</div>
+					</div>
+					<div class="col-lg-6">
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="search" />

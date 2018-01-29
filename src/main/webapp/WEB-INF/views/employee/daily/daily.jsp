@@ -69,7 +69,7 @@
 							<tr>
 								<td><spring:message code="returnmoneyemployee" /> <c:out
 										value="${income.employee.alias}" /></td>
-								<td><fmt:formatDate value="${income.creationdate}"
+								<td><fmt:formatDate value="${income.returndate}"
 										type="time" /></td>
 								<td><c:out value="${income.amount}" /><i
 									class="fa fa-euro"></i></td>
@@ -78,9 +78,10 @@
 						</c:forEach>
 						<c:forEach items="${daily.moneyadvance}" var="money">
 							<tr>
-								<td><spring:message code="moneyemployee" /> <c:out
+								<td><spring:message code="moneyadvance" /> <c:out
 										value="${money.employee.alias}" /></td>
-								<td><fmt:formatDate value="${money.returndate}" type="time" /></td>
+								<td><fmt:formatDate value="${money.creationdate}"
+										type="time" /></td>
 								<td><c:out value="${money.amount}" /><i class="fa fa-euro"></i></td>
 								<td></td>
 							</tr>
