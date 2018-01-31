@@ -37,7 +37,7 @@ public class ChangeMachineServiceTest {
 	public void findLostNumbersTest() {
 		List<Long> ln = changeMachineService.findLostNumbers();
 		for (Long long1 : ln) {
-			logger.trace(long1.toString());
+			logger.info(long1.toString());
 		}
 	}
 }

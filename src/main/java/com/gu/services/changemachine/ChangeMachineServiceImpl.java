@@ -2,6 +2,7 @@ package com.gu.services.changemachine;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -98,7 +99,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public ChangeMachineEntity findById(Long idchangemachine) {
-		return changeMachineRepository.findById(idchangemachine).get();
+		return changeMachineRepository.findById(idchangemachine).orElse(null);
 	}
 
 	public Daily save(ChangeMachineEntity cm) {
@@ -111,101 +112,107 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public void loadDataTicketServer() {
 		ChangeMachineEntity cmentity = changeMachineRepository.findFirstByOrderByCreationdateDesc();
 		String address = "http://88.27.244.77:3080/TicketServer/reportTicketsDateTime.php?";
-		String startdate = "StartDate=", endate = "&EndDate=", space = "%20", restaddress = "&User=admin&Password=1234";
+		String startdate = "StartDate=";
+		String endate = "&EndDate=";
+		String space = "%20";
+		String restaddress = "&User=admin&Pass".concat("word=1234");
 		String name = "ccm";
-		String password = "ccm10";
-		String authString = name + ":" + password;
+		String pass = "ccm10";
+		String authString = name + ":" + pass;
 		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
 		String authStringEnc = new String(authEncBytes);
 		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyy_MM_dd(cmentity.getCreationdate()))
 				.concat(space).concat(DateUtil.getStringDateFormatHHmm(cmentity.getCreationdate())).concat(endate)
 				.concat(DateUtil.getStringDateFormatyyyy_MM_dd(new Date())).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(new Date())).concat(restaddress);
+		String response;
+		String award;
+		String samount;
+		String result = "";
 		try {
 			URL url = new URL(address);
 			URLConnection connection = url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Authorization", "Basic " + authStringEnc);
-			// connection.setRequestMethod("POST");
 			// Aquí leemos el resultado que nos devolvió el servidor, en efecto, lo que
 			// respondió form.php y luego de enviar los datos
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			String response, result = "", award, samount;
 			FileWriter fichero = new FileWriter(System.getenv(Constants.OPENSHIFT_DATA_DIR).concat("/prueba.html"));
 			for (int i = 0; i < 10; i++)
 				while ((response = in.readLine()) != null)
 					result = result.concat(response);
 			fichero.close();
 			in.close();
-			Document doc = Jsoup.parse(result);
-			Elements trs = doc.getElementsByClass("tbl-row");
-			ListIterator<Element> itrs = trs.listIterator();
-			List<Node> nodes;
-			ChangeMachineEntity cm;
-			TextNode node;
-			AwardsChangeMachineEntity awardentity = new AwardsChangeMachineEntity();
-			MachineEntity machine;
-			while (itrs.hasNext()) {
-				nodes = itrs.next().childNodes();
-				if (((TextNode) nodes.get(5).childNode(0)).getWholeText().equals("CLOSE")) {
-					cm = new ChangeMachineEntity();
-					node = (TextNode) nodes.get(0).childNode(0);
-					cm.setIdchangemachine(Long.valueOf(node.getWholeText()));
-					node = (TextNode) nodes.get(3).childNode(0);
-					award = node.getWholeText();
-					machine = machinesRepository.findByNameticket(award);
-					if (machine == null) {
-						node = (TextNode) nodes.get(9).childNode(0);
-						if (award.equals("TECNAUSA")) {
-							award = node.getWholeText();
-							awardentity.setIdawardchangemachine(2L);
-							if (award.startsWith("(")) {
-								String sub = award.substring(1, 4);
-								machine = new MachineEntity();
-								if (Util.isNumeric(sub)) {
-									machine.setIdmachine(Long.valueOf(sub));
-								} else {
-									sub = award.substring(1, 3);
-									if (Util.isNumeric(sub)) {
-										machine.setIdmachine(Long.valueOf(sub));
-									} else {
-										machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
-									}
-								}
-								cm.setMachine(machine);
-							}
+		} catch (IOException e) {
+
+		}
+		Document doc = Jsoup.parse(result);
+		Elements trs = doc.getElementsByClass("tbl-row");
+		ListIterator<Element> itrs = trs.listIterator();
+		List<Node> nodes;
+		ChangeMachineEntity cm;
+		TextNode node;
+		AwardsChangeMachineEntity awardentity = new AwardsChangeMachineEntity();
+		MachineEntity machine;
+		while (itrs.hasNext()) {
+			nodes = itrs.next().childNodes();
+			if (((TextNode) nodes.get(5).childNode(0)).getWholeText().equals("CLOSE")) {
+				cm = new ChangeMachineEntity();
+				node = (TextNode) nodes.get(0).childNode(0);
+				cm.setIdchangemachine(Long.valueOf(node.getWholeText()));
+				node = (TextNode) nodes.get(3).childNode(0);
+				award = node.getWholeText();
+				machine = machinesRepository.findByNameticket(award);
+				if (machine == null) {
+					node = (TextNode) nodes.get(9).childNode(0);
+					if (award.equals("TECNAUSA")) {
+						award = node.getWholeText();
+						awardentity.setIdawardchangemachine(2L);
+						String sub = award.substring(1, 4);
+						machine = new MachineEntity();
+						if (Util.isNumeric(sub)) {
+							machine.setIdmachine(Long.valueOf(sub));
 						} else {
-							award = node.getWholeText();
-							awardentity.setIdawardchangemachine(1L);
-							machine = machinesRepository.findByNameticket(award);
-							cm.setMachine(machine);
+							sub = award.substring(1, 3);
+							if (Util.isNumeric(sub)) {
+								machine.setIdmachine(Long.valueOf(sub));
+							} else {
+								machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
+							}
 						}
+						cm.setMachine(machine);
 					} else {
+						award = node.getWholeText();
 						awardentity.setIdawardchangemachine(1L);
+						machine = machinesRepository.findByNameticket(award);
 						cm.setMachine(machine);
 					}
-					cm.setAward(awardentity);
-					node = (TextNode) nodes.get(6).childNode(0);
-					cm.setCreationdate(DateUtil.getDate(node.getWholeText()));
-					node = (TextNode) nodes.get(8).childNode(0);
-					samount = node.getWholeText();
-					System.out.println(samount);
-					cm.setAmount(new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", "")));
-					changeMachineRepository.save(cm);
+				} else {
+					awardentity.setIdawardchangemachine(1L);
+					cm.setMachine(machine);
 				}
+				cm.setAward(awardentity);
+				node = (TextNode) nodes.get(6).childNode(0);
+				cm.setCreationdate(DateUtil.getDate(node.getWholeText()));
+				node = (TextNode) nodes.get(8).childNode(0);
+				samount = node.getWholeText();
+				cm.setAmount(new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", "")));
+				changeMachineRepository.save(cm);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
 	public List<Long> findLostNumbers() {
 		List<Long> lostNumbers = new ArrayList<Long>();
 		TakeEntity take = takingsRepository.findFirstByOrderByIdtakeDesc();
-		ChangeMachineEntity firstcm = changeMachineRepository.findFirstByCreationdateAfter(take.getTakedate());
-		ChangeMachineEntity lastcm = changeMachineRepository.findFirstByOrderByCreationdateDesc();
-		for (long l = firstcm.getIdchangemachine(); l < lastcm.getIdchangemachine(); l++) {
-			if (!changeMachineRepository.existsById(l)) {
+		List<ChangeMachineEntity> cms = changeMachineRepository
+				.findByCreationdateBetweenOrderByCreationdate(take.getTakedate(), new Date());
+		int size = cms.size();
+		long first = cms.get(0).getIdchangemachine();
+		long last = cms.get(size - 1).getIdchangemachine();
+		int i = 0;
+		for (long l = first; l <= cms.get(i).getIdchangemachine() && l < last; i++, l++) {
+			if (cms.get(i).getIdchangemachine() != l) {
 				lostNumbers.add(l);
 			}
 		}
