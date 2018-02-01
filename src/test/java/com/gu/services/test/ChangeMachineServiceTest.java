@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,24 +18,22 @@ public class ChangeMachineServiceTest {
 	@Autowired
 	private ChangeMachineService changeMachineService;
 
-	private static final Logger logger = LoggerFactory.getLogger(ChangeMachineServiceTest.class);
-
 	@Test
 	public void getAwardsTest() {
 		BigDecimal awards = changeMachineService.getAwards();
-		logger.trace(awards.toString());
+		System.out.println(awards.toString());
 	}
 
 	@Test
 	public void getIncomeTotalMonthTest() {
-		changeMachineService.getIncomeTotalMonth();
+		System.out.println(changeMachineService.getIncomeTotalMonth());
 	}
 
 	@Test
 	public void findLostNumbersTest() {
 		List<Long> ln = changeMachineService.findLostNumbers();
 		for (Long long1 : ln) {
-			logger.info(long1.toString());
+			System.out.println(long1.toString());
 		}
 	}
 }

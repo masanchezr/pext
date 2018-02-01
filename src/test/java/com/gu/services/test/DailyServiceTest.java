@@ -1,6 +1,7 @@
 package com.gu.services.test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +30,7 @@ public class DailyServiceTest {
 	 */
 	@Test
 	public void getDailyTest() {
-		Calendar c = Calendar.getInstance();
-		c.set(2018, 01, 31);
-		Daily daily = dailyService.getDaily(c.getTime());
+		Daily daily = dailyService.getDaily(new Date());
 		if (daily != null) {
 			System.out.println(
 					"Numero de operaciones:" + daily.getNumoperations() + " importe final:" + daily.getFinalamount());

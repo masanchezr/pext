@@ -183,23 +183,20 @@ public class DailyServiceImpl implements DailyService {
 			numoperations = numoperations + changemachine.size();
 			daily.setListchangemachine(changemachine);
 		}
-		BigDecimal previousamount = BigDecimal.ZERO;
+		BigDecimal previousamount;
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		if (dEntity == null) {
+		DailyEntity previousdaily = dailyRepository.findById(calendar.getTime()).orElse(null);
+		if (dEntity == null && previousdaily != null) {
 			// tengo que sacar el importe del día anterior para calcularlo
-			DailyEntity previousdaily = dailyRepository.findById(calendar.getTime()).get();
 			previousamount = previousdaily.getFinalamount();
 			dEntity = new DailyEntity();
 			dEntity.setDailydate(date);
+		} else if (previousdaily == null) {
+			return daily;
 		} else {
-			DailyEntity dailyprevious = dailyRepository.findById(calendar.getTime()).get();
-			if (dailyprevious == null) {
-				return daily;
-			} else {
-				previousamount = dailyprevious.getFinalamount();
-			}
+			previousamount = previousdaily.getFinalamount();
 		}
 		finalamount = previousamount.add(finalamount);
 		dEntity.setFinalamount(finalamount);
@@ -207,7 +204,7 @@ public class DailyServiceImpl implements DailyService {
 		daily.setNumoperations(numoperations);
 		daily.setDate(date);
 		dailyRepository.save(dEntity);
-		ticketserver.run();
+		ticketserver.start();
 		return daily;
 	}
 

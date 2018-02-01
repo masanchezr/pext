@@ -205,15 +205,16 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public List<Long> findLostNumbers() {
 		List<Long> lostNumbers = new ArrayList<Long>();
 		TakeEntity take = takingsRepository.findFirstByOrderByIdtakeDesc();
-		List<ChangeMachineEntity> cms = changeMachineRepository
-				.findByCreationdateBetweenOrderByCreationdate(take.getTakedate(), new Date());
+		List<ChangeMachineEntity> cms = changeMachineRepository.findByCreationdateBetween(take.getTakedate(),
+				new Date());
 		int size = cms.size();
 		long first = cms.get(0).getIdchangemachine();
 		long last = cms.get(size - 1).getIdchangemachine();
 		int i = 0;
-		for (long l = first; l <= cms.get(i).getIdchangemachine() && l < last; i++, l++) {
+		for (long l = first; l < last && i < size && l <= cms.get(i).getIdchangemachine(); i++, l++) {
 			if (cms.get(i).getIdchangemachine() != l) {
 				lostNumbers.add(l);
+				l++;
 			}
 		}
 		return lostNumbers;

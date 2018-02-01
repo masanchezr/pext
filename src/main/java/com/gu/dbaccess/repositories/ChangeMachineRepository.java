@@ -33,4 +33,6 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 	public ChangeMachineEntity findFirstByOrderByCreationdateDesc();
 
 	public ChangeMachineEntity findFirstByCreationdateAfter(Date takedate);
+
+	public List<ChangeMachineEntity> findByCreationdateBetween(Date takedate, Date date);
 }
