@@ -87,8 +87,17 @@ public class TimeEntity implements Comparable<TimeEntity> {
 		return this.getOrder().compareTo(o.getOrder());
 	}
 
-	public boolean equals(TimeEntity o) {
-		return this.getIdtime().equals(o.getIdtime());
+	@Override
+	public boolean equals(Object o) {
+		if (o != null) {
+			if (this.getClass() != o.getClass()) {
+				return false;
+			} else {
+				return this.getIdtime().equals(((TimeEntity) o).getIdtime());
+			}
+		} else {
+			return false;
+		}
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "roles")
 public class RoleEntity {
@@ -16,10 +18,10 @@ public class RoleEntity {
 	@Column(name = "idrole")
 	private Long idrole;
 
-	@Column(name = "username")
+	@Column(name = Constants.USERNAME)
 	private String username;
 
-	@Column(name = "role")
+	@Column(name = Constants.ROLE)
 	private String role;
 
 	public Long getIdrole() {

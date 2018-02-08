@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.boss.validators.UserValidator;
 import com.gu.services.users.User;
 import com.gu.services.users.UserService;
+import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 
 @Controller
@@ -43,7 +44,7 @@ public class UsersController {
 			if (user == null) {
 				model.setViewName(VIEWUSERS);
 				model.addObject(ConstantsJsp.USER, new User());
-				result.rejectValue("username", "usernoexist");
+				result.rejectValue(Constants.USERNAME, "usernoexist");
 			} else {
 				model.addObject(ConstantsJsp.USER, user);
 				model.setViewName("resultenabledisableuser");

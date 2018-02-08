@@ -21,13 +21,13 @@ public class EmployeeEntity {
 	@Column(name = Constants.NAME)
 	private String name;
 
-	@Column(name = "alias")
+	@Column(name = Constants.ALIAS)
 	private String alias;
 
 	@Column(name = "enabled")
 	private Boolean enabled;
 
-	@Column(name = "username")
+	@Column(name = Constants.USERNAME)
 	private String username;
 
 	public Long getIdemployee() {
