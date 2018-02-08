@@ -5,6 +5,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.GratificationEntity;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.string.Util;
 
 public class GratificationsValidator implements Validator {
@@ -15,10 +16,10 @@ public class GratificationsValidator implements Validator {
 
 	public void validate(Object arg0, Errors arg1) {
 		GratificationEntity g = (GratificationEntity) arg0;
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "client", "client");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.CLIENT, ConstantsJsp.CLIENT);
 		String client = g.getClient();
 		if (Util.isNumeric(client)) {
-			arg1.rejectValue("client", "notclient");
+			arg1.rejectValue(ConstantsJsp.CLIENT, "notclient");
 		}
 	}
 

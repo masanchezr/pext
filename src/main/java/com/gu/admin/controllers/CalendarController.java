@@ -19,6 +19,7 @@ import com.gu.admin.forms.WeekForm;
 import com.gu.dbaccess.entities.TimeEntity;
 import com.gu.services.calendar.CalendarService;
 import com.gu.services.employees.EmployeeService;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -36,11 +37,11 @@ public class CalendarController {
 		ScheduleForm schedule = new ScheduleForm();
 		String sweek = week.getWeek();
 		List<Schedule> lscheduleform = calendarService.getSchedule(sweek);
-		model.addObject("employees", employeeService.allEmployeesActives());
+		model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
 		model.addObject("week", sweek);
 		model.addObject("dates", DateUtil.getDates(sweek));
 		if (lscheduleform == null || lscheduleform.isEmpty()) {
-			model.addObject("times", calendarService.getTimesActive());
+			model.addObject(ConstantsJsp.TIMES, calendarService.getTimesActive());
 			schedule.setSchedule(lscheduleform);
 		} else {
 			List<TimeEntity> times = new ArrayList<TimeEntity>();
@@ -50,7 +51,7 @@ public class CalendarController {
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
-			model.addObject("times", times);
+			model.addObject(ConstantsJsp.TIMES, times);
 			schedule.setSchedule(lscheduleform);
 		}
 		model.addObject("scheduleForm", schedule);
@@ -68,7 +69,7 @@ public class CalendarController {
 	public ModelAndView saveSchedule(ScheduleForm sform) {
 		ModelAndView model = new ModelAndView("successadmin");
 		model.addObject("schedule", calendarService.save(sform.getSchedule()));
-		// model.addObject("times", calendarService.getTimesActive());
+		// model.addObject(ConstantsJsp.TIMES, calendarService.getTimesActive());
 		return model;
 	}
 
@@ -99,7 +100,7 @@ public class CalendarController {
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
-			model.addObject("times", times);
+			model.addObject(ConstantsJsp.TIMES, times);
 			model.addObject("dates", DateUtil.getDates(sweek));
 			model.addObject("schedule", schedule);
 			model.addObject("week", sweek);

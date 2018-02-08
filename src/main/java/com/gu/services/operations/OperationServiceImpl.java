@@ -25,6 +25,7 @@ import com.gu.dbaccess.repositories.ProvidingRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 
 public class OperationServiceImpl implements OperationService {
@@ -65,34 +66,39 @@ public class OperationServiceImpl implements OperationService {
 	}
 
 	public Daily update(OperationEntity operation) {
-		OperationEntity entityoperation = operationRepository.findById(operation.getIdoperation()).get();
+		OperationEntity entityoperation = operationRepository.findById(operation.getIdoperation()).orElse(null);
 		PaymentEntity pay = operation.getPay();
 		Long idpayment = pay.getIdpayment();
 		BigDecimal amount = operation.getAmount();
-		if (operation.getMachine().getIdmachine().equals(0L)) {
-			entityoperation.setMachine(null);
+		if (entityoperation != null) {
+			if (operation.getMachine().getIdmachine().equals(0L)) {
+				entityoperation.setMachine(null);
+			} else {
+				entityoperation.setMachine(operation.getMachine());
+			}
+			entityoperation.setAward(operation.getAward());
+			entityoperation.setPay(pay);
+			entityoperation.setAmount(operation.getAmount());
+			operationRepository.save(entityoperation);
+			if (idpayment.equals(Constants.PROVIDING)) {
+				ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
+				ProvidingEntity entity = new ProvidingEntity();
+				entity.setCreationdate(new Date());
+				entity.setAmount(amount.negate());
+				entity.setTotal(providing.getTotal().subtract(amount));
+				providingRepository.save(entity);
+			}
+			return dailyService.getDaily(entityoperation.getCreationdate());
 		} else {
-			entityoperation.setMachine(operation.getMachine());
+			return dailyService.getDaily(new Date());
 		}
-		entityoperation.setAward(operation.getAward());
-		entityoperation.setPay(pay);
-		entityoperation.setAmount(operation.getAmount());
-		operationRepository.save(entityoperation);
-		if (idpayment.equals(Constants.PROVIDING)) {
-			ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
-			ProvidingEntity entity = new ProvidingEntity();
-			entity.setCreationdate(new Date());
-			entity.setAmount(amount.negate());
-			entity.setTotal(providing.getTotal().subtract(amount));
-			providingRepository.save(entity);
-		}
-		return dailyService.getDaily(entityoperation.getCreationdate());
 	}
 
 	public Map<String, Object> findExpensesByMonth(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		Object[] object;
 		List<Object[]> sum;
 		Iterator<Object[]> isum;
@@ -118,17 +124,17 @@ public class OperationServiceImpl implements OperationService {
 			expenses.add(expense);
 		}
 		if (gratifications != null) {
-			double g = gratifications.size() * 10;
-			result.put("gratifications", g);
-			total = total.add(new BigDecimal(g));
+			int g = gratifications.size() * 10;
+			result.put(Constants.GRATIFICATIONS, g);
+			total = total.add(BigDecimal.valueOf(g));
 		}
 		result.put("expenses", expenses);
-		result.put("total", total);
+		result.put(ConstantsJsp.TOTAL, total);
 		return result;
 	}
 
 	public OperationEntity findById(long id) {
-		return operationRepository.findById(id).get();
+		return operationRepository.findById(id).orElse(null);
 	}
 
 	public void delete(OperationEntity operation) {
@@ -138,7 +144,8 @@ public class OperationServiceImpl implements OperationService {
 	public List<OperationEntity> recharges(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		AwardEntity pay = new AwardEntity();
 		pay.setIdaward(Constants.RECHARGES);
 		calendar.setTime(date);

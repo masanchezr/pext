@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "operations")
 public class OperationEntity {
@@ -21,10 +23,10 @@ public class OperationEntity {
 	@Column(name = "idoperation")
 	private Long idoperation;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	@ManyToOne
@@ -44,7 +46,7 @@ public class OperationEntity {
 	@JoinColumn(name = "idemployee", referencedColumnName = "idemployee")
 	private EmployeeEntity employee;
 
-	@Column(name = "description")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	public Long getIdoperation() {

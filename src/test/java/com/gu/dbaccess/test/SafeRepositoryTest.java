@@ -23,8 +23,8 @@ public class SafeRepositoryTest {
 	public void saveTest() {
 		SafeEntity safe = new SafeEntity();
 		safe.setCreationdate(new Date());
-		safe.setAmount(new BigDecimal(200));
-		safe.setTotal(new BigDecimal(12000));
+		safe.setAmount(BigDecimal.valueOf(200));
+		safe.setTotal(BigDecimal.valueOf(12000));
 		saferepository.save(safe);
 	}
 

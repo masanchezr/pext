@@ -22,6 +22,7 @@ import com.gu.employee.validators.GratificationsValidator;
 import com.gu.services.gratifications.GratificationService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class GratificationsController {
@@ -35,11 +36,15 @@ public class GratificationsController {
 	@Autowired
 	private GratificationsValidator gvalidator;
 
+	private static final String GRATIFICATION = "gratification";
+	private static final String VIEWNEWGRATIFICATION = "newgratification";
+	private static final String VIEWREGISTERGRATIFICATION = "registergratification";
+
 	@RequestMapping(value = "/employee/newgratification")
 	public ModelAndView newgratification() {
-		ModelAndView model = new ModelAndView("newgratification");
-		model.addObject("machines", machineservice.searchMachinesOrder());
-		model.addObject("gratification", new GratificationEntity());
+		ModelAndView model = new ModelAndView(VIEWNEWGRATIFICATION);
+		model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+		model.addObject(GRATIFICATION, new GratificationEntity());
 		return model;
 	}
 
@@ -56,20 +61,20 @@ public class GratificationsController {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
 		if (arg1.hasErrors()) {
-			model.addObject("machines", machineservice.searchMachinesOrder());
-			model.addObject("gratification", g);
-			model.setViewName("newgratification");
+			model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+			model.addObject(GRATIFICATION, g);
+			model.setViewName(VIEWNEWGRATIFICATION);
 		} else {
 			GratificationEntity gratification = gratificationservice.searchGratificationActive(g.getIdgratification());
 			if (gratification == null) {
 				arg1.rejectValue("idgratification", "gratificationsproblem");
-				model.addObject("machines", machineservice.searchMachinesOrder());
-				model.addObject("gratification", g);
-				model.setViewName("newgratification");
+				model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+				model.addObject(GRATIFICATION, g);
+				model.setViewName(VIEWNEWGRATIFICATION);
 			} else {
 				gratification.setMachine(g.getMachine());
-				model.addObject("daily", gratificationservice.save(gratification, user));
-				model.setViewName("daily");
+				model.addObject(ConstantsJsp.DAILY, gratificationservice.save(gratification, user));
+				model.setViewName(ConstantsJsp.DAILY);
 			}
 		}
 		return model;
@@ -77,8 +82,8 @@ public class GratificationsController {
 
 	@RequestMapping(value = "/employee/registernumber")
 	public ModelAndView registerNumber() {
-		ModelAndView model = new ModelAndView("registergratification");
-		model.addObject("gratification", new GratificationEntity());
+		ModelAndView model = new ModelAndView(VIEWREGISTERGRATIFICATION);
+		model.addObject(GRATIFICATION, new GratificationEntity());
 		return model;
 	}
 
@@ -90,21 +95,21 @@ public class GratificationsController {
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 		gvalidator.validate(g, arg1);
 		if (arg1.hasErrors()) {
-			model.addObject("gratification", g);
-			model.setViewName("registergratification");
+			model.addObject(GRATIFICATION, g);
+			model.setViewName(VIEWREGISTERGRATIFICATION);
 		} else {
 			gratificationservice.registerNumberGratification(g, user, path);
 			File file = new File(path.concat("ticket.pdf"));
-			InputStream inputStream;
+			InputStream inputStream = null;
 			try {
 				inputStream = new FileInputStream(file);
 				response.setContentType("application/force-download");
 				response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
 				IOUtils.copy(inputStream, response.getOutputStream());
 				response.flushBuffer();
-				inputStream.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				model.setViewName(VIEWREGISTERGRATIFICATION);
+				arg1.rejectValue(ConstantsJsp.CLIENT, "notopenfile");
 			}
 		}
 		return model;
@@ -113,7 +118,7 @@ public class GratificationsController {
 	@RequestMapping(value = "/employee/lastgratifications")
 	public ModelAndView lastgratifications() {
 		ModelAndView model = new ModelAndView("lastgratifications");
-		model.addObject("gratifications", gratificationservice.lastNumGratifications());
+		model.addObject(Constants.GRATIFICATIONS, gratificationservice.lastNumGratifications());
 		return model;
 	}
 }

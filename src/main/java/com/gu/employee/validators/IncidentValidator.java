@@ -5,6 +5,8 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.IncidentEntity;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 
 public class IncidentValidator implements Validator {
 
@@ -13,7 +15,7 @@ public class IncidentValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "description", "selectdescription");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
 	}
 
 }

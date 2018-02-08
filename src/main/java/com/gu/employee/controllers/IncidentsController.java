@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.dbaccess.entities.IncidentEntity;
 import com.gu.employee.validators.IncidentValidator;
 import com.gu.services.incidents.IncidentService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class IncidentsController {
@@ -25,12 +26,13 @@ public class IncidentsController {
 	@RequestMapping(value = "/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("newincident");
-		model.addObject("incident", new IncidentEntity());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveincident")
-	public ModelAndView saveIncident(@ModelAttribute("incident") IncidentEntity incident, BindingResult result) {
+	public ModelAndView saveIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) IncidentEntity incident,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		incidentValidator.validate(incident, result);
 		if (result.hasErrors()) {
@@ -39,7 +41,7 @@ public class IncidentsController {
 			model.setViewName("saveincident");
 			incidentService.save(incident);
 		}
-		model.addObject("incident", incident);
+		model.addObject(ConstantsJsp.FORMINCIDENT, incident);
 		return model;
 	}
 

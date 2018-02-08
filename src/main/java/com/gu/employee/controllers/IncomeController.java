@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.dbaccess.entities.BarDrinkEntity;
 import com.gu.employee.validators.IncomeValidator;
 import com.gu.services.income.IncomeService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class IncomeController {
@@ -22,24 +23,27 @@ public class IncomeController {
 	@Autowired
 	private IncomeValidator incomeValidator;
 
+	private static final String VIEWNEWINCOME = "newincome";
+
 	@RequestMapping(value = "/employee/newincome")
 	public ModelAndView newincome() {
-		ModelAndView model = new ModelAndView("newincome");
-		model.addObject("incomeForm", new BarDrinkEntity());
+		ModelAndView model = new ModelAndView(VIEWNEWINCOME);
+		model.addObject(ConstantsJsp.FORMINCOME, new BarDrinkEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveincome")
-	public ModelAndView saveincome(@ModelAttribute("incomeForm") BarDrinkEntity income, BindingResult result) {
+	public ModelAndView saveincome(@ModelAttribute(ConstantsJsp.FORMINCOME) BarDrinkEntity income,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		incomeValidator.validate(income, result);
 		if (result.hasErrors()) {
-			model.setViewName("newincome");
-			model.addObject("incomeForm", income);
+			model.setViewName(VIEWNEWINCOME);
+			model.addObject(ConstantsJsp.FORMINCOME, income);
 		} else {
-			model.addObject("daily", incomeservice.save(income));
-			model.setViewName("daily");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, incomeservice.save(income));
+			model.setViewName(ConstantsJsp.DAILY);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.admin.forms.EntryMoneyForm;
 import com.gu.services.entrymoney.EntryMoneyService;
 import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.EntryMoneyValidator;
 
 @Controller
@@ -22,50 +23,51 @@ public class EntryMoneyController {
 
 	@Autowired
 	private EntryMoneyValidator entryMoneyValidator;
+	private static final String VIEWNEWENTRYMACHINE = "newentrymachine";
 
 	@RequestMapping(value = "/employee/entrymoney")
 	public ModelAndView entrymoney() {
-		ModelAndView model = new ModelAndView("newentrymoney");
-		model.addObject("entrymoneyForm", new EntryMoneyForm());
+		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWNEWENTRYMONEY);
+		model.addObject("ConstantsJsp.FORMENTRYMONEY", new EntryMoneyForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveentrymoney")
-	public ModelAndView saveEntryMoney(@ModelAttribute("entrymoneyForm") EntryMoneyForm entryMoney,
+	public ModelAndView saveEntryMoney(@ModelAttribute("ConstantsJsp.FORMENTRYMONEY") EntryMoneyForm entryMoney,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		entryMoneyValidator.validate(entryMoney, result);
 		if (result.hasErrors()) {
-			model.addObject("entrymoney", entryMoney);
-			model.setViewName("newentrymoney");
+			model.addObject(ConstantsJsp.FORMENTRYMONEY, entryMoney);
+			model.setViewName(ConstantsJsp.VIEWNEWENTRYMONEY);
 		} else {
 			entryMoney.setOrigin(Constants.STRINGPROVIDING);
-			model.addObject("daily", entryMoneyService.saveEntryMoneyEmployee(entryMoney));
-			model.setViewName("daily");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMoneyEmployee(entryMoney));
+			model.setViewName(ConstantsJsp.DAILY);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/entrymoneychangemachine")
 	public ModelAndView entryChangeMachine() {
-		ModelAndView model = new ModelAndView("newentrymachine");
-		model.addObject("entrymoneyForm", new EntryMoneyForm());
+		ModelAndView model = new ModelAndView(VIEWNEWENTRYMACHINE);
+		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveEntrymachine")
-	public ModelAndView saveEntryMachine(@ModelAttribute("entrymoneyForm") EntryMoneyForm entryMoney,
+	public ModelAndView saveEntryMachine(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoneyForm entryMoney,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		entryMoneyValidator.validate(entryMoney, result);
 		if (result.hasErrors()) {
-			model.addObject("entrymoney", entryMoney);
-			model.setViewName("newentrymachine");
+			model.addObject(ConstantsJsp.FORMENTRYMONEY, entryMoney);
+			model.setViewName(VIEWNEWENTRYMACHINE);
 		} else {
-			model.addObject("daily", entryMoneyService.saveEntryMachine(entryMoney));
-			model.setViewName("daily");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMachine(entryMoney));
+			model.setViewName(ConstantsJsp.DAILY);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}

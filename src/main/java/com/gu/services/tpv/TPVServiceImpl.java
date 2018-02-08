@@ -12,6 +12,8 @@ import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 
 public class TPVServiceImpl implements TPVService {
@@ -37,7 +39,8 @@ public class TPVServiceImpl implements TPVService {
 		Map<String, Object> map = null;
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();
@@ -46,8 +49,8 @@ public class TPVServiceImpl implements TPVService {
 		List<TPVEntity> operations = tpvrepository.findByCreationdateBetween(from, until);
 		if (operations != null) {
 			map = new HashMap<String, Object>();
-			map.put("operations", operations);
-			map.put("amount", tpvrepository.sumByCreationdate(from, until));
+			map.put(ConstantsJsp.OPERATIONS, operations);
+			map.put(Constants.AMOUNT, tpvrepository.sumByCreationdate(from, until));
 		}
 		return map;
 	}

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.entrymoney.EntryMoneyService;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
@@ -20,6 +21,8 @@ public class SafeBossController {
 	@Autowired
 	private SearchDatesFormValidator searchdatesformvalidator;
 
+	private static final String VIEWSEARCHENTRYSORTSAFE = "searchentrysortsafe";
+
 	@RequestMapping(value = "/safetotal")
 	public ModelAndView safetotal() {
 		ModelAndView model = new ModelAndView("safetotal");
@@ -29,22 +32,22 @@ public class SafeBossController {
 
 	@RequestMapping(value = "/searchentrysortsafe")
 	public ModelAndView searchbydates() {
-		ModelAndView model = new ModelAndView("searchentrysortsafe");
-		model.addObject("searchForm", new SearchByDatesForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHENTRYSORTSAFE);
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultentrysortsafe")
-	public ModelAndView resultentrysortsafe(@ModelAttribute("searchForm") SearchByDatesForm searchForm,
+	public ModelAndView resultentrysortsafe(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		searchdatesformvalidator.validate(searchForm, result);
 		if (result.hasErrors()) {
-			model.setViewName(("searchentrysortsafe"));
-			model.addObject("searchForm", searchForm);
+			model.setViewName(VIEWSEARCHENTRYSORTSAFE);
+			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
 		} else {
 			model.addObject("resultsearch", safeService.searchByDates(searchForm.getDatefrom()));
-			model.setViewName(("resultentrysortsafe"));
+			model.setViewName("resultentrysortsafe");
 		}
 		return model;
 	}

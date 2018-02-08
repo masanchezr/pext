@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.boss.validators.UserValidator;
 import com.gu.services.users.User;
 import com.gu.services.users.UserService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class UsersController {
@@ -20,28 +21,31 @@ public class UsersController {
 	@Autowired
 	private UserValidator userValidator;
 
+	private static final String VIEWUSERS = "enabledisableuser";
+	private static final String VIEWNEWUSER = "newuser";
+
 	@RequestMapping(value = "/enabledisableuser")
 	public ModelAndView enabledisableuser() {
-		ModelAndView model = new ModelAndView("enabledisableuser");
-		model.addObject("user", new User());
+		ModelAndView model = new ModelAndView(VIEWUSERS);
+		model.addObject(ConstantsJsp.USER, new User());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultenabledisableuser")
-	public ModelAndView resultenabledisableuser(@ModelAttribute("user") User user, BindingResult result) {
+	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView("resultenabledisableuser");
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			model.setViewName("enabledisableuser");
-			model.addObject("user", new User());
+			model.setViewName(VIEWUSERS);
+			model.addObject(ConstantsJsp.USER, new User());
 		} else {
 			user = userService.disableEnableUser(user.getUsername());
 			if (user == null) {
-				model.setViewName("enabledisableuser");
-				model.addObject("user", new User());
+				model.setViewName(VIEWUSERS);
+				model.addObject(ConstantsJsp.USER, new User());
 				result.rejectValue("username", "usernoexist");
 			} else {
-				model.addObject("user", user);
+				model.addObject(ConstantsJsp.USER, user);
 				model.setViewName("resultenabledisableuser");
 			}
 		}
@@ -50,21 +54,21 @@ public class UsersController {
 
 	@RequestMapping(value = "/newuser")
 	public ModelAndView newUser() {
-		ModelAndView model = new ModelAndView("newuser");
-		model.addObject("user", new User());
+		ModelAndView model = new ModelAndView(VIEWNEWUSER);
+		model.addObject(ConstantsJsp.USER, new User());
 		return model;
 	}
 
 	@RequestMapping(value = "/saveuser")
-	public ModelAndView saveUser(@ModelAttribute("user") User user, BindingResult result) {
+	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			model.setViewName("newuser");
-			model.addObject("user", new User());
+			model.setViewName(VIEWNEWUSER);
+			model.addObject(ConstantsJsp.USER, new User());
 		} else {
 			model.setViewName("resultuser");
-			model.addObject("user", user);
+			model.addObject(ConstantsJsp.USER, user);
 			userService.newUser(user);
 		}
 		return model;

@@ -50,7 +50,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new Date());
 		entryMoneyRepository.save(entrymoney);
-		if (entryMoneyForm.getOrigin().equals(Constants.CAJAFUERTE)) {
+		if (entryMoneyForm.getOrigin().equals(Constants.getOrigin()[0])) {
 			SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
 			safe.setIdsafe(null);
 			safe.setTotal(safe.getTotal().subtract(amount));
@@ -108,7 +108,8 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	 */
 	public void save(ProvidingEntity providing) {
 		ProvidingEntity entity = providingRepository.findFirstByOrderByIdprovidingDesc();
-		SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc(), newsafe = new SafeEntity();
+		SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
+		SafeEntity newsafe = new SafeEntity();
 		BigDecimal amount = providing.getAmount();
 		providing.setCreationdate(new Date());
 		providing.setTotal(entity.getTotal().add(providing.getAmount()));
@@ -165,7 +166,8 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	public List<SafeEntity> searchByDates(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();

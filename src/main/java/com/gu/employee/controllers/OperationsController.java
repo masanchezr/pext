@@ -15,6 +15,8 @@ import com.gu.services.employees.EmployeeService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.OperationsValidator;
 
 @Controller
@@ -38,44 +40,47 @@ public class OperationsController {
 	@Autowired
 	private OperationsValidator operationsValidator;
 
+	private static final String VIEWNEWOPERATION = "newoperation";
+
 	@RequestMapping(value = "/employee/newoperation")
 	public ModelAndView newoperation() {
-		ModelAndView model = new ModelAndView("newoperation");
-		model.addObject("machines", machineService.searchAllMachinesOrder());
-		model.addObject("payments", paymentService.findAllActive());
-		model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-		model.addObject("employees", employeeService.allEmployeesActives());
-		model.addObject("operation", new OperationEntity());
+		ModelAndView model = new ModelAndView(VIEWNEWOPERATION);
+		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+		model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
+		model.addObject(ConstantsJsp.OPERATION, new OperationEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveoperation")
-	public ModelAndView saveoperation(@ModelAttribute("operation") OperationEntity operation, BindingResult result) {
+	public ModelAndView saveoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
-			model.setViewName("newoperation");
-			model.addObject("machines", machineService.searchAllMachinesOrder());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-			model.addObject("employees", employeeService.allEmployeesActives());
-			model.addObject("operation", operation);
+			model.setViewName(VIEWNEWOPERATION);
+			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
+			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else if (operationService.getOperationNotAllowed(operation) != null) {
-			model.setViewName("newoperation");
-			model.addObject("machines", machineService.searchAllMachinesOrder());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-			model.addObject("employees", employeeService.allEmployeesActives());
-			model.addObject("operation", operation);
-			result.rejectValue("amount", "operationnotallowed");
+			model.setViewName(VIEWNEWOPERATION);
+			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
+			model.addObject(ConstantsJsp.OPERATION, operation);
+			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
-			if(operation.getEmployee().getIdemployee().equals(1L)) {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			EmployeeEntity employee=employeeService.getEmployeeByUserName(user);
-			operation.setEmployee(employee);}
-			model.addObject("daily", operationService.save(operation));
-			model.setViewName("daily");
-			// model.addObject("datedaily", new Date());
+			if (operation.getEmployee().getIdemployee().equals(1L)) {
+				String user = SecurityContextHolder.getContext().getAuthentication().getName();
+				EmployeeEntity employee = employeeService.getEmployeeByUserName(user);
+				operation.setEmployee(employee);
+			}
+			model.addObject(ConstantsJsp.DAILY, operationService.save(operation));
+			model.setViewName(ConstantsJsp.DAILY);
 		}
 		return model;
 	}

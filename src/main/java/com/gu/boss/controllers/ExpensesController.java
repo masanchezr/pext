@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.operations.OperationService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class ExpensesController {
@@ -18,12 +19,12 @@ public class ExpensesController {
 	@RequestMapping(value = "/summaryexpenses")
 	public ModelAndView searchexpenses() {
 		ModelAndView model = new ModelAndView("searchexpenses");
-		model.addObject("searchForm", new SearchByDatesForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultexpenses")
-	public ModelAndView resultexpenses(@ModelAttribute("searchForm") SearchByDatesForm searchForm) {
+	public ModelAndView resultexpenses(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("resultexpenses");
 		model.addAllObjects(operationService.findExpensesByMonth(searchForm.getDatefrom()));
 		return model;

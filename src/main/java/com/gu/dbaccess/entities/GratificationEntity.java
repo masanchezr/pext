@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
-@Table(name = "gratifications")
+@Table(name = Constants.GRATIFICATIONS)
 public class GratificationEntity {
 
 	@Id

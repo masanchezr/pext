@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "incomemachines")
 public class IncomeMachineEntity {
@@ -21,13 +23,13 @@ public class IncomeMachineEntity {
 	@Column(name = "idincomemachine")
 	private Long idincomemachine;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
-	@Column(name = "description")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	@ManyToOne

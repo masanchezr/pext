@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "incomeluckia")
 public class IncomeLuckiaEntity {
@@ -19,13 +21,13 @@ public class IncomeLuckiaEntity {
 	@Column(name = "idincomeluckia")
 	private Long idincomeluckia;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	@Column(name = "amount")
 	private BigDecimal amount;
 
-	@Column(name = "description")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	public Long getIdincomeluckia() {

@@ -13,6 +13,7 @@ import com.gu.services.income.IncomeService;
 import com.gu.services.incomeluckia.IncomeLuckiaService;
 import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class IncomeBossController {
@@ -32,12 +33,12 @@ public class IncomeBossController {
 	@RequestMapping(value = "/summaryincome")
 	public ModelAndView summaryincome() {
 		ModelAndView model = new ModelAndView("summaryincome");
-		model.addObject("searchForm", new SearchByDatesForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultincome")
-	public ModelAndView resultincome(@ModelAttribute("searchForm") SearchByDatesForm searchForm) {
+	public ModelAndView resultincome(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("resultincome");
 		BigDecimal bardrinks = incomeService.findIncomeByMonth(searchForm.getDatefrom());
 		BigDecimal luckia = incomeluckiaservice.findIncomeByMonth(searchForm.getDatefrom());
@@ -45,22 +46,22 @@ public class IncomeBossController {
 		BigDecimal returns = returnmoneyemployeeservice.findIncomeByMonth(searchForm.getDatefrom());
 		BigDecimal total = BigDecimal.ZERO;
 		if (bardrinks != null) {
-			total.add(bardrinks);
+			total = total.add(bardrinks);
 		}
 		if (incomemachines != null) {
-			total.add(incomemachines);
+			total = total.add(incomemachines);
 		}
 		if (luckia != null) {
-			total.add(luckia);
+			total = total.add(luckia);
 		}
 		if (returns != null) {
-			total.add(returns);
+			total = total.add(returns);
 		}
 		model.addObject("bardrinks", bardrinks);
 		model.addObject("luckia", luckia);
 		model.addObject("incomemachines", incomemachines);
 		model.addObject("returns", returns);
-		model.addObject("total", total);
+		model.addObject(ConstantsJsp.TOTAL, total);
 		return model;
 	}
 }

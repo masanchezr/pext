@@ -36,6 +36,7 @@ import com.gu.dbaccess.repositories.TakingsRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 
@@ -92,8 +93,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				amount = amount.add(ilcm.next().getAmount());
 			}
 			map = new HashMap<String, Object>();
-			map.put("operations", lcm);
-			map.put("amount", amount.plus());
+			map.put(ConstantsJsp.OPERATIONS, lcm);
+			map.put(Constants.AMOUNT, amount.plus());
 		}
 		return map;
 	}

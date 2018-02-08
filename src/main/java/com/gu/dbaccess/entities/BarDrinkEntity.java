@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "bardrinks")
 public class BarDrinkEntity {
@@ -19,13 +21,13 @@ public class BarDrinkEntity {
 	@Column(name = "idbardrink")
 	private Long idbardrink;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
-	@Column(name = "description")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	public Long getIdbardrink() {

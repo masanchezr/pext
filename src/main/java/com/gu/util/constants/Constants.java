@@ -5,6 +5,20 @@ package com.gu.util.constants;
  */
 public class Constants {
 
+	public static final String AMOUNT = "amount";
+
+	public static final String CREATIONDATE = "creationdate";
+
+	public static final String DESCRIPTION = "description";
+
+	private Constants() {
+
+	}
+
+	public static String[] getOrigin() {
+		return ORIGIN;
+	}
+
 	/** The Constant MARIANA. ROLE_NRA */
 	public static final String ROLE_NRA = "ROLE_NRA";
 
@@ -18,9 +32,7 @@ public class Constants {
 	/** EXTENSION PNG **/
 	public static final String PNG = ".png";
 
-	public static final String[] ORIGIN = { "CAJA FUERTE", "EXTERIOR (BANCO)" };
-
-	public static final String CAJAFUERTE = "CAJA FUERTE";
+	private static final String[] ORIGIN = { "CAJA FUERTE", "EXTERIOR (BANCO)" };
 
 	public static final Integer RECHARGES = 12;
 
@@ -37,6 +49,17 @@ public class Constants {
 	public static final Long EVERYBODY = 12L;
 
 	public static final Integer OTHERAWARDS = 16;
+
 	public static final String OPENSHIFT_DATA_DIR = "OPENSHIFT_DATA_DIR";
+
+	public static final String ACTIVE = "active";
+
+	public static final String DATE = "date";
+
+	public static final String IDCHANGEMACHINE = "idchangemachine";
+
+	public static final String IDTPV = "idtpv";
+
+	public static final String GRATIFICATIONS = "gratifications";
 
 }

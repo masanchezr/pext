@@ -8,18 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "tpvs")
 public class TPVEntity {
 
 	@Id
-	@Column(name = "idtpv")
+	@Column(name = Constants.IDTPV)
 	private Long idtpv;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	public Long getIdtpv() {

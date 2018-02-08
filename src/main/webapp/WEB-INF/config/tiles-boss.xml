@@ -118,4 +118,8 @@
 	<definition name="403" extends="templateLogin">
 		<put-attribute name="body" value="/WEB-INF/views/boss/403.jsp" />
 	</definition>
+	<definition name="notdailyboss" extends="templateBoss">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/dailies/notdaily.jsp" />
+	</definition>
 </tiles-definitions>

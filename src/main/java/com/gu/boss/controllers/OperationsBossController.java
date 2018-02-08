@@ -14,6 +14,7 @@ import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.OperationsValidator;
 
 @Controller
@@ -38,35 +39,34 @@ public class OperationsBossController {
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
 		OperationEntity operation = operationService.findById(id);
 		ModelAndView model = new ModelAndView("updateoperationboss");
-		model.addObject("machines", machineService.searchAllMachinesOrder());
-		model.addObject("payments", paymentService.findAllActive());
-		model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-		model.addObject("operation", operation);
+		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+		model.addObject(ConstantsJsp.OPERATION, operation);
 		return model;
 	}
 
 	@RequestMapping(value = "/saveoperation")
-	public ModelAndView saveoperationboss(@ModelAttribute("operation") OperationEntity operation,
+	public ModelAndView saveoperationboss(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName("updateoperationboss");
-			model.addObject("machines", machineService.searchAllMachinesOrder());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-			model.addObject("operation", operation);
+			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else {
-			model.addObject("daily", operationService.update(operation));
-			model.setViewName("success");
-			// model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, operationService.update(operation));
+			model.setViewName(ConstantsJsp.SUCCESS);
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/deleteoperation")
-	public ModelAndView deleteoperation(@ModelAttribute("operation") OperationEntity operation) {
-		ModelAndView model = new ModelAndView("success");
+	public ModelAndView deleteoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation) {
+		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
 		operationService.delete(operation);
 		return model;
 	}
@@ -74,12 +74,12 @@ public class OperationsBossController {
 	@RequestMapping(value = "/searchrecharges")
 	public ModelAndView searchRecharges() {
 		ModelAndView model = new ModelAndView("searchrecharges");
-		model.addObject("searchForm", new SearchByDatesForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/recharges")
-	public ModelAndView recharges(@ModelAttribute("searchForm") SearchByDatesForm searchForm) {
+	public ModelAndView recharges(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("recharges");
 		model.addObject("recharges", operationService.recharges(searchForm.getDatefrom()));
 		return model;

@@ -14,6 +14,8 @@ import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.OperationsValidator;
 
 @Controller
@@ -37,34 +39,36 @@ public class OperationsAdminController {
 	@RequestMapping(value = "/admin/updateoperation{id}")
 	public ModelAndView updateoperation(@PathVariable("id") long id) {
 		OperationEntity operation = operationService.findById(id);
-		ModelAndView model = new ModelAndView("updateoperationadmin");
-		model.addObject("machines", machineService.searchAllMachinesOrder());
-		model.addObject("payments", paymentService.findAllActive());
-		model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-		model.addObject("operation", operation);
+		String view = "updateoperationadmin";
+		ModelAndView model = new ModelAndView(view);
+		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+		model.addObject(ConstantsJsp.OPERATION, operation);
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/saveoperation")
-	public ModelAndView saveoperation(@ModelAttribute("operation") OperationEntity operation, BindingResult result) {
+	public ModelAndView saveoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName("updateoperationadmin");
-			model.addObject("machines", machineService.searchAllMachinesOrder());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-			model.addObject("operation", operation);
+			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else if (operationService.getOperationNotAllowed(operation) != null) {
 			model.setViewName("updateoperationadmin");
-			model.addObject("machines", machineService.searchAllMachinesOrder());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("awards", awardService.searchAllAwardsActiveByOrder());
-			model.addObject("operation", operation);
-			result.rejectValue("amount", "operationnotallowed");
+			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsJsp.OPERATION, operation);
+			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
-			model.addObject("daily", operationService.update(operation));
-			model.setViewName("dailyadmin");
+			model.addObject(ConstantsJsp.DAILY, operationService.update(operation));
+			model.setViewName("dailyadminarrows");
 		}
 		return model;
 	}

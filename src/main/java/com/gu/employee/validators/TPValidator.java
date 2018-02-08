@@ -5,6 +5,8 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.TPVEntity;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 
 public class TPValidator implements Validator {
 
@@ -13,8 +15,8 @@ public class TPValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idtpv", "selectid");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", "selectamount");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDTPV, ConstantsJsp.ERRORSELECTID);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 	}
 
 }

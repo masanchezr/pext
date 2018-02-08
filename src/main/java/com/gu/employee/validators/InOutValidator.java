@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.gu.employee.forms.CheckboxesEmp;
+import com.gu.util.constants.ConstantsJsp;
 
 public class InOutValidator implements Validator {
 
@@ -14,7 +15,7 @@ public class InOutValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		CheckboxesEmp cb = (CheckboxesEmp) arg0;
 		if (cb.getEmployees() == null || cb.getEmployees().isEmpty()) {
-			arg1.rejectValue("employees", "selectemployees");
+			arg1.rejectValue(ConstantsJsp.EMPLOYEES, "selectemployees");
 		}
 	}
 }

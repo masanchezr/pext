@@ -13,6 +13,7 @@ import com.gu.dbaccess.entities.EmployeeEntity;
 import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.gu.services.employees.EmployeeService;
 import com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class ReturnMoneyEmployeeController {
@@ -23,22 +24,24 @@ public class ReturnMoneyEmployeeController {
 	@Autowired
 	private EmployeeService employeeservice;
 
+	private static final String FORMMONEYADVANCE = "moneyadvance";
+
 	@RequestMapping(value = "/employee/newreturn")
 	public ModelAndView newreturn() {
 		ModelAndView model = new ModelAndView("returnmoneyemployee");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnmoneyemployeeservice.findAdvanceByEmployee(employee);
-		model.addObject("moneyadvance", moneyadvance);
-		model.addObject("incomeForm", new ReturnMoneyEmployeeEntity());
+		model.addObject(FORMMONEYADVANCE, moneyadvance);
+		model.addObject(ConstantsJsp.FORMINCOME, new ReturnMoneyEmployeeEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/savereturn")
-	public ModelAndView savereturn(@ModelAttribute("incomeForm") ReturnMoneyEmployeeEntity returnme) {
+	public ModelAndView savereturn(@ModelAttribute(ConstantsJsp.FORMINCOME) ReturnMoneyEmployeeEntity returnme) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("daily", returnmoneyemployeeservice.savereturn(returnme));
-		model.setViewName("daily");
+		model.addObject(ConstantsJsp.DAILY, returnmoneyemployeeservice.savereturn(returnme));
+		model.setViewName(ConstantsJsp.DAILY);
 		return model;
 	}
 
@@ -46,19 +49,19 @@ public class ReturnMoneyEmployeeController {
 	public ModelAndView newmoneyadvance() {
 		ModelAndView model = new ModelAndView("newmoneyadvance");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		model.addObject("user", user);
-		model.addObject("moneyadvance", new ReturnMoneyEmployeeEntity());
+		model.addObject(ConstantsJsp.USER, user);
+		model.addObject(FORMMONEYADVANCE, new ReturnMoneyEmployeeEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/moneyadvance")
-	public ModelAndView moneyadvance(@ModelAttribute("moneyadvance") ReturnMoneyEmployeeEntity returnme) {
+	public ModelAndView moneyadvance(@ModelAttribute(FORMMONEYADVANCE) ReturnMoneyEmployeeEntity returnme) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
 		returnme.setEmployee(employee);
-		model.addObject("daily", returnmoneyemployeeservice.savemoneyadvance(returnme));
-		model.setViewName("daily");
+		model.addObject(ConstantsJsp.DAILY, returnmoneyemployeeservice.savemoneyadvance(returnme));
+		model.setViewName(ConstantsJsp.DAILY);
 		return model;
 	}
 

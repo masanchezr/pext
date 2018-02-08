@@ -11,6 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.gu.dbaccess.entities.GratificationEntity;
+import com.gu.util.constants.Constants;
 
 public interface GratificationsRepository extends CrudRepository<GratificationEntity, Long> {
 
@@ -23,5 +24,5 @@ public interface GratificationsRepository extends CrudRepository<GratificationEn
 
 	@Query("select o from GratificationEntity o where o.idgratification=:id and o.paydate is null and o.usefromdate<=:date and o.expirationdate>=:date")
 	public GratificationEntity findByIdgratificationAndPaydateIsNull(@Param("id") Long idgratification,
-			@Param("date") Date date);
+			@Param(Constants.DATE) Date date);
 }

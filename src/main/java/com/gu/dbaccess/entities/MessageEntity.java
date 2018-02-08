@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
+
 @Entity
 @Table(name = "messages")
 public class MessageEntity {
@@ -20,22 +23,22 @@ public class MessageEntity {
 	@Column(name = "idmessage")
 	private Long idmessage;
 
-	@Column(name = "message")
+	@Column(name = ConstantsJsp.MESSAGE)
 	private String message;
 
-	@Column(name = "active")
+	@Column(name = Constants.ACTIVE)
 	private Boolean active;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "datefrom")
+	@Column(name = ConstantsJsp.DATEFROM)
 	private Date datefrom;
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "dateuntil")
+	@Column(name = ConstantsJsp.DATEUNTIL)
 	private Date dateuntil;
 
 	public Long getIdmessage() {

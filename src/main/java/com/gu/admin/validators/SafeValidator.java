@@ -6,6 +6,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.SafeEntity;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 
 public class SafeValidator implements Validator {
 
@@ -17,7 +19,7 @@ public class SafeValidator implements Validator {
 		SafeEntity safe = (SafeEntity) arg0;
 		BigDecimal amount = safe.getAmount();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue("amount", "selectamount");
+			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 	}
 

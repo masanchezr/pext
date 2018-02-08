@@ -23,5 +23,8 @@ public class OperationServiceTest {
 	public void rechargesTest() {
 		List<OperationEntity> operations = operationservice.recharges("11/2016");
 		Iterator<OperationEntity> ioperations = operations.iterator();
+		while (ioperations.hasNext()) {
+			ioperations.next().toString();
+		}
 	}
 }

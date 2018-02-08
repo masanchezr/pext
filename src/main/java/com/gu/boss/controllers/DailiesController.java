@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 import com.gu.validators.SearchDatesFormValidator;
@@ -30,17 +32,21 @@ public class DailiesController {
 	@Autowired
 	private SearchDatesFormValidator searchDatesFormValidator;
 
+	private static final String VIEWSEARCHCALCULATEDAILIES = "searchcalculatedailies";
+	private static final String FORMSEARCHDAILY = "searchDailyForm";
+	private static final String VIEWSEARCHDAILY = "searchdaily";
+
 	@RequestMapping(value = "/searchcalculatedailies")
 	public ModelAndView searchCalculateDailies() {
-		ModelAndView model = new ModelAndView("searchcalculatedailies");
-		model.addObject("searchDailyForm", new SearchByDatesForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
+		model.addObject(FORMSEARCHDAILY, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/daily")
 	public ModelAndView daily() {
-		ModelAndView model = new ModelAndView("searchdaily");
-		model.addObject("searchDailyForm", new SearchByDatesForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHDAILY);
+		model.addObject(FORMSEARCHDAILY, new SearchByDatesForm());
 		return model;
 	}
 
@@ -52,7 +58,7 @@ public class DailiesController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultdaily")
-	public ModelAndView searchDaily(@ModelAttribute("searchDailyForm") SearchByDatesForm sdf, BindingResult arg1) {
+	public ModelAndView searchDaily(@ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model;
 		String sdate = sdf.getDatefrom();
 		Date date;
@@ -63,8 +69,8 @@ public class DailiesController {
 			searchDatesFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
 				model = new ModelAndView();
-				model.addObject("searchDailyForm", sdf);
-				model.setViewName("searchdaily");
+				model.addObject(FORMSEARCHDAILY, sdf);
+				model.setViewName(VIEWSEARCHDAILY);
 				return model;
 			} else {
 				date = DateUtil.getDate(sdate);
@@ -77,30 +83,30 @@ public class DailiesController {
 		ModelAndView model = new ModelAndView();
 		Daily daily = dailyService.getDaily(date);
 		if (daily.getFinalamount() == null) {
-			model.setViewName("notdailyadmin");
+			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {
 			String view;
 			String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
 			String sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
 			if (stoday.compareTo(sdate) == 0) {
-				view = "dailybossarrow";
+				view = ConstantsJsp.VIEWDAILYBOSSARROW;
 			} else {
-				view = "dailybossarrows";
+				view = ConstantsJsp.VIEWDAILYBOSSARROWS;
 			}
-			model.addObject("daily", daily);
+			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(view);
-			model.addObject("datedaily", date);
+			model.addObject(ConstantsJsp.DATEDAILY, date);
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/calculatedailies")
-	public ModelAndView calculateDailies(@ModelAttribute("searchDailyForm") SearchByDatesForm sdf,
+	public ModelAndView calculateDailies(@ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
-			model.setViewName("searchcalculatedailies");
+			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
 		} else {
 			String sdate = sdf.getDatefrom();
 			Date date = DateUtil.getDate(sdf.getDatefrom());
@@ -110,9 +116,9 @@ public class DailiesController {
 				date = DateUtil.getDate(sdate);
 				if (date.after(c.getTime())) {
 					dailyService.calculateDailies(date);
-					model.setViewName("success");
+					model.setViewName(ConstantsJsp.SUCCESS);
 				} else {
-					model.setViewName("searchcalculatedailies");
+					model.setViewName(VIEWSEARCHCALCULATEDAILIES);
 				}
 			}
 		}
@@ -120,7 +126,7 @@ public class DailiesController {
 	}
 
 	@RequestMapping(value = "/beforeday{date}")
-	public ModelAndView beforeday(@PathVariable("date") String sdate) {
+	public ModelAndView beforeday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Calendar c = Calendar.getInstance();
 		c.set(2015, 2, 31);
@@ -131,15 +137,15 @@ public class DailiesController {
 				date = DateUtil.addDays(date, -1);
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
-					model.setViewName("notdailyadmin");
+					model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 				} else {
-					model.addObject("daily", daily);
-					model.setViewName("dailybossarrows");
-					model.addObject("datedaily", date);
+					model.addObject(ConstantsJsp.DAILY, daily);
+					model.setViewName(ConstantsJsp.VIEWDAILYBOSSARROWS);
+					model.addObject(ConstantsJsp.DATEDAILY, date);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName("notdailyadmin");
+				model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 				existdaily = true;
 			}
 		}
@@ -147,7 +153,7 @@ public class DailiesController {
 	}
 
 	@RequestMapping(value = "/againday{date}")
-	public ModelAndView againday(@PathVariable("date") String sdate) {
+	public ModelAndView againday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Date date = DateUtil.getDate(sdate);
 		boolean existdaily = false;
@@ -156,7 +162,7 @@ public class DailiesController {
 			if (date.compareTo(new Date()) < 0) {
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
-					model.setViewName("notdailyadmin");
+					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
 					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
@@ -164,15 +170,15 @@ public class DailiesController {
 					if (stoday.compareTo(sdate) == 0) {
 						view = "dailybossarrow";
 					} else {
-						view = "dailybossarrows";
+						view = ConstantsJsp.VIEWDAILYBOSSARROWS;
 					}
-					model.addObject("daily", daily);
+					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject("datedaily", date);
+					model.addObject(ConstantsJsp.DATEDAILY, date);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName("notdailyadmin");
+				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				existdaily = true;
 			}
 		}

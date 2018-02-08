@@ -32,5 +32,8 @@ public class OperationRepositoryTest {
 		until = calendar.getTime();
 		List<Object[]> list = operationRepository.searchSumByMonth(from, until);
 		Iterator<Object[]> ilist = list.iterator();
+		while (ilist.hasNext()) {
+			ilist.next().toString();
+		}
 	}
 }

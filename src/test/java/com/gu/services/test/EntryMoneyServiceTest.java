@@ -22,8 +22,8 @@ public class EntryMoneyServiceTest {
 	@Test
 	public void saveEntryMoneyTest() {
 		EntryMoneyForm form = new EntryMoneyForm();
-		form.setOrigin(Constants.CAJAFUERTE);
-		form.setAmount(new BigDecimal(300));
+		form.setOrigin(Constants.getOrigin()[0]);
+		form.setAmount(BigDecimal.valueOf(300));
 		entryMoneyService.saveEntryMoney(form);
 	}
 

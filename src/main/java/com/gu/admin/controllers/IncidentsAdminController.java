@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.IncidentEntity;
 import com.gu.services.incidents.IncidentService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class IncidentsAdminController {
@@ -19,7 +20,7 @@ public class IncidentsAdminController {
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("allincidents");
 		model.addObject("incidents", incidentService.searchAllIncidents());
-		model.addObject("incident", new IncidentEntity());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
@@ -27,22 +28,22 @@ public class IncidentsAdminController {
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("allincidents");
 		model.addObject("incidents", incidentService.searchPending());
-		model.addObject("incident", new IncidentEntity());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/searchincident")
-	public ModelAndView searchIncident(@ModelAttribute("incident") IncidentEntity incident) {
+	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) IncidentEntity incident) {
 		ModelAndView model = new ModelAndView("updateincident");
-		model.addObject("incident", incidentService.searchIncident(incident));
+		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/resolvedincident")
-	public ModelAndView resolvedIncident(@ModelAttribute("incident") IncidentEntity incident) {
+	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) IncidentEntity incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);
-		} 
+		}
 		return pendingissues();
 	}
 }

@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+import com.gu.util.constants.ConstantsJsp;
+
 @Entity
 @Table(name = "safe")
 public class SafeEntity {
@@ -19,16 +22,16 @@ public class SafeEntity {
 	@Column(name = "idsafe")
 	private Long idsafe;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
-	@Column(name = "total")
+	@Column(name = ConstantsJsp.TOTAL)
 	private BigDecimal total;
 
-	@Column(name = "description")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	public String getDescription() {

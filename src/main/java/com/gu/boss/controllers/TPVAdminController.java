@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.tpv.TPVService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class TPVAdminController {
@@ -18,12 +19,12 @@ public class TPVAdminController {
 	@RequestMapping(value = "/searchtpv")
 	public ModelAndView searchtpv() {
 		ModelAndView model = new ModelAndView("searchtpv");
-		model.addObject("searchForm", new SearchByDatesForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resulttpv")
-	public ModelAndView resulttpv(@ModelAttribute("searchForm") SearchByDatesForm searchForm) {
+	public ModelAndView resulttpv(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView();
 		model.addAllObjects(tpvservice.getOperationsTpv(searchForm.getDatefrom()));
 		model.setViewName("resulttpv");

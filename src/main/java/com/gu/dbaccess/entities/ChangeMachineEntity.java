@@ -11,18 +11,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "changemachine")
 public class ChangeMachineEntity {
 
 	@Id
-	@Column(name = "idchangemachine")
+	@Column(name = Constants.IDCHANGEMACHINE)
 	private Long idchangemachine;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	@OneToOne
@@ -57,10 +59,6 @@ public class ChangeMachineEntity {
 		this.amount = amount;
 	}
 
-	public AwardsChangeMachineEntity getOperation() {
-		return award;
-	}
-
 	public void setOperation(AwardsChangeMachineEntity operation) {
 		this.award = operation;
 	}
@@ -69,16 +67,16 @@ public class ChangeMachineEntity {
 		return award;
 	}
 
-	public void setAward(AwardsChangeMachineEntity award) {
-		this.award = award;
-	}
-
 	public MachineEntity getMachine() {
 		return machine;
 	}
 
 	public void setMachine(MachineEntity machine) {
 		this.machine = machine;
+	}
+
+	public void setAward(AwardsChangeMachineEntity award) {
+		this.award = award;
 	}
 
 }

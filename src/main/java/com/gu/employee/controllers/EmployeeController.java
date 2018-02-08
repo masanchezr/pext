@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.services.messages.MessageService;
 import com.gu.services.register.RegisterService;
+import com.gu.util.constants.ConstantsJsp;
 
 /**
  * The Class EmployeeController.
@@ -44,7 +45,7 @@ public class EmployeeController {
 	@RequestMapping("/employee/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("adminemployee");
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();

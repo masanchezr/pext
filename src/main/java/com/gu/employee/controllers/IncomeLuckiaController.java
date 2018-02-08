@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.IncomeLuckiaEntity;
 import com.gu.services.incomeluckia.IncomeLuckiaService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class IncomeLuckiaController {
@@ -15,18 +16,20 @@ public class IncomeLuckiaController {
 	@Autowired
 	private IncomeLuckiaService incomeLuckiaService;
 
+	private static final String FORMLUCKIA = "iluckia";
+
 	@RequestMapping(value = "/employee/newincomeluckia")
 	public ModelAndView newincomeluckia() {
 		ModelAndView model = new ModelAndView("incomeluckia");
-		model.addObject("iluckia", new IncomeLuckiaEntity());
+		model.addObject(FORMLUCKIA, new IncomeLuckiaEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveincomeluckia")
-	public ModelAndView saveincomeluckia(@ModelAttribute("iluckia") IncomeLuckiaEntity iluckia) {
+	public ModelAndView saveincomeluckia(@ModelAttribute(FORMLUCKIA) IncomeLuckiaEntity iluckia) {
 		ModelAndView model = new ModelAndView("successemployee");
-		model.addObject("daily", incomeLuckiaService.save(iluckia));
-		model.setViewName("daily");
+		model.addObject(ConstantsJsp.DAILY, incomeLuckiaService.save(iluckia));
+		model.setViewName(ConstantsJsp.DAILY);
 		return model;
 	}
 }

@@ -11,6 +11,7 @@ import com.gu.admin.validators.MessageValidator;
 import com.gu.dbaccess.entities.MessageEntity;
 import com.gu.services.messages.Message;
 import com.gu.services.messages.MessageService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class MessagesController {
@@ -21,19 +22,21 @@ public class MessagesController {
 	@Autowired
 	private MessageValidator messagevalidator;
 
+	private static final String VIEWNEWMESSAGE = "newmessage";
+
 	@RequestMapping(value = "/admin/newmessage")
 	public ModelAndView newMessage() {
-		ModelAndView model = new ModelAndView("newmessage");
-		model.addObject("message", new Message());
+		ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
+		model.addObject(ConstantsJsp.MESSAGE, new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/savemessage")
-	public ModelAndView savemessage(@ModelAttribute("message") Message message, BindingResult result) {
+	public ModelAndView savemessage(@ModelAttribute(ConstantsJsp.MESSAGE) Message message, BindingResult result) {
 		messagevalidator.validate(message, result);
 		if (result.hasErrors()) {
-			ModelAndView model = new ModelAndView("newmessage");
-			model.addObject("message", message);
+			ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
+			model.addObject(ConstantsJsp.MESSAGE, message);
 			return model;
 		} else {
 			messageservice.save(message);
@@ -46,14 +49,14 @@ public class MessagesController {
 		ModelAndView model = new ModelAndView("allmessages");
 		Iterable<MessageEntity> messages = messageservice.getAllMessages();
 		model.addObject("messages", messages);
-		model.addObject("message", new Message());
+		model.addObject(ConstantsJsp.MESSAGE, new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/updatemessage")
-	public ModelAndView updatemessage(@ModelAttribute("message") Message message) {
-		ModelAndView model = new ModelAndView("newmessage");
-		model.addObject("message", messageservice.findById(message.getIdmessage()));
+	public ModelAndView updatemessage(@ModelAttribute(ConstantsJsp.MESSAGE) Message message) {
+		ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
+		model.addObject(ConstantsJsp.MESSAGE, messageservice.findById(message.getIdmessage()));
 		return model;
 	}
 }
