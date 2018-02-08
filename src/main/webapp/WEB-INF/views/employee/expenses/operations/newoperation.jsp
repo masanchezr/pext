@@ -54,7 +54,7 @@
 							<form:select class="form-control" path="machine.idmachine"
 								id="machines">
 								<form:options items="${machines}" itemValue="idmachine"
-									itemLabel="name" />
+									itemLabel=Constants.NAME />
 							</form:select>
 						</div>
 						<div class="form-group">

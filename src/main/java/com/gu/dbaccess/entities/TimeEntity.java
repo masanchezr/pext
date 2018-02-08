@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "timetable")
 public class TimeEntity implements Comparable<TimeEntity> {
@@ -18,7 +20,7 @@ public class TimeEntity implements Comparable<TimeEntity> {
 	@Column(name = "idtime")
 	private Long idtime;
 
-	@Column(name = "name")
+	@Column(name = Constants.NAME)
 	private String name;
 
 	@Column(name = "entry")
@@ -89,6 +91,7 @@ public class TimeEntity implements Comparable<TimeEntity> {
 		return this.getIdtime().equals(o.getIdtime());
 	}
 
+	@Override
 	public int hashCode() {
 		return idtime.hashCode();
 	}

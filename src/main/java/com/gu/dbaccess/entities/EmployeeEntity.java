@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "employees")
 public class EmployeeEntity {
@@ -16,7 +18,7 @@ public class EmployeeEntity {
 	@Column(name = "idemployee")
 	private Long idemployee;
 
-	@Column(name = "name")
+	@Column(name = Constants.NAME)
 	private String name;
 
 	@Column(name = "alias")

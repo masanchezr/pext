@@ -62,4 +62,6 @@ public class Constants {
 
 	public static final String GRATIFICATIONS = "gratifications";
 
+	public static final String NAME = "name";
+
 }

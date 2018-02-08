@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "awards")
 public class AwardEntity {
@@ -16,7 +18,7 @@ public class AwardEntity {
 	@Column(name = "idaward")
 	private Integer idaward;
 
-	@Column(name = "name")
+	@Column(name = Constants.NAME)
 	private String name;
 
 	@Column(name = "active")

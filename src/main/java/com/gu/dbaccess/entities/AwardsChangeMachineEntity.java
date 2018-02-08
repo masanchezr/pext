@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gu.util.constants.Constants;
+
 @Entity
 @Table(name = "awardschangemachine")
 public class AwardsChangeMachineEntity {
@@ -13,7 +15,7 @@ public class AwardsChangeMachineEntity {
 	@Column(name = "idawardchangemachine")
 	private Long idawardchangemachine;
 
-	@Column(name = "name")
+	@Column(name = Constants.NAME)
 	private String name;
 
 	public Long getIdawardchangemachine() {

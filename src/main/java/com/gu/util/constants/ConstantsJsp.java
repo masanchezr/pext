@@ -22,7 +22,7 @@ public class ConstantsJsp {
 	public static final String VIEWNOTDAILYBOSS = "notdailyboss";
 	public static final String FORMINCOME = "incomeForm";
 	public static final String USER = "user";
-	public static final String FORMENTRYMONEY = "entrymoney";
+	public static final String FORMENTRYMONEY = "entrymoneyForm";
 	public static final String VIEWNEWENTRYMONEY = "newentrymoney";
 	public static final String FORMSEARCH = "searchForm";
 	public static final String FORMINCIDENT = "incident";

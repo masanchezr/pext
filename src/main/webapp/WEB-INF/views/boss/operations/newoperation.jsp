@@ -38,7 +38,7 @@
 						<spring:message code="machine" />
 						<form:select class="form-control" path="machine.idmachine">
 							<form:options items="${machines}" itemValue="idmachine"
-								itemLabel="name" />
+								itemLabel=Constants.NAME />
 						</form:select>
 					</div>
 					<div class="form-group">
