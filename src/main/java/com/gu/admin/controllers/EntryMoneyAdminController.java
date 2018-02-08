@@ -27,7 +27,7 @@ public class EntryMoneyAdminController {
 	@RequestMapping(value = "/admin/newentrymoney")
 	public ModelAndView newentrymoney() {
 		ModelAndView model = new ModelAndView("newentrymoneyadmin");
-		model.addObject("ConstantsJsp.FORMENTRYMONEY", new EntryMoneyForm());
+		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyForm());
 		model.addObject("origin", Constants.getOrigin());
 		return model;
 	}
@@ -42,7 +42,7 @@ public class EntryMoneyAdminController {
 			model.setViewName(ConstantsJsp.VIEWNEWENTRYMONEY);
 		} else {
 			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMoney(entryMoney));
-			model.setViewName("dailyadminarrow");
+			model.setViewName(ConstantsJsp.VIEWDAILYADMINARROW);
 			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;

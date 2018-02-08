@@ -38,5 +38,6 @@ public class ConstantsJsp {
 	public static final String XFORWARDEDFOR = "X-FORWARDED-FOR";
 	public static final String ERRORSELECTID = "selectid";
 	public static final String OPERATIONS = "operations";
+	public static final String VIEWDAILYADMINARROW = "dailyadminarrow";
 
 }

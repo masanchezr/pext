@@ -214,8 +214,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		int i = 0;
 		for (long l = first; l < last && i < size && l <= cms.get(i).getIdchangemachine(); i++, l++) {
 			if (cms.get(i).getIdchangemachine() != l) {
-				lostNumbers.add(l);
-				l++;
+				lostNumbers.add(l++);
 			}
 		}
 		return lostNumbers;
