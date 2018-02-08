@@ -39,6 +39,7 @@ public class GratificationsController {
 	private static final String GRATIFICATION = "gratification";
 	private static final String VIEWNEWGRATIFICATION = "newgratification";
 	private static final String VIEWREGISTERGRATIFICATION = "registergratification";
+	private static final String IDGRATIFICATION = "idgratification";
 
 	@RequestMapping(value = "/employee/newgratification")
 	public ModelAndView newgratification() {
@@ -56,10 +57,10 @@ public class GratificationsController {
 	 * @return
 	 */
 	@RequestMapping(value = "/employee/savegratification")
-	public ModelAndView save(@ModelAttribute("gratification") GratificationEntity g, BindingResult arg1) {
+	public ModelAndView save(@ModelAttribute(GRATIFICATION) GratificationEntity g, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idgratification", "selectgratification");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, IDGRATIFICATION, "selectgratification");
 		if (arg1.hasErrors()) {
 			model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
 			model.addObject(GRATIFICATION, g);
@@ -67,7 +68,7 @@ public class GratificationsController {
 		} else {
 			GratificationEntity gratification = gratificationservice.searchGratificationActive(g.getIdgratification());
 			if (gratification == null) {
-				arg1.rejectValue("idgratification", "gratificationsproblem");
+				arg1.rejectValue(IDGRATIFICATION, "gratificationsproblem");
 				model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
 				model.addObject(GRATIFICATION, g);
 				model.setViewName(VIEWNEWGRATIFICATION);
@@ -88,8 +89,8 @@ public class GratificationsController {
 	}
 
 	@RequestMapping(value = "/employee/registergratification")
-	public ModelAndView registerGratification(@ModelAttribute("gratification") GratificationEntity g,
-			BindingResult arg1, HttpServletResponse response) {
+	public ModelAndView registerGratification(@ModelAttribute(GRATIFICATION) GratificationEntity g, BindingResult arg1,
+			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("successemployee");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
