@@ -27,7 +27,7 @@ public class IncomeLuckiaController {
 
 	@RequestMapping(value = "/employee/saveincomeluckia")
 	public ModelAndView saveincomeluckia(@ModelAttribute(FORMLUCKIA) IncomeLuckiaEntity iluckia) {
-		ModelAndView model = new ModelAndView("successemployee");
+		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSUCCESSEMPLOYEE);
 		model.addObject(ConstantsJsp.DAILY, incomeLuckiaService.save(iluckia));
 		model.setViewName(ConstantsJsp.DAILY);
 		return model;

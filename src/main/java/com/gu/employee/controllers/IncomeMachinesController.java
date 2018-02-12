@@ -32,7 +32,7 @@ public class IncomeMachinesController {
 
 	@RequestMapping(value = "/employee/saveincomemachine")
 	public ModelAndView saveincomemachine(@ModelAttribute(ConstantsJsp.FORMINCOME) IncomeMachineEntity imachine) {
-		ModelAndView model = new ModelAndView("successemployee");
+		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSUCCESSEMPLOYEE);
 		model.addObject(ConstantsJsp.DAILY, incomemachineService.save(imachine));
 		model.setViewName(ConstantsJsp.DAILY);
 		model.addObject(ConstantsJsp.DATEDAILY, new Date());

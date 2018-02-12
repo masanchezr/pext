@@ -91,7 +91,7 @@ public class GratificationsController {
 	@RequestMapping(value = "/employee/registergratification")
 	public ModelAndView registerGratification(@ModelAttribute(GRATIFICATION) GratificationEntity g, BindingResult arg1,
 			HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("successemployee");
+		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSUCCESSEMPLOYEE);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 		gvalidator.validate(g, arg1);
@@ -99,15 +99,15 @@ public class GratificationsController {
 			model.addObject(GRATIFICATION, g);
 			model.setViewName(VIEWREGISTERGRATIFICATION);
 		} else {
-			gratificationservice.registerNumberGratification(g, user, path);
 			File file = new File(path.concat("ticket.pdf"));
-			InputStream inputStream = null;
+			gratificationservice.registerNumberGratification(g, user, path);
+			response.setContentType("application/force-download");
+			response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
 			try {
-				inputStream = new FileInputStream(file);
-				response.setContentType("application/force-download");
-				response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
+				InputStream inputStream = new FileInputStream(file);
 				IOUtils.copy(inputStream, response.getOutputStream());
 				response.flushBuffer();
+				inputStream.close();
 			} catch (IOException e) {
 				model.setViewName(VIEWREGISTERGRATIFICATION);
 				arg1.rejectValue(ConstantsJsp.CLIENT, "notopenfile");

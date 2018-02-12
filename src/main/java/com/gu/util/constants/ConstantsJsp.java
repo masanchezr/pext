@@ -40,5 +40,6 @@ public class ConstantsJsp {
 	public static final String OPERATIONS = "operations";
 	public static final String VIEWDAILYADMINARROW = "dailyadminarrow";
 	public static final String ERRORSELECTNAME = "selectname";
+	public static final String VIEWSUCCESSEMPLOYEE = "successemployee";
 
 }
