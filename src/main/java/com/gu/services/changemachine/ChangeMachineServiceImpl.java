@@ -206,6 +206,14 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 								}
 							}
 							cm.setMachine(machine);
+						} else if (award.equals("RECARGAS")) {
+							awardentity.setIdawardchangemachine(3L);
+							machine = machinesRepository.findByNameticket(scomments);
+							cm.setMachine(machine);
+						} else if (award.equals("PAGO MANUAL")) {
+							awardentity.setIdawardchangemachine(4L);
+							machine = machinesRepository.findByNameticket(scomments);
+							cm.setMachine(machine);
 						} else {
 							awardentity.setIdawardchangemachine(1L);
 							machine = machinesRepository.findByNameticket(scomments);
@@ -235,7 +243,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		int i = 0;
 		for (long l = first; l < last && i < size && l <= cms.get(i).getIdchangemachine(); i++, l++) {
 			if (cms.get(i).getIdchangemachine() != l) {
-				lostNumbers.add(l++);
+				lostNumbers.add(l);
 			}
 		}
 		return lostNumbers;
