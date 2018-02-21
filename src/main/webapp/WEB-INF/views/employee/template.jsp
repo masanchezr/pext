@@ -45,8 +45,6 @@
 						class="fa fa-euro fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="expenses" /></span></a>
 					<ul class="sidenav-second-level collapse" id="collapsexpenses">
-						<li><spring:url value="/employee/newtpv" var="newtpv">
-							</spring:url> <a href="${newtpv}"><spring:message code="tpv" /></a></li>
 						<li><spring:url value="/employee/newmoneyadvance"
 								var="moneyadvance">
 							</spring:url> <a href="${moneyadvance}"><spring:message

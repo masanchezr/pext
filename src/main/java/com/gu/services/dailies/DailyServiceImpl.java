@@ -174,7 +174,9 @@ public class DailyServiceImpl implements DailyService {
 			TPVEntity tpv;
 			while (itpvs.hasNext()) {
 				tpv = itpvs.next();
-				finalamount = finalamount.subtract(tpv.getAmount());
+				if (tpv.getPay().getIdpayment().equals(Constants.CAJACOMUN)) {
+					finalamount = finalamount.subtract(tpv.getAmount());
+				}
 				numoperations = numoperations + 1;
 			}
 			daily.setTpvs(tpvs);

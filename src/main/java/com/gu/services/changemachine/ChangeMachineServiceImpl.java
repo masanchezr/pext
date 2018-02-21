@@ -28,10 +28,13 @@ import com.gu.dbaccess.entities.AwardsChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
 import com.gu.dbaccess.entities.MachineEntity;
+import com.gu.dbaccess.entities.PaymentEntity;
+import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.entities.TakeEntity;
 import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.gu.dbaccess.repositories.MachinesRepository;
+import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.dbaccess.repositories.TakingsRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
@@ -56,6 +59,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Autowired
 	private MachinesRepository machinesRepository;
+
+	@Autowired
+	private TPVRepository tpvrepository;
 
 	public BigDecimal getIncomeTotalMonth() {
 		return changeMachineRepository
@@ -155,50 +161,65 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		TextNode node;
 		AwardsChangeMachineEntity awardentity = new AwardsChangeMachineEntity();
 		MachineEntity machine;
+		Date date;
+		BigDecimal amount;
+		String scomments;
 		while (itrs.hasNext()) {
 			nodes = itrs.next().childNodes();
 			if (((TextNode) nodes.get(5).childNode(0)).getWholeText().equals("CLOSE")) {
-				cm = new ChangeMachineEntity();
-				node = (TextNode) nodes.get(0).childNode(0);
-				cm.setIdchangemachine(Long.valueOf(node.getWholeText()));
 				node = (TextNode) nodes.get(3).childNode(0);
 				award = node.getWholeText();
-				machine = machinesRepository.findByNameticket(award);
-				if (machine == null) {
-					node = (TextNode) nodes.get(9).childNode(0);
-					if (award.equals("TECNAUSA")) {
-						award = node.getWholeText();
-						awardentity.setIdawardchangemachine(2L);
-						String sub = award.substring(1, 4);
-						machine = new MachineEntity();
-						if (Util.isNumeric(sub)) {
-							machine.setIdmachine(Long.valueOf(sub));
-						} else {
-							sub = award.substring(1, 3);
+				node = (TextNode) nodes.get(6).childNode(0);
+				date = DateUtil.getDate(node.getWholeText());
+				node = (TextNode) nodes.get(8).childNode(0);
+				samount = node.getWholeText();
+				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
+				node = (TextNode) nodes.get(9).childNode(0);
+				scomments = node.getWholeText();
+				if (award.equals("TPV")) {
+					TPVEntity tpv = new TPVEntity();
+					PaymentEntity pay = new PaymentEntity();
+					pay.setIdpayment(Constants.MAQUINACAMBIO);
+					tpv.setPay(pay);
+					tpv.setCreationdate(date);
+					tpv.setAmount(amount);
+					tpv.setIdtpv(Long.valueOf(scomments));
+					tpvrepository.save(tpv);
+				} else {
+					cm = new ChangeMachineEntity();
+					node = (TextNode) nodes.get(0).childNode(0);
+					cm.setIdchangemachine(Long.valueOf(node.getWholeText()));
+					machine = machinesRepository.findByNameticket(award);
+					if (machine == null) {
+						if (award.equals("TECNAUSA")) {
+							awardentity.setIdawardchangemachine(2L);
+							String sub = scomments.substring(1, 4);
+							machine = new MachineEntity();
 							if (Util.isNumeric(sub)) {
 								machine.setIdmachine(Long.valueOf(sub));
 							} else {
-								machine.setIdmachine(Long.valueOf(award.substring(1, 2)));
+								sub = scomments.substring(1, 3);
+								if (Util.isNumeric(sub)) {
+									machine.setIdmachine(Long.valueOf(sub));
+								} else {
+									machine.setIdmachine(Long.valueOf(scomments.substring(1, 2)));
+								}
 							}
+							cm.setMachine(machine);
+						} else {
+							awardentity.setIdawardchangemachine(1L);
+							machine = machinesRepository.findByNameticket(scomments);
+							cm.setMachine(machine);
 						}
-						cm.setMachine(machine);
 					} else {
-						award = node.getWholeText();
 						awardentity.setIdawardchangemachine(1L);
-						machine = machinesRepository.findByNameticket(award);
 						cm.setMachine(machine);
 					}
-				} else {
-					awardentity.setIdawardchangemachine(1L);
-					cm.setMachine(machine);
+					cm.setAward(awardentity);
+					cm.setCreationdate(date);
+					cm.setAmount(amount);
+					changeMachineRepository.save(cm);
 				}
-				cm.setAward(awardentity);
-				node = (TextNode) nodes.get(6).childNode(0);
-				cm.setCreationdate(DateUtil.getDate(node.getWholeText()));
-				node = (TextNode) nodes.get(8).childNode(0);
-				samount = node.getWholeText();
-				cm.setAmount(new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", "")));
-				changeMachineRepository.save(cm);
 			}
 		}
 	}

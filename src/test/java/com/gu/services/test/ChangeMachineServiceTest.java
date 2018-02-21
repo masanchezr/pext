@@ -36,4 +36,9 @@ public class ChangeMachineServiceTest {
 			System.out.println(long1.toString());
 		}
 	}
+
+	@Test
+	public void loadDataTicketServerTest() {
+		changeMachineService.loadDataTicketServer();
+	}
 }
