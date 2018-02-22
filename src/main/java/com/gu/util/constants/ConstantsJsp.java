@@ -29,9 +29,6 @@ public class ConstantsJsp {
 	public static final String ERRORSELECTAMOUNT = "selectamount";
 	public static final String SELECTDATE = "selectdate";
 	public static final String ERRORSELECTDESCRIPTION = "selectdescription";
-	public static final String DATEFROM = "datefrom";
-	public static final String DATEUNTIL = "dateuntil";
-	public static final String MESSAGE = "message";
 	public static final String SUCCESS = "success";
 	public static final String TOTAL = "total";
 	public static final String VIEWNOTDAILY = "notdaily";

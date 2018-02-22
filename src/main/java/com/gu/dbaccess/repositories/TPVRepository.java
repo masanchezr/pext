@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.gu.dbaccess.entities.PaymentEntity;
 import com.gu.dbaccess.entities.TPVEntity;
 
 public interface TPVRepository extends CrudRepository<TPVEntity, Long> {
@@ -22,6 +23,11 @@ public interface TPVRepository extends CrudRepository<TPVEntity, Long> {
 
 	@Query("select sum(o.amount) from TPVEntity o where DATE(o.creationdate)>=:from and DATE(o.creationdate)<=:until")
 	public BigDecimal sumByCreationdate(@Temporal(TemporalType.DATE) @Param("from") Date from,
+			@Temporal(TemporalType.DATE) @Param("until") Date until);
+
+	@Query("select sum(o.amount) from TPVEntity o where DATE(o.creationdate)>=:from and DATE(o.creationdate)<=:until and o.pay=:payment")
+	public BigDecimal sumByCreationdateAndPayment(@Param("payment") PaymentEntity pay,
+			@Temporal(TemporalType.DATE) @Param("from") Date from,
 			@Temporal(TemporalType.DATE) @Param("until") Date until);
 
 }

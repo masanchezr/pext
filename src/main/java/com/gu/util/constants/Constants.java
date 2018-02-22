@@ -71,5 +71,8 @@ public class Constants {
 	public static final String CONTRASE = "password";
 
 	public static final String ROLE = "role";
+	public static final String DATEFROM = "datefrom";
+	public static final String DATEUNTIL = "dateuntil";
+	public static final String MESSAGE = "message";
 
 }

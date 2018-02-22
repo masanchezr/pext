@@ -11,7 +11,7 @@ import com.gu.admin.validators.MessageValidator;
 import com.gu.dbaccess.entities.MessageEntity;
 import com.gu.services.messages.Message;
 import com.gu.services.messages.MessageService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.Constants;
 
 @Controller
 public class MessagesController {
@@ -27,16 +27,16 @@ public class MessagesController {
 	@RequestMapping(value = "/admin/newmessage")
 	public ModelAndView newMessage() {
 		ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
-		model.addObject(ConstantsJsp.MESSAGE, new Message());
+		model.addObject(Constants.MESSAGE, new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/savemessage")
-	public ModelAndView savemessage(@ModelAttribute(ConstantsJsp.MESSAGE) Message message, BindingResult result) {
+	public ModelAndView savemessage(@ModelAttribute(Constants.MESSAGE) Message message, BindingResult result) {
 		messagevalidator.validate(message, result);
 		if (result.hasErrors()) {
 			ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
-			model.addObject(ConstantsJsp.MESSAGE, message);
+			model.addObject(Constants.MESSAGE, message);
 			return model;
 		} else {
 			messageservice.save(message);
@@ -49,14 +49,14 @@ public class MessagesController {
 		ModelAndView model = new ModelAndView("allmessages");
 		Iterable<MessageEntity> messages = messageservice.getAllMessages();
 		model.addObject("messages", messages);
-		model.addObject(ConstantsJsp.MESSAGE, new Message());
+		model.addObject(Constants.MESSAGE, new Message());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/updatemessage")
-	public ModelAndView updatemessage(@ModelAttribute(ConstantsJsp.MESSAGE) Message message) {
+	public ModelAndView updatemessage(@ModelAttribute(Constants.MESSAGE) Message message) {
 		ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
-		model.addObject(ConstantsJsp.MESSAGE, messageservice.findById(message.getIdmessage()));
+		model.addObject(Constants.MESSAGE, messageservice.findById(message.getIdmessage()));
 		return model;
 	}
 }
