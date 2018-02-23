@@ -47,7 +47,7 @@
 								<td><fmt:formatDate value="${operation.paydate}"
 										type="time" /></td>
 								<td>10<i class="fa fa-euro"></i></td>
-								<td></td>
+								<td><spring:message code="comun" /></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${daily.entriesMoney}" var="entryMoney">
@@ -88,7 +88,7 @@
 								<td><fmt:formatDate value="${money.creationdate}"
 										type="time" /></td>
 								<td><c:out value="${money.amount}" /><i class="fa fa-euro"></i></td>
-								<td></td>
+								<td><spring:message code="comun" /></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${daily.incomeluckia}" var="income">
@@ -118,20 +118,19 @@
 										value="${tpv.idtpv}" /></td>
 								<td><fmt:formatDate value="${tpv.creationdate}" type="time" /></td>
 								<td><c:out value="${tpv.amount}" /><i class="fa fa-euro"></i></td>
-								<td></td>
+								<td><c:out value="${tpv.pay.name}" /></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${daily.listchangemachine}" var="lcm">
 							<tr>
-								<td><spring:message code="changemachine" /> <c:out
-										value="${lcm.idchangemachine}" /> <c:out
+								<td><c:out value="${lcm.idchangemachine}" /> <c:out
 										value="${lcm.machine.name}" /></td>
 								<td><fmt:formatDate value="${lcm.creationdate}" type="time" /></td>
 								<td><spring:url value="/admin/updatechangemachine"
 										var="updatechangemachine" /><a
 									href="${updatechangemachine}<c:out value="${lcm.idchangemachine}" />"><c:out
 											value="${lcm.amount}" /><i class="fa fa-euro"></i></a></td>
-								<td></td>
+								<td><spring:message code="changemachine" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

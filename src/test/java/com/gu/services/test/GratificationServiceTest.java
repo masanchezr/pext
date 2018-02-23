@@ -10,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gu.dbaccess.entities.GratificationEntity;
-import com.gu.dbaccess.entities.MachineEntity;
 import com.gu.services.gratifications.GratificationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,14 +33,5 @@ public class GratificationServiceTest {
 		while (igratifications.hasNext()) {
 			System.out.println(igratifications.next().getIdgratification());
 		}
-	}
-
-	@Test
-	public void saveGratificationTest() {
-		GratificationEntity g = gratificationservice.searchGratificationActive(492L);
-		MachineEntity machine = new MachineEntity();
-		machine.setIdmachine(158L);
-		g.setMachine(machine);
-		gratificationservice.save(g, "masanchez");
 	}
 }

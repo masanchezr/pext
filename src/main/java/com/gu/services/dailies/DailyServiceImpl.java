@@ -74,115 +74,22 @@ public class DailyServiceImpl implements DailyService {
 	public Daily getDaily(Date date) {
 		TicketServer ticketserver = new TicketServer(changeMachineService);
 		Daily daily = new Daily();
-		List<OperationEntity> operations = operationsRepository.findByCreationdate(date);
-		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdate(date);
-		List<BarDrinkEntity> income = incomeRepository.findByCreationdate(date);
-		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdate(date);
-		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdate(date);
-		List<GratificationEntity> gratifications = gratificationRepository.searchByPaydate(date);
-		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndate(date);
-		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdate(date);
-		List<TPVEntity> tpvs = tpvrepository.findByCreationdate(date);
 		List<ChangeMachineEntity> changemachine = changeMachineRepository.searchByCreationdate(date);
-		int numoperations = 0;
-		BigDecimal finalamount = BigDecimal.ZERO;
 		// busco el parte de hoy si ya está calculado
 		DailyEntity dEntity = dailyRepository.findById(date).orElse(null);
-		if (operations != null && !operations.isEmpty()) {
-			Iterator<OperationEntity> ioperations = operations.iterator();
-			OperationEntity operation;
-			while (ioperations.hasNext()) {
-				operation = ioperations.next();
-				numoperations = numoperations + 1;
-				if (!operation.getPay().getIdpayment().equals(Constants.PROVIDING)) {
-					finalamount = finalamount.subtract(operation.getAmount());
-				}
-			}
-			daily.setOperations(operations);
-		}
-		if (gratifications != null && !gratifications.isEmpty()) {
-			BigDecimal ten = new BigDecimal(10);
-			for (int i = 0; i < gratifications.size(); i++) {
-				finalamount = finalamount.subtract(ten);
-				numoperations = numoperations + 1;
-			}
-			daily.setGratifications(gratifications);
-		}
-		if (entriesMoney != null && !entriesMoney.isEmpty()) {
-			Iterator<EntryMoneyEntity> ientriesmoney = entriesMoney.iterator();
-			EntryMoneyEntity eme;
-			while (ientriesmoney.hasNext()) {
-				eme = ientriesmoney.next();
-				finalamount = finalamount.add(eme.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setEntriesMoney(entriesMoney);
-		}
-		if (income != null && !income.isEmpty()) {
-			Iterator<BarDrinkEntity> iincome = income.iterator();
-			BarDrinkEntity ie;
-			while (iincome.hasNext()) {
-				ie = iincome.next();
-				finalamount = finalamount.add(ie.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setIncome(income);
-		}
-
-		if (incomeluckia != null && !incomeluckia.isEmpty()) {
-			Iterator<IncomeLuckiaEntity> iincome = incomeluckia.iterator();
-			IncomeLuckiaEntity ie;
-			while (iincome.hasNext()) {
-				ie = iincome.next();
-				finalamount = finalamount.add(ie.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setIncomeluckia(incomeluckia);
-		}
-		if (incomemachines != null && !incomemachines.isEmpty()) {
-			Iterator<IncomeMachineEntity> iincome = incomemachines.iterator();
-			IncomeMachineEntity ie;
-			while (iincome.hasNext()) {
-				ie = iincome.next();
-				finalamount = finalamount.add(ie.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setIncomemachines(incomemachines);
-		}
-		if (returns != null && !returns.isEmpty()) {
-			Iterator<ReturnMoneyEmployeeEntity> iincome = returns.iterator();
-			ReturnMoneyEmployeeEntity ie;
-			while (iincome.hasNext()) {
-				ie = iincome.next();
-				finalamount = finalamount.add(ie.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setReturns(returns);
-		}
-		if (moneyadvance != null && !moneyadvance.isEmpty()) {
-			Iterator<ReturnMoneyEmployeeEntity> iincome = moneyadvance.iterator();
-			ReturnMoneyEmployeeEntity ie;
-			while (iincome.hasNext()) {
-				ie = iincome.next();
-				finalamount = finalamount.subtract(ie.getAmount());
-				numoperations = numoperations + 1;
-			}
-			daily.setMoneyAdvance(moneyadvance);
-		}
-		if (tpvs != null && !tpvs.isEmpty()) {
-			Iterator<TPVEntity> itpvs = tpvs.iterator();
-			TPVEntity tpv;
-			while (itpvs.hasNext()) {
-				tpv = itpvs.next();
-				if (tpv.getPay().getIdpayment().equals(Constants.CAJACOMUN)) {
-					finalamount = finalamount.subtract(tpv.getAmount());
-				}
-				numoperations = numoperations + 1;
-			}
-			daily.setTpvs(tpvs);
-		}
+		BigDecimal finalamount;
+		daily.setFinalamount(BigDecimal.ZERO);
+		setOperations(daily, date);
+		setGratifications(daily, date);
+		setEntriesMoney(daily, date);
+		setIncome(daily, date);
+		setIncomeLuckia(daily, date);
+		setIncomeMachines(daily, date);
+		setReturns(daily, date);
+		setMoneyAdvance(daily, date);
+		setTpvs(daily, date);
 		if (changemachine != null && !changemachine.isEmpty()) {
-			numoperations = numoperations + changemachine.size();
+			daily.setNumoperations(daily.getNumoperations() + changemachine.size());
 			daily.setListchangemachine(changemachine);
 		}
 		BigDecimal previousamount;
@@ -200,14 +107,147 @@ public class DailyServiceImpl implements DailyService {
 		} else {
 			previousamount = previousdaily.getFinalamount();
 		}
-		finalamount = previousamount.add(finalamount);
+		finalamount = previousamount.add(daily.getFinalamount());
 		dEntity.setFinalamount(finalamount);
 		daily.setFinalamount(finalamount);
-		daily.setNumoperations(numoperations);
 		daily.setDate(date);
 		dailyRepository.save(dEntity);
 		ticketserver.start();
 		return daily;
+	}
+
+	private void setTpvs(Daily daily, Date date) {
+		BigDecimal tpvsamount = BigDecimal.ZERO;
+		List<TPVEntity> tpvs = tpvrepository.findByCreationdate(date);
+		if (tpvs != null && !tpvs.isEmpty()) {
+			Iterator<TPVEntity> itpvs = tpvs.iterator();
+			TPVEntity tpv;
+			while (itpvs.hasNext()) {
+				tpv = itpvs.next();
+				if (tpv.getPay().getIdpayment().equals(Constants.CAJACOMUN)) {
+					tpvsamount = tpvsamount.add(tpv.getAmount());
+				}
+			}
+			daily.setFinalamount(daily.getFinalamount().subtract(tpvsamount));
+			daily.setNumoperations(tpvs.size() + daily.getNumoperations());
+			daily.setTpvs(tpvs);
+		}
+	}
+
+	private void setMoneyAdvance(Daily daily, Date date) {
+		BigDecimal moneyadvanceamount = BigDecimal.ZERO;
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdate(date);
+		if (moneyadvance != null && !moneyadvance.isEmpty()) {
+			Iterator<ReturnMoneyEmployeeEntity> iincome = moneyadvance.iterator();
+			while (iincome.hasNext()) {
+				moneyadvanceamount = moneyadvanceamount.add(iincome.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().subtract(moneyadvanceamount));
+			daily.setNumoperations(moneyadvance.size() + daily.getNumoperations());
+			daily.setMoneyAdvance(moneyadvance);
+		}
+	}
+
+	private void setReturns(Daily daily, Date date) {
+		BigDecimal returnmoneyamount = BigDecimal.ZERO;
+		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndate(date);
+		if (returns != null && !returns.isEmpty()) {
+			Iterator<ReturnMoneyEmployeeEntity> iincome = returns.iterator();
+			while (iincome.hasNext()) {
+				returnmoneyamount = returnmoneyamount.add(iincome.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().add(returnmoneyamount));
+			daily.setNumoperations(returns.size() + daily.getNumoperations());
+			daily.setReturns(returns);
+		}
+	}
+
+	private void setIncomeMachines(Daily daily, Date date) {
+		BigDecimal incomemachinesamount = BigDecimal.ZERO;
+		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdate(date);
+		if (incomemachines != null) {
+			Iterator<IncomeMachineEntity> iincome = incomemachines.iterator();
+			while (iincome.hasNext()) {
+				incomemachinesamount = incomemachinesamount.add(iincome.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().add(incomemachinesamount));
+			daily.setNumoperations(incomemachines.size() + daily.getNumoperations());
+			daily.setIncomemachines(incomemachines);
+		}
+	}
+
+	private void setIncomeLuckia(Daily daily, Date date) {
+		BigDecimal amountincomeluckia = BigDecimal.ZERO;
+		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdate(date);
+		if (incomeluckia != null) {
+			Iterator<IncomeLuckiaEntity> iincome = incomeluckia.iterator();
+			while (iincome.hasNext()) {
+				amountincomeluckia = amountincomeluckia.add(iincome.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().add(amountincomeluckia));
+			daily.setNumoperations(incomeluckia.size() + daily.getNumoperations());
+			daily.setIncomeluckia(incomeluckia);
+		}
+	}
+
+	private void setIncome(Daily daily, Date date) {
+		BigDecimal incomeAmount = BigDecimal.ZERO;
+		List<BarDrinkEntity> income = incomeRepository.findByCreationdate(date);
+		if (income != null && !income.isEmpty()) {
+			Iterator<BarDrinkEntity> iincome = income.iterator();
+			while (iincome.hasNext()) {
+				incomeAmount = incomeAmount.add(iincome.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().add(incomeAmount));
+			daily.setNumoperations(income.size() + daily.getNumoperations());
+			daily.setIncome(income);
+		}
+	}
+
+	private void setEntriesMoney(Daily daily, Date date) {
+		BigDecimal entriesMoneyAmount = BigDecimal.ZERO;
+		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdate(date);
+		if (entriesMoney != null && !entriesMoney.isEmpty()) {
+			Iterator<EntryMoneyEntity> ientriesmoney = entriesMoney.iterator();
+			while (ientriesmoney.hasNext()) {
+				entriesMoneyAmount = entriesMoneyAmount.add(ientriesmoney.next().getAmount());
+			}
+			daily.setFinalamount(daily.getFinalamount().add(entriesMoneyAmount));
+			daily.setNumoperations(entriesMoney.size() + daily.getNumoperations());
+			daily.setEntriesMoney(entriesMoney);
+		}
+	}
+
+	private void setGratifications(Daily daily, Date date) {
+		BigDecimal gratificationsAmount = BigDecimal.ZERO;
+		List<GratificationEntity> gratifications = gratificationRepository.searchByPaydate(date);
+		if (gratifications != null && !gratifications.isEmpty()) {
+			BigDecimal ten = new BigDecimal(10);
+			for (int i = 0; i < gratifications.size(); i++) {
+				gratificationsAmount = gratificationsAmount.add(ten);
+			}
+			daily.setFinalamount(daily.getFinalamount().subtract(gratificationsAmount));
+			daily.setNumoperations(gratifications.size() + daily.getNumoperations());
+			daily.setGratifications(gratifications);
+		}
+	}
+
+	private void setOperations(Daily daily, Date date) {
+		BigDecimal operationsAmount = BigDecimal.ZERO;
+		List<OperationEntity> operations = operationsRepository.findByCreationdate(date);
+		if (operations != null) {
+			Iterator<OperationEntity> ioperations = operations.iterator();
+			OperationEntity operation;
+			while (ioperations.hasNext()) {
+				operation = ioperations.next();
+				if (!operation.getPay().getIdpayment().equals(Constants.PROVIDING)) {
+					operationsAmount = operationsAmount.add(operation.getAmount());
+				}
+			}
+			daily.setFinalamount(daily.getFinalamount().subtract(operationsAmount));
+			daily.setNumoperations(operations.size() + daily.getNumoperations());
+			daily.setOperations(operations);
+		}
 	}
 
 	public void calculateDailies(Date date) {

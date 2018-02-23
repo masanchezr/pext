@@ -47,4 +47,9 @@ public class CalendarServiceTest {
 		// calendarservice.save(schedule);
 
 	}
+
+	@Test
+	public void getTimesTest() {
+		calendarservice.getTimes();
+	}
 }
