@@ -169,6 +169,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		Date date;
 		BigDecimal amount;
 		String scomments;
+		Long idtpv;
 		while (itrs.hasNext()) {
 			nodes = itrs.next().childNodes();
 			if (((TextNode) nodes.get(5).childNode(0)).getWholeText().equals("CLOSE")) {
@@ -182,14 +183,17 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				node = (TextNode) nodes.get(9).childNode(0);
 				scomments = node.getWholeText();
 				if (award.equals("TPV")) {
-					TPVEntity tpv = new TPVEntity();
-					PaymentEntity pay = new PaymentEntity();
-					pay.setIdpayment(Constants.MAQUINACAMBIO);
-					tpv.setPay(pay);
-					tpv.setCreationdate(date);
-					tpv.setAmount(amount);
-					tpv.setIdtpv(Long.valueOf(scomments));
-					tpvrepository.save(tpv);
+					idtpv = Long.valueOf(scomments);
+					if (!tpvrepository.findById(idtpv).isPresent()) {
+						TPVEntity tpv = new TPVEntity();
+						PaymentEntity pay = new PaymentEntity();
+						pay.setIdpayment(Constants.MAQUINACAMBIO);
+						tpv.setPay(pay);
+						tpv.setCreationdate(date);
+						tpv.setAmount(amount);
+						tpv.setIdtpv(idtpv);
+						tpvrepository.save(tpv);
+					}
 				} else {
 					cm = new ChangeMachineEntity();
 					node = (TextNode) nodes.get(0).childNode(0);
