@@ -19,7 +19,6 @@ import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.repositories.BarDrinksRepository;
-import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.DailyRepository;
 import com.gu.dbaccess.repositories.EntryMoneyRepository;
 import com.gu.dbaccess.repositories.GratificationsRepository;
@@ -66,15 +65,12 @@ public class DailyServiceImpl implements DailyService {
 	private TPVRepository tpvrepository;
 
 	@Autowired
-	private ChangeMachineRepository changeMachineRepository;
-
-	@Autowired
 	private ChangeMachineService changeMachineService;
 
 	public Daily getDaily(Date date) {
 		TicketServer ticketserver = new TicketServer(changeMachineService);
 		Daily daily = new Daily();
-		List<ChangeMachineEntity> changemachine = changeMachineRepository.searchByCreationdate(date);
+		List<ChangeMachineEntity> changemachine = changeMachineService.getOperationsTicketServer(date);
 		// busco el parte de hoy si ya está calculado
 		DailyEntity dEntity = dailyRepository.findById(date).orElse(null);
 		BigDecimal finalamount;
@@ -276,8 +272,8 @@ public class DailyServiceImpl implements DailyService {
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
 				new Date());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
-		List<ChangeMachineEntity> changemachine = changeMachineRepository
-				.findByCreationdateBetweenOrderByCreationdate(date, new Date());
+		List<ChangeMachineEntity> changemachine = changeMachineService.getOperationsTicketServerBetweenDates(date,
+				new Date());
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);

@@ -88,6 +88,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		BigDecimal amount = entryMoney.getAmount();
 		entrymoney.setAmount(amount.negate());
 		entrymoney.setCreationdate(new Date());
+		entrymoney.setDescription("Máquina de cambio");
 		entryMoneyRepository.save(entrymoney);
 		machine.setAmount(amount);
 		machine.setCreationdate(new Date());

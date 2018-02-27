@@ -101,7 +101,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		return awards.add(changeMachineRepository.sumByCreationdateBetween(takedate, new Date()));
 	}
 
-	public Map<String, ?> ticketsByDay(Date date) {
+	public Map<String, Object> ticketsByDay(Date date) {
 		Map<String, Object> map = null;
 		BigDecimal amount = BigDecimal.ZERO;
 		List<ChangeMachineEntity> lcm = changeMachineRepository.findByCreationdate(date);
@@ -112,7 +112,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			}
 			map = new HashMap<>();
 			map.put(ConstantsJsp.OPERATIONS, lcm);
-			map.put(Constants.AMOUNT, amount.plus());
+			map.put(Constants.AMOUNT, amount);
 		}
 		return map;
 	}
@@ -278,5 +278,16 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			}
 		}
 		return lostNumbers;
+	}
+
+	@Override
+	public List<ChangeMachineEntity> getOperationsTicketServer(Date date) {
+		return changeMachineRepository.searchByCreationdate(date);
+	}
+
+	@Override
+	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until) {
+		return changeMachineRepository
+				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(from, until);
 	}
 }

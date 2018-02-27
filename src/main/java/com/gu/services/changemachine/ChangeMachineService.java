@@ -18,7 +18,7 @@ public interface ChangeMachineService {
 
 	public BigDecimal getAwards();
 
-	public Map<String, ?> ticketsByDay(Date date);
+	public Map<String, Object> ticketsByDay(Date date);
 
 	public ChangeMachineEntity findById(Long idchangemachine);
 
@@ -27,5 +27,9 @@ public interface ChangeMachineService {
 	public void loadDataTicketServer();
 
 	public List<Long> findLostNumbers();
+
+	public List<ChangeMachineEntity> getOperationsTicketServer(Date date);
+
+	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until);
 
 }

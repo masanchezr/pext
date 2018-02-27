@@ -27,6 +27,9 @@ public class EntryMoneyEntity {
 	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
+	@Column(name = Constants.DESCRIPTION)
+	private String description;
+
 	public Long getIdentrymoney() {
 		return identrymoney;
 	}
@@ -49,6 +52,14 @@ public class EntryMoneyEntity {
 
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

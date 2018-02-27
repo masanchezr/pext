@@ -28,7 +28,15 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 	@Query("select o from ChangeMachineEntity o where DATE(o.creationdate)=:cdate and o.award is not null and o.machine is not null order by o.creationdate")
 	public List<ChangeMachineEntity> searchByCreationdate(@Param("cdate") @Temporal(TemporalType.DATE) Date date);
 
-	public List<ChangeMachineEntity> findByCreationdateBetweenOrderByCreationdate(Date date, Date date2);
+	/**
+	 * Recupera las operaciones de máquina de cambio para mostrarlas a los empleados
+	 * 
+	 * @param from
+	 * @param until
+	 * @return List<ChangeMachineEntity>
+	 */
+	public List<ChangeMachineEntity> findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(
+			Date from, Date until);
 
 	public ChangeMachineEntity findFirstByOrderByCreationdateDesc();
 
