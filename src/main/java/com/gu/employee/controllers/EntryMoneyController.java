@@ -28,12 +28,12 @@ public class EntryMoneyController {
 	@RequestMapping(value = "/employee/entrymoney")
 	public ModelAndView entrymoney() {
 		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWNEWENTRYMONEY);
-		model.addObject("ConstantsJsp.FORMENTRYMONEY", new EntryMoneyForm());
+		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveentrymoney")
-	public ModelAndView saveEntryMoney(@ModelAttribute("ConstantsJsp.FORMENTRYMONEY") EntryMoneyForm entryMoney,
+	public ModelAndView saveEntryMoney(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoneyForm entryMoney,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		entryMoneyValidator.validate(entryMoney, result);
