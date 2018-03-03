@@ -94,11 +94,19 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public BigDecimal getAwards() {
+		BigDecimal awards = BigDecimal.ZERO;
 		PaymentEntity pay = new PaymentEntity();
 		pay.setIdpayment(Constants.CHANGEMACHINE);
 		Date takedate = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
-		BigDecimal awards = tpvrepository.sumByCreationdateAndPayment(pay, takedate, new Date());
-		return awards.add(changeMachineRepository.sumByCreationdateBetween(takedate, new Date()));
+		BigDecimal tpvs = tpvrepository.sumByCreationdateAndPayment(pay, takedate, new Date());
+		BigDecimal awardscm = changeMachineRepository.sumByCreationdateBetween(takedate, new Date());
+		if (tpvs != null) {
+			awards = tpvs;
+		}
+		if (awardscm != null) {
+			awards = awards.add(awardscm);
+		}
+		return awards;
 	}
 
 	public Map<String, Object> ticketsByDay(Date date) {
