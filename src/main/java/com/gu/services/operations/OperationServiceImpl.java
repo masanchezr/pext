@@ -102,10 +102,10 @@ public class OperationServiceImpl implements OperationService {
 		Object[] object;
 		List<Object[]> sum;
 		Iterator<Object[]> isum;
-		List<Expense> expenses = new ArrayList<Expense>();
+		List<Expense> expenses = new ArrayList<>();
 		Expense expense;
 		BigDecimal total = BigDecimal.ZERO;
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<>();
 		List<GratificationEntity> gratifications;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
@@ -139,21 +139,6 @@ public class OperationServiceImpl implements OperationService {
 
 	public void delete(OperationEntity operation) {
 		operationRepository.delete(operation);
-	}
-
-	public List<OperationEntity> recharges(String month) {
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
-		AwardEntity pay = new AwardEntity();
-		pay.setIdaward(Constants.RECHARGES);
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
-		return operationRepository.findByAwardAndCreationdateBetween(pay, from, until);
 	}
 
 	public OperationNotAllowedEntity getOperationNotAllowed(OperationEntity operation) {

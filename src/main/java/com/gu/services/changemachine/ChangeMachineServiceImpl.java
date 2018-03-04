@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -297,5 +298,20 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until) {
 		return changeMachineRepository
 				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(from, until);
+	}
+
+	public List<ChangeMachineEntity> recharges(String month) {
+		Date date = DateUtil.getDate(month);
+		Calendar calendar = Calendar.getInstance();
+		Date from;
+		Date until;
+		AwardsChangeMachineEntity pay = new AwardsChangeMachineEntity();
+		pay.setIdawardchangemachine(Constants.RECHARGES);
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+		from = calendar.getTime();
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		until = calendar.getTime();
+		return changeMachineRepository.findByAwardAndCreationdateBetween(pay, from, until);
 	}
 }

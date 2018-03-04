@@ -34,7 +34,7 @@ public class Constants {
 
 	private static final String[] ORIGIN = { "CAJA FUERTE", "EXTERIOR (BANCO)" };
 
-	public static final Integer RECHARGES = 12;
+	public static final Long RECHARGES = 3L;
 
 	public static final Long PROVIDING = 3L;
 

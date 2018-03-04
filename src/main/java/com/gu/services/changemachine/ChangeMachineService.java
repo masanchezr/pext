@@ -32,4 +32,6 @@ public interface ChangeMachineService {
 
 	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until);
 
+	public List<ChangeMachineEntity> recharges(String datefrom);
+
 }

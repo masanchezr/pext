@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.gu.dbaccess.entities.AwardsChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 
 public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEntity, Long> {
@@ -43,4 +44,7 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 	public ChangeMachineEntity findFirstByCreationdateAfter(Date takedate);
 
 	public List<ChangeMachineEntity> findByCreationdateBetween(Date takedate, Date date);
+
+	public List<ChangeMachineEntity> findByAwardAndCreationdateBetween(AwardsChangeMachineEntity award,
+			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until);
 }

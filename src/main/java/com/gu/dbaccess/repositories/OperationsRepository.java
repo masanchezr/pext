@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.gu.dbaccess.entities.AwardEntity;
 import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.PaymentEntity;
 
@@ -22,9 +21,6 @@ public interface OperationsRepository extends CrudRepository<OperationEntity, Lo
 	@Query("select sum(o.amount), o.award from OperationEntity o where DATE(o.creationdate)>=:from and DATE(o.creationdate)<=:until group by o.award")
 	public List<Object[]> searchSumByMonth(@Param("from") @Temporal(TemporalType.DATE) Date from,
 			@Param("until") @Temporal(TemporalType.DATE) Date until);
-
-	public List<OperationEntity> findByAwardAndCreationdateBetween(AwardEntity award,
-			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until);
 
 	@Query("select o from OperationEntity o where DATE(o.creationdate)=:cdate and o.pay=:pay")
 	public List<OperationEntity> findByPayAndCreationdate(@Param("pay") PaymentEntity pay,

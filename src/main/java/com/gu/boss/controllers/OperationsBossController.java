@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.OperationEntity;
-import com.gu.forms.SearchByDatesForm;
 import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
@@ -68,20 +67,6 @@ public class OperationsBossController {
 	public ModelAndView deleteoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation) {
 		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
 		operationService.delete(operation);
-		return model;
-	}
-
-	@RequestMapping(value = "/searchrecharges")
-	public ModelAndView searchRecharges() {
-		ModelAndView model = new ModelAndView("searchrecharges");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/recharges")
-	public ModelAndView recharges(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView("recharges");
-		model.addObject("recharges", operationService.recharges(searchForm.getDatefrom()));
 		return model;
 	}
 }

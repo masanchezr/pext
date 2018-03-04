@@ -48,7 +48,7 @@ public class TPVServiceImpl implements TPVService {
 		until = calendar.getTime();
 		List<TPVEntity> operations = tpvrepository.findByCreationdateBetween(from, until);
 		if (operations != null) {
-			map = new HashMap<String, Object>();
+			map = new HashMap<>();
 			map.put(ConstantsJsp.OPERATIONS, operations);
 			map.put(Constants.AMOUNT, tpvrepository.sumByCreationdate(from, until));
 		}
