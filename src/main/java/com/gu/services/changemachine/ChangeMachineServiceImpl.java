@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -270,23 +269,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
 
-	}
-
-	public List<Long> findLostNumbers() {
-		List<Long> lostNumbers = new ArrayList<>();
-		TakeEntity take = takingsRepository.findFirstByOrderByIdtakeDesc();
-		List<ChangeMachineEntity> cms = changeMachineRepository.findByCreationdateBetween(take.getTakedate(),
-				new Date());
-		int size = cms.size();
-		long first = cms.get(0).getIdchangemachine();
-		long last = cms.get(size - 1).getIdchangemachine();
-		int i = 0;
-		for (long l = first; l < last && i < size && l <= cms.get(i).getIdchangemachine(); i++, l++) {
-			if (cms.get(i).getIdchangemachine() != l) {
-				lostNumbers.add(l);
-			}
-		}
-		return lostNumbers;
 	}
 
 	@Override

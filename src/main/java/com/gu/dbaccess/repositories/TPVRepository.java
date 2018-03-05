@@ -25,7 +25,7 @@ public interface TPVRepository extends CrudRepository<TPVEntity, Long> {
 	public BigDecimal sumByCreationdate(@Temporal(TemporalType.DATE) @Param("from") Date from,
 			@Temporal(TemporalType.DATE) @Param("until") Date until);
 
-	@Query("select sum(o.amount) from TPVEntity o where DATE(o.creationdate)>=:from and DATE(o.creationdate)<=:until and o.pay=:payment")
+	@Query("select sum(o.amount) from TPVEntity o where o.creationdate>=:from and o.creationdate<=:until and o.pay=:payment")
 	public BigDecimal sumByCreationdateAndPayment(@Param("payment") PaymentEntity pay, @Param("from") Date from,
 			@Param("until") Date until);
 

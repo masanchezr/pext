@@ -26,8 +26,6 @@ public interface ChangeMachineService {
 
 	public void loadDataTicketServer();
 
-	public List<Long> findLostNumbers();
-
 	public List<ChangeMachineEntity> getOperationsTicketServer(Date date);
 
 	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until);
