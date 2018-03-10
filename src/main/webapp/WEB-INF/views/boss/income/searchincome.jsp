@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="summaryincome" /></li>
 </ol>
-<form:form action="resultincome" modelAttribute="searchForm">
+<form:form action="resultincome" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

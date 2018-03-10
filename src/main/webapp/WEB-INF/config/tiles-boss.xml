@@ -77,7 +77,12 @@
 			value="/WEB-INF/views/boss/income/result.jsp" />
 	</definition>
 	<definition name="register" extends="templateBoss">
-		<put-attribute name="body" value="/WEB-INF/views/boss/register.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/registers/register.jsp" />
+	</definition>
+	<definition name="searchregisters" extends="templateBoss">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/registers/searchregisters.jsp" />
 	</definition>
 	<definition name="searchexpenses" extends="templateBoss">
 		<put-attribute name="body"

@@ -4,23 +4,28 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
-				code="safe" /></a></li>
+				code="registers" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="entrysortsafe" /></li>
+			code="searchregister" /></li>
 </ol>
-<form:form action="resultentrysortsafe" modelAttribute="searchDateForm">
+<form:form action="register" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="selectmonth" var="selectmonth" />
+							<spring:message code="date" var="datemessage" />
 							<div id="sandbox-container">
 								<form:input class="form-control" type="text" path="datefrom"
-									placeholder="${selectmonth}" />
+									placeholder="${datemessage}" />
 							</div>
+							<p class="text-danger">
+								<form:errors path="datefrom" />
+							</p>
 						</div>
+					</div>
+					<div class="col-lg-6">
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="search" />
