@@ -10,6 +10,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MailService extends Thread {
 
 	private String message;
@@ -17,6 +20,9 @@ public class MailService extends Thread {
 	private String cc;
 
 	private String subject;
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory.getLogger(MailService.class);
 
 	public MailService(String message, String cc, String subject) {
 		this.message = message;
@@ -28,15 +34,11 @@ public class MailService extends Thread {
 	public void run() {
 		// La dirección de envío (to)
 		String to = "mangeles.sanchez0807@gmail.com";
-		// String cc = "josetmoreno@hotmail.es";
-
 		// La dirección de la cuenta de envío (from)
-		// final String from = "desarrollomancha@gmail.com";
 		final String from = "webmariangeless@hotmail.com";
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		// props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.host", "smtp.live.com");
 		props.put("mail.smtp.port", "587");
 
@@ -65,7 +67,7 @@ public class MailService extends Thread {
 			// Enviamos el correo
 			Transport.send(mensaje);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			logger.error(java.util.logging.Level.SEVERE.getName());
 		}
 	}
 

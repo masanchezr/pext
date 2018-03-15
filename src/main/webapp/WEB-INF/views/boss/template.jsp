@@ -98,7 +98,7 @@
 							code="register" />"><spring:url
 						value="/searchregister" var="register"></spring:url> <a
 					href="${register}" class="nav-link"><i
-						class="fa fa-inbox fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-address-book fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="register" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message

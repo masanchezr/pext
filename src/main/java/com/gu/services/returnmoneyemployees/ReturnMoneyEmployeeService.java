@@ -17,4 +17,6 @@ public interface ReturnMoneyEmployeeService {
 
 	Daily savemoneyadvance(ReturnMoneyEmployeeEntity returnme);
 
+	boolean isAllowedAdvances(ReturnMoneyEmployeeEntity returnme);
+
 }

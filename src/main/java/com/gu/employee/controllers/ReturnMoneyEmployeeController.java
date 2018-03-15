@@ -47,22 +47,28 @@ public class ReturnMoneyEmployeeController {
 
 	@RequestMapping(value = "/employee/newmoneyadvance")
 	public ModelAndView newmoneyadvance() {
-		ModelAndView model = new ModelAndView("newmoneyadvance");
+		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addObject(ConstantsJsp.USER, user);
 		model.addObject(FORMMONEYADVANCE, new ReturnMoneyEmployeeEntity());
+		model.setViewName("newmoneyadvance");
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/moneyadvance")
-	public ModelAndView moneyadvance(@ModelAttribute(FORMMONEYADVANCE) ReturnMoneyEmployeeEntity returnme) {
+	public Object moneyadvance(@ModelAttribute(FORMMONEYADVANCE) ReturnMoneyEmployeeEntity returnme) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
 		returnme.setEmployee(employee);
-		model.addObject(ConstantsJsp.DAILY, returnmoneyemployeeservice.savemoneyadvance(returnme));
-		model.setViewName(ConstantsJsp.DAILY);
-		return model;
+		// miramos primero que no supere el importe
+		if (returnmoneyemployeeservice.isAllowedAdvances(returnme)) {
+			model.addObject(ConstantsJsp.DAILY, returnmoneyemployeeservice.savemoneyadvance(returnme));
+			model.setViewName(ConstantsJsp.DAILY);
+			return model;
+		} else {
+			model.setViewName("notmoney");
+			return model;
+		}
 	}
-
 }

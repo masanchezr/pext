@@ -19,8 +19,7 @@ public class MessageServiceImpl implements MessageService {
 
 	public List<MessageEntity> getMessagesActiveNow() {
 		Date now = new Date();
-		List<MessageEntity> messages = messagesrepository.findByActiveTrueAndDatefromBeforeAndDateuntilAfter(now, now);
-		return messages;
+		return messagesrepository.findByActiveTrueAndDatefromBeforeAndDateuntilAfter(now, now);
 	}
 
 	public Iterable<MessageEntity> getAllMessages() {
@@ -34,6 +33,6 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	public MessageEntity findById(Long idmessage) {
-		return messagesrepository.findById(idmessage).get();
+		return messagesrepository.findById(idmessage).orElse(null);
 	}
 }

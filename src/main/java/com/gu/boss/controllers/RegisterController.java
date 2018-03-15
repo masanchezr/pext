@@ -1,7 +1,5 @@
 package com.gu.boss.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,7 +17,7 @@ public class RegisterController {
 
 	private static final String VIEWREGISTER = "register";
 
-	private static final String VIEWSEARCHREGISTER = "searchregister";
+	private static final String VIEWSEARCHREGISTER = "searchregisters";
 
 	@Autowired
 	private RegisterService registerservice;
@@ -38,7 +36,7 @@ public class RegisterController {
 			model.setViewName(VIEWSEARCHREGISTER);
 			return model;
 		} else {
-			model.addObject("registers", registerservice.findByDate(new Date()));
+			model.addObject("registers", registerservice.findByDates(sdf.getDatefrom(), sdf.getDateuntil()));
 			model.setViewName(VIEWREGISTER);
 		}
 		return model;

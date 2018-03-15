@@ -1,7 +1,6 @@
 package com.gu.services.changemachine;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
@@ -40,6 +39,7 @@ import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.dbaccess.repositories.TakingsRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
+import com.gu.services.mails.MailService;
 import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
@@ -137,17 +137,18 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public void loadDataTicketServer() {
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnection().getInputStream()))) {
+		ChangeMachineEntity cmentity = changeMachineRepository.findFirstByOrderByCreationdateDesc();
+		try (BufferedReader in = new BufferedReader(
+				new InputStreamReader(getConnection(cmentity.getCreationdate()).getInputStream()))) {
 			readFile(in);
 		} catch (IOException e) {
-			logger.error("No se pueden obtener los datos");
+			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
-			logger.debug("Fin del método");
+			logger.debug(java.util.logging.Level.SEVERE.getName());
 		}
 	}
 
-	private URLConnection getConnection() throws IOException {
-		ChangeMachineEntity cmentity = changeMachineRepository.findFirstByOrderByCreationdateDesc();
+	private URLConnection getConnection(Date from) throws IOException {
 		String address = "http://88.27.244.77:3080/TicketServer/reportTicketsDateTime.php?";
 		String startdate = "StartDate=";
 		String endate = "&EndDate=";
@@ -158,8 +159,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		String authString = name + ":" + pass;
 		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
 		String authStringEnc = new String(authEncBytes);
-		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyy_MM_dd(cmentity.getCreationdate()))
-				.concat(space).concat(DateUtil.getStringDateFormatHHmm(cmentity.getCreationdate())).concat(endate)
+		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyy_MM_dd(from)).concat(space)
+				.concat(DateUtil.getStringDateFormatHHmm(from)).concat(endate)
 				.concat(DateUtil.getStringDateFormatyyyy_MM_dd(new Date())).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(new Date())).concat(restaddress);
 		URL url = new URL(address);
@@ -172,16 +173,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	private void readFile(BufferedReader in) {
 		String response;
 		String result = "";
-		try (FileWriter fichero = new FileWriter(System.getenv(Constants.OPENSHIFT_DATA_DIR).concat("/prueba.html"))) {
+		try {
 			for (int i = 0; i < 10; i++)
 				while ((response = in.readLine()) != null)
 					result = result.concat(response);
 			in.close();
 			loadData(result);
 		} catch (IOException e) {
-			logger.error("No se puede abrir el fichero html");
+			logger.error(java.util.logging.Level.SEVERE.getName());
 		}
-
 	}
 
 	private void loadData(String result) {
@@ -224,6 +224,48 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 					loadChangeMachineEntity(award, scomments, date, nodes, amount);
 				}
 			}
+		}
+		compareTotal();
+	}
+
+	private void compareTotal() {
+		String result = "";
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(
+				getConnection(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate()).getInputStream()))) {
+			String response;
+			for (int i = 0; i < 10; i++)
+				while ((response = in.readLine()) != null)
+					result = result.concat(response);
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+		} finally {
+			logger.debug(java.util.logging.Level.SEVERE.getName());
+		}
+		Document doc = Jsoup.parse(result);
+		String totaltext = doc.text();
+		totaltext = totaltext.substring(totaltext.indexOf("Total = "));
+		char[] array = totaltext.toCharArray();
+		char[] carray = new char[9];
+		int c = 0;
+		boolean finalized = false;
+		for (int i = 8; i < totaltext.length() && !finalized; i++) {
+			if (Character.isDigit(array[i])) {
+				carray[c] = array[i];
+				c++;
+			} else if (array[i] == '.') {
+				carray[c] = array[i];
+				carray[c + 1] = array[i + 1];
+				carray[c + 2] = array[i + 2];
+				finalized = true;
+			}
+		}
+		String sarray = String.valueOf(carray).trim();
+		BigDecimal total = new BigDecimal(sarray);
+		BigDecimal totalbbdd = getAwards();
+		if (total.compareTo(totalbbdd) != 0) {
+			MailService mail = new MailService("No coinciden premios dados.", null,
+					"NO COINCIDEN PREMIOS TICKET SERVER");
+			mail.start();
 		}
 	}
 
@@ -268,7 +310,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setCreationdate(date);
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
-
 	}
 
 	@Override

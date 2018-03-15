@@ -11,4 +11,6 @@ public interface RegisterService {
 
 	public List<RegisterEntity> findByDate(Date date);
 
+	public List<RegisterEntity> findByDates(String datefrom, String dateuntil);
+
 }

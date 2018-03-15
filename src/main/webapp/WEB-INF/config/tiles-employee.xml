@@ -125,6 +125,10 @@
 	</definition>
 	<definition name="newmoneyadvance" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/expenses/newmoneyadvance.jsp" />
+			value="/WEB-INF/views/employee/expenses/moneyadvance/newmoneyadvance.jsp" />
+	</definition>
+	<definition name="notmoney" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/expenses/moneyadvance/notmoney.jsp" />
 	</definition>
 </tiles-definitions>
