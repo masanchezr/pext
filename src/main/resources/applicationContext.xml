@@ -13,6 +13,8 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="pbkdf2Encoder"
+		class="org.springframework.security.crypto.password.Pbkdf2PasswordEncoder" />
 	<bean id="userValidator" class="com.gu.boss.validators.UserValidator" />
 	<bean id="entrymoneyFormValidator" class="com.gu.validators.EntryMoneyValidator" />
 	<bean id="inoutValidator" class="com.gu.employee.validators.InOutValidator" />

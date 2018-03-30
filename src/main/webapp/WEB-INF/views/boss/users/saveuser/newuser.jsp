@@ -13,10 +13,10 @@
 			<div class="card-body">
 				<div class="form-group">
 					<spring:message code="fullname" var="fullname" />
-					<form:input class="form-control" path=Constants.NAME
+					<form:input class="form-control" path="name"
 						placeholder="${fullname}" />
 					<p class="text-danger">
-						<form:errors path=Constants.NAME />
+						<form:errors path="name" />
 					</p>
 				</div>
 				<div class="form-group">

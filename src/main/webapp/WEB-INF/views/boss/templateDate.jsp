@@ -110,7 +110,7 @@
 					<ul id="collapseUsers" class="sidenav-second-level collapse">
 						<li><spring:url value="/enabledisableuser"
 								var="enabledisableuser" /> <a href="${enabledisableuser}">
-								<spring:message code="enabledisable" />
+								<spring:message code="updateuser" />
 						</a></li>
 						<li><spring:url value="/newuser" var="newuser" /> <a
 							href="${newuser}"> <spring:message code="newuser" />

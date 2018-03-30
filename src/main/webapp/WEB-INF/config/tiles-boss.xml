@@ -17,13 +17,17 @@
 	<definition name="success" extends="templateBoss">
 		<put-attribute name="body" value="/WEB-INF/views/success.jsp" />
 	</definition>
-	<definition name="enabledisableuser" extends="templateBoss">
+	<definition name="allusers" extends="templateBoss">
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/users/enabledisable/enabledisableuser.jsp" />
+			value="/WEB-INF/views/boss/users/update/allusers.jsp" />
+	</definition>
+	<definition name="updateuser" extends="templateBoss">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/users/update/updateuser.jsp" />
 	</definition>
 	<definition name="resultenabledisableuser" extends="templateBoss">
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/users/enabledisable/resultenabledisableuser.jsp" />
+			value="/WEB-INF/views/boss/users/update/resultenabledisableuser.jsp" />
 	</definition>
 	<definition name="newuser" extends="templateBoss">
 		<put-attribute name="body"

@@ -22,33 +22,27 @@ public class UsersController {
 	@Autowired
 	private UserValidator userValidator;
 
-	private static final String VIEWUSERS = "enabledisableuser";
 	private static final String VIEWNEWUSER = "newuser";
 
 	@RequestMapping(value = "/enabledisableuser")
 	public ModelAndView enabledisableuser() {
-		ModelAndView model = new ModelAndView(VIEWUSERS);
-		model.addObject(ConstantsJsp.USER, new User());
+		ModelAndView model = new ModelAndView("allusers");
+		model.addObject("users", userService.allUsers());
+		model.addObject("userForm", new User());
 		return model;
 	}
 
-	@RequestMapping(value = "/resultenabledisableuser")
+	@RequestMapping(value = "/update")
 	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView("resultenabledisableuser");
 		userValidator.validate(user, result);
+		model.addObject(ConstantsJsp.USER, user);
 		if (result.hasErrors()) {
-			model.setViewName(VIEWUSERS);
-			model.addObject(ConstantsJsp.USER, new User());
+			model.setViewName("updateuser");
 		} else {
-			user = userService.disableEnableUser(user.getUsername());
-			if (user == null) {
-				model.setViewName(VIEWUSERS);
-				model.addObject(ConstantsJsp.USER, new User());
-				result.rejectValue(Constants.USERNAME, "usernoexist");
-			} else {
-				model.addObject(ConstantsJsp.USER, user);
-				model.setViewName("resultenabledisableuser");
-			}
+			userService.update(user);
+			model.addObject("users", userService.allUsers());
+			model.addObject("userForm", new User());
 		}
 		return model;
 	}
@@ -60,6 +54,13 @@ public class UsersController {
 		return model;
 	}
 
+	@RequestMapping(value = "/updateuser")
+	public ModelAndView updateUser(@ModelAttribute("userForm") User user) {
+		ModelAndView model = new ModelAndView("updateuser");
+		model.addObject(ConstantsJsp.USER, userService.findUser(user.getUsername()));
+		return model;
+	}
+
 	@RequestMapping(value = "/saveuser")
 	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -68,9 +69,14 @@ public class UsersController {
 			model.setViewName(VIEWNEWUSER);
 			model.addObject(ConstantsJsp.USER, new User());
 		} else {
-			model.setViewName("resultuser");
 			model.addObject(ConstantsJsp.USER, user);
-			userService.newUser(user);
+			if (userService.findUser(user.getUsername()) != null) {
+				model.setViewName(VIEWNEWUSER);
+				result.rejectValue(Constants.USERNAME, "exists");
+			} else {
+				model.setViewName("resultuser");
+				userService.newUser(user);
+			}
 		}
 		return model;
 	}
