@@ -34,15 +34,14 @@ public class UsersController {
 
 	@RequestMapping(value = "/update")
 	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
-		ModelAndView model = new ModelAndView("resultenabledisableuser");
+		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
 		model.addObject(ConstantsJsp.USER, user);
 		if (result.hasErrors()) {
 			model.setViewName("updateuser");
 		} else {
 			userService.update(user);
-			model.addObject("users", userService.allUsers());
-			model.addObject("userForm", new User());
+			model = enabledisableuser();
 		}
 		return model;
 	}
