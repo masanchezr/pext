@@ -45,7 +45,7 @@ public class OperationsController {
 	@RequestMapping(value = "/employee/newoperation")
 	public ModelAndView newoperation() {
 		ModelAndView model = new ModelAndView(VIEWNEWOPERATION);
-		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		model.addObject(ConstantsJsp.MACHINES, machineService.searchMachinesOrder());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 		model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
