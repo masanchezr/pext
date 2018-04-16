@@ -103,11 +103,9 @@ public class GratificationsController {
 			gratificationservice.registerNumberGratification(g, user, path);
 			response.setContentType("application/force-download");
 			response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
-			try {
-				InputStream inputStream = new FileInputStream(file);
+			try (InputStream inputStream = new FileInputStream(file)) {
 				IOUtils.copy(inputStream, response.getOutputStream());
 				response.flushBuffer();
-				inputStream.close();
 			} catch (IOException e) {
 				model.setViewName(VIEWREGISTERGRATIFICATION);
 				arg1.rejectValue(ConstantsJsp.CLIENT, "notopenfile");
