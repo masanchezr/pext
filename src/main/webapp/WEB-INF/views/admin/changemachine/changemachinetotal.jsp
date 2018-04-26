@@ -5,7 +5,7 @@
 		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
+					<i class="fa fa-fw fa-euro-sign"></i>
 				</div>
 				<div class="mr-5">
 					<spring:message code="awards" />
@@ -18,7 +18,7 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
+					<i class="fa fa-fw fa-euro-sign"></i>
 				</div>
 				<div class="mr-5">
 					<spring:message code="changemachinetotalmonth" />
@@ -31,7 +31,7 @@
 		<div class="card text-white bg-danger o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
+					<i class="fa fa-fw fa-euro-sign"></i>
 				</div>
 				<div class="mr-5">
 					<spring:message code="total" />

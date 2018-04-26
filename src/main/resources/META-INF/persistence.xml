@@ -30,6 +30,8 @@
 		<class>com.gu.dbaccess.entities.MessageEntity</class>
 		<class>com.gu.dbaccess.entities.TPVEntity</class>
 		<class>com.gu.dbaccess.entities.AwardsChangeMachineEntity</class>
+		<class>com.gu.dbaccess.entities.OpenMachineEntity</class>
+		<class>com.gu.dbaccess.entities.CauseEntity</class>
 		<properties>
 			<property name="hibernate.query.factory_class"
 				value="org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory" />

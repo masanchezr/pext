@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
@@ -9,7 +9,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newpaymentchangemachine" /></li>
 </ol>
-<form:form action="savepaymentchangemachine" modelAttribute="changemachine">
+<form:form action="savepaymentchangemachine"
+	modelAttribute="changemachine">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -33,7 +34,7 @@
 							<form:select class="form-control" path="machine.idmachine"
 								id="machines">
 								<form:options items="${machines}" itemValue="idmachine"
-									itemLabel=Constants.NAME />
+									itemLabel="name" />
 							</form:select>
 						</div>
 						<div class="form-group">

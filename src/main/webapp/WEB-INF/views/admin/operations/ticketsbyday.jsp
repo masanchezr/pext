@@ -31,7 +31,7 @@
 								<td><fmt:formatDate value="${operation.creationdate}"
 										type="both" dateStyle="short" timeStyle="short" /></td>
 								<td><c:out value="${operation.amount}" /><i
-									class="fa fa-euro"></i></td>
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${operation.pay.name}" /></td>
 							</tr>
 						</c:forEach>
@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<spring:message code="totalamount" />
 						<c:out value="${amount}" />
-						<i class="fa fa-euro"></i>
+						<i class="fa fa-euro-sign"></i>
 					</div>
 				</div>
 			</div>

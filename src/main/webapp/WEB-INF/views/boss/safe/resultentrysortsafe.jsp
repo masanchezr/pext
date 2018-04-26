@@ -26,8 +26,8 @@
 							<tr>
 								<td><c:out value="${result.creationdate}" /></td>
 								<td><c:out value="${result.amount}" /><i
-									class="fa fa-euro"></i></td>
-								<td><c:out value="${result.total}" /><i class="fa fa-euro"></i></td>
+									class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${result.total}" /><i class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${result.description}" /></td>
 							</tr>
 						</c:forEach>

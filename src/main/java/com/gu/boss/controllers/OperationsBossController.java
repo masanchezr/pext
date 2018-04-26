@@ -13,6 +13,7 @@ import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
+import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.OperationsValidator;
 
@@ -38,7 +39,7 @@ public class OperationsBossController {
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
 		OperationEntity operation = operationService.findById(id);
 		ModelAndView model = new ModelAndView("updateoperationboss");
-		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 		model.addObject(ConstantsJsp.OPERATION, operation);
@@ -52,7 +53,7 @@ public class OperationsBossController {
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName("updateoperationboss");
-			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.OPERATION, operation);

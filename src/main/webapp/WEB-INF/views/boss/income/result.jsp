@@ -22,20 +22,20 @@
 					<tbody>
 						<tr>
 							<td><spring:message code="bardrinks" /></td>
-							<td><c:out value="${bardrinks}" /><i class="fa fa-euro"></i></td>
+							<td><c:out value="${bardrinks}" /><i class="fa fa-euro-sign"></i></td>
 						</tr>
 						<tr>
 							<td><spring:message code="incomeluckia" /></td>
-							<td><c:out value="${luckia}" /><i class="fa fa-euro"></i></td>
+							<td><c:out value="${luckia}" /><i class="fa fa-euro-sign"></i></td>
 						</tr>
 						<tr>
 							<td><spring:message code="incomemachine" /></td>
 							<td><c:out value="${incomemachines}" /><i
-								class="fa fa-euro"></i></td>
+								class="fa fa-euro-sign"></i></td>
 						</tr>
 						<tr>
 							<td><spring:message code="returnmoneyemployee" /></td>
-							<td><c:out value="${returns}" /><i class="fa fa-euro"></i></td>
+							<td><c:out value="${returns}" /><i class="fa fa-euro-sign"></i></td>
 						</tr>
 					</tbody>
 				</table>
@@ -43,7 +43,7 @@
 			<div>
 				<spring:message code="total" />
 				<c:out value="${total}" />
-				<i class="fa fa-euro"></i>
+				<i class="fa fa-euro-sign"></i>
 			</div>
 		</div>
 	</div>

@@ -36,12 +36,13 @@ public class OperationsAdminController {
 	@Autowired
 	private OperationsValidator operationsValidator;
 
+	public static final String VIEWUPDATEOPERATIONADMIN = "updateoperationadmin";
+
 	@RequestMapping(value = "/admin/updateoperation{id}")
 	public ModelAndView updateoperation(@PathVariable("id") long id) {
 		OperationEntity operation = operationService.findById(id);
-		String view = "updateoperationadmin";
-		ModelAndView model = new ModelAndView(view);
-		model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+		ModelAndView model = new ModelAndView(VIEWUPDATEOPERATIONADMIN);
+		model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 		model.addObject(ConstantsJsp.OPERATION, operation);
@@ -54,14 +55,14 @@ public class OperationsAdminController {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
-			model.setViewName("updateoperationadmin");
-			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.setViewName(VIEWUPDATEOPERATIONADMIN);
+			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else if (operationService.getOperationNotAllowed(operation) != null) {
-			model.setViewName("updateoperationadmin");
-			model.addObject(ConstantsJsp.MACHINES, machineService.searchAllMachinesOrder());
+			model.setViewName(VIEWUPDATEOPERATIONADMIN);
+			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.OPERATION, operation);

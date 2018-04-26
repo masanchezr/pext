@@ -70,7 +70,7 @@ public class ChangeMachineAdminController {
 	public ModelAndView updatechangemachine(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView(UPDATEVIEW);
 		model.addObject(CHANGEMACHINE, changeMachineService.findById(id));
-		model.addObject(ConstantsJsp.MACHINES, machineService.searchMachinesOrder());
+		model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 		model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
 		return model;
 	}
@@ -81,14 +81,14 @@ public class ChangeMachineAdminController {
 		ModelAndView model = new ModelAndView();
 		changeMachineAdminValidator.validate(cm, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.MACHINES, machineService.searchMachinesOrder());
+			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 			model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);
 		} else {
 			ChangeMachineEntity cmentity = changeMachineService.findById(cm.getIdchangemachine());
 			if (cmentity != null) {
-				model.addObject(ConstantsJsp.MACHINES, machineService.searchMachinesOrder());
+				model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 				model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
 				model.addObject(CHANGEMACHINE, cm);
 				model.setViewName(UPDATEVIEW);
@@ -107,7 +107,7 @@ public class ChangeMachineAdminController {
 		ModelAndView model = new ModelAndView();
 		changeMachineAdminValidator.validate(cm, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.MACHINES, machineService.searchMachinesOrder());
+			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 			model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import com.gu.util.constants.Constants;
 
 @Entity
-@Table(name = "machines")
+@Table(name = Constants.MACHINES)
 public class MachineEntity {
 
 	@Id

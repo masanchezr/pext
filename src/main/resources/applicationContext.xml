@@ -15,38 +15,71 @@
 	</bean>
 	<bean id="pbkdf2Encoder"
 		class="org.springframework.security.crypto.password.Pbkdf2PasswordEncoder" />
-	<bean id="userValidator" class="com.gu.boss.validators.UserValidator" />
-	<bean id="entrymoneyFormValidator" class="com.gu.validators.EntryMoneyValidator" />
-	<bean id="inoutValidator" class="com.gu.employee.validators.InOutValidator" />
-	<bean id="searchDatesFormValidator" class="com.gu.validators.SearchDatesFormValidator" />
-	<bean id="operationsValidator" class="com.gu.validators.OperationsValidator" />
-	<bean id="incidentValidator" class="com.gu.employee.validators.IncidentValidator" />
-	<bean id="incomeValidator" class="com.gu.employee.validators.IncomeValidator" />
-	<bean id="tpvalidator" class="com.gu.employee.validators.TPValidator" />
-	<bean id="gvalidator" class="com.gu.employee.validators.GratificationsValidator" />
-	<bean id="changeMachineValidator" class="com.gu.employee.validators.ChangeMachineValidator" />
-	<bean id="safevalidator" class="com.gu.admin.validators.SafeValidator" />
-	<bean id="changeMachineAdminValidator" class="com.gu.admin.validators.ChangeMachineValidator" />
-	<bean id="providingValidator" class="com.gu.admin.validators.ProvidingValidator" />
-	<bean id="messagevalidator" class="com.gu.admin.validators.MessageValidator" />
-	<bean id="incidentService" class="com.gu.services.incidents.IncidentServiceImpl" />
-	<bean id="entryMoneyService" class="com.gu.services.entrymoney.EntryMoneyServiceImpl" />
-	<bean id="userService" class="com.gu.services.users.UserServiceImpl" />
-	<bean id="employeeService" class="com.gu.services.employees.EmployeeServiceImpl" />
-	<bean id="registerService" class="com.gu.services.register.RegisterServiceImpl" />
-	<bean id="calendarService" class="com.gu.services.calendar.CalendarServiceImpl" />
-	<bean id="dailyService" class="com.gu.services.dailies.DailyServiceImpl" />
-	<bean id="machineService" class="com.gu.services.machines.MachineServiceImpl" />
-	<bean id="paymentService" class="com.gu.services.payments.PaymentServiceImpl" />
-	<bean id="awardService" class="com.gu.services.awards.AwardServiceImpl" />
-	<bean id="operationService" class="com.gu.services.operations.OperationServiceImpl" />
-	<bean id="incomeService" class="com.gu.services.income.IncomeServiceImpl" />
-	<bean id="changeMachineService" class="com.gu.services.changemachine.ChangeMachineServiceImpl" />
+	<bean id="userValidator"
+		class="com.gu.boss.validators.UserValidator" />
+	<bean id="entrymoneyFormValidator"
+		class="com.gu.validators.EntryMoneyValidator" />
+	<bean id="inoutValidator"
+		class="com.gu.employee.validators.InOutValidator" />
+	<bean id="searchDatesFormValidator"
+		class="com.gu.validators.SearchDatesFormValidator" />
+	<bean id="operationsValidator"
+		class="com.gu.validators.OperationsValidator" />
+	<bean id="incidentValidator"
+		class="com.gu.employee.validators.IncidentValidator" />
+	<bean id="incomeValidator"
+		class="com.gu.employee.validators.IncomeValidator" />
+	<bean id="tpvalidator"
+		class="com.gu.employee.validators.TPValidator" />
+	<bean id="gvalidator"
+		class="com.gu.employee.validators.GratificationsValidator" />
+	<bean id="changeMachineValidator"
+		class="com.gu.employee.validators.ChangeMachineValidator" />
+	<bean id="safevalidator"
+		class="com.gu.admin.validators.SafeValidator" />
+	<bean id="changeMachineAdminValidator"
+		class="com.gu.admin.validators.ChangeMachineValidator" />
+	<bean id="providingValidator"
+		class="com.gu.admin.validators.ProvidingValidator" />
+	<bean id="messagevalidator"
+		class="com.gu.admin.validators.MessageValidator" />
+	<bean id="incidentService"
+		class="com.gu.services.incidents.IncidentServiceImpl" />
+	<bean id="entryMoneyService"
+		class="com.gu.services.entrymoney.EntryMoneyServiceImpl" />
+	<bean id="userService"
+		class="com.gu.services.users.UserServiceImpl" />
+	<bean id="employeeService"
+		class="com.gu.services.employees.EmployeeServiceImpl" />
+	<bean id="registerService"
+		class="com.gu.services.register.RegisterServiceImpl" />
+	<bean id="calendarService"
+		class="com.gu.services.calendar.CalendarServiceImpl" />
+	<bean id="dailyService"
+		class="com.gu.services.dailies.DailyServiceImpl" />
+	<bean id="machineService"
+		class="com.gu.services.machines.MachineServiceImpl" />
+	<bean id="paymentService"
+		class="com.gu.services.payments.PaymentServiceImpl" />
+	<bean id="awardService"
+		class="com.gu.services.awards.AwardServiceImpl" />
+	<bean id="operationService"
+		class="com.gu.services.operations.OperationServiceImpl" />
+	<bean id="incomeService"
+		class="com.gu.services.income.IncomeServiceImpl" />
+	<bean id="changeMachineService"
+		class="com.gu.services.changemachine.ChangeMachineServiceImpl" />
 	<bean id="returnmoneyemployeeservice"
 		class="com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeServiceImpl" />
-	<bean id="incomeLuckiaService" class="com.gu.services.incomeluckia.IncomeLuckiaServiceImpl" />
-	<bean id="incomemachineService" class="com.gu.services.incomemachines.IncomeMachineServiceImpl" />
-	<bean id="gratificationservice" class="com.gu.services.gratifications.GratificationServiceImpl" />
-	<bean id="messageservice" class="com.gu.services.messages.MessageServiceImpl" />
+	<bean id="incomeLuckiaService"
+		class="com.gu.services.incomeluckia.IncomeLuckiaServiceImpl" />
+	<bean id="incomemachineService"
+		class="com.gu.services.incomemachines.IncomeMachineServiceImpl" />
+	<bean id="gratificationservice"
+		class="com.gu.services.gratifications.GratificationServiceImpl" />
+	<bean id="messageservice"
+		class="com.gu.services.messages.MessageServiceImpl" />
 	<bean id="tpvservice" class="com.gu.services.tpv.TPVServiceImpl" />
+	<bean id="openmachineservice"
+		class="com.gu.services.openmachines.OpenMachineServiceImpl" />
 </beans>

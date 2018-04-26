@@ -5,7 +5,7 @@
 		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-euro fa-fw"></i>
+					<i class="fa fa-euro-sign fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${totalamount}" />

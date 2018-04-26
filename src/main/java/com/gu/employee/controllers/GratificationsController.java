@@ -44,7 +44,7 @@ public class GratificationsController {
 	@RequestMapping(value = "/employee/newgratification")
 	public ModelAndView newgratification() {
 		ModelAndView model = new ModelAndView(VIEWNEWGRATIFICATION);
-		model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
 		model.addObject(GRATIFICATION, new GratificationEntity());
 		return model;
 	}
@@ -62,14 +62,14 @@ public class GratificationsController {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, IDGRATIFICATION, "selectgratification");
 		if (arg1.hasErrors()) {
-			model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+			model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
 			model.addObject(GRATIFICATION, g);
 			model.setViewName(VIEWNEWGRATIFICATION);
 		} else {
 			GratificationEntity gratification = gratificationservice.searchGratificationActive(g.getIdgratification());
 			if (gratification == null) {
 				arg1.rejectValue(IDGRATIFICATION, "gratificationsproblem");
-				model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+				model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
 				model.addObject(GRATIFICATION, g);
 				model.setViewName(VIEWNEWGRATIFICATION);
 			} else {

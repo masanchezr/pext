@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.dbaccess.entities.IncomeMachineEntity;
 import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.machines.MachineService;
+import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 
 @Controller
@@ -25,7 +26,7 @@ public class IncomeMachinesController {
 	@RequestMapping(value = "/employee/newincomemachine")
 	public ModelAndView newincomemachine() {
 		ModelAndView model = new ModelAndView("incomemachine");
-		model.addObject(ConstantsJsp.MACHINES, machineservice.searchMachinesOrder());
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
 		model.addObject(ConstantsJsp.FORMINCOME, new IncomeMachineEntity());
 		return model;
 	}

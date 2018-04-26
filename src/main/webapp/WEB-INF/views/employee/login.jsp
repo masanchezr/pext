@@ -41,11 +41,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="<spring:url value="/resources/js/admin/popper.min.js"/>" /></script>
-<script src="<spring:url value="/resources/js/admin/bootstrap.min.js"/>" /></script>
-<!-- Core plugin JavaScript-->
-<script
-	src="<spring:url value="/resources/js/admin/jquery.easing.min.js"/>" /></script>

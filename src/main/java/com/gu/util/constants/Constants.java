@@ -5,15 +5,15 @@ package com.gu.util.constants;
  */
 public class Constants {
 
+	private Constants() {
+
+	}
+
 	public static final String AMOUNT = "amount";
 
 	public static final String CREATIONDATE = "creationdate";
 
 	public static final String DESCRIPTION = "description";
-
-	private Constants() {
-
-	}
 
 	public static String[] getOrigin() {
 		return ORIGIN;
@@ -74,5 +74,9 @@ public class Constants {
 	public static final String DATEFROM = "datefrom";
 	public static final String DATEUNTIL = "dateuntil";
 	public static final String MESSAGE = "message";
+
+	public static final String OPENMACHINES = "openmachines";
+
+	public static final String MACHINES = "machines";
 
 }

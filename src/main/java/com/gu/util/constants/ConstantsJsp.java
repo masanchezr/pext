@@ -6,7 +6,6 @@ public class ConstantsJsp {
 
 	}
 
-	public static final String MACHINES = "machines";
 	public static final String PAYMENTS = "payments";
 	public static final String AWARDS = "awards";
 	public static final String OPERATION = "operation";
@@ -38,5 +37,5 @@ public class ConstantsJsp {
 	public static final String VIEWDAILYADMINARROW = "dailyadminarrow";
 	public static final String ERRORSELECTNAME = "selectname";
 	public static final String VIEWSUCCESSEMPLOYEE = "successemployee";
-
+	public static final String FORMOPENMACHINE = "openmachine";
 }

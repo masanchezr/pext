@@ -9,7 +9,7 @@
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet" type="text/css">
 <!-- MetisMenu CSS -->
 <link
@@ -51,7 +51,7 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a href="javascript:formSubmit()"><i
-						class="fa fa-sign-out fa-fw"></i> <spring:message code="logout" /></a></li>
+						class="fa fa-sign-out-alt fa-fw"></i> <spring:message code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
@@ -65,7 +65,7 @@
 							code="entrymoney" />"><spring:url
 						value="/admin/newentrymoney" var="entrymoney"></spring:url> <a
 					href="${entrymoney}" class="nav-link"><i
-						class="fa fa-euro fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="entrymoney" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
@@ -87,7 +87,7 @@
 							code="providing" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseProviding" data-parent="#exampleAccordion"><i
-						class="fa fa-euro fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="providing" /></span> </a>
 					<ul id="collapseProviding" class="sidenav-second-level collapse">
 						<li><spring:url value="/admin/newproviding" var="providing"></spring:url>
@@ -101,7 +101,7 @@
 							code="changemachine" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseChangeMachine" data-parent="#exampleAccordion"><i
-						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-money-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="changemachine" /></span> </a>
 					<ul id="collapseChangeMachine"
 						class="sidenav-second-level collapse">

@@ -7,15 +7,12 @@
 <!-- Bootstrap Core CSS -->
 <link href="<spring:url value="/resources/styles/bootstrap.min.css"/>"
 	rel="stylesheet">
-<!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet" type="text/css">
-<!-- MetisMenu CSS -->
 <link
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
-<!-- Custom CSS -->
 <link href="<spring:url value="/resources/styles/sb-admin.css"/>"
 	rel="stylesheet">
 <link
@@ -34,7 +31,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a
 					href="<c:url value="/employee/logout" />"><i
-						class="fa fa-sign-out fa-fw"></i> <spring:message code="logout" /></a></li>
+						class="fa fa-sign-out-alt fa-fw"></i> <spring:message code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
@@ -42,7 +39,7 @@
 								code="expenses"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsexpenses" data-parent="#exampleAccordion"><i
-						class="fa fa-euro fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="expenses" /></span></a>
 					<ul class="sidenav-second-level collapse" id="collapsexpenses">
 						<li><spring:url value="/employee/newmoneyadvance"
@@ -59,7 +56,7 @@
 							code="gratifications"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseGratifications" data-parent="#exampleAccordion"><i
-						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-money-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="gratifications" /></span></a>
 					<ul class="sidenav-second-level collapse"
 						id="collapseGratifications">
@@ -124,7 +121,7 @@
 					title="<spring:message
 							code="daily"/>"><spring:url
 						value="/employee/daily" var="daily" /><a href="${daily}"
-					class="nav-link"> <i class="fa fa-calendar-o fa-fw"></i> <span
+					class="nav-link"> <i class="fa fa-calendar-alt fa-fw"></i> <span
 						class="nav-link-text"><spring:message code="daily" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
@@ -142,6 +139,13 @@
 								var="myincidents"></spring:url> <a href="${myincidents}"><spring:message
 									code="myincidents" /></a></li>
 					</ul></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="openmachine"/>"><spring:url
+						value="/employee/newopenmachine" var="newopenmachine" /><a
+					href="${newopenmachine}" class="nav-link"> <i
+						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
+								code="openmachine" /></span></a></li>
 			</ul>
 			<ul class="navbar-nav sidenav-toggler">
 				<li class="nav-item"><a class="nav-link text-center"
