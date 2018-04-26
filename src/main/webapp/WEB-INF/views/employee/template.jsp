@@ -31,7 +31,8 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a
 					href="<c:url value="/employee/logout" />"><i
-						class="fa fa-sign-out-alt fa-fw"></i> <spring:message code="logout" /></a></li>
+						class="fa fa-sign-out-alt fa-fw"></i> <spring:message
+							code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
@@ -56,8 +57,8 @@
 							code="gratifications"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseGratifications" data-parent="#exampleAccordion"><i
-						class="fa fa-money-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="gratifications" /></span></a>
+						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="nav-link-text"><spring:message code="gratifications" /></span></a>
 					<ul class="sidenav-second-level collapse"
 						id="collapseGratifications">
 						<li><spring:url value="/employee/registernumber"
@@ -95,6 +96,13 @@
 							</spring:url> <a href="${return}"><spring:message
 									code="returnmoneyemployee" /></a></li>
 					</ul></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="openmachine"/>"><spring:url
+						value="/employee/newopenmachine" var="newopenmachine" /><a
+					href="${newopenmachine}" class="nav-link"> <i
+						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
+								code="openmachine" /></span></a></li>
 				<!--li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 								code="searchschedule" />"><spring:url
@@ -139,13 +147,6 @@
 								var="myincidents"></spring:url> <a href="${myincidents}"><spring:message
 									code="myincidents" /></a></li>
 					</ul></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-							code="openmachine"/>"><spring:url
-						value="/employee/newopenmachine" var="newopenmachine" /><a
-					href="${newopenmachine}" class="nav-link"> <i
-						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
-								code="openmachine" /></span></a></li>
 			</ul>
 			<ul class="navbar-nav sidenav-toggler">
 				<li class="nav-item"><a class="nav-link text-center"
