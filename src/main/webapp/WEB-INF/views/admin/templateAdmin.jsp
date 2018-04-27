@@ -53,7 +53,7 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a href="javascript:formSubmit()"><i
-						class="fa fa-sign-out-alt fa-fw"></i> <spring:message
+						class="fas fa-sign-out-alt fa-fw"></i> <spring:message
 							code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">

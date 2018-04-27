@@ -34,7 +34,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a
 					href="<c:url value="/employee/logout" />"><i
-						class="fa fa-sign-out-alt fa-fw"></i> <spring:message
+						class="fas fa-sign-out-alt fa-fw"></i> <spring:message
 							code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">

@@ -21,6 +21,7 @@
 								<th><spring:message code="machine" /></th>
 								<th><spring:message code="date" /></th>
 								<th><spring:message code="cause" /></th>
+								<th><spring:message code="amount" /></th>
 								<th><spring:message code="description" /></th>
 							</tr>
 						</thead>
@@ -31,6 +32,7 @@
 									<td><c:out value="${message.machine.name}" /></td>
 									<td><c:out value="${message.creationdate}" /></td>
 									<td><c:out value="${message.cause.cause}" /></td>
+									<td><c:out value="${message.amount}" /></td>
 									<td><c:out value="${message.description}" /></td>
 								</tr>
 							</c:forEach>
