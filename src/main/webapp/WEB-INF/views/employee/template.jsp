@@ -60,7 +60,7 @@
 							code="gratifications"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseGratifications" data-parent="#exampleAccordion"><i
-						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="fa fa-money fa-fw"></i> <span
 						class="nav-link-text"><spring:message code="gratifications" /></span></a>
 					<ul class="sidenav-second-level collapse"
 						id="collapseGratifications">

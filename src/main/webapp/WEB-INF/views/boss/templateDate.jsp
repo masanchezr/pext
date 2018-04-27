@@ -80,7 +80,7 @@
 							code="recharges" />"><spring:url
 						value="/searchrecharges" var="searchrecharges" /><a
 					href="${searchrecharges}" class="nav-link"><i
-						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="fa fa-money fa-fw"></i> <span
 						class="nav-link-text"><spring:message code="recharges" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
