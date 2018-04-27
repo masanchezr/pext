@@ -5,17 +5,23 @@
 
 <tiles-definitions>
 	<!-- workshop -->
-	<definition name="templateBoss" template="/WEB-INF/views/boss/template.jsp" />
-	<definition name="templateDate" template="/WEB-INF/views/boss/templateDate.jsp" />
-	<definition name="templateLogin" template="/WEB-INF/views/boss/templateLogin.jsp" />
+	<definition name="templateBoss"
+		template="/WEB-INF/views/boss/template.jsp" />
+	<definition name="templateDate"
+		template="/WEB-INF/views/boss/templateDate.jsp" />
+	<definition name="templateLogin"
+		template="/WEB-INF/views/boss/templateLogin.jsp" />
 	<definition name="loginboss" extends="templateLogin">
-		<put-attribute name="body" value="/WEB-INF/views/boss/login.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/login.jsp" />
 	</definition>
 	<definition name="adminboss" extends="templateBoss">
-		<put-attribute name="body" value="/WEB-INF/views/boss/admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/admin.jsp" />
 	</definition>
 	<definition name="success" extends="templateBoss">
-		<put-attribute name="body" value="/WEB-INF/views/success.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/success.jsp" />
 	</definition>
 	<definition name="allusers" extends="templateBoss">
 		<put-attribute name="body"
@@ -25,7 +31,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/update/updateuser.jsp" />
 	</definition>
-	<definition name="resultenabledisableuser" extends="templateBoss">
+	<definition name="resultenabledisableuser"
+		extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/update/resultenabledisableuser.jsp" />
 	</definition>
@@ -54,13 +61,16 @@
 			value="/WEB-INF/views/boss/calendar/schedule.jsp" />
 	</definition>
 	<definition name="safetotal" extends="templateBoss">
-		<put-attribute name="body" value="/WEB-INF/views/boss/safe/safe.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/safe/safe.jsp" />
 	</definition>
-	<definition name="searchentrysortsafe" extends="templateBoss">
+	<definition name="searchentrysortsafe"
+		extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/safe/searchentrysortsafe.jsp" />
 	</definition>
-	<definition name="resultentrysortsafe" extends="templateBoss">
+	<definition name="resultentrysortsafe"
+		extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/safe/resultentrysortsafe.jsp" />
 	</definition>
@@ -100,7 +110,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/dailyarrow.jsp" />
 	</definition>
-	<definition name="updateoperationboss" extends="templateBoss">
+	<definition name="updateoperationboss"
+		extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/operations/newoperation.jsp" />
 	</definition>
@@ -125,10 +136,19 @@
 			value="/WEB-INF/views/boss/dailies/searchdaily.jsp" />
 	</definition>
 	<definition name="403" extends="templateLogin">
-		<put-attribute name="body" value="/WEB-INF/views/boss/403.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/403.jsp" />
 	</definition>
 	<definition name="notdailyboss" extends="templateBoss">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/notdaily.jsp" />
+	</definition>
+	<definition name="searchopenmachines" extends="templateDate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/openmachines/search.jsp" />
+	</definition>
+	<definition name="openmachinesboss" extends="templateBoss">
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/openmachines/openmachines.jsp" />
 	</definition>
 </tiles-definitions>

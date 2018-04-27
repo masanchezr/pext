@@ -33,7 +33,7 @@
 	}
 </script>
 </head>
-<body>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 	<!-- csrt support -->
 	<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -80,8 +80,15 @@
 							code="recharges" />"><spring:url
 						value="/searchrecharges" var="searchrecharges" /><a
 					href="${searchrecharges}" class="nav-link"><i
-						class="fa fa-money fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="recharges" /></span></a></li>
+						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="recharges" /></span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="openmachines" />"><spring:url
+						value="/searchopenmachines" var="searchopenmachines" /><a
+					href="${searchopenmachines}" class="nav-link"><i
+						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
+								code="openmachines" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="safe" />"><a

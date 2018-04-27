@@ -80,8 +80,15 @@
 							code="recharges" />"><spring:url
 						value="/searchrecharges" var="searchrecharges" /><a
 					href="${searchrecharges}" class="nav-link"><i
-						class="fa fa-money fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="recharges" /></span></a></li>
+						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="recharges" /></span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="openmachines" />"><spring:url
+						value="/searchopenmachines" var="searchopenmachines" /><a
+					href="${searchopenmachines}" class="nav-link"><i
+						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
+								code="openmachines" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="safe" />"><a

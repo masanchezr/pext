@@ -1,4 +1,4 @@
-package com.gu.admin.controllers;
+package com.gu.boss.controllers;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 
 @Controller
-public class OpenMachinesAdminController {
+public class OpenMachinesController {
 
 	@Autowired
 	private OpenMachineService openmachineservice;
@@ -30,7 +30,7 @@ public class OpenMachinesAdminController {
 
 	@RequestMapping("/openmachines")
 	public ModelAndView openmachines(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView("openmachinesadmin");
+		ModelAndView model = new ModelAndView("openmachinesboss");
 		String sdate = searchForm.getDatefrom();
 		Date date = new Date();
 		if (!Util.isEmpty(sdate)) {

@@ -152,6 +152,8 @@
 			access="hasRole('ROLE_BOSS')" />
 		<intercept-url pattern="/enabledisableuser"
 			access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/searchopenmachines"
+			access="hasRole('ROLE_BOSS')" />
 	</http>
 
 	<authentication-manager id="authenticationMgr">
