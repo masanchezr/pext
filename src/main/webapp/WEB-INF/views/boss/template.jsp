@@ -11,7 +11,9 @@
 <link
 	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet" type="text/css">
-<!-- MetisMenu CSS -->
+<link
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
+	rel="stylesheet" type="text/css">
 <link
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
@@ -44,7 +46,8 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a href="javascript:formSubmit()"><i
-						class="fa fa-sign-out-alt fa-fw"></i> <spring:message code="logout" /></a></li>
+						class="fa fa-sign-out-alt fa-fw"></i> <spring:message
+							code="logout" /></a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
@@ -77,8 +80,8 @@
 							code="recharges" />"><spring:url
 						value="/searchrecharges" var="searchrecharges" /><a
 					href="${searchrecharges}" class="nav-link"><i
-						class="fa fa-money-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="recharges" /></span></a></li>
+						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="nav-link-text"><spring:message code="recharges" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="safe" />"><a
