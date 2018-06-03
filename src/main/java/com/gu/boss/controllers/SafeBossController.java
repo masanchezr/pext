@@ -26,7 +26,7 @@ public class SafeBossController {
 	@RequestMapping(value = "/safetotal")
 	public ModelAndView safetotal() {
 		ModelAndView model = new ModelAndView("safetotal");
-		model.addObject("totalamount", safeService.searchTotalSafe());
+		model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.searchTotalSafe());
 		return model;
 	}
 

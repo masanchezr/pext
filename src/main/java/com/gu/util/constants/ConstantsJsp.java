@@ -38,4 +38,5 @@ public class ConstantsJsp {
 	public static final String ERRORSELECTNAME = "selectname";
 	public static final String VIEWSUCCESSEMPLOYEE = "successemployee";
 	public static final String FORMOPENMACHINE = "openmachine";
+	public static final String TOTALAMOUNT = "totalamount";
 }

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.admin.validators.SafeValidator;
 import com.gu.dbaccess.entities.SafeEntity;
 import com.gu.services.entrymoney.EntryMoneyService;
+import com.gu.util.constants.ConstantsJsp;
 
 @Controller
 public class SafeController {
@@ -20,23 +21,26 @@ public class SafeController {
 	@Autowired
 	private SafeValidator safevalidator;
 
+	private static final String VIEWTOTALSAFE = "totalsafe";
+	private static final String FORMSALE = "saleForm";
+
 	@RequestMapping(value = "/admin/newentrysafe")
 	public ModelAndView newentrysafe() {
 		ModelAndView model = new ModelAndView("safe");
-		model.addObject("safeForm", new SafeEntity());
+		model.addObject(FORMSALE, new SafeEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/savesafe")
-	public ModelAndView savesafe(@ModelAttribute("safeForm") SafeEntity safe, BindingResult result) {
+	public ModelAndView savesafe(@ModelAttribute(FORMSALE) SafeEntity safe, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		safevalidator.validate(safe, result);
 		if (result.hasErrors()) {
 			model.setViewName("safe");
-			model.addObject("safeForm", safe);
+			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject("totalamount", safeService.saveAdd(safe));
-			model.setViewName("totalsafe");
+			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveAdd(safe));
+			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;
 	}
@@ -44,28 +48,28 @@ public class SafeController {
 	@RequestMapping(value = "/admin/newentrymachine")
 	public ModelAndView newentrymachine() {
 		ModelAndView model = new ModelAndView("newentrychangemachine");
-		model.addObject("safeForm", new SafeEntity());
+		model.addObject(FORMSALE, new SafeEntity());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/saveentrymachine")
-	public ModelAndView saveentrymachine(@ModelAttribute("safeForm") SafeEntity safe, BindingResult result) {
+	public ModelAndView saveentrymachine(@ModelAttribute(FORMSALE) SafeEntity safe, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		safevalidator.validate(safe, result);
 		if (result.hasErrors()) {
 			model.setViewName("newentrychangemachine");
-			model.addObject("safeForm", safe);
+			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject("totalamount", safeService.saveSub(safe));
-			model.setViewName("totalsafe");
+			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveSub(safe));
+			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/totalsafe")
 	public ModelAndView totalsafe() {
-		ModelAndView model = new ModelAndView("totalsafe");
-		model.addObject("totalamount", safeService.searchTotalSafe());
+		ModelAndView model = new ModelAndView(VIEWTOTALSAFE);
+		model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.searchTotalSafe());
 		return model;
 	}
 }

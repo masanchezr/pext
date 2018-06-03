@@ -14,7 +14,7 @@ import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 
 @Entity
-@Table(name = "providing")
+@Table(name = Constants.STRINGPROVIDING)
 public class ProvidingEntity {
 
 	@Id
