@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="entrymachine" /></li>
 </ol>
-<form:form action="saveentrymachine" modelAttribute="safeForm" role="form">
+<form:form action="saveentrymachine" modelAttribute="safeForm"
+	role="form">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

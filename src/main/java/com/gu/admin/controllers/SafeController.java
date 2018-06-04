@@ -22,7 +22,7 @@ public class SafeController {
 	private SafeValidator safevalidator;
 
 	private static final String VIEWTOTALSAFE = "totalsafe";
-	private static final String FORMSALE = "saleForm";
+	private static final String FORMSALE = "safeForm";
 
 	@RequestMapping(value = "/admin/newentrysafe")
 	public ModelAndView newentrysafe() {
