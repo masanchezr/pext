@@ -137,9 +137,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public void loadDataTicketServer() {
-		ChangeMachineEntity cmentity = changeMachineRepository.findFirstByOrderByCreationdateDesc();
-		try (BufferedReader in = new BufferedReader(
-				new InputStreamReader(getConnection(cmentity.getCreationdate()).getInputStream()))) {
+		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnection(from).getInputStream()))) {
 			readFile(in);
 		} catch (IOException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
@@ -221,7 +220,11 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 						tpvrepository.save(tpv);
 					}
 				} else {
-					loadChangeMachineEntity(award, scomments, date, nodes, amount);
+					node = (TextNode) nodes.get(0).childNode(0);
+					Long id = Long.valueOf(node.getWholeText());
+					if (!changeMachineRepository.existsById(id)) {
+						loadChangeMachineEntity(award, scomments, date, id, amount);
+					}
 				}
 			}
 		}
@@ -269,13 +272,11 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		}
 	}
 
-	private void loadChangeMachineEntity(String award, String scomments, Date date, List<Node> nodes,
-			BigDecimal amount) {
+	private void loadChangeMachineEntity(String award, String scomments, Date date, Long id, BigDecimal amount) {
 		AwardsChangeMachineEntity awardentity = new AwardsChangeMachineEntity();
 		MachineEntity machine;
 		ChangeMachineEntity cm = new ChangeMachineEntity();
-		TextNode node = (TextNode) nodes.get(0).childNode(0);
-		cm.setIdchangemachine(Long.valueOf(node.getWholeText()));
+		cm.setIdchangemachine(id);
 		machine = machinesRepository.findByNameticket(award);
 		if (machine == null) {
 			if (award.equals("TECNAUSA")) {
