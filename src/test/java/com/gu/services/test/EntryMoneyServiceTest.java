@@ -27,4 +27,9 @@ public class EntryMoneyServiceTest {
 		entryMoneyService.saveEntryMoney(form);
 	}
 
+	@Test
+	public void searchByDatesTest() {
+		entryMoneyService.searchByDates("02-05-2018");
+	}
+
 }

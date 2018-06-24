@@ -173,6 +173,9 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
 		until = calendar.getTime();
 		return safeRepository.findByCreationdateBetween(from, until);
 	}
