@@ -3,7 +3,9 @@
 	<div class="col-12">
 		<h1>
 			<c:forEach items="${messages}" var="message">
-				<c:out value="${message.message}" />
+				<p>
+					<c:out value="${message.message}" />
+				</p>
 			</c:forEach>
 		</h1>
 	</div>
