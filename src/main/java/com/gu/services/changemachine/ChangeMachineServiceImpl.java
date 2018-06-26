@@ -148,7 +148,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	private URLConnection getConnection(Date from) throws IOException {
-		String address = "http://88.27.244.77:3080/TicketServer/reportTicketsDateTime.php?";
+		String address = "http://".concat(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?");
 		String startdate = "StartDate=";
 		String endate = "&EndDate=";
 		String space = "%20";
