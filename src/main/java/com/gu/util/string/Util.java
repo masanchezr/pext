@@ -5,6 +5,10 @@ package com.gu.util.string;
  */
 public class Util {
 
+	private Util() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	/**
 	 * Checks if is empty.
 	 * 
@@ -21,6 +25,6 @@ public class Util {
 	}
 
 	public static boolean isNumeric(String str) {
-		return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("") == false);
+		return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals(""));
 	}
 }

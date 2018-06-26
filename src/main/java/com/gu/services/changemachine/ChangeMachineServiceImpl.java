@@ -207,7 +207,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
 				node = (TextNode) nodes.get(9).childNode(0);
 				scomments = node.getWholeText();
-				if (award.equals("TPV")) {
+				if (award.equals("TPV") && Util.isNumeric(scomments)) {
 					idtpv = Long.valueOf(scomments);
 					if (!tpvrepository.findById(idtpv).isPresent()) {
 						TPVEntity tpv = new TPVEntity();
@@ -228,23 +228,10 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				}
 			}
 		}
-		compareTotal();
+		compareTotal(doc);
 	}
 
-	private void compareTotal() {
-		String result = "";
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(
-				getConnection(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate()).getInputStream()))) {
-			String response;
-			for (int i = 0; i < 10; i++)
-				while ((response = in.readLine()) != null)
-					result = result.concat(response);
-		} catch (IOException e) {
-			logger.error(java.util.logging.Level.SEVERE.getName());
-		} finally {
-			logger.debug(java.util.logging.Level.SEVERE.getName());
-		}
-		Document doc = Jsoup.parse(result);
+	private void compareTotal(Document doc) {
 		String totaltext = doc.text();
 		totaltext = totaltext.substring(totaltext.indexOf("Total = "));
 		char[] array = totaltext.toCharArray();
