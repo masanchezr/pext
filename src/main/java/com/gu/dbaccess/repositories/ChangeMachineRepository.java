@@ -16,6 +16,9 @@ import com.gu.dbaccess.entities.ChangeMachineEntity;
 
 public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEntity, Long> {
 
+	/**
+	 * Dinero invertido en la máquina de cambio
+	 */
 	@Query("select sum(c.amount) from ChangeMachineEntity c where c.creationdate>=:from and c.creationdate<=:until and c.amount>0 and c.award is null and c.machine is null")
 	public BigDecimal sumIncomeBetweenDates(@Param("from") Date from, @Param("until") Date until);
 

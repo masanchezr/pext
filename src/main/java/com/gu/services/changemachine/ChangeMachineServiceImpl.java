@@ -68,6 +68,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
+	/**
+	 * Dinero invertido en la máquina de cambio
+	 */
 	public BigDecimal getIncomeTotalMonth() {
 		return changeMachineRepository
 				.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new Date());
@@ -148,7 +151,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	private URLConnection getConnection(Date from) throws IOException {
-		String address = "http://".concat(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?");
+		String address = "http://"
+				.concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?"));
 		String startdate = "StartDate=";
 		String endate = "&EndDate=";
 		String space = "%20";
@@ -209,16 +213,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				scomments = node.getWholeText();
 				if (award.equals("TPV") && Util.isNumeric(scomments)) {
 					idtpv = Long.valueOf(scomments);
-					if (!tpvrepository.findById(idtpv).isPresent()) {
-						TPVEntity tpv = new TPVEntity();
-						PaymentEntity pay = new PaymentEntity();
-						pay.setIdpayment(Constants.MAQUINACAMBIO);
-						tpv.setPay(pay);
-						tpv.setCreationdate(date);
-						tpv.setAmount(amount);
-						tpv.setIdtpv(idtpv);
-						tpvrepository.save(tpv);
-					}
+					loadTPV(date, amount, idtpv);
 				} else {
 					node = (TextNode) nodes.get(0).childNode(0);
 					Long id = Long.valueOf(node.getWholeText());
@@ -229,6 +224,19 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			}
 		}
 		compareTotal(doc);
+	}
+
+	private void loadTPV(Date date, BigDecimal amount, Long idtpv) {
+		if (!tpvrepository.findById(idtpv).isPresent()) {
+			TPVEntity tpv = new TPVEntity();
+			PaymentEntity pay = new PaymentEntity();
+			pay.setIdpayment(Constants.MAQUINACAMBIO);
+			tpv.setPay(pay);
+			tpv.setCreationdate(date);
+			tpv.setAmount(amount);
+			tpv.setIdtpv(idtpv);
+			tpvrepository.save(tpv);
+		}
 	}
 
 	private void compareTotal(Document doc) {

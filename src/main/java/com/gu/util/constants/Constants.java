@@ -79,6 +79,8 @@ public class Constants {
 
 	public static final String MACHINES = "machines";
 
-	public static final String IPGOLDEN = "88.27.244.77";
+	public static final String IPGOLDEN = "TICKETSERVER";
+
+	public static final Long OPENMACHINE = 3L;
 
 }

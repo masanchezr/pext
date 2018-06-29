@@ -60,14 +60,14 @@ public class OperationsController {
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWOPERATION);
-			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
 			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else if (operationService.getOperationNotAllowed(operation) != null) {
 			model.setViewName(VIEWNEWOPERATION);
-			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
+			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());

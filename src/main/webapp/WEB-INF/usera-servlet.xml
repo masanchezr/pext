@@ -44,12 +44,5 @@
 	</bean>
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
-	<bean id="mapperWeb" class="org.dozer.DozerBeanMapper">
-		<property name="mappingFiles">
-			<list>
-				<value>mapping-dozer.xml</value>
-			</list>
-		</property>
-	</bean>
 	<mvc:resources mapping="/resources/**" location="/resources/mytheme/" />
 </beans>

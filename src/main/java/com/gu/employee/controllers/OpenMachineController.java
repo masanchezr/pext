@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gu.dbaccess.entities.FunctionalityEntity;
 import com.gu.dbaccess.entities.OpenMachineEntity;
 import com.gu.services.machines.MachineService;
 import com.gu.services.openmachines.OpenMachineService;
@@ -27,9 +28,11 @@ public class OpenMachineController {
 	@RequestMapping("/employee/newopenmachine")
 	public ModelAndView newopenmachine() {
 		ModelAndView model = new ModelAndView("newopenmachine");
+		FunctionalityEntity functionality = new FunctionalityEntity();
+		functionality.setIdfuncionality(Constants.OPENMACHINE);
 		model.addObject("causes", openmachineservice.getCauses());
 		model.addObject(ConstantsJsp.FORMOPENMACHINE, new OpenMachineEntity());
-		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
 		return model;
 	}
 
