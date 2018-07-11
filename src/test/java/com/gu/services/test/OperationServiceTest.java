@@ -20,7 +20,7 @@ public class OperationServiceTest {
 
 	@Test
 	public void updateOperationTest() {
-		OperationEntity operation = operationservice.findById(17L);
+		OperationEntity operation = operationservice.findById(27L);
 		operation.setAmount(new BigDecimal(100));
 		operationservice.update(operation);
 	}
