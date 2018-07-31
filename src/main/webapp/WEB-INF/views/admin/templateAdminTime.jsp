@@ -12,9 +12,6 @@
 	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet" type="text/css">
 <link
-	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
@@ -102,9 +99,8 @@
 							code="changemachine" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseChangeMachine" data-parent="#exampleAccordion"><i
-						class="fa fa-money fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="changemachine" /></span>
-				</a>
+						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="changemachine" /></span> </a>
 					<ul id="collapseChangeMachine"
 						class="sidenav-second-level collapse">
 						<li><spring:url value="/admin/newentrymachine"
