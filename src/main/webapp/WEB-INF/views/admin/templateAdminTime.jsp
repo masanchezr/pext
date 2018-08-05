@@ -99,8 +99,9 @@
 							code="changemachine" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseChangeMachine" data-parent="#exampleAccordion"><i
-						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="changemachine" /></span> </a>
+						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="nav-link-text"><spring:message code="changemachine" /></span>
+				</a>
 					<ul id="collapseChangeMachine"
 						class="sidenav-second-level collapse">
 						<li><spring:url value="/admin/newentrymachine"
