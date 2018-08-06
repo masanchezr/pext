@@ -151,7 +151,7 @@
 							code="messages"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsemessages" data-parent="#exampleAccordion"> <i
-						class="fa fa-file-text"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-comments"></i> <span class="nav-link-text"><spring:message
 								code="messages" /></span>
 				</a>
 					<ul class="sidenav-second-level collapse" id="collapsemessages">

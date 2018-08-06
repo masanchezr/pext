@@ -29,7 +29,8 @@ public class IncomeMachineServiceImpl implements IncomeMachineService {
 	public BigDecimal findIncomeByMonth(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();
