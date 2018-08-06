@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gu.dbaccess.entities.FunctionalityEntity;
 import com.gu.dbaccess.entities.IncomeMachineEntity;
 import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.machines.MachineService;
@@ -26,7 +27,9 @@ public class IncomeMachinesController {
 	@RequestMapping(value = "/employee/newincomemachine")
 	public ModelAndView newincomemachine() {
 		ModelAndView model = new ModelAndView("incomemachine");
-		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
+		FunctionalityEntity functionality = new FunctionalityEntity();
+		functionality.setIdfuncionality(Constants.INCOMEMACHINE);
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
 		model.addObject(ConstantsJsp.FORMINCOME, new IncomeMachineEntity());
 		return model;
 	}

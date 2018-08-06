@@ -83,4 +83,6 @@ public class Constants {
 
 	public static final Long OPENMACHINE = 3L;
 
+	public static final Long INCOMEMACHINE = 4L;
+
 }
