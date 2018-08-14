@@ -15,7 +15,7 @@ import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.gu.dbaccess.entities.TPVEntity;
 
 /**
- * The Class Daily.
+ * The Class Daily. Clase para mostrar en pantalla las operaciones del parte.
  */
 public class Daily {
 
@@ -140,10 +140,6 @@ public class Daily {
 
 	public void setListchangemachine(List<ChangeMachineEntity> listchangemachine) {
 		this.listchangemachine = listchangemachine;
-	}
-
-	public void setMoneyAdvance(List<ReturnMoneyEmployeeEntity> moneyadvance) {
-		this.setMoneyadvance(moneyadvance);
 	}
 
 	public List<ReturnMoneyEmployeeEntity> getMoneyadvance() {

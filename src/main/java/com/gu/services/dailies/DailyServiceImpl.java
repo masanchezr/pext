@@ -140,7 +140,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			daily.setFinalamount(daily.getFinalamount().subtract(moneyadvanceamount));
 			daily.setNumoperations(moneyadvance.size() + daily.getNumoperations());
-			daily.setMoneyAdvance(moneyadvance);
+			daily.setMoneyadvance(moneyadvance);
 		}
 	}
 
