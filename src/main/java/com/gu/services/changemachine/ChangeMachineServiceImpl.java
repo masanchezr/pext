@@ -215,7 +215,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 					idtpv = Long.valueOf(scomments);
 					loadTPV(date, amount, idtpv);
 				} else {
-					node = (TextNode) nodes.get(0).childNode(0);
+					node = (TextNode) nodes.get(2).childNode(0);
 					Long id = Long.valueOf(node.getWholeText());
 					if (!changeMachineRepository.existsById(id)) {
 						loadChangeMachineEntity(award, scomments, date, id, amount);
