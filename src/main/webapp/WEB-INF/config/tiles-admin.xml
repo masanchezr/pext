@@ -6,7 +6,8 @@
 <tiles-definitions>
 	<!-- admin -->
 	<definition name="templateAdmin"
-		template="/WEB-INF/views/admin/templateAdmin.jsp" />
+		template="/WEB-INF/views/admin/templateAdmin.jsp">
+	</definition>
 	<definition name="templateAdminTime"
 		template="/WEB-INF/views/admin/templateAdminTime.jsp" />
 	<definition name="templateLogin"

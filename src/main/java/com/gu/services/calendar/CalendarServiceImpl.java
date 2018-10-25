@@ -13,7 +13,6 @@ import com.gu.dbaccess.entities.ScheduleEntity;
 import com.gu.dbaccess.entities.TimeEntity;
 import com.gu.dbaccess.repositories.ScheduleRepository;
 import com.gu.dbaccess.repositories.TimeRepository;
-import com.gu.util.constants.Constants;
 import com.gu.util.date.DateUtil;
 
 public class CalendarServiceImpl implements CalendarService {
@@ -29,7 +28,8 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	public List<ScheduleEntity> save(List<Schedule> schedule) {
-		List<ScheduleEntity> calendar = new ArrayList<ScheduleEntity>(), lschedule;
+		List<ScheduleEntity> calendar = new ArrayList<>();
+		List<ScheduleEntity> lschedule;
 		Iterator<Schedule> ischedule = schedule.iterator();
 		ScheduleEntity s;
 		while (ischedule.hasNext()) {
@@ -43,21 +43,14 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	private List<ScheduleEntity> mapper(Schedule next) {
-		List<ScheduleEntity> calendar = new ArrayList<ScheduleEntity>();
+		List<ScheduleEntity> calendar = new ArrayList<>();
 		List<EmployeeEntity> employees = next.getEmployees();
 		for (EmployeeEntity employee : employees) {
 			ScheduleEntity s = new ScheduleEntity();
 			s.setDateschedule(DateUtil.getDate(next.getDateschedule()));
 			s.setTime(next.getTime());
-			if ((employee.getIdemployee().equals(Constants.NOBODY)
-					|| employee.getIdemployee().equals(Constants.EVERYBODY)) && employees.size() == 1) {
-				s.setEmployee(employee);
-				calendar.add(s);
-			} else if (!employee.getIdemployee().equals(Constants.NOBODY)
-					&& !employee.getIdemployee().equals(Constants.EVERYBODY) && employees.size() > 1) {
-				s.setEmployee(employee);
-				calendar.add(s);
-			}
+			s.setEmployee(employee);
+			calendar.add(s);
 		}
 		if (calendar.isEmpty()) {
 			ScheduleEntity s = new ScheduleEntity();
@@ -73,9 +66,10 @@ public class CalendarServiceImpl implements CalendarService {
 		List<Date> dates = DateUtil.getDates(week);
 		List<ScheduleEntity> lschedule = scheduleRepository.findByDatescheduleBetween(dates.get(0),
 				dates.get(dates.size() - 1));
-		List<Schedule> lscheduleform = new ArrayList<Schedule>();
-		List<EmployeeEntity> employees = new ArrayList<EmployeeEntity>();
-		ScheduleEntity schedule, scheduletwo;
+		List<Schedule> lscheduleform = new ArrayList<>();
+		List<EmployeeEntity> employees = new ArrayList<>();
+		ScheduleEntity schedule;
+		ScheduleEntity scheduletwo;
 		Schedule scheduleform = new Schedule();
 		for (int i = 0; i < lschedule.size(); i++) {
 			schedule = lschedule.get(i);
@@ -95,7 +89,7 @@ public class CalendarServiceImpl implements CalendarService {
 				} else {
 					lscheduleform.add(scheduleform);
 					scheduleform = new Schedule();
-					employees = new ArrayList<EmployeeEntity>();
+					employees = new ArrayList<>();
 				}
 			} else {
 				scheduleform.getEmployees().add(schedule.getEmployee());
