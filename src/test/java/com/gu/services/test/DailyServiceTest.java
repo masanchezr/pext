@@ -41,7 +41,7 @@ public class DailyServiceTest {
 	@Test
 	public void calculateDailiesTest() {
 		Calendar c = Calendar.getInstance();
-		c.set(2018, 9, 27);
+		c.set(2017, 11, 23);
 		dailyService.calculateDailies(c.getTime());
 	}
 }

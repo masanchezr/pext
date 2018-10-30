@@ -1,5 +1,7 @@
 package com.gu.dbaccess.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "payments")
-public class PaymentEntity {
+public class PaymentEntity implements Serializable {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
 	/** The idpayment. */
 	@Id
@@ -43,7 +48,8 @@ public class PaymentEntity {
 	/**
 	 * Sets the idpayment.
 	 *
-	 * @param idpayment the idpayment to set
+	 * @param idpayment
+	 *            the idpayment to set
 	 */
 	public void setIdpayment(Long idpayment) {
 		this.idpayment = idpayment;
@@ -61,7 +67,8 @@ public class PaymentEntity {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -79,7 +86,8 @@ public class PaymentEntity {
 	/**
 	 * Sets the active.
 	 *
-	 * @param active the active to set
+	 * @param active
+	 *            the active to set
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
