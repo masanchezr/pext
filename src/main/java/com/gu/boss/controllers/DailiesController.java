@@ -53,8 +53,7 @@ public class DailiesController {
 	/**
 	 * Search daily.
 	 *
-	 * @param sdf
-	 *            the sdf
+	 * @param sdf the sdf
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultdaily")
@@ -86,8 +85,8 @@ public class DailiesController {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {
 			String view;
-			String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
-			String sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+			String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+			String sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 			if (stoday.compareTo(sdate) == 0) {
 				view = ConstantsJsp.VIEWDAILYBOSSARROW;
 			} else {
@@ -165,8 +164,8 @@ public class DailiesController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
-					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = "dailybossarrow";
 					} else {

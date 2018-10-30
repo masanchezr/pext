@@ -100,8 +100,8 @@ public class DailiesAdminController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
-					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = "dailyadminarrow";
 					} else {

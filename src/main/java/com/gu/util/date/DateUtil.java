@@ -17,18 +17,22 @@ import java.util.Set;
  */
 public class DateUtil {
 
+	private DateUtil() {
+
+	}
+
 	/**
 	 * Gets the date.
 	 *
-	 * @param sdate
-	 *            the sdate
+	 * @param sdate the sdate
 	 * @return the date
 	 */
 	public static Date getDate(String sdate) {
 		Date date = null;
-		String pattern = null, p;
+		String pattern = null;
+		String p;
 		SimpleDateFormat sdf = null;
-		Map<String, String> patterns = new HashMap<String, String>();
+		Map<String, String> patterns = new HashMap<>();
 		patterns.put("\\d{2}/\\d{2}/\\d{4}", "dd/MM/yyyy");
 		patterns.put("(\\d{2})-(\\d{2})-(\\d{4})", "dd-MM-yyyy");
 		patterns.put("(\\d{4})-(\\d{2})-(\\d{2})", "yyyy-MM-dd");
@@ -53,7 +57,7 @@ public class DateUtil {
 			try {
 				date = sdf.parse(sdate);
 			} catch (ParseException e) {
-				e.printStackTrace();
+				date = null;
 			}
 		}
 		return date;
@@ -62,13 +66,12 @@ public class DateUtil {
 	/**
 	 * Checks if is date.
 	 *
-	 * @param sdate
-	 *            the sdate
+	 * @param sdate the sdate
 	 * @return true, if is date
 	 */
 	public static boolean isDate(String sdate) {
 		boolean isdate = false;
-		List<String> patterns = new ArrayList<String>();
+		List<String> patterns = new ArrayList<>();
 		// dd/MM/yyyy
 		patterns.add("\\d\\d/\\d\\d/\\d\\d\\d\\d");
 		// dd.MM.yyyy
@@ -98,12 +101,12 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
-	public static String getStringDateFormatdd_MM_yyyy(Date date) {
+	public static String getStringDateFormatddMMyyyy(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(date);
 	}
 
-	public static String getStringDateFormatdd_MM_yyyyHHmm(Date date) {
+	public static String getStringDateFormatddMMyyyyHHmm(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		return sdf.format(date);
 	}
@@ -114,10 +117,10 @@ public class DateUtil {
 	}
 
 	public static List<Date> getDates(String sweek) {
-		List<Date> dates = new ArrayList<Date>(7);
+		List<Date> dates = new ArrayList<>(7);
 		Calendar calendar = Calendar.getInstance();
-		int iweek = Integer.parseInt(sweek.substring(sweek.indexOf("W") + 1));
-		int year = Integer.parseInt(sweek.substring(0, sweek.indexOf("-")));
+		int iweek = Integer.parseInt(sweek.substring(sweek.indexOf('W') + 1));
+		int year = Integer.parseInt(sweek.substring(0, sweek.indexOf('-')));
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.WEEK_OF_YEAR, iweek);
 		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -128,12 +131,12 @@ public class DateUtil {
 		return dates;
 	}
 
-	public static String getStringDateFormatyyyy_MM_dd(Date date) {
+	public static String getStringDateFormatyyyyMMdd(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
 	}
 
-	public static String getStringDateFormatdd_MM_yyyyHHmmss(Date date) {
+	public static String getStringDateFormatddMMyyyyHHmmss(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		return sdf.format(date);
 	}

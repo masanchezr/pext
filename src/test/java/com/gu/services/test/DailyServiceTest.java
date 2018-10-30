@@ -1,7 +1,6 @@
 package com.gu.services.test;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +29,9 @@ public class DailyServiceTest {
 	 */
 	@Test
 	public void getDailyTest() {
-		Daily daily = dailyService.getDaily(new Date());
+		Calendar c = Calendar.getInstance();
+		c.set(2018, 9, 29);
+		Daily daily = dailyService.getDaily(c.getTime());
 		if (daily != null) {
 			System.out.println(
 					"Numero de operaciones:" + daily.getNumoperations() + " importe final:" + daily.getFinalamount());
@@ -41,7 +42,7 @@ public class DailyServiceTest {
 	@Test
 	public void calculateDailiesTest() {
 		Calendar c = Calendar.getInstance();
-		c.set(2017, 11, 23);
+		c.set(2018, 9, 23);
 		dailyService.calculateDailies(c.getTime());
 	}
 }

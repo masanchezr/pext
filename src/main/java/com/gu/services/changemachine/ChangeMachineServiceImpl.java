@@ -162,9 +162,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		String authString = name + ":" + pass;
 		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
 		String authStringEnc = new String(authEncBytes);
-		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyy_MM_dd(from)).concat(space)
+		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyyMMdd(from)).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(from)).concat(endate)
-				.concat(DateUtil.getStringDateFormatyyyy_MM_dd(new Date())).concat(space)
+				.concat(DateUtil.getStringDateFormatyyyyMMdd(new Date())).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(new Date())).concat(restaddress);
 		URL url = new URL(address);
 		URLConnection connection = url.openConnection();

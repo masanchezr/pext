@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.EmployeeEntity;
@@ -38,6 +40,9 @@ public class GratificationServiceImpl implements GratificationService {
 	@Autowired
 	private DailyService dailyService;
 
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(GratificationServiceImpl.class);
+
 	/**
 	 * pagamos la propina
 	 */
@@ -51,14 +56,8 @@ public class GratificationServiceImpl implements GratificationService {
 
 	private void generateTicket(GratificationEntity g, String path) {
 		File file = new File(path.concat("ticket.pdf"));
-		PdfWriter writer;
-		try {
-			writer = new PdfWriter(file);
+		try (PdfWriter writer = new PdfWriter(file)) {
 			PdfDocument pdf = new PdfDocument(writer);
-			/*
-			 * PageRotationEventHandler eventHandler = new PageRotationEventHandler();
-			 * pdf.addEventHandler(PdfDocumentEvent.START_PAGE, eventHandler);
-			 */
 			PageSize page = PageSize.A4.rotate();
 			Document document = new Document(pdf, page);
 			PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_BOLD);
@@ -68,24 +67,23 @@ public class GratificationServiceImpl implements GratificationService {
 			com.itextpdf.layout.element.List list = new com.itextpdf.layout.element.List();
 			// Add ListItem objects
 			list.add(new ListItem("Ticket número:" + g.getIdgratification() + " Entrega de ticket:"
-					+ DateUtil.getStringDateFormatdd_MM_yyyyHHmmss(g.getCreationdate())))
+					+ DateUtil.getStringDateFormatddMMyyyyHHmmss(g.getCreationdate())))
 					.add(new ListItem(
-							"Utilizar a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getUsefromdate())))
+							"Utilizar a partir de:" + DateUtil.getStringDateFormatddMMyyyyHHmm(g.getUsefromdate())))
 					.add(new ListItem(
-							"Caduca a partir de:" + DateUtil.getStringDateFormatdd_MM_yyyyHHmm(g.getExpirationdate())))
+							"Caduca a partir de:" + DateUtil.getStringDateFormatddMMyyyyHHmm(g.getExpirationdate())))
 					.add(new ListItem("Cliente:" + g.getClient() + " Empleado:" + g.getEmployee().getAlias()));
 			// Add the list
 			list.setFontSize(14).setTextAlignment(TextAlignment.CENTER);
 			document.add(list);
 			document.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("No se ha podido generar el ticket.");
 		}
 	}
 
 	public GratificationEntity searchGratificationActive(Long id) {
-		GratificationEntity g = gratificationRepository.findByIdgratificationAndPaydateIsNull(id, new Date());
-		return g;
+		return gratificationRepository.findByIdgratificationAndPaydateIsNull(id, new Date());
 	}
 
 	public List<GratificationEntity> lastNumGratifications() {
@@ -96,7 +94,8 @@ public class GratificationServiceImpl implements GratificationService {
 	public void registerNumberGratification(GratificationEntity g, String user, String path) {
 		EmployeeEntity employee = employeesrepository.findByUsername(user);
 		Calendar c = Calendar.getInstance();
-		Date expirationdate, usefromdate;
+		Date expirationdate;
+		Date usefromdate;
 		c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
