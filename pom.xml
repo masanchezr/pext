@@ -22,7 +22,7 @@
 				</property>
 			</activation>
 			<properties>
-				<database.url>jdbc:mysql://localhost:3307/usera</database.url>
+				<database.url>jdbc:mysql://localhost:3307/usera?serverTimezone=Europe/Madrid</database.url>
 				<database.user>root</database.user>
 				<database.password>mariangeles</database.password>
 				<anyvalue.name>God</anyvalue.name>
