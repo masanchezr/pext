@@ -3,33 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
-<head>
-<!-- Bootstrap Core CSS -->
-<link href="<spring:url value="/resources/styles/bootstrap.min.css"/>"
-	rel="stylesheet">
-<!-- Custom Fonts -->
-<link
-	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
-	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
-	rel="stylesheet">
-<!-- Custom CSS -->
-<link href="<spring:url value="/resources/styles/sb-admin.css"/>"
-	rel="stylesheet">
-<link
-	href="<spring:url value="/resources/styles/bootstrap-datepicker.css"/>"
-	rel="stylesheet">
-<link rel="shortcut icon"
-	href="<spring:url value="/resources/img/admin/favicon.png"/>"
-	type="image/png">
-<title><spring:message code="titleAdmin" /></title>
-<script>
-	function formSubmit() {
-		document.getElementById("logoutForm").submit();
-	}
-</script>
-</head>
+<tiles:insertAttribute name="header" />
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<c:url value="/admin/j_spring_security_logout" var="logoutUrl" />
 	<!-- csrt support -->
@@ -40,7 +14,6 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="mainNav">
 		<a class="navbar-brand" href=""><spring:message code="goldusera" /></a>
-		<!-- Botón para dispositivos móviles -->
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -177,30 +150,5 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fa fa-angle-up"></i>
 	</a>
-	<script type="text/javascript"
-		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
-	<!-- Custom Theme JavaScript -->
-	<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
-	<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
-	<script>
-		$(function() {
-			$("#sandbox-container input").datepicker({
-				language : "es",
-				autoclose : true,
-				todayHighlight : true
-			});
-		});
-	</script>
 </body>
 </html>

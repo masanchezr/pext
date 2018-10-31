@@ -7,11 +7,11 @@
 	<!-- admin -->
 	<definition name="templateAdmin"
 		template="/WEB-INF/views/admin/templateAdmin.jsp" />
-	<definition name="templateAdminTime"
-		template="/WEB-INF/views/admin/templateAdminTime.jsp" />
 	<definition name="templateLogin"
 		template="/WEB-INF/views/admin/templateLogin.jsp" />
 	<definition name="admin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/admin.jsp" />
 	</definition>
@@ -20,23 +20,33 @@
 			value="/WEB-INF/views/admin/login.jsp" />
 	</definition>
 	<definition name="successadmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/success.jsp" />
 	</definition>
 	<definition name="searchdailyadmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/searchdaily.jsp" />
 	</definition>
 	<definition name="searchcalculatedailies"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/searchcalculatedailies.jsp" />
 	</definition>
 	<definition name="dailyadminarrows" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/dailyarrows.jsp" />
 	</definition>
 	<definition name="dailyadminarrow" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/dailyarrow.jsp" />
 	</definition>
@@ -45,56 +55,82 @@
 			value="/WEB-INF/views/admin/403.jsp" />
 	</definition>
 	<definition name="notdailyadmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/notdailyadmin.jsp" />
 	</definition>
 	<definition name="allincidents" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/incidents/allincidents.jsp" />
 	</definition>
 	<definition name="updateincident" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/incidents/updateincident.jsp" />
 	</definition>
 	<definition name="newcalendar" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/calendar/searchweek.jsp" />
 	</definition>
 	<definition name="calendar" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/calendar/calendar.jsp" />
 	</definition>
 	<definition name="searchschedule" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/calendar/searchschedule.jsp" />
 	</definition>
 	<definition name="schedule" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/calendar/schedule.jsp" />
 	</definition>
 	<definition name="safe" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/safe/safe.jsp" />
 	</definition>
 	<definition name="totalsafe" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/safe/totalsafe.jsp" />
 	</definition>
 	<definition name="registeradmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/register.jsp" />
 	</definition>
 	<definition name="newentrymoneyadmin"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/newentrymoney.jsp" />
 	</definition>
 	<definition name="newproviding" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/providing/newproviding.jsp" />
 	</definition>
 	<definition name="newentrychangemachine"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/newentrychangemachine.jsp" />
 	</definition>
@@ -103,60 +139,85 @@
 			value="/WEB-INF/views/admin/incidents/allincidents.jsp" />
 	</definition>
 	<definition name="updateincident" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/incidents/updateincident.jsp" />
 	</definition>
 	<definition name="updateoperationadmin"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/operations/newoperation.jsp" />
 	</definition>
 	<definition name="providingtotal" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/providing/providingtotal.jsp" />
 	</definition>
 	<definition name="changemachinetotal"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/changemachinetotal.jsp" />
 	</definition>
 	<definition name="luckia" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/luckia.jsp" />
 	</definition>
 	<definition name="searchticketsbyday"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/operations/searchticketsbyday.jsp" />
 	</definition>
 	<definition name="ticketsbyday" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/operations/ticketsbyday.jsp" />
 	</definition>
 	<definition name="updatechangemachine"
 		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/updatechangemachine.jsp" />
 	</definition>
 	<definition name="lostnumbers" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/lostnumbers.jsp" />
 	</definition>
-	<definition name="newmessage" extends="templateAdminTime">
+	<definition name="newmessage" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/headerTime.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/messages/newmessage.jsp" />
 	</definition>
 	<definition name="allmessages" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/messages/allmessages.jsp" />
 	</definition>
-	<definition name="openmachinesadmin"
-		extends="templateEmployee">
+	<definition name="openmachinesadmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/openmachines/openmachines.jsp" />
 	</definition>
 	<definition name="searchopenmachines"
-		extends="templateEmployee">
+		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/openmachines/search.jsp" />
 	</definition>

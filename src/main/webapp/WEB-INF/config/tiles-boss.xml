@@ -7,8 +7,6 @@
 	<!-- workshop -->
 	<definition name="templateBoss"
 		template="/WEB-INF/views/boss/template.jsp" />
-	<definition name="templateDate"
-		template="/WEB-INF/views/boss/templateDate.jsp" />
 	<definition name="templateLogin"
 		template="/WEB-INF/views/boss/templateLogin.jsp" />
 	<definition name="loginboss" extends="templateLogin">
@@ -16,122 +14,180 @@
 			value="/WEB-INF/views/boss/login.jsp" />
 	</definition>
 	<definition name="adminboss" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/admin.jsp" />
 	</definition>
 	<definition name="success" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/success.jsp" />
 	</definition>
 	<definition name="allusers" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/update/allusers.jsp" />
 	</definition>
 	<definition name="updateuser" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/update/updateuser.jsp" />
 	</definition>
 	<definition name="resultenabledisableuser"
 		extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/update/resultenabledisableuser.jsp" />
 	</definition>
 	<definition name="newuser" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/saveuser/newuser.jsp" />
 	</definition>
 	<definition name="resultuser" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/users/saveuser/resultuser.jsp" />
 	</definition>
 	<definition name="searchentries" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/entriesmoney/searchentries.jsp" />
 	</definition>
 	<definition name="resultentriesmoney" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/entriesmoney/resultentriesmoney.jsp" />
 	</definition>
 	<definition name="searchscheduleboss" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/calendar/searchschedule.jsp" />
 	</definition>
 	<definition name="scheduleboss" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/calendar/schedule.jsp" />
 	</definition>
 	<definition name="safetotal" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/safe/safe.jsp" />
 	</definition>
 	<definition name="searchentrysortsafe"
 		extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/safe/searchentrysortsafe.jsp" />
 	</definition>
 	<definition name="resultentrysortsafe"
 		extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/safe/resultentrysortsafe.jsp" />
 	</definition>
 	<definition name="summaryexpenses" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/expenses/searchexpenses.jsp" />
 	</definition>
 	<definition name="resultexpenses" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/expenses/result.jsp" />
 	</definition>
 	<definition name="summaryincome" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/income/searchincome.jsp" />
 	</definition>
 	<definition name="resultincome" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/income/result.jsp" />
 	</definition>
 	<definition name="register" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/registers/register.jsp" />
 	</definition>
 	<definition name="searchregisters" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/registers/searchregisters.jsp" />
 	</definition>
 	<definition name="searchexpenses" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/expenses/searchexpenses.jsp" />
 	</definition>
 	<definition name="dailybossarrows" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/dailyarrows.jsp" />
 	</definition>
 	<definition name="dailybossarrow" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/dailyarrow.jsp" />
 	</definition>
 	<definition name="updateoperationboss"
 		extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/operations/newoperation.jsp" />
 	</definition>
 	<definition name="searchtpv" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/operations/searchtpv.jsp" />
 	</definition>
 	<definition name="resulttpv" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/operations/resulttpv.jsp" />
 	</definition>
 	<definition name="searchrecharges" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/recharges/searchrecharges.jsp" />
 	</definition>
 	<definition name="recharges" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/recharges/recharges.jsp" />
 	</definition>
-	<definition name="searchdaily" extends="templateDate">
+	<definition name="searchdaily" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/headerDate.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/searchdaily.jsp" />
 	</definition>
@@ -140,14 +196,20 @@
 			value="/WEB-INF/views/boss/403.jsp" />
 	</definition>
 	<definition name="notdailyboss" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/dailies/notdaily.jsp" />
 	</definition>
-	<definition name="searchopenmachines" extends="templateDate">
+	<definition name="searchopenmachines" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/headerDate.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/openmachines/search.jsp" />
 	</definition>
 	<definition name="openmachinesboss" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/openmachines/openmachines.jsp" />
 	</definition>
