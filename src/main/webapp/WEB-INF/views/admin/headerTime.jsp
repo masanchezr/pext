@@ -19,6 +19,7 @@
 	href="<spring:url value="/resources/img/admin/favicon.png"/>"
 	type="image/png">
 <title><spring:message code="titleAdmin" /></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 	function formSubmit() {
 		document.getElementById("logoutForm").submit();
@@ -49,29 +50,29 @@
 		scrollbar : true
 	});
 </script>
-	<script type="text/javascript"
-		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
-	<!-- Custom Theme JavaScript -->
-	<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
-	<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
-	<script>
-		$(function() {
-			$("#sandbox-container input").datepicker({
-				language : "es",
-				autoclose : true,
-				todayHighlight : true
-			});
+<script type="text/javascript"
+	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
+<!-- Custom Theme JavaScript -->
+<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
+<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
+<script>
+	$(function() {
+		$("#sandbox-container input").datepicker({
+			language : "es",
+			autoclose : true,
+			todayHighlight : true
 		});
-	</script>
+	});
+</script>
 </head>
