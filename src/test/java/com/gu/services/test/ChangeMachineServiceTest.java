@@ -27,9 +27,4 @@ public class ChangeMachineServiceTest {
 	public void getIncomeTotalMonthTest() {
 		System.out.println(changeMachineService.getIncomeTotalMonth());
 	}
-
-	@Test
-	public void loadDataTicketServerTest() {
-		changeMachineService.loadDataTicketServer();
-	}
 }
