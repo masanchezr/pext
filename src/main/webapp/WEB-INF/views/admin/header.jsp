@@ -20,7 +20,6 @@
 	href="<spring:url value="/resources/img/admin/favicon.png"/>"
 	type="image/png">
 <title><spring:message code="titleAdmin" /></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 	function formSubmit() {
 		document.getElementById("logoutForm").submit();
