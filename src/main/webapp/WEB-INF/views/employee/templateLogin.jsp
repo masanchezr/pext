@@ -10,6 +10,9 @@
 <link
 	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet">
+<link rel="shortcut icon"
+	href="<spring:url value="/resources/img/admin/favicon.png"/>"
+	type="image/png">
 <title><spring:message code="titleAdmin" /></title>
 </head>
 <body class="bg-dark">
