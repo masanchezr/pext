@@ -134,10 +134,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/newentrychangemachine.jsp" />
 	</definition>
-	<definition name="allincidents" extends="templateAdmin">
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/incidents/allincidents.jsp" />
-	</definition>
 	<definition name="updateincident" extends="templateAdmin">
 		<put-attribute name="header"
 			value="/WEB-INF/views/admin/header.jsp" />
