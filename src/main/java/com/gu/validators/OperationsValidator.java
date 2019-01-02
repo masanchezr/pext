@@ -22,9 +22,9 @@ public class OperationsValidator implements Validator {
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
 			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
-		if (operation.getAward().getIdaward().equals(Constants.OTHERAWARDS)) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION,
-					ConstantsJsp.ERRORSELECTDESCRIPTION);
+		if (operation.getAward().getIdaward().compareTo(Constants.OTHERAWARDS) == 0
+				|| (operation.getAward().getIdaward().compareTo(Constants.EATANDDRINKS) == 0)) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
 		}
 	}
 

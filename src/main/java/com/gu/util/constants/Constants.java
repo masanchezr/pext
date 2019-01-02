@@ -85,4 +85,6 @@ public class Constants {
 
 	public static final Long INCOMEMACHINE = 4L;
 
+	public static final Integer EATANDDRINKS = 7;
+
 }
