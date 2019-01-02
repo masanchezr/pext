@@ -73,6 +73,9 @@
 									itemLabel="alias" />
 							</form:select>
 						</div>
+						<div class="invisible" id="textstaple">
+							<spring:message code="staple" />
+						</div>
 					</div>
 				</div>
 			</div>
