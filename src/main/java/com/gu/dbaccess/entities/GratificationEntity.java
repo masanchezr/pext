@@ -49,6 +49,9 @@ public class GratificationEntity {
 	@JoinColumn(name = "idmachine", referencedColumnName = "idmachine")
 	private MachineEntity machine;
 
+	@Column(name = "amount")
+	private Integer amount;
+
 	public Long getIdgratification() {
 		return idgratification;
 	}
@@ -119,5 +122,13 @@ public class GratificationEntity {
 
 	public void setUsefromdate(Date usefromdate) {
 		this.usefromdate = usefromdate;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 }

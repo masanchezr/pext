@@ -33,6 +33,7 @@
 		<class>com.gu.dbaccess.entities.OpenMachineEntity</class>
 		<class>com.gu.dbaccess.entities.CauseEntity</class>
 		<class>com.gu.dbaccess.entities.FunctionalityEntity</class>
+		<class>com.gu.dbaccess.entities.MetadataEntity</class>
 		<class>com.gu.dbaccess.entities.FunctionalityMachine</class>
 		<properties>
 			<property name="hibernate.query.factory_class"

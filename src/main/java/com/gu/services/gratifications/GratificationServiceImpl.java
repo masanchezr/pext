@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.EmployeeEntity;
 import com.gu.dbaccess.entities.GratificationEntity;
+import com.gu.dbaccess.entities.MetadataEntity;
 import com.gu.dbaccess.repositories.EmployeesRepository;
 import com.gu.dbaccess.repositories.GratificationsRepository;
+import com.gu.dbaccess.repositories.MetadataRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
@@ -35,6 +38,9 @@ public class GratificationServiceImpl implements GratificationService {
 
 	@Autowired
 	private EmployeesRepository employeesrepository;
+
+	@Autowired
+	private MetadataRepository metadataRepository;
 
 	/** The daily service. */
 	@Autowired
@@ -96,17 +102,21 @@ public class GratificationServiceImpl implements GratificationService {
 		Calendar c = Calendar.getInstance();
 		Date expirationdate;
 		Date usefromdate;
-		c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
-		c.set(Calendar.HOUR_OF_DAY, 0);
-		c.set(Calendar.MINUTE, 0);
-		usefromdate = c.getTime();
-		c.set(Calendar.HOUR_OF_DAY, 23);
-		c.set(Calendar.MINUTE, 59);
-		expirationdate = c.getTime();
-		g.setCreationdate(new Date());
-		g.setEmployee(employee);
-		g.setUsefromdate(usefromdate);
-		g.setExpirationdate(expirationdate);
-		generateTicket(gratificationRepository.save(g), path);
+		Optional<MetadataEntity> optionalmetadata = metadataRepository.findById("amountgratifications");
+		if (optionalmetadata.isPresent()) {
+			g.setAmount(optionalmetadata.get().getValue());
+			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
+			c.set(Calendar.HOUR_OF_DAY, 0);
+			c.set(Calendar.MINUTE, 0);
+			usefromdate = c.getTime();
+			c.set(Calendar.HOUR_OF_DAY, 23);
+			c.set(Calendar.MINUTE, 59);
+			expirationdate = c.getTime();
+			g.setCreationdate(new Date());
+			g.setEmployee(employee);
+			g.setUsefromdate(usefromdate);
+			g.setExpirationdate(expirationdate);
+			generateTicket(gratificationRepository.save(g), path);
+		}
 	}
 }

@@ -215,14 +215,14 @@ public class DailyServiceImpl implements DailyService {
 	}
 
 	private void setGratifications(Daily daily, Date date) {
-		BigDecimal gratificationsAmount = BigDecimal.ZERO;
+		Integer gratificationsAmount = 0;
 		List<GratificationEntity> gratifications = gratificationRepository.searchByPaydate(date);
 		if (gratifications != null && !gratifications.isEmpty()) {
-			BigDecimal ten = new BigDecimal(10);
-			for (int i = 0; i < gratifications.size(); i++) {
-				gratificationsAmount = gratificationsAmount.add(ten);
+			Iterator<GratificationEntity> igratifications = gratifications.iterator();
+			while (igratifications.hasNext()) {
+				gratificationsAmount = gratificationsAmount + igratifications.next().getAmount();
 			}
-			daily.setFinalamount(daily.getFinalamount().subtract(gratificationsAmount));
+			daily.setFinalamount(daily.getFinalamount().subtract(new BigDecimal(gratificationsAmount)));
 			daily.setNumoperations(gratifications.size() + daily.getNumoperations());
 			daily.setGratifications(gratifications);
 		}
