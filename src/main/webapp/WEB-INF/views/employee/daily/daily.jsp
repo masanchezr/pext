@@ -41,7 +41,8 @@
 										value="${operation.machine.name}" /></td>
 								<td><fmt:formatDate value="${operation.paydate}"
 										type="time" /></td>
-								<td>10<i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${operation.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="comun" /></td>
 							</tr>
 						</c:forEach>
@@ -82,7 +83,8 @@
 										value="${money.employee.alias}" /></td>
 								<td><fmt:formatDate value="${money.creationdate}"
 										type="time" /></td>
-								<td><c:out value="${money.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${money.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="comun" /></td>
 							</tr>
 						</c:forEach>
@@ -112,7 +114,8 @@
 								<td><spring:message code="tpv" /> <c:out
 										value="${tpv.idtpv}" /></td>
 								<td><fmt:formatDate value="${tpv.creationdate}" type="time" /></td>
-								<td><c:out value="${tpv.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${tpv.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${tpv.pay.name}" /></td>
 							</tr>
 						</c:forEach>
@@ -121,7 +124,8 @@
 								<td><c:out value="${lcm.idchangemachine}" /> <c:out
 										value="${lcm.machine.name}" /></td>
 								<td><fmt:formatDate value="${lcm.creationdate}" type="time" /></td>
-								<td><c:out value="${lcm.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${lcm.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="changemachine" /></td>
 							</tr>
 						</c:forEach>

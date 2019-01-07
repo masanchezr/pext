@@ -107,6 +107,8 @@ public class OperationServiceImpl implements OperationService {
 		BigDecimal total = BigDecimal.ZERO;
 		Map<String, Object> result = new HashMap<>();
 		List<GratificationEntity> gratifications;
+		Iterator<GratificationEntity> igratifications;
+		Integer g = 0;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();
@@ -123,11 +125,12 @@ public class OperationServiceImpl implements OperationService {
 			total = total.add(expense.getAmount());
 			expenses.add(expense);
 		}
-		if (gratifications != null) {
-			int g = gratifications.size() * 10;
-			result.put(Constants.GRATIFICATIONS, g);
-			total = total.add(BigDecimal.valueOf(g));
+		igratifications = gratifications.iterator();
+		while (igratifications.hasNext()) {
+			g = g + igratifications.next().getAmount();
 		}
+		total = total.add(BigDecimal.valueOf(g));
+		result.put(Constants.GRATIFICATIONS, g);
 		result.put("expenses", expenses);
 		result.put(ConstantsJsp.TOTAL, total);
 		return result;
