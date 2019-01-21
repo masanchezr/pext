@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,20 +22,24 @@ public class IncidentServiceImpl implements IncidentService {
 		incident.setCreationdate(new Date());
 		incident.setState(Boolean.FALSE);
 		incident = incidentRepository.save(incident);
-		mailService = new MailService(incident.getDescription(), null, "NUEVA INCIDENCIA GOLDEN USERA");
+		mailService = new MailService(incident.getDescription(), "godomin1971@gmail.com",
+				"NUEVA INCIDENCIA GOLDEN USERA");
 		mailService.start();
 	}
 
 	public void resolve(IncidentEntity incident) {
-		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).get();
-		entity.setDescription(incident.getDescription());
-		entity.setState(Boolean.TRUE);
-		incidentRepository.save(entity);
+		Optional<IncidentEntity> oincident = incidentRepository.findById(incident.getIdincident());
+		if (oincident.isPresent()) {
+			IncidentEntity entity = oincident.get();
+			entity.setDescription(incident.getDescription());
+			entity.setState(Boolean.TRUE);
+			incidentRepository.save(entity);
+		}
 	}
 
 	public List<IncidentEntity> searchAllIncidents() {
-		List<IncidentEntity> incidents = mapper(incidentRepository.findAll());
-		return incidents;
+		Iterable<IncidentEntity> entities = incidentRepository.findAll();
+		return mapper(entities);
 	}
 
 	public List<IncidentEntity> searchPending() {
@@ -42,7 +47,7 @@ public class IncidentServiceImpl implements IncidentService {
 	}
 
 	private List<IncidentEntity> mapper(Iterable<IncidentEntity> entities) {
-		List<IncidentEntity> incidents = new ArrayList<IncidentEntity>();
+		List<IncidentEntity> incidents = new ArrayList<>();
 		Iterator<IncidentEntity> ientities = entities.iterator();
 		while (ientities.hasNext()) {
 			incidents.add(ientities.next());
@@ -51,6 +56,11 @@ public class IncidentServiceImpl implements IncidentService {
 	}
 
 	public IncidentEntity searchIncident(IncidentEntity incident) {
-		return incidentRepository.findById(incident.getIdincident()).get();
+		Optional<IncidentEntity> oincident = incidentRepository.findById(incident.getIdincident());
+		if (oincident.isPresent()) {
+			return oincident.get();
+		} else {
+			return null;
+		}
 	}
 }
