@@ -38,7 +38,7 @@
 							code="entrymoney" />"><spring:url
 						value="/admin/newentrymoney" var="entrymoney"></spring:url> <a
 					href="${entrymoney}" class="nav-link"><i
-						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-cash-register fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="entrymoney" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
