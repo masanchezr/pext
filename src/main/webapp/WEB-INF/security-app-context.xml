@@ -152,7 +152,7 @@
 			access="hasRole('ROLE_BOSS')" />
 		<intercept-url pattern="/searchopenmachines"
 			access="hasRole('ROLE_BOSS')" />
-		<intercept-url pattern="/employee/newtpv"
+		<intercept-url pattern="/newtpv"
 			access="hasRole('ROLE_BOSS')" />
 	</http>
 
