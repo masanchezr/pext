@@ -20,10 +20,8 @@ public class TPVServiceImpl implements TPVService {
 	private TPVRepository tpvrepository;
 
 	public Daily save(TPVEntity tpv) {
-		Date today = new Date();
-		tpv.setCreationdate(today);
 		tpvrepository.save(tpv);
-		return dailyService.getDailyEmployee(today);
+		return dailyService.getDaily(new Date());
 	}
 
 	@Override
