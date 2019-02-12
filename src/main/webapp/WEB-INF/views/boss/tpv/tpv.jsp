@@ -28,6 +28,13 @@
 						</p>
 					</div>
 					<div class="form-group">
+						<spring:message code="date" />
+						<form:input class="form-control" path="creationdate" />
+						<p class="text-danger">
+							<form:errors path="creationdate" />
+						</p>
+					</div>
+					<div class="form-group">
 						<spring:message code="payment" />
 						<form:select class="form-control" path="pay.idpayment"
 							id="payments">

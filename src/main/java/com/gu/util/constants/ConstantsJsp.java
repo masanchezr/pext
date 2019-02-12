@@ -26,7 +26,7 @@ public class ConstantsJsp {
 	public static final String FORMSEARCH = "searchDateForm";
 	public static final String FORMINCIDENT = "incident";
 	public static final String ERRORSELECTAMOUNT = "selectamount";
-	public static final String SELECTDATE = "selectdate";
+	public static final String ERRORSELECTDATE = "selectdate";
 	public static final String ERRORSELECTDESCRIPTION = "selectdescription";
 	public static final String SUCCESS = "success";
 	public static final String TOTAL = "total";

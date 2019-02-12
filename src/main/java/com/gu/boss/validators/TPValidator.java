@@ -17,6 +17,7 @@ public class TPValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDTPV, ConstantsJsp.ERRORSELECTID);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.CREATIONDATE, ConstantsJsp.ERRORSELECTDATE);
 	}
 
 }

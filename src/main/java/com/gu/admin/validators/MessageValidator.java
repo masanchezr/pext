@@ -15,8 +15,8 @@ public class MessageValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEFROM, ConstantsJsp.SELECTDATE);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEUNTIL, ConstantsJsp.SELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEFROM, ConstantsJsp.ERRORSELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEUNTIL, ConstantsJsp.ERRORSELECTDATE);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "smessage", ConstantsJsp.ERRORSELECTDESCRIPTION);
 	}
 
