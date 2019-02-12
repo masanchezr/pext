@@ -151,6 +151,21 @@ public class DailiesController {
 		return model;
 	}
 
+	@RequestMapping(value = "/beforeday")
+	public ModelAndView beforeday() {
+		ModelAndView model = new ModelAndView();
+		Date date = DateUtil.addDays(new Date(), -1);
+		Daily daily = dailyService.getDaily(DateUtil.addDays(new Date(), -1));
+		if (daily.getFinalamount() == null) {
+			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
+		} else {
+			model.addObject(ConstantsJsp.DAILY, daily);
+			model.setViewName(ConstantsJsp.VIEWDAILYBOSSARROWS);
+			model.addObject(ConstantsJsp.DATEDAILY, date);
+		}
+		return model;
+	}
+
 	@RequestMapping(value = "/againday{date}")
 	public ModelAndView againday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
