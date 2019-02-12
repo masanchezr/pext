@@ -13,6 +13,15 @@
 		</field>
 	</mapping>
 	<mapping>
+		<class-a>com.gu.boss.forms.TPV</class-a>
+		<class-b>com.gu.dbaccess.entities.TPVEntity</class-b>
+		<field
+			custom-converter="com.gu.converters.StringToDateConverter">
+			<a>creationdate</a>
+			<b>creationdate</b>
+		</field>
+	</mapping>
+	<mapping>
 		<class-a>com.gu.services.messages.Message</class-a>
 		<class-b>com.gu.dbaccess.entities.MessageEntity</class-b>
 		<field
