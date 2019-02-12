@@ -60,7 +60,7 @@ public class TPVController {
 	public ModelAndView newtpv() {
 		ModelAndView model = new ModelAndView();
 		model.addObject(FORMTPV, new TPV());
-		model.addObject("payments", paymentservice.findAll());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentservice.findAll());
 		model.setViewName(VIEWNEWTPV);
 		return model;
 	}
@@ -72,12 +72,14 @@ public class TPVController {
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWTPV);
 			model.addObject(FORMTPV, tpv);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentservice.findAll());
 		} else {
 			// miro si existe ya
 			if (tpvservice.exists(tpv.getIdtpv())) {
 				model.setViewName(VIEWNEWTPV);
 				model.addObject(FORMTPV, tpv);
 				result.rejectValue(Constants.IDTPV, "exists");
+				model.addObject(ConstantsJsp.PAYMENTS, paymentservice.findAll());
 			} else {
 				model.addObject(ConstantsJsp.DAILY, tpvservice.save(mapper.map(tpv, TPVEntity.class)));
 				model.setViewName(ConstantsJsp.VIEWDAILYBOSSARROW);
