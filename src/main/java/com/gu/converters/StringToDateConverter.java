@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.dozer.DozerConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
@@ -15,8 +13,6 @@ import com.gu.util.string.Util;
  * The Class StringToDateConverter.
  */
 public class StringToDateConverter extends DozerConverter<String, Date> {
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(StringToDateConverter.class);
 
 	/**
 	 * Instantiates a new string to date converter.
@@ -28,7 +24,6 @@ public class StringToDateConverter extends DozerConverter<String, Date> {
 	@Override
 	public Date convertTo(String source, Date destination) {
 		Date date = null;
-		log.info("source:" + source);
 		if (!Util.isEmpty(source)) {
 			date = DateUtil.getDate(source);
 		}

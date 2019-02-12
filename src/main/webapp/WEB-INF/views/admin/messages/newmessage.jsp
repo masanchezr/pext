@@ -17,10 +17,10 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<spring:message code="description" var="desc" />
-							<form:textarea class="form-control" path="message"
+							<form:textarea class="form-control" path="smessage"
 								placeholder="${desc}" />
 							<p class="text-danger">
-								<form:errors path="message" />
+								<form:errors path="smessage" />
 							</p>
 						</div>
 						<div class="form-group">
@@ -28,23 +28,31 @@
 							<form:checkbox path="active" />
 						</div>
 						<div class="form-group">
-							<div class="jt-configuration-demo-example-timepicker-container">
-								<spring:message code="datefrom" var="datefrom" />
+							<div class="input-group date" id="datetimefrom"
+								data-target-input="nearest">
 								<form:input type="text" path="datefrom"
-									class="timepicker text-center" placeholder="${datefrom}" />
-								<p class="text-danger">
-									<form:errors path="datefrom" />
-								</p>
+									class="form-control datetimepicker-input"
+									data-target="#datetimefrom" />
+								<div class="input-group-append" data-target="#datetimefrom"
+									data-toggle="datetimepicker">
+									<div class="input-group-text">
+										<i class="fa fa-clock"></i>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="jt-configuration-demo-example-timepicker-container">
-								<spring:message code="dateuntil" var="dateuntil" />
+							<div class="input-group date" id="datetimeuntil"
+								data-target-input="nearest">
 								<form:input type="text" path="dateuntil"
-									class="timepicker text-center" placeholder="${dateuntil}" />
-								<p class="text-danger">
-									<form:errors path="dateuntil" />
-								</p>
+									class="form-control datetimepicker-input"
+									data-target="#datetimeuntil" />
+								<div class="input-group-append" data-target="#datetimeuntil"
+									data-toggle="datetimepicker">
+									<div class="input-group-text">
+										<i class="fa fa-clock"></i>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">

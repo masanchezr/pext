@@ -21,7 +21,7 @@ public interface PaymentService {
 	 *
 	 * @return the list
 	 */
-	List<PaymentEntity> findAll();
+	Iterable<PaymentEntity> findAll();
 
 	public List<PaymentEntity> findAllActiveFalse();
 }

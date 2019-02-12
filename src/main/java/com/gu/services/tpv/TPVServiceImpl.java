@@ -1,10 +1,8 @@
 package com.gu.services.tpv;
 
-import java.util.Calendar;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,9 +10,6 @@ import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
-import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
-import com.gu.util.date.DateUtil;
 
 public class TPVServiceImpl implements TPVService {
 
@@ -31,28 +26,17 @@ public class TPVServiceImpl implements TPVService {
 		return dailyService.getDailyEmployee(today);
 	}
 
-	public TPVEntity findById(TPVEntity tpv) {
-		return tpvrepository.findById(tpv.getIdtpv()).orElse(null);
+	@Override
+	public boolean exists(Long idtpv) {
+		return tpvrepository.existsById(idtpv);
 	}
 
-	public Map<String, ?> getOperationsTpv(String month) {
-		Map<String, Object> map = null;
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
-		List<TPVEntity> operations = tpvrepository.findByCreationdateBetween(from, until);
-		if (operations != null) {
-			map = new HashMap<>();
-			map.put(ConstantsJsp.OPERATIONS, operations);
-			map.put(Constants.AMOUNT, tpvrepository.sumByCreationdate(from, until));
-		}
-		return map;
+	public List<TPVEntity> getOperationsTpv(Date from, Date until) {
+		return tpvrepository.findByCreationdateBetween(from, until);
+	}
+
+	public BigDecimal sumByCreationdate(Date from, Date until) {
+		return tpvrepository.sumByCreationdate(from, until);
 	}
 
 }

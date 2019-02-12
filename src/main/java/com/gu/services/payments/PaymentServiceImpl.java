@@ -21,16 +21,16 @@ public class PaymentServiceImpl implements PaymentService {
 	 * 
 	 * @return the list
 	 */
-	public List<PaymentEntity> findAll() {
-		return (List<PaymentEntity>) paymentRepository.findAll();
+	public Iterable<PaymentEntity> findAll() {
+		return paymentRepository.findAll();
 	}
 
 	public List<PaymentEntity> findAllActive() {
-		return (List<PaymentEntity>) paymentRepository.findByActive(true);
+		return paymentRepository.findByActive(true);
 	}
 
 	public List<PaymentEntity> findAllActiveFalse() {
-		return (List<PaymentEntity>) paymentRepository.findByActiveOrderByName(false);
+		return paymentRepository.findByActiveOrderByName(false);
 	}
 
 }

@@ -159,19 +159,19 @@
 		<put-attribute name="header"
 			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/operations/newoperation.jsp" />
+			value="/WEB-INF/views/boss/newoperation.jsp" />
 	</definition>
 	<definition name="searchtpv" extends="templateBoss">
 		<put-attribute name="header"
 			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/operations/searchtpv.jsp" />
+			value="/WEB-INF/views/boss/tpv/searchtpv.jsp" />
 	</definition>
 	<definition name="resulttpv" extends="templateBoss">
 		<put-attribute name="header"
 			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/boss/operations/resulttpv.jsp" />
+			value="/WEB-INF/views/boss/tpv/resulttpv.jsp" />
 	</definition>
 	<definition name="searchrecharges" extends="templateBoss">
 		<put-attribute name="header"
@@ -212,5 +212,11 @@
 			value="/WEB-INF/views/boss/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/openmachines/openmachines.jsp" />
+	</definition>
+	<definition name="newtpv" extends="templateBoss">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/headerTime.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/boss/tpv/tpv.jsp" />
 	</definition>
 </tiles-definitions>

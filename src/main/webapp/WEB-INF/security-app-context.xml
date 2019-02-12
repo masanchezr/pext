@@ -47,8 +47,6 @@
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/lastgratifications"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
-		<intercept-url pattern="/employee/newtpv"
-			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url
 			pattern="/employee/newpaymentchangemachine"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
@@ -153,6 +151,8 @@
 		<intercept-url pattern="/enabledisableuser"
 			access="hasRole('ROLE_BOSS')" />
 		<intercept-url pattern="/searchopenmachines"
+			access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/employee/newtpv"
 			access="hasRole('ROLE_BOSS')" />
 	</http>
 

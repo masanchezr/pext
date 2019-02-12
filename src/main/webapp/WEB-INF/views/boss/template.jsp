@@ -28,11 +28,6 @@
 					class="nav-link"><i class="fa fa-calendar fa-fw"></i> <span
 						class="nav-link-text"><spring:message code="dailies" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message code="operationstpv" />"><spring:url
-						value="/searchtpv" var="searchtpv" /> <a href="${searchtpv}"
-					class="nav-link"><i class="fa fa-credit-card fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="operationstpv" /></span></a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="summaryexpenses" />"><spring:url
 						value="/summaryexpenses" var="summaryexpenses" /><a
@@ -51,7 +46,7 @@
 							code="recharges" />"><spring:url
 						value="/searchrecharges" var="searchrecharges" /><a
 					href="${searchrecharges}" class="nav-link"><i
-						class="fa fa-eur fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="recharges" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
@@ -60,6 +55,18 @@
 					href="${searchopenmachines}" class="nav-link"><i
 						class="fas fa-lock-open"></i> <span class="nav-link-text"><spring:message
 								code="openmachines" /></span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message code="tpv" />"><a
+					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+					href="#collapseTPV" data-parent="#exampleAccordion"><i
+						class="fa fa-credit-card fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="tpv" /></span> </a>
+					<ul id="collapseTPV" class="sidenav-second-level collapse">
+						<li><spring:url value="/searchtpv" var="searchtpv" /> <a
+							href="${searchtpv}"><spring:message code="searchtpv" /></a></li>
+						<li><spring:url value="/newtpv" var="newtpv" /><a
+							href="${newtpv}"><spring:message code="newtpv" /></a></li>
+					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="safe" />"><a

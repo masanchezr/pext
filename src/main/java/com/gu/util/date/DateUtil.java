@@ -140,4 +140,18 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		return sdf.format(date);
 	}
+
+	public static Date getDayMonthMinimum(String monthyear) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getDate(monthyear));
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+		return calendar.getTime();
+	}
+
+	public static Date getDayMonthMaximum(String monthyear) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getDate(monthyear));
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		return calendar.getTime();
+	}
 }

@@ -30,7 +30,7 @@
 	<bean id="incomeValidator"
 		class="com.gu.employee.validators.IncomeValidator" />
 	<bean id="tpvalidator"
-		class="com.gu.employee.validators.TPValidator" />
+		class="com.gu.boss.validators.TPValidator" />
 	<bean id="gvalidator"
 		class="com.gu.employee.validators.GratificationsValidator" />
 	<bean id="changeMachineValidator"

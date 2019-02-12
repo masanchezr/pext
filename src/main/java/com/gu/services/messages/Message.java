@@ -2,7 +2,7 @@ package com.gu.services.messages;
 
 public class Message {
 	private Long idmessage;
-	private String message;
+	private String smessage;
 	private Boolean active;
 	private String datefrom;
 	private String dateuntil;
@@ -15,12 +15,12 @@ public class Message {
 		this.idmessage = idmessage;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getSmessage() {
+		return smessage;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setSmessage(String message) {
+		this.smessage = message;
 	}
 
 	public Boolean getActive() {

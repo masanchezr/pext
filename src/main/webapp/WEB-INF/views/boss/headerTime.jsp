@@ -14,7 +14,7 @@
 <link href="<spring:url value="/resources/styles/sb-admin.css"/>"
 	rel="stylesheet">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <link rel="shortcut icon"
 	href="<spring:url value="/resources/img/admin/favicon.png"/>"
 	type="image/png">
@@ -39,12 +39,21 @@
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script>
+	$('.timepicker').timepicker({
+		timeFormat : 'hh:mm p',
+		interval : 60,
+		dynamic : true,
+		minTime : '00',
+		maxTime : '23',
+		dropdown : true,
+		scrollbar : true
+	});
+</script>
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
@@ -58,15 +67,12 @@
 	src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
-<script type="text/javascript">
+<script>
 	$(function() {
-		$('#datetimefrom').datetimepicker({
-			format : 'HH:mm:ss'
-		});
-	});
-	$(function() {
-		$('#datetimeuntil').datetimepicker({
-			format : 'HH:mm:ss'
+		$("#sandbox-container input").datepicker({
+			language : "es",
+			autoclose : true,
+			todayHighlight : true
 		});
 	});
 </script>

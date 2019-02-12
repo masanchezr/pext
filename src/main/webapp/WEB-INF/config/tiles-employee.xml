@@ -81,10 +81,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/expenses/operations/updateoperation.jsp" />
 	</definition>
-	<definition name="newtpv" extends="templateEmployee">
-		<put-attribute name="body"
-			value="/WEB-INF/views/employee/expenses/tpv.jsp" />
-	</definition>
 	<definition name="newpaymentchangemachine"
 		extends="templateEmployee">
 		<put-attribute name="body"
