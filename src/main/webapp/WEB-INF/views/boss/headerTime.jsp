@@ -11,7 +11,7 @@
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
-<link href="<spring:url value="/resources/styles/sb-admin.css"/>"
+<link href="<spring:url value="/resources/styles/sb-admin.min.css"/>"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -28,12 +28,16 @@
 		document.getElementById("logoutForm").submit();
 	}
 </script>
+<script>
+	
+</script>
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
@@ -41,6 +45,12 @@
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
 <script>
 	$('.timepicker').timepicker({
 		timeFormat : 'hh:mm p',
@@ -51,23 +61,6 @@
 		dropdown : true,
 		scrollbar : true
 	});
-</script>
-<script type="text/javascript"
-	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
-<!-- Custom Theme JavaScript -->
-<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
-<script
-	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
-<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script
-	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
-<script>
 	$(function() {
 		$("#sandbox-container input").datepicker({
 			language : "es",

@@ -16,7 +16,7 @@
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <link
-	href="<spring:url value="/resources/styles/bootstrap-datepicker.css"/>"
+	href="<spring:url value="/resources/styles/bootstrap-datepicker.min.css"/>"
 	rel="stylesheet">
 <link rel="shortcut icon"
 	href="<spring:url value="/resources/img/admin/favicon.png"/>"
@@ -178,7 +178,7 @@
 	<script
 		src="<spring:url value="/resources/js/employee/operations.js"/>"></script>
 	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+		src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
 	<script>

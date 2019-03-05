@@ -11,7 +11,7 @@
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
-<link href="<spring:url value="/resources/styles/sb-admin.css"/>"
+<link href="<spring:url value="/resources/styles/sb-admin.min.css"/>"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
@@ -33,7 +33,8 @@
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
@@ -48,14 +49,15 @@
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+	src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
 <script type="text/javascript">
