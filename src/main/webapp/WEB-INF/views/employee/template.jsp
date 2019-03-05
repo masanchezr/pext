@@ -13,7 +13,7 @@
 	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
 	rel="stylesheet" type="text/css">
 <link
-	href="<spring:url value="/resources/styles/dataTables.bootstrap4.css"/>"
+	href="<spring:url value="/resources/styles/dataTables.bootstrap4.min.css"/>"
 	rel="stylesheet">
 <link
 	href="<spring:url value="/resources/styles/bootstrap-datepicker.min.css"/>"
