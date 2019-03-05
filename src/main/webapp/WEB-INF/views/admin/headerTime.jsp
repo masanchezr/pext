@@ -36,7 +36,7 @@
 <script
 	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
+	src="<spring:url value="/resources/js/dataTables.bootstrap4.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
@@ -52,7 +52,7 @@
 <script
 	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
+	src="<spring:url value="/resources/js/dataTables.bootstrap4.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
