@@ -5,7 +5,7 @@
 <!-- Bootstrap Core CSS -->
 <link href="<spring:url value="/resources/styles/bootstrap.min.css"/>"
 	rel="stylesheet">
-<link href="<spring:url value="/resources/styles/sb-admin.css"/>"
+<link href="<spring:url value="/resources/styles/sb-admin.min.css"/>"
 	rel="stylesheet">
 <link
 	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/fontawesome-all.min.css"/>"
