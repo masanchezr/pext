@@ -9,7 +9,8 @@
 	rel="stylesheet">
 <link href="<spring:url value="/resources/styles/sb-admin.min.css"/>"
 	rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+	rel="stylesheet">
 <link
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.min.css"/>"
 	rel="stylesheet">
