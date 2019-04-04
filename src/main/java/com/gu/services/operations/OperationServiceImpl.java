@@ -17,11 +17,9 @@ import com.gu.dbaccess.entities.GratificationEntity;
 import com.gu.dbaccess.entities.OperationEntity;
 import com.gu.dbaccess.entities.OperationNotAllowedEntity;
 import com.gu.dbaccess.entities.PaymentEntity;
-import com.gu.dbaccess.entities.ProvidingEntity;
 import com.gu.dbaccess.repositories.GratificationsRepository;
 import com.gu.dbaccess.repositories.OperationsNotAllowedRepository;
 import com.gu.dbaccess.repositories.OperationsRepository;
-import com.gu.dbaccess.repositories.ProvidingRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
@@ -38,38 +36,23 @@ public class OperationServiceImpl implements OperationService {
 	private OperationsRepository operationRepository;
 
 	@Autowired
-	private ProvidingRepository providingRepository;
-
-	@Autowired
 	private OperationsNotAllowedRepository operationsnotallowedrepository;
 
 	@Autowired
 	private GratificationsRepository gratificationsrepository;
 
 	public Daily save(OperationEntity operation) {
-		Long idpayment = operation.getPay().getIdpayment();
 		operation.setCreationdate(new Date());
 		if (operation.getMachine().getIdmachine().equals(0L)) {
 			operation.setMachine(null);
 		}
 		operationRepository.save(operation);
-		if (idpayment.equals(Constants.PROVIDING)) {
-			ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
-			ProvidingEntity entity = new ProvidingEntity();
-			BigDecimal amount = operation.getAmount();
-			entity.setCreationdate(new Date());
-			entity.setAmount(amount.negate());
-			entity.setTotal(providing.getTotal().subtract(amount));
-			providingRepository.save(entity);
-		}
 		return dailyService.getDailyEmployee(new Date());
 	}
 
 	public Daily update(OperationEntity operation) {
 		OperationEntity entityoperation = operationRepository.findById(operation.getIdoperation()).orElse(null);
 		PaymentEntity pay = operation.getPay();
-		Long idpayment = pay.getIdpayment();
-		BigDecimal amount = operation.getAmount();
 		if (entityoperation != null) {
 			if (operation.getMachine().getIdmachine().equals(0L)) {
 				entityoperation.setMachine(null);
@@ -80,14 +63,6 @@ public class OperationServiceImpl implements OperationService {
 			entityoperation.setPay(pay);
 			entityoperation.setAmount(operation.getAmount());
 			operationRepository.save(entityoperation);
-			if (idpayment.equals(Constants.PROVIDING)) {
-				ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
-				ProvidingEntity entity = new ProvidingEntity();
-				entity.setCreationdate(new Date());
-				entity.setAmount(amount.negate());
-				entity.setTotal(providing.getTotal().subtract(amount));
-				providingRepository.save(entity);
-			}
 			return dailyService.getDaily(entityoperation.getCreationdate());
 		} else {
 			return dailyService.getDaily(new Date());

@@ -20,7 +20,6 @@
 		<class>com.gu.dbaccess.entities.BarDrinkEntity</class>
 		<class>com.gu.dbaccess.entities.SafeEntity</class>
 		<class>com.gu.dbaccess.entities.TakeEntity</class>
-		<class>com.gu.dbaccess.entities.ProvidingEntity</class>
 		<class>com.gu.dbaccess.entities.ChangeMachineTotalEntity</class>
 		<class>com.gu.dbaccess.entities.RoleEntity</class>
 		<class>com.gu.dbaccess.entities.IncomeLuckiaEntity</class>

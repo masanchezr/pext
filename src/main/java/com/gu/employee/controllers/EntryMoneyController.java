@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.forms.EntryMoneyForm;
 import com.gu.services.entrymoney.EntryMoneyService;
-import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.EntryMoneyValidator;
 
@@ -29,23 +28,6 @@ public class EntryMoneyController {
 	public ModelAndView entrymoney() {
 		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWNEWENTRYMONEY);
 		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/employee/saveentrymoney")
-	public ModelAndView saveEntryMoney(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoneyForm entryMoney,
-			BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		entryMoneyValidator.validate(entryMoney, result);
-		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.FORMENTRYMONEY, entryMoney);
-			model.setViewName(ConstantsJsp.VIEWNEWENTRYMONEY);
-		} else {
-			entryMoney.setOrigin(Constants.STRINGPROVIDING);
-			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMoneyEmployee(entryMoney));
-			model.setViewName(ConstantsJsp.DAILY);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
-		}
 		return model;
 	}
 

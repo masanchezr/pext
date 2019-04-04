@@ -40,8 +40,6 @@ public class Constants {
 
 	public static final Long CHANGEMACHINE = 2L;
 
-	public static final String STRINGPROVIDING = "providing";
-
 	public static final Integer TPV = 2;
 
 	public static final Long NOBODY = 1L;

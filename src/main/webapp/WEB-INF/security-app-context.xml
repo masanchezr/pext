@@ -92,10 +92,6 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/pendingissues"
 			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/admin/newproviding"
-			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/admin/providingtotal"
-			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/totalsafe"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/luckiaAward"

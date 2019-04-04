@@ -54,21 +54,6 @@
 						<li><spring:url value="/admin/totalsafe" var="totalsafe"></spring:url>
 							<a href="${totalsafe}"><spring:message code="totalsafe" /></a></li>
 					</ul></li>
-
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-							code="providing" />"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseProviding" data-parent="#exampleAccordion"><i
-						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="providing" /></span> </a>
-					<ul id="collapseProviding" class="sidenav-second-level collapse">
-						<li><spring:url value="/admin/newproviding" var="providing"></spring:url>
-							<a href="${providing}"><spring:message code="entryproviding" /></a></li>
-						<li><spring:url value="/admin/providingtotal"
-								var="providingtotal"></spring:url> <a href="${providingtotal}"><spring:message
-									code="providingtotal" /></a></li>
-					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="changemachine" />"><a

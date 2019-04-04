@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.gu.admin.forms.EntryMoneyForm;
 import com.gu.dbaccess.entities.EntryMoneyEntity;
-import com.gu.dbaccess.entities.ProvidingEntity;
 import com.gu.dbaccess.entities.SafeEntity;
 import com.gu.services.dailies.Daily;
 
@@ -19,10 +18,6 @@ public interface EntryMoneyService {
 	public Daily saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm);
 
 	public Daily saveEntryMachine(EntryMoneyForm entryMoney);
-
-	public void save(ProvidingEntity providing);
-
-	public BigDecimal searchTotalProviding();
 
 	public BigDecimal saveAdd(SafeEntity safe);
 

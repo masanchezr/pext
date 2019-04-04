@@ -11,12 +11,10 @@ import com.gu.admin.forms.EntryMoneyForm;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
 import com.gu.dbaccess.entities.EntryMoneyEntity;
-import com.gu.dbaccess.entities.ProvidingEntity;
 import com.gu.dbaccess.entities.SafeEntity;
 import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.gu.dbaccess.repositories.EntryMoneyRepository;
-import com.gu.dbaccess.repositories.ProvidingRepository;
 import com.gu.dbaccess.repositories.SafeRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
@@ -34,9 +32,6 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 
 	@Autowired
 	private SafeRepository safeRepository;
-
-	@Autowired
-	private ProvidingRepository providingRepository;
 
 	@Autowired
 	private ChangeMachineRepository changemachinerepository;
@@ -68,12 +63,6 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new Date());
 		entryMoneyRepository.save(entrymoney);
-		ProvidingEntity providing = providingRepository.findFirstByOrderByIdprovidingDesc();
-		providing.setIdproviding(null);
-		providing.setTotal(providing.getTotal().subtract(amount));
-		providing.setAmount(amount.negate());
-		providing.setCreationdate(new Date());
-		providingRepository.save(providing);
 		return dailyService.getDailyEmployee(new Date());
 	}
 
@@ -100,30 +89,6 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
 		return dailyService.getDailyEmployee(new Date());
-	}
-
-	/**
-	 * El dinero procederá de la caja fuerte
-	 * 
-	 * @param providing
-	 */
-	public void save(ProvidingEntity providing) {
-		ProvidingEntity entity = providingRepository.findFirstByOrderByIdprovidingDesc();
-		SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
-		SafeEntity newsafe = new SafeEntity();
-		BigDecimal amount = providing.getAmount();
-		providing.setCreationdate(new Date());
-		providing.setTotal(entity.getTotal().add(providing.getAmount()));
-		newsafe.setAmount(amount.negate());
-		newsafe.setTotal(safe.getTotal().subtract(amount));
-		newsafe.setCreationdate(new Date());
-		newsafe.setDescription(Constants.STRINGPROVIDING);
-		providingRepository.save(providing);
-		safeRepository.save(newsafe);
-	}
-
-	public BigDecimal searchTotalProviding() {
-		return providingRepository.findFirstByOrderByIdprovidingDesc().getTotal();
 	}
 
 	public BigDecimal saveAdd(SafeEntity safe) {

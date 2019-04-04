@@ -121,12 +121,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/newentrymoney.jsp" />
 	</definition>
-	<definition name="newproviding" extends="templateAdmin">
-		<put-attribute name="header"
-			value="/WEB-INF/views/admin/header.jsp" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/providing/newproviding.jsp" />
-	</definition>
 	<definition name="newentrychangemachine"
 		extends="templateAdmin">
 		<put-attribute name="header"
@@ -146,12 +140,6 @@
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/operations/newoperation.jsp" />
-	</definition>
-	<definition name="providingtotal" extends="templateAdmin">
-		<put-attribute name="header"
-			value="/WEB-INF/views/admin/header.jsp" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/providing/providingtotal.jsp" />
 	</definition>
 	<definition name="changemachinetotal"
 		extends="templateAdmin">
