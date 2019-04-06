@@ -40,7 +40,7 @@ public class MessageServiceImpl implements MessageService {
 		messagesrepository.save(entity);
 	}
 
-	public MessageEntity findById(Long idmessage) {
-		return messagesrepository.findById(idmessage).orElse(null);
+	public Message findById(Long idmessage) {
+		return mapper.map(messagesrepository.findById(idmessage).orElse(null), Message.class);
 	}
 }
