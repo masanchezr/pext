@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.validators.MessageValidator;
-import com.gu.dbaccess.entities.MessageEntity;
 import com.gu.services.messages.Message;
 import com.gu.services.messages.MessageService;
 import com.gu.util.constants.Constants;
@@ -47,8 +46,7 @@ public class MessagesController {
 	@RequestMapping(value = "/admin/messages")
 	public ModelAndView messages() {
 		ModelAndView model = new ModelAndView("allmessages");
-		Iterable<MessageEntity> messages = messageservice.getAllMessages();
-		model.addObject("messages", messages);
+		model.addObject("messages", messageservice.getAllMessages());
 		model.addObject(Constants.MESSAGE, new Message());
 		return model;
 	}

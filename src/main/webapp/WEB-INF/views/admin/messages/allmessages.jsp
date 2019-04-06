@@ -11,9 +11,9 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card-body">
-			<c:if test="${not empty messages}">
-				<div class="table-responsive">
-					<form:form action="updatemessage" modelAttribute="message">
+			<form:form action="updatemessage" modelAttribute="message">
+				<c:if test="${not empty messages}">
+					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>
@@ -30,7 +30,7 @@
 									<tr>
 										<td><form:radiobutton path="idmessage"
 												value="${message.idmessage}" /></td>
-										<td><c:out value="${message.message}" /></td>
+										<td><c:out value="${message.smessage}" /></td>
 										<td><c:out value="${message.active}" /></td>
 										<td><c:out value="${message.datefrom}" /></td>
 										<td><c:out value="${message.dateuntil}" /></td>
@@ -38,15 +38,15 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<form:button class="btn btn-primary" value="submit">
-							<spring:message code="update" />
-						</form:button>
-					</form:form>
-				</div>
-			</c:if>
-			<c:if test="${empty messages}">
-				<spring:message code="noresults" />
-			</c:if>
+					</div>
+				</c:if>
+				<c:if test="${empty messages}">
+					<spring:message code="noresults" />
+				</c:if>
+				<form:button class="btn btn-primary" value="submit">
+					<spring:message code="update" />
+				</form:button>
+			</form:form>
 		</div>
 	</div>
 </div>

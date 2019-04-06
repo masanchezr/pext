@@ -8,7 +8,7 @@ public interface MessageService {
 
 	public List<MessageEntity> getMessagesActiveNow();
 
-	public Iterable<MessageEntity> getAllMessages();
+	public List<Message> getAllMessages();
 
 	public void save(Message message);
 

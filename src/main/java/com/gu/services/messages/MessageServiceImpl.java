@@ -1,6 +1,8 @@
 package com.gu.services.messages;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.dozer.Mapper;
@@ -22,8 +24,14 @@ public class MessageServiceImpl implements MessageService {
 		return messagesrepository.findByActiveTrueAndDatefromBeforeAndDateuntilAfter(now, now);
 	}
 
-	public Iterable<MessageEntity> getAllMessages() {
-		return messagesrepository.findAll();
+	public List<Message> getAllMessages() {
+		Iterable<MessageEntity> entities = messagesrepository.findAll();
+		Iterator<MessageEntity> imessages = entities.iterator();
+		List<Message> messages = new ArrayList<>();
+		while (imessages.hasNext()) {
+			messages.add(mapper.map(imessages.next(), Message.class));
+		}
+		return messages;
 	}
 
 	public void save(Message message) {
