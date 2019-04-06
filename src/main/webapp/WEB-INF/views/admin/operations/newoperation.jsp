@@ -33,6 +33,14 @@
 							</p>
 						</div>
 						<div class="form-group">
+							<spring:message code="description" var="descmessage" />
+							<form:input class="form-control" path="description"
+								placeholder="${descmessage}" />
+							<p class="text-danger">
+								<form:errors path="description" />
+							</p>
+						</div>
+						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="save" />
 							</form:button>
