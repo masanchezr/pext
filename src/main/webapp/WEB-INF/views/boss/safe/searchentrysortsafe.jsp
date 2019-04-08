@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="entrysortsafe" /></li>
 </ol>
-<form:form action="resultentrysortsafe" modelAttribute="searchDateForm">
+<form:form action="resultentrysortsafe" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

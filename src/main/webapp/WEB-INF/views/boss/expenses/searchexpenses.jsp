@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="summaryexpenses" /></li>
 </ol>
-<form:form action="resultexpenses" modelAttribute="searchDateForm">
+<form:form action="resultexpenses" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

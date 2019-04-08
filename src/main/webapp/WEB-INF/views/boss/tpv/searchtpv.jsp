@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="operationstpv" /></li>
 </ol>
-<form:form action="resulttpv" modelAttribute="searchDateForm">
+<form:form action="resulttpv" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="card-body">
 			<div class="col-lg-6">
