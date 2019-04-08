@@ -69,6 +69,7 @@ public class OperationsAdminController {
 			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
 			model.addObject(ConstantsJsp.DAILY, operationService.update(operation));
+			model.addObject(ConstantsJsp.DATEDAILY, operation.getCreationdate());
 			model.setViewName("dailyadminarrows");
 		}
 		return model;
