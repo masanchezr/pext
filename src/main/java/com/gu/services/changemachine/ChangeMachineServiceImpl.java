@@ -86,14 +86,14 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		pay.setIdpayment(Constants.CHANGEMACHINE);
 		take.setTakedate(now);
 		cmtn.setCreationdate(now);
-		cmtn.setTotal(cmt.getTotal().subtract(changeMachineRepository.sumByCreationdateBetween(from, now))
+		cmtn.setDeposit(cmt.getDeposit().subtract(changeMachineRepository.sumByCreationdateBetween(from, now))
 				.subtract(tpvrepository.sumByCreationdateAndPayment(pay, from, now)));
 		changeMachineTotalRepository.save(cmtn);
 		takingsRepository.save(take);
 	}
 
-	public BigDecimal getTotal() {
-		return changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc().getTotal();
+	public ChangeMachineTotalEntity getTotal() {
+		return changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
 	}
 
 	public BigDecimal getAwards() {
@@ -332,5 +332,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		until = calendar.getTime();
 		return changeMachineRepository.findByAwardAndCreationdateBetween(pay, from, until);
+	}
+
+	@Override
+	public void entryToVisible(BigDecimal amount) {
+		ChangeMachineTotalEntity last = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+		ChangeMachineTotalEntity entity = new ChangeMachineTotalEntity();
+		entity.setCreationdate(new Date());
+		entity.setDeposit(last.getDeposit().subtract(amount));
+		entity.setVisible(last.getVisible().add(amount));
+		changeMachineTotalRepository.save(entity);
 	}
 }

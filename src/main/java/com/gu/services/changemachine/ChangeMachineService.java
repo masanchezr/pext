@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.gu.dbaccess.entities.ChangeMachineEntity;
+import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
 import com.gu.services.dailies.Daily;
 
 public interface ChangeMachineService {
@@ -13,8 +14,6 @@ public interface ChangeMachineService {
 	public BigDecimal getIncomeTotalMonth();
 
 	public void reset();
-
-	public BigDecimal getTotal();
 
 	public BigDecimal getAwards();
 
@@ -31,5 +30,9 @@ public interface ChangeMachineService {
 	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until);
 
 	public List<ChangeMachineEntity> recharges(String datefrom);
+
+	public ChangeMachineTotalEntity getTotal();
+
+	public void entryToVisible(BigDecimal amount);
 
 }

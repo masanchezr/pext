@@ -6,9 +6,9 @@
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="changemachine" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="entrychangemachine" /></li>
+			code="entrytovisible" /></li>
 </ol>
-<form:form action="saveentrymachine" modelAttribute="safeForm"
+<form:form action="saveentryvisible" modelAttribute="moneyForm"
 	role="form">
 	<div class="row">
 		<div class="col-lg-6">

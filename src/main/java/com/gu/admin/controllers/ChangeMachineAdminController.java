@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gu.admin.forms.EntryMoneyForm;
 import com.gu.admin.validators.ChangeMachineValidator;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
+import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.awards.AwardService;
 import com.gu.services.changemachine.ChangeMachineService;
@@ -45,6 +47,28 @@ public class ChangeMachineAdminController {
 		model.addObject(ConstantsJsp.TOTAL, changeMachineService.getTotal());
 		model.addObject(ConstantsJsp.AWARDS, changeMachineService.getAwards());
 		return model;
+	}
+
+	@RequestMapping(value = "/admin/newentryvisible")
+	public ModelAndView newentryvisible() {
+		ModelAndView model = new ModelAndView("newentrydeposittovisible");
+		model.addObject("moneyForm", new EntryMoneyForm());
+		return model;
+
+	}
+
+	@RequestMapping(value = "/admin/saveentryvisible")
+	public ModelAndView saveentryvisible(@ModelAttribute("moneyForm") EntryMoneyForm entryForm, BindingResult result) {
+		ChangeMachineTotalEntity total = changeMachineService.getTotal();
+		if (total.getDeposit().compareTo(entryForm.getAmount()) < 0) {
+			ModelAndView model = new ModelAndView("newentrydeposittovisible");
+			model.addObject("money", new EntryMoneyForm());
+			result.rejectValue("amount", "amountplusthan");
+			return model;
+		} else {
+			changeMachineService.entryToVisible(entryForm.getAmount());
+			return changemachinetotal();
+		}
 	}
 
 	@RequestMapping(value = "/admin/resetcm")

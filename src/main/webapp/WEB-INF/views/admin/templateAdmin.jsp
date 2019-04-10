@@ -68,6 +68,9 @@
 								var="entrychangemachine"></spring:url> <a
 							href="${entrychangemachine}"><spring:message
 									code="entrychangemachine" /></a></li>
+						<li><spring:url value="/admin/newentryvisible"
+								var="newentryvisible"></spring:url> <a href="${newentryvisible}"><spring:message
+									code="entrydeposit" /></a></li>
 						<li><spring:url value="/admin/changemachinetotal"
 								var="changemachinetotal"></spring:url> <a
 							href="${changemachinetotal}"><spring:message

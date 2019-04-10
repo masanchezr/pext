@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
 
 @Entity
 @Table(name = "changemachinetotal")
@@ -25,8 +24,11 @@ public class ChangeMachineTotalEntity {
 	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = ConstantsJsp.TOTAL)
-	private BigDecimal total;
+	@Column(name = "VISIBLE")
+	private BigDecimal visible;
+
+	@Column(name = "DEPOSIT")
+	private BigDecimal deposit;
 
 	public Long getIdchangemachinetotal() {
 		return idchangemachinetotal;
@@ -44,11 +46,19 @@ public class ChangeMachineTotalEntity {
 		this.creationdate = creationdate;
 	}
 
-	public BigDecimal getTotal() {
-		return total;
+	public BigDecimal getVisible() {
+		return visible;
 	}
 
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+	public void setVisible(BigDecimal total) {
+		this.visible = total;
+	}
+
+	public BigDecimal getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(BigDecimal deposit) {
+		this.deposit = deposit;
 	}
 }

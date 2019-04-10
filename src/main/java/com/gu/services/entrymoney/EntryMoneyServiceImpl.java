@@ -84,7 +84,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		machine.setIdchangemachine(changemachinerepository
 				.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc().getIdchangemachine() + 1);
 		machinetotal.setCreationdate(new Date());
-		machinetotal.setTotal(changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc().getTotal()
+		machinetotal.setDeposit(changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc().getDeposit()
 				.add(entryMoney.getAmount()));
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
@@ -108,15 +108,16 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	public BigDecimal saveSub(SafeEntity safe) {
 		BigDecimal amount = safe.getAmount();
 		BigDecimal totalsafe = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
-		BigDecimal changemachinetotal = changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc()
-				.getTotal();
+		ChangeMachineTotalEntity changemachinetotal = changemachinetotalrepository
+				.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineEntity entity = new ChangeMachineEntity();
 		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
 		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
 		Date today = new Date();
 		totalcm.setCreationdate(today);
-		totalcm.setTotal(amount.add(changemachinetotal));
+		totalcm.setDeposit(amount.add(changemachinetotal.getDeposit()));
+		totalcm.setVisible(changemachinetotal.getVisible());
 		entity.setCreationdate(today);
 		entity.setAmount(amount);
 		entity.setIdchangemachine(id + 1);

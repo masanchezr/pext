@@ -118,14 +118,6 @@
 								code="newentrymoney" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
-								code="entrymoneychangemachine" />"><spring:url
-						value="/employee/entrymoneychangemachine"
-						var="entrymoneychangemachine">
-					</spring:url> <a href="${entrymoneychangemachine}" class="nav-link"> <i
-						class="fa fa-database fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="entrymoneychangemachine" /></span></a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
 							code="daily"/>"><spring:url
 						value="/employee/daily" var="daily" /><a href="${daily}"
 					class="nav-link"> <i class="fa fa-calendar-alt fa-fw"></i> <span

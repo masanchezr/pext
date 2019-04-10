@@ -205,4 +205,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/openmachines/search.jsp" />
 	</definition>
+	<definition name="newentrydeposittovisible"
+		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/changemachine/newentrydeposittovisible.jsp" />
+	</definition>
 </tiles-definitions>

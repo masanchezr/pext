@@ -38,9 +38,6 @@
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/searchschedule"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
-		<intercept-url
-			pattern="/employee/entrymoneychangemachine"
-			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/newgratification"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/registernumber"
@@ -107,6 +104,8 @@
 		<intercept-url pattern="/admin/searchticketsByDay"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/changemachinetotal"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/newentryvisible"
 			access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/admin/login"
 			default-target-url="/admin/admin"
