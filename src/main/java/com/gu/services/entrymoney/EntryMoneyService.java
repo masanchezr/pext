@@ -26,4 +26,6 @@ public interface EntryMoneyService {
 	public BigDecimal searchTotalSafe();
 
 	public List<SafeEntity> searchByDates(String datefrom);
+
+	public BigDecimal saveSubDirect(SafeEntity safe);
 }

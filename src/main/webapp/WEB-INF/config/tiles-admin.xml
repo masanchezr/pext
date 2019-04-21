@@ -212,4 +212,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/newentrydeposittovisible.jsp" />
 	</definition>
+	<definition name="newentrydirect" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/changemachine/newentrydirect.jsp" />
+	</definition>
 </tiles-definitions>

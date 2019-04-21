@@ -64,6 +64,9 @@
 				</a>
 					<ul id="collapseChangeMachine"
 						class="sidenav-second-level collapse">
+						<li><spring:url value="/admin/newentrydirect"
+								var="newentrydirect"></spring:url> <a href="${newentrydirect}"><spring:message
+									code="newentrydirect" /></a></li>
 						<li><spring:url value="/admin/newentrymachine"
 								var="entrychangemachine"></spring:url> <a
 							href="${entrychangemachine}"><spring:message

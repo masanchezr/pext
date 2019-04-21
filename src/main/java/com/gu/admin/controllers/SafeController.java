@@ -66,6 +66,27 @@ public class SafeController {
 		return model;
 	}
 
+	@RequestMapping(value = "/admin/newentrydirect")
+	public ModelAndView newentrydirectmachine() {
+		ModelAndView model = new ModelAndView("newentrydirect");
+		model.addObject(FORMSALE, new SafeEntity());
+		return model;
+	}
+
+	@RequestMapping(value = "/admin/saveentrydirect")
+	public ModelAndView saveentrydirectmachine(@ModelAttribute(FORMSALE) SafeEntity safe, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		safevalidator.validate(safe, result);
+		if (result.hasErrors()) {
+			model.setViewName("newentrydirect");
+			model.addObject(FORMSALE, safe);
+		} else {
+			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveSubDirect(safe));
+			model.setViewName(VIEWTOTALSAFE);
+		}
+		return model;
+	}
+
 	@RequestMapping(value = "/admin/totalsafe")
 	public ModelAndView totalsafe() {
 		ModelAndView model = new ModelAndView(VIEWTOTALSAFE);

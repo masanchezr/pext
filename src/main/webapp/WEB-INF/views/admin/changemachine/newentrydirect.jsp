@@ -4,30 +4,23 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
-				code="gratifications" /></a></li>
+				code="changemachine" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="gratification" /></li>
+			code="newentrydirect" /></li>
 </ol>
-<form:form action="savegratification" modelAttribute="gratification"
+<form:form action="saveentrydirect" modelAttribute="safeForm"
 	role="form">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-6">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-3">
 						<div class="form-group">
-							<spring:message code="number" />
-							<form:input class="form-control" path="idgratification" />
+							<spring:message code="amount" />
+							<form:input class="form-control" path="amount" />
 							<p class="text-danger">
-								<form:errors path="idgratification" />
+								<form:errors path="amount" />
 							</p>
-						</div>
-						<div class="form-group">
-							<spring:message code="machine" />
-							<form:select class="form-control" path="machine.idmachine">
-								<form:options items="${machines}" itemValue="idmachine"
-									itemLabel="name" />
-							</form:select>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">

@@ -103,7 +103,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	}
 
 	/**
-	 * Entrada a máquina de cambio
+	 * Entrada a depósito de máquina de cambio
 	 */
 	public BigDecimal saveSub(SafeEntity safe) {
 		BigDecimal amount = safe.getAmount();
@@ -118,6 +118,34 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		totalcm.setCreationdate(today);
 		totalcm.setDeposit(amount.add(changemachinetotal.getDeposit()));
 		totalcm.setVisible(changemachinetotal.getVisible());
+		entity.setCreationdate(today);
+		entity.setAmount(amount);
+		entity.setIdchangemachine(id + 1);
+		safe.setCreationdate(today);
+		safe.setTotal(totalsafe.subtract(amount));
+		safe.setAmount(amount.negate());
+		safe.setDescription("CHANGEMACHINE");
+		changemachinerepository.save(entity);
+		changemachinetotalrepository.save(totalcm);
+		return safeRepository.save(safe).getTotal();
+	}
+
+	/**
+	 * Entrada a directa a máquina de cambio
+	 */
+	public BigDecimal saveSubDirect(SafeEntity safe) {
+		BigDecimal amount = safe.getAmount();
+		BigDecimal totalsafe = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
+		ChangeMachineTotalEntity changemachinetotal = changemachinetotalrepository
+				.findFirstByOrderByIdchangemachinetotalDesc();
+		ChangeMachineEntity entity = new ChangeMachineEntity();
+		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
+		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
+				.getIdchangemachine();
+		Date today = new Date();
+		totalcm.setCreationdate(today);
+		totalcm.setVisible(amount.add(changemachinetotal.getVisible()));
+		totalcm.setDeposit(changemachinetotal.getDeposit());
 		entity.setCreationdate(today);
 		entity.setAmount(amount);
 		entity.setIdchangemachine(id + 1);
