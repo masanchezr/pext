@@ -34,7 +34,7 @@ public class DailyServiceTest {
 		Daily daily = dailyService.getDaily(c.getTime());
 		if (daily != null) {
 			System.out.println(
-					"Numero de operaciones:" + daily.getNumoperations() + " importe final:" + daily.getFinalamount());
+					"N&uacute;mero de operaciones:" + daily.getNumoperations() + " importe final:" + daily.getFinalamount());
 		}
 
 	}
