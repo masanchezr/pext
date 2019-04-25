@@ -35,7 +35,7 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="description" var="descmessage" />
+							<spring:message code="descriptionph" var="descmessage" />
 							<form:input class="form-control" path="description"
 								placeholder="${descmessage}" />
 							<p class="text-danger">

@@ -33,7 +33,7 @@
 							</form:select>
 						</div>
 						<div class="form-group">
-							<spring:message code="description" var="description" />
+							<spring:message code="descriptionph" var="description" />
 							<form:input class="form-control" placeholder="${description}"
 								path="description" />
 						</div>

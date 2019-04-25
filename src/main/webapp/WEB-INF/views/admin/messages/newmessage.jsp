@@ -16,7 +16,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="description" var="desc" />
+							<spring:message code="descriptionph" var="desc" />
 							<form:textarea class="form-control" path="smessage"
 								placeholder="${desc}" />
 							<p class="text-danger">
