@@ -34,8 +34,6 @@
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/newincident"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
-		<intercept-url pattern="/employee/newentrymoney"
-			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/searchschedule"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/newgratification"
