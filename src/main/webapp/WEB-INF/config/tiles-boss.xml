@@ -7,8 +7,6 @@
 	<!-- workshop -->
 	<definition name="templateBoss"
 		template="/WEB-INF/views/boss/template.jsp" />
-	<definition name="templateLogin"
-		template="/WEB-INF/views/boss/templateLogin.jsp" />
 	<definition name="loginboss" extends="templateLogin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/login.jsp" />

@@ -7,14 +7,11 @@
 	<!-- employee -->
 	<definition name="templateEmployee"
 		template="/WEB-INF/views/employee/template.jsp" />
-	<definition name="templateLoginEmployee"
-		template="/WEB-INF/views/employee/templateLogin.jsp" />
 	<definition name="adminemployee" extends="templateEmployee">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/admin.jsp" />
 	</definition>
-	<definition name="loginemployee"
-		extends="templateLoginEmployee">
+	<definition name="loginemployee" extends="templateLogin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/login.jsp" />
 	</definition>
@@ -35,8 +32,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/searchdaily.jsp" />
 	</definition>
-	<definition name="403employee"
-		extends="templateLoginEmployee">
+	<definition name="403employee" extends="templateLogin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/403.jsp" />
 	</definition>
