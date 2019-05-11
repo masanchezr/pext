@@ -9,8 +9,9 @@
 	rel="stylesheet">
 <link href="<spring:url value="/resources/styles/sb-admin.min.css"/>"
 	rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-	rel="stylesheet">
+<!-- Custom Fonts -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link
 	href="<spring:url value="/resources/styles/dataTables.bootstrap4.min.css"/>"
 	rel="stylesheet">
@@ -109,13 +110,6 @@
 					href="${searchschedule}" class="nav-link"> <i
 						class="fa fa-calendar fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="searchschedule" /></span></a></li-->
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-								code="newentrymoney" />"><spring:url
-						value="/employee/entrymoney" var="newentrymoney">
-					</spring:url> <a href="${newentrymoney}" class="nav-link"> <i
-						class="fa fa-tags fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="newentrymoney" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="daily"/>"><spring:url
