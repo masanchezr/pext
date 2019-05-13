@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="card card-login mx-auto mt-5">
 		<div class="card-header">
-			<spring:message code="login" />
+			<spring:message code="loginemployee" />
 		</div>
 		<div class="card-body">
 			<form role="form" name='f'
