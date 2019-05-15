@@ -26,8 +26,7 @@ public class RegisterController {
 	private SearchDatesFormValidator searchDatesFormValidator;
 
 	@RequestMapping(value = "/register")
-	public ModelAndView searchregister(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf,
-			BindingResult arg1) {
+	public ModelAndView register(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
@@ -43,7 +42,7 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value = "/searchregister")
-	public ModelAndView searchCalculateDailies() {
+	public ModelAndView searchregister() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHREGISTER);
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;

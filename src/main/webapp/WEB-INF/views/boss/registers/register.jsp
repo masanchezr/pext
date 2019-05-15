@@ -3,6 +3,8 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="#"><spring:message
+				code="goldenusera" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="register" /></li>
 </ol>
 <div class="row">
@@ -21,7 +23,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${register}" var="r">
+						<c:forEach items="${registers}" var="r">
 							<tr>
 								<td><c:out value="${r.employee.dni}" /></td>
 								<td><c:out value="${r.employee.name}" /></td>
