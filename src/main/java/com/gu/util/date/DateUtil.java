@@ -131,6 +131,19 @@ public class DateUtil {
 		return dates;
 	}
 
+	public static List<Date> getDates(Date from, Date until) {
+		List<Date> dates = new ArrayList<>();
+		Calendar cfrom = Calendar.getInstance();
+		Calendar cuntil = Calendar.getInstance();
+		cfrom.setTime(from);
+		cuntil.setTime(until);
+		while (cfrom.compareTo(cuntil) != 0) {
+			dates.add(cfrom.getTime());
+			cfrom.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		return dates;
+	}
+
 	public static String getStringDateFormatyyyyMMdd(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
@@ -153,5 +166,9 @@ public class DateUtil {
 		calendar.setTime(getDate(monthyear));
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		return calendar.getTime();
+	}
+
+	public static Date getDateFormated(Date date) {
+		return getDate(getStringDateFormatddMMyyyy(date));
 	}
 }

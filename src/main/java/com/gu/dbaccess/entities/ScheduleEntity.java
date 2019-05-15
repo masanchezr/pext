@@ -66,4 +66,18 @@ public class ScheduleEntity implements Comparable<ScheduleEntity> {
 	public int compareTo(ScheduleEntity o) {
 		return this.getTime().compareTo(o.getTime());
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		} else {
+			ScheduleEntity e = (ScheduleEntity) o;
+			return e.getEmployee().getIdemployee().equals(this.getEmployee().getIdemployee())
+					&& e.getTime().getIdtime().equals(this.getTime().getIdtime());
+		}
+	}
 }

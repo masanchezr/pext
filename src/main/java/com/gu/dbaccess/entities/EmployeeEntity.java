@@ -30,6 +30,9 @@ public class EmployeeEntity {
 	@Column(name = Constants.USERNAME)
 	private String username;
 
+	@Column(name = "dni")
+	private String dni;
+
 	public Long getIdemployee() {
 		return idemployee;
 	}
@@ -68,5 +71,13 @@ public class EmployeeEntity {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 }

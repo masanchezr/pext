@@ -130,7 +130,7 @@
 	</definition>
 	<definition name="searchregisters" extends="templateBoss">
 		<put-attribute name="header"
-			value="/WEB-INF/views/boss/header.jsp" />
+			value="/WEB-INF/views/boss/headerDate.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/boss/registers/searchregisters.jsp" />
 	</definition>

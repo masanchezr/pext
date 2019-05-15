@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.gu.util.constants.Constants;
 
 @Entity
@@ -22,6 +24,7 @@ public class BarDrinkEntity {
 	private Long idbardrink;
 
 	@Column(name = Constants.CREATIONDATE)
+	@CreatedDate
 	private Date creationdate;
 
 	@Column(name = Constants.AMOUNT)

@@ -4,9 +4,8 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
-				code="registers" /></a></li>
-	<li class="breadcrumb-item active"><spring:message
-			code="searchregister" /></li>
+				code="register" /></a></li>
+	<li class="breadcrumb-item active"><spring:message code="search" /></li>
 </ol>
 <form:form action="register" modelAttribute="searchDateForm"
 	autocomplete="off">

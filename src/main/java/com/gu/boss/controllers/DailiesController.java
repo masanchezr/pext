@@ -154,8 +154,8 @@ public class DailiesController {
 	@RequestMapping(value = "/beforeday")
 	public ModelAndView beforeday() {
 		ModelAndView model = new ModelAndView();
-		Date date = DateUtil.addDays(new Date(), -1);
-		Daily daily = dailyService.getDaily(DateUtil.addDays(new Date(), -1));
+		Date date = DateUtil.addDays(DateUtil.getDateFormated(new Date()), -1);
+		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormated(new Date()), -1));
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {

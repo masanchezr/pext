@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.gu.util.constants.Constants;
 
 @Entity
@@ -23,6 +25,7 @@ public class GratificationEntity {
 	private Long idgratification;
 
 	@Column(name = "CREATIONDATE")
+	@CreatedDate
 	private Date creationdate;
 
 	@Column(name = "PAYDATE")

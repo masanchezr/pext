@@ -50,7 +50,7 @@ public class EmployeeController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		registerService.register(user, ipAddress, Boolean.TRUE);
+		registerService.registerIn(user, ipAddress);
 		model.addObject("messages", messageservice.getMessagesActiveNow());
 		return model;
 	}
@@ -59,6 +59,11 @@ public class EmployeeController {
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
+			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+			if (ipAddress == null) {
+				ipAddress = request.getRemoteAddr();
+			}
+			registerService.registerOut(auth.getName(), ipAddress);
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/employee/login?logout";

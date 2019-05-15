@@ -1,6 +1,7 @@
 package com.gu.services.register;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,29 +47,83 @@ public class RegisterServiceImpl implements RegisterService {
 	 *            EmployeeEntity.class)); outRepository.save(in);
 	 *            inout.add(mapper.map(in, Register.class)); } return inout; }
 	 **/
-	public void register(String user, String ipaddress, Boolean inout) {
+	public void registerIn(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		RegisterEntity register = new RegisterEntity();
-		register.setEmployee(employee);
-		register.setDate(new Date());
-		register.setIpaddress(ipaddress);
-		register.setOutin(inout);
-		registerRepository.save(register);
+		RegisterEntity register = registerRepository.findByDateAndEmployee(DateUtil.getDateFormated(new Date()),
+				employee);
+		if (register == null) {
+			register = new RegisterEntity();
+			register.setEmployee(employee);
+			register.setDate(new Date());
+			register.setIpaddress(ipaddress);
+			register.setEmployee(employee);
+			register.setDate(new Date());
+			register.setIpaddress(ipaddress);
+			register.setTimein(new Date());
+			register.setActive(Boolean.TRUE);
+			registerRepository.save(register);
+		}
 	}
 
-	public List<RegisterEntity> findByDate(Date date) {
-		return registerRepository.selectByDate(date);
+	public void registerOut(String user, String ipaddress) {
+		EmployeeEntity employee = employeesRepository.findByUsername(user);
+		RegisterEntity register = registerRepository.findByDateAndEmployee(DateUtil.getDateFormated(new Date()),
+				employee);
+		if (register == null) {
+			register = new RegisterEntity();
+			register.setEmployee(employee);
+			register.setDate(new Date());
+			register.setIpaddress(ipaddress);
+			register.setEmployee(employee);
+			register.setDate(new Date());
+			register.setIpaddress(ipaddress);
+			register.setActive(Boolean.TRUE);
+		}
+		register.setTimeout(new Date());
+		registerRepository.save(register);
 	}
 
 	public List<RegisterEntity> findByDates(String datefrom, String dateuntil) {
 		Date from;
 		Date until;
+		EmployeeEntity employee;
+		Iterable<EmployeeEntity> employees = employeesRepository.findAll();
+		Iterator<EmployeeEntity> iemployees = employees.iterator();
 		if (dateuntil == null || dateuntil.isEmpty()) {
 			until = new Date();
 		} else {
 			until = DateUtil.getDate(dateuntil);
 		}
 		from = DateUtil.getDate(datefrom);
-		return registerRepository.findByDateBetween(from, until);
+		List<Date> dates = DateUtil.getDates(from, until);
+		// Desactivamos los registros que no queremos mostrar
+		while (iemployees.hasNext()) {
+			employee = iemployees.next();
+			disabledRegister(employee, dates);
+		}
+		return registerRepository.findByDateBetweenAndActive(from, until, Boolean.TRUE);
+	}
+
+	private void disabledRegister(EmployeeEntity employee, List<Date> dates) {
+		Date date;
+		RegisterEntity register;
+		Iterator<Date> idates = dates.iterator();
+		while (idates.hasNext()) {
+			date = idates.next();
+			// cuidado cambiar que hay varios registros de antes cambiar la tabla con uk
+			register = registerRepository.findByDateAndEmployee(date, employee);
+			if (register == null) {
+				register = registerRepository.findByDateAndEmployee(DateUtil.addDays(date, -1), employee);
+				if (register != null) {
+					register.setActive(Boolean.FALSE);
+					registerRepository.save(register);
+				}
+				register = registerRepository.findByDateAndEmployee(DateUtil.addDays(date, -2), employee);
+				if (register != null) {
+					register.setActive(Boolean.FALSE);
+					registerRepository.save(register);
+				}
+			}
+		}
 	}
 }

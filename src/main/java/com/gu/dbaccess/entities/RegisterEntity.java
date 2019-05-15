@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "register")
@@ -20,14 +22,23 @@ public class RegisterEntity {
 	@Column(name = "idregister")
 	private Long idregister;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	private Date date;
 
 	@Column(name = "ipaddress")
 	private String ipaddress;
 
-	@Column(name = "outin")
-	private Boolean outin;
+	@Temporal(TemporalType.TIME)
+	@Column(name = "timein")
+	private Date timein;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "timeout")
+	private Date timeout;
+
+	@Column(name = "active")
+	private Boolean active;
 
 	@ManyToOne
 	@JoinColumn(name = "IDEMPLOYEE", referencedColumnName = "IDEMPLOYEE")
@@ -65,11 +76,27 @@ public class RegisterEntity {
 		this.ipaddress = ipaddress;
 	}
 
-	public Boolean getOutin() {
-		return outin;
+	public Date getTimeout() {
+		return timeout;
 	}
 
-	public void setOutin(Boolean outin) {
-		this.outin = outin;
+	public void setTimeout(Date timeout) {
+		this.timeout = timeout;
+	}
+
+	public Date getTimein() {
+		return timein;
+	}
+
+	public void setTimein(Date timein) {
+		this.timein = timein;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

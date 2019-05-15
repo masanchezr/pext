@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 @Entity
 @Table(name = "incidents")
 public class IncidentEntity {
@@ -22,6 +24,7 @@ public class IncidentEntity {
 	private String description;
 
 	@Column(name = "CREATIONDATE")
+	@CreatedDate
 	private Date creationdate;
 
 	@Column(name = "STATE")

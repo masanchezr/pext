@@ -13,26 +13,21 @@
 					id="dataTables-example">
 					<thead>
 						<tr>
-							<th><spring:message code="employee" /></th>
+							<th><spring:message code="dni" /></th>
+							<th><spring:message code="name" /></th>
 							<th><spring:message code="date" /></th>
-							<th><spring:message code="inout" /></th>
-							<th><spring:message code="ipaddress" /></th>
+							<th><spring:message code="timein" /></th>
+							<th><spring:message code="timeout" /></th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${registers}" var="register">
+						<c:forEach items="${register}" var="r">
 							<tr>
-								<td><c:out value="${register.employee.alias}" /></td>
-								<td><fmt:formatDate value="${register.date}" type="time" /></td>
-								<td><c:choose>
-										<c:when test="${register.outin}">
-											<spring:message code="in" />
-										</c:when>
-										<c:otherwise>
-											<spring:message code="out" />
-										</c:otherwise>
-									</c:choose></td>
-								<td><c:out value="${register.ipaddress}" /></td>
+								<td><c:out value="${r.employee.dni}" /></td>
+								<td><c:out value="${r.employee.name}" /></td>
+								<td><fmt:formatDate value="${r.date}" type="date" /></td>
+								<td><fmt:formatDate value="${r.timein}" type="time" /></td>
+								<td><fmt:formatDate value="${r.timeout}" type="time" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
