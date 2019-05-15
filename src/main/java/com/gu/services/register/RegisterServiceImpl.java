@@ -87,7 +87,7 @@ public class RegisterServiceImpl implements RegisterService {
 		Date from;
 		Date until;
 		EmployeeEntity employee;
-		Iterable<EmployeeEntity> employees = employeesRepository.findAll();
+		Iterable<EmployeeEntity> employees = employeesRepository.findByEnabledTrue();
 		Iterator<EmployeeEntity> iemployees = employees.iterator();
 		if (dateuntil == null || dateuntil.isEmpty()) {
 			until = new Date();
@@ -101,7 +101,7 @@ public class RegisterServiceImpl implements RegisterService {
 			employee = iemployees.next();
 			disabledRegister(employee, dates);
 		}
-		return registerRepository.findByCreationdateBetweenAndActive(from, until, Boolean.TRUE);
+		return registerRepository.findByCreationdateBetweenAndActiveTrue(from, until);
 	}
 
 	private void disabledRegister(EmployeeEntity employee, List<Date> dates) {

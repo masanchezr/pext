@@ -16,8 +16,8 @@
 							<th><spring:message code="dni" /></th>
 							<th><spring:message code="name" /></th>
 							<th><spring:message code="date" /></th>
-							<th><spring:message code="timein" /></th>
-							<th><spring:message code="timeout" /></th>
+							<th><spring:message code="timefrom" /></th>
+							<th><spring:message code="timeuntil" /></th>
 						</tr>
 					</thead>
 					<tbody>

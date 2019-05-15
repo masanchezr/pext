@@ -17,8 +17,8 @@ public class RegisterServiceTest {
 
 	@Test
 	public void findByDatesTest() {
-		String from = "07/07/2018";
-		String until = "08/07/2018";
+		String from = "13/05/2019";
+		String until = "15/05/2019";
 		registerService.findByDates(from, until);
 
 	}
