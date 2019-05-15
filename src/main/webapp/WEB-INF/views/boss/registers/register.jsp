@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
-				code="goldenusera" /></a></li>
+				code="goldusera" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="register" /></li>
 </ol>
 <div class="row">
