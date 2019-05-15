@@ -13,9 +13,9 @@ import com.gu.dbaccess.entities.RegisterEntity;
 
 public interface RegisterRepository extends CrudRepository<RegisterEntity, Long> {
 
-	public List<RegisterEntity> findByDateBetweenAndActive(@Temporal(TemporalType.DATE) Date from,
+	public List<RegisterEntity> findByCreationdateBetweenAndActive(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, Boolean active);
 
-	public RegisterEntity findByDateAndEmployee(@Temporal(TemporalType.DATE) Date dateFormated,
+	public RegisterEntity findByCreationdateAndEmployee(@Temporal(TemporalType.DATE) Date dateFormated,
 			EmployeeEntity employee);
 }

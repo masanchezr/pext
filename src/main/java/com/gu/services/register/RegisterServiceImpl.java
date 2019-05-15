@@ -49,15 +49,15 @@ public class RegisterServiceImpl implements RegisterService {
 	 **/
 	public void registerIn(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		RegisterEntity register = registerRepository.findByDateAndEmployee(DateUtil.getDateFormated(new Date()),
+		RegisterEntity register = registerRepository.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()),
 				employee);
 		if (register == null) {
 			register = new RegisterEntity();
 			register.setEmployee(employee);
-			register.setDate(new Date());
+			register.setCreationdate(new Date());
 			register.setIpaddress(ipaddress);
 			register.setEmployee(employee);
-			register.setDate(new Date());
+			register.setCreationdate(new Date());
 			register.setIpaddress(ipaddress);
 			register.setTimein(new Date());
 			register.setActive(Boolean.TRUE);
@@ -67,15 +67,15 @@ public class RegisterServiceImpl implements RegisterService {
 
 	public void registerOut(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		RegisterEntity register = registerRepository.findByDateAndEmployee(DateUtil.getDateFormated(new Date()),
+		RegisterEntity register = registerRepository.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()),
 				employee);
 		if (register == null) {
 			register = new RegisterEntity();
 			register.setEmployee(employee);
-			register.setDate(new Date());
+			register.setCreationdate(new Date());
 			register.setIpaddress(ipaddress);
 			register.setEmployee(employee);
-			register.setDate(new Date());
+			register.setCreationdate(new Date());
 			register.setIpaddress(ipaddress);
 			register.setActive(Boolean.TRUE);
 		}
@@ -101,7 +101,7 @@ public class RegisterServiceImpl implements RegisterService {
 			employee = iemployees.next();
 			disabledRegister(employee, dates);
 		}
-		return registerRepository.findByDateBetweenAndActive(from, until, Boolean.TRUE);
+		return registerRepository.findByCreationdateBetweenAndActive(from, until, Boolean.TRUE);
 	}
 
 	private void disabledRegister(EmployeeEntity employee, List<Date> dates) {
@@ -111,14 +111,14 @@ public class RegisterServiceImpl implements RegisterService {
 		while (idates.hasNext()) {
 			date = idates.next();
 			// cuidado cambiar que hay varios registros de antes cambiar la tabla con uk
-			register = registerRepository.findByDateAndEmployee(date, employee);
+			register = registerRepository.findByCreationdateAndEmployee(date, employee);
 			if (register == null) {
-				register = registerRepository.findByDateAndEmployee(DateUtil.addDays(date, -1), employee);
+				register = registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -1), employee);
 				if (register != null) {
 					register.setActive(Boolean.FALSE);
 					registerRepository.save(register);
 				}
-				register = registerRepository.findByDateAndEmployee(DateUtil.addDays(date, -2), employee);
+				register = registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -2), employee);
 				if (register != null) {
 					register.setActive(Boolean.FALSE);
 					registerRepository.save(register);

@@ -23,8 +23,8 @@ public class RegisterEntity {
 	private Long idregister;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date")
-	private Date date;
+	@Column(name = "creationdate")
+	private Date creationdate;
 
 	@Column(name = "ipaddress")
 	private String ipaddress;
@@ -52,12 +52,12 @@ public class RegisterEntity {
 		this.idregister = idinemployee;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreationdate() {
+		return creationdate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreationdate(Date date) {
+		this.creationdate = date;
 	}
 
 	public EmployeeEntity getEmployee() {
