@@ -27,7 +27,7 @@
 							<tr>
 								<td><c:out value="${r.employee.dni}" /></td>
 								<td><c:out value="${r.employee.name}" /></td>
-								<td><fmt:formatDate value="${r.date}" type="date" /></td>
+								<td><fmt:formatDate value="${r.creationdate}" type="date" /></td>
 								<td><fmt:formatDate value="${r.timein}" type="time" /></td>
 								<td><fmt:formatDate value="${r.timeout}" type="time" /></td>
 							</tr>

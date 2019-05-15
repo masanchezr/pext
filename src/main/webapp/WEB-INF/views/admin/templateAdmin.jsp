@@ -86,12 +86,6 @@
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
-							code="register" />"><spring:url
-						value="/admin/searchregister" var="register"></spring:url> <a
-					href="${register}" class="nav-link"><i class="fa fa-user fa-fw"></i><span
-						class="nav-link-text"> <spring:message code="register" /></span></a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
 							code="schedule" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseschedule" data-parent="#exampleAccordion"><i
