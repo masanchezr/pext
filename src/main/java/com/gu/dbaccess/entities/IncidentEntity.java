@@ -16,7 +16,7 @@ import org.springframework.data.annotation.CreatedDate;
 public class IncidentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDINCIDENT")
 	private Long idincident;
 

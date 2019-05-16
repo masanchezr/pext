@@ -14,7 +14,7 @@ import com.gu.util.constants.Constants;
 public class EmployeeEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idemployee")
 	private Long idemployee;
 

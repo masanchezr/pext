@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class FunctionalityMachine {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idfunctionalitymachine")
 	private Long idfunctionalitymachine;
 

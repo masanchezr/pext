@@ -21,7 +21,7 @@ import com.gu.util.constants.Constants;
 public class IncomeMachineEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idincomemachine")
 	private Long idincomemachine;
 

@@ -21,7 +21,7 @@ import com.gu.util.constants.Constants;
 public class OpenMachineEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idopenmachine")
 	private Long idopenmachine;
 

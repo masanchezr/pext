@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class OperationNotAllowedEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idoperationnotallowed")
 	private Long idoperationnotallowed;
 

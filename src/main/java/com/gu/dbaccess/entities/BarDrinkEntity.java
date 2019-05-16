@@ -19,7 +19,7 @@ import com.gu.util.constants.Constants;
 public class BarDrinkEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idbardrink")
 	private Long idbardrink;
 

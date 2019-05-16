@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class ScheduleEntity implements Comparable<ScheduleEntity> {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idschedule")
 	private Long idschedule;
 
