@@ -62,7 +62,7 @@ public class DailiesController {
 		String sdate = sdf.getDatefrom();
 		Date date;
 		if (Util.isEmpty(sdate)) {
-			date = new Date();
+			date = DateUtil.getDateFormated(new Date());
 			return getDailyModel(date);
 		} else {
 			searchDatesFormValidator.validate(sdf, arg1);
