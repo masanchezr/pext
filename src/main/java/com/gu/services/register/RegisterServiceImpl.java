@@ -49,38 +49,42 @@ public class RegisterServiceImpl implements RegisterService {
 	 **/
 	public void registerIn(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		RegisterEntity register = registerRepository.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()),
-				employee);
-		if (register == null) {
-			register = new RegisterEntity();
-			register.setEmployee(employee);
-			register.setCreationdate(new Date());
-			register.setIpaddress(ipaddress);
-			register.setEmployee(employee);
-			register.setCreationdate(new Date());
-			register.setIpaddress(ipaddress);
-			register.setTimein(new Date());
-			register.setActive(Boolean.TRUE);
-			registerRepository.save(register);
+		if (employee.getEnabled().equals(Boolean.TRUE)) {
+			RegisterEntity register = registerRepository
+					.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()), employee);
+			if (register == null) {
+				register = new RegisterEntity();
+				register.setEmployee(employee);
+				register.setCreationdate(new Date());
+				register.setIpaddress(ipaddress);
+				register.setEmployee(employee);
+				register.setCreationdate(new Date());
+				register.setIpaddress(ipaddress);
+				register.setTimein(new Date());
+				register.setActive(Boolean.TRUE);
+				registerRepository.save(register);
+			}
 		}
 	}
 
 	public void registerOut(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		RegisterEntity register = registerRepository.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()),
-				employee);
-		if (register == null) {
-			register = new RegisterEntity();
-			register.setEmployee(employee);
-			register.setCreationdate(new Date());
-			register.setIpaddress(ipaddress);
-			register.setEmployee(employee);
-			register.setCreationdate(new Date());
-			register.setIpaddress(ipaddress);
-			register.setActive(Boolean.TRUE);
+		if (employee.getEnabled().equals(Boolean.TRUE)) {
+			RegisterEntity register = registerRepository
+					.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()), employee);
+			if (register == null) {
+				register = new RegisterEntity();
+				register.setEmployee(employee);
+				register.setCreationdate(new Date());
+				register.setIpaddress(ipaddress);
+				register.setEmployee(employee);
+				register.setCreationdate(new Date());
+				register.setIpaddress(ipaddress);
+				register.setActive(Boolean.TRUE);
+			}
+			register.setTimeout(new Date());
+			registerRepository.save(register);
 		}
-		register.setTimeout(new Date());
-		registerRepository.save(register);
 	}
 
 	public List<RegisterEntity> findByDates(String datefrom, String dateuntil) {
@@ -114,11 +118,6 @@ public class RegisterServiceImpl implements RegisterService {
 			register = registerRepository.findByCreationdateAndEmployee(date, employee);
 			if (register == null) {
 				register = registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -1), employee);
-				if (register != null) {
-					register.setActive(Boolean.FALSE);
-					registerRepository.save(register);
-				}
-				register = registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -2), employee);
 				if (register != null) {
 					register.setActive(Boolean.FALSE);
 					registerRepository.save(register);

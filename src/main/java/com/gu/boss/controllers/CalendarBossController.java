@@ -43,12 +43,12 @@ public class CalendarBossController {
 			model.addObject("weekForm", week);
 			result.rejectValue("week", "noschedule");
 		} else {
-			List<TimeEntity> times = new ArrayList<TimeEntity>();
+			List<TimeEntity> times = new ArrayList<>();
 			Iterator<Schedule> ischedule = schedule.iterator();
 			while (ischedule.hasNext()) {
 				times.add(ischedule.next().getTime());
 			}
-			Set<TimeEntity> settimes = new TreeSet<TimeEntity>();
+			Set<TimeEntity> settimes = new TreeSet<>();
 			Collections.sort(schedule);
 			settimes.addAll(times);
 			times.clear();
