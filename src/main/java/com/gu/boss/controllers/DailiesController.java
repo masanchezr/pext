@@ -62,7 +62,7 @@ public class DailiesController {
 		String sdate = sdf.getDatefrom();
 		Date date;
 		if (Util.isEmpty(sdate)) {
-			date = DateUtil.getDateFormated(new Date());
+			date = DateUtil.getDateFormatddMMyyyy(new Date());
 			return getDailyModel(date);
 		} else {
 			searchDatesFormValidator.validate(sdf, arg1);
@@ -154,8 +154,8 @@ public class DailiesController {
 	@RequestMapping(value = "/beforeday")
 	public ModelAndView beforeday() {
 		ModelAndView model = new ModelAndView();
-		Date date = DateUtil.addDays(DateUtil.getDateFormated(new Date()), -1);
-		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormated(new Date()), -1));
+		Date date = DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1);
+		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1));
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {

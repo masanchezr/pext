@@ -10,6 +10,7 @@ import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
+import com.gu.util.date.DateUtil;
 
 public class TPVServiceImpl implements TPVService {
 
@@ -21,7 +22,7 @@ public class TPVServiceImpl implements TPVService {
 
 	public Daily save(TPVEntity tpv) {
 		tpvrepository.save(tpv);
-		return dailyService.getDaily(new Date());
+		return dailyService.getDaily(DateUtil.getDateFormatddMMyyyy(tpv.getCreationdate()));
 	}
 
 	@Override

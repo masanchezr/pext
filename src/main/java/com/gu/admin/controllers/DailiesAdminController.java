@@ -39,7 +39,7 @@ public class DailiesAdminController {
 		Date date;
 		String view;
 		if (Util.isEmpty(sdate)) {
-			date = DateUtil.getDateFormated(new Date());
+			date = DateUtil.getDateFormatddMMyyyy(new Date());
 			view = "dailyadminarrow";
 		} else {
 			date = DateUtil.getDate(sdate);

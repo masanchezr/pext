@@ -93,7 +93,7 @@ public class GratificationServiceImpl implements GratificationService {
 	}
 
 	public List<GratificationEntity> lastNumGratifications() {
-		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(DateUtil.addDays(DateUtil.getDateFormated(new Date()), -1),
+		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1),
 				new Date());
 	}
 

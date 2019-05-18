@@ -51,7 +51,7 @@ public class RegisterServiceImpl implements RegisterService {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
 		if (employee.getEnabled().equals(Boolean.TRUE)) {
 			RegisterEntity register = registerRepository
-					.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()), employee);
+					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new Date()), employee);
 			if (register == null) {
 				register = new RegisterEntity();
 				register.setEmployee(employee);
@@ -71,7 +71,7 @@ public class RegisterServiceImpl implements RegisterService {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
 		if (employee.getEnabled().equals(Boolean.TRUE)) {
 			RegisterEntity register = registerRepository
-					.findByCreationdateAndEmployee(DateUtil.getDateFormated(new Date()), employee);
+					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new Date()), employee);
 			if (register == null) {
 				register = new RegisterEntity();
 				register.setEmployee(employee);

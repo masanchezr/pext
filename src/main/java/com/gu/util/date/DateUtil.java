@@ -168,7 +168,7 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
-	public static Date getDateFormated(Date date) {
+	public static Date getDateFormatddMMyyyy(Date date) {
 		return getDate(getStringDateFormatddMMyyyy(date));
 	}
 }
