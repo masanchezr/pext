@@ -42,12 +42,12 @@ public class OperationServiceImpl implements OperationService {
 	private GratificationsRepository gratificationsrepository;
 
 	public Daily save(OperationEntity operation) {
-		operation.setCreationdate(new Date());
+		operation.setCreationdate(new DateUtil().getNow());
 		if (operation.getMachine().getIdmachine().equals(0L)) {
 			operation.setMachine(null);
 		}
 		operationRepository.save(operation);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	public Daily update(OperationEntity operation) {
@@ -65,7 +65,7 @@ public class OperationServiceImpl implements OperationService {
 			operationRepository.save(entityoperation);
 			return dailyService.getDaily(entityoperation.getCreationdate());
 		} else {
-			return dailyService.getDaily(new Date());
+			return dailyService.getDaily(new DateUtil().getNow());
 		}
 	}
 

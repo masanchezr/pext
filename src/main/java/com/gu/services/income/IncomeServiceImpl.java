@@ -22,9 +22,9 @@ public class IncomeServiceImpl implements IncomeService {
 	private BarDrinksRepository incomerepository;
 
 	public Daily save(BarDrinkEntity income) {
-		income.setCreationdate(new Date());
+		income.setCreationdate(new DateUtil().getNow());
 		incomerepository.save(income);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {

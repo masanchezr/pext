@@ -1,7 +1,6 @@
 package com.gu.dbaccess.test;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.gu.dbaccess.entities.SafeEntity;
 import com.gu.dbaccess.repositories.SafeRepository;
+import com.gu.util.date.DateUtil;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
@@ -22,7 +22,7 @@ public class SafeRepositoryTest {
 	@Test
 	public void saveTest() {
 		SafeEntity safe = new SafeEntity();
-		safe.setCreationdate(new Date());
+		safe.setCreationdate(new DateUtil().getNow());
 		safe.setAmount(BigDecimal.valueOf(200));
 		safe.setTotal(BigDecimal.valueOf(12000));
 		saferepository.save(safe);

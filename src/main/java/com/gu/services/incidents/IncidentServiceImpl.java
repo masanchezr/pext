@@ -1,7 +1,6 @@
 package com.gu.services.incidents;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gu.dbaccess.entities.IncidentEntity;
 import com.gu.dbaccess.repositories.IncidentRepository;
 import com.gu.services.mails.MailService;
+import com.gu.util.date.DateUtil;
 
 public class IncidentServiceImpl implements IncidentService {
 
@@ -19,7 +19,7 @@ public class IncidentServiceImpl implements IncidentService {
 
 	public void save(IncidentEntity incident) {
 		MailService mailService;
-		incident.setCreationdate(new Date());
+		incident.setCreationdate(new DateUtil().getNow());
 		incident.setState(Boolean.FALSE);
 		incident = incidentRepository.save(incident);
 		mailService = new MailService(incident.getDescription(), "godomin1971@gmail.com",

@@ -33,7 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
 	 *            List<InOut> inout = new ArrayList<InOut>();
 	 *            Iterator<EmployeeEntity> ilin = lin.iterator(); InEntity in; Long
 	 *            id; while (ilin.hasNext()) { id = ilin.next().getIdemployee(); if
-	 *            (id != null) { in = new InEntity(); in.setDate(new Date());
+	 *            (id != null) { in = new InEntity(); in.setDate(new DateUtil().getNow());
 	 *            in.setEmployee(employeesRepository.findById(id));
 	 *            inRepository.save(in); inout.add(mapper.map(in, InOut.class)); } }
 	 * 
@@ -51,16 +51,16 @@ public class RegisterServiceImpl implements RegisterService {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
 		if (employee.getEnabled().equals(Boolean.TRUE)) {
 			RegisterEntity register = registerRepository
-					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new Date()), employee);
+					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), employee);
 			if (register == null) {
 				register = new RegisterEntity();
 				register.setEmployee(employee);
-				register.setCreationdate(new Date());
+				register.setCreationdate(new DateUtil().getNow());
 				register.setIpaddress(ipaddress);
 				register.setEmployee(employee);
-				register.setCreationdate(new Date());
+				register.setCreationdate(new DateUtil().getNow());
 				register.setIpaddress(ipaddress);
-				register.setTimein(new Date());
+				register.setTimein(new DateUtil().getNow());
 				register.setActive(Boolean.TRUE);
 				registerRepository.save(register);
 			}
@@ -71,18 +71,18 @@ public class RegisterServiceImpl implements RegisterService {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
 		if (employee.getEnabled().equals(Boolean.TRUE)) {
 			RegisterEntity register = registerRepository
-					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new Date()), employee);
+					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), employee);
 			if (register == null) {
 				register = new RegisterEntity();
 				register.setEmployee(employee);
-				register.setCreationdate(new Date());
+				register.setCreationdate(new DateUtil().getNow());
 				register.setIpaddress(ipaddress);
 				register.setEmployee(employee);
-				register.setCreationdate(new Date());
+				register.setCreationdate(new DateUtil().getNow());
 				register.setIpaddress(ipaddress);
 				register.setActive(Boolean.TRUE);
 			}
-			register.setTimeout(new Date());
+			register.setTimeout(new DateUtil().getNow());
 			registerRepository.save(register);
 		}
 	}
@@ -94,7 +94,7 @@ public class RegisterServiceImpl implements RegisterService {
 		Iterable<EmployeeEntity> employees = employeesRepository.findByEnabledTrue();
 		Iterator<EmployeeEntity> iemployees = employees.iterator();
 		if (dateuntil == null || dateuntil.isEmpty()) {
-			until = new Date();
+			until = new DateUtil().getNow();
 		} else {
 			until = DateUtil.getDate(dateuntil);
 		}

@@ -32,7 +32,7 @@ public class OpenMachinesController {
 	public ModelAndView openmachines(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("openmachinesboss");
 		String sdate = searchForm.getDatefrom();
-		Date date = new Date();
+		Date date = new DateUtil().getNow();
 		if (!Util.isEmpty(sdate)) {
 			date = DateUtil.getDate(sdate);
 		}

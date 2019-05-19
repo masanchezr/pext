@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.MessageEntity;
 import com.gu.dbaccess.repositories.MessagesRepository;
+import com.gu.util.date.DateUtil;
 
 public class MessageServiceImpl implements MessageService {
 
@@ -20,7 +21,7 @@ public class MessageServiceImpl implements MessageService {
 	private Mapper mapper;
 
 	public List<MessageEntity> getMessagesActiveNow() {
-		Date now = new Date();
+		Date now = new DateUtil().getNow();
 		return messagesrepository.findByActiveTrueAndDatefromBeforeAndDateuntilAfter(now, now);
 	}
 
@@ -36,7 +37,7 @@ public class MessageServiceImpl implements MessageService {
 
 	public void save(Message message) {
 		MessageEntity entity = mapper.map(message, MessageEntity.class);
-		entity.setCreationdate(new Date());
+		entity.setCreationdate(new DateUtil().getNow());
 		messagesrepository.save(entity);
 	}
 

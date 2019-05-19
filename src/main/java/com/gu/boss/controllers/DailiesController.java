@@ -62,7 +62,7 @@ public class DailiesController {
 		String sdate = sdf.getDatefrom();
 		Date date;
 		if (Util.isEmpty(sdate)) {
-			date = DateUtil.getDateFormatddMMyyyy(new Date());
+			date = DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow());
 			return getDailyModel(date);
 		} else {
 			searchDatesFormValidator.validate(sdf, arg1);
@@ -85,7 +85,7 @@ public class DailiesController {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {
 			String view;
-			String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+			String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
 			String sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 			if (stoday.compareTo(sdate) == 0) {
 				view = ConstantsJsp.VIEWDAILYBOSSARROW;
@@ -154,8 +154,8 @@ public class DailiesController {
 	@RequestMapping(value = "/beforeday")
 	public ModelAndView beforeday() {
 		ModelAndView model = new ModelAndView();
-		Date date = DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1);
-		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1));
+		Date date = DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1);
+		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1));
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {
@@ -173,13 +173,13 @@ public class DailiesController {
 		boolean existdaily = false;
 		while (!existdaily) {
 			date = DateUtil.addDays(date, 1);
-			if (date.compareTo(new Date()) < 0) {
+			if (date.compareTo(new DateUtil().getNow()) < 0) {
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+					String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
 					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = "dailybossarrow";

@@ -39,13 +39,13 @@ public class DailiesAdminController {
 		Date date;
 		String view;
 		if (Util.isEmpty(sdate)) {
-			date = DateUtil.getDateFormatddMMyyyy(new Date());
+			date = DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow());
 			view = "dailyadminarrow";
 		} else {
 			date = DateUtil.getDate(sdate);
 			view = ConstantsJsp.VIEWDAILYADMINARROWS;
 		}
-		if (date.before(new Date()) || date.equals(new Date())) {
+		if (date.before(new DateUtil().getNow()) || date.equals(new DateUtil().getNow())) {
 			Daily daily = dailyService.getDaily(date);
 			if (daily.getFinalamount() == null) {
 				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
@@ -94,13 +94,13 @@ public class DailiesAdminController {
 		boolean existdaily = false;
 		while (!existdaily) {
 			date = DateUtil.addDays(date, 1);
-			if (date.compareTo(new Date()) < 0) {
+			if (date.compareTo(new DateUtil().getNow()) < 0) {
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
+					String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
 					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = "dailyadminarrow";

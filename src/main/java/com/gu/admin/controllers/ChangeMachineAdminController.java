@@ -1,7 +1,5 @@
 package com.gu.admin.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -83,7 +81,7 @@ public class ChangeMachineAdminController {
 		String sfrom = date.getDatefrom();
 		model.setViewName("ticketsbyday");
 		if (sfrom == null) {
-			model.addAllObjects(changeMachineService.ticketsByDay(new Date()));
+			model.addAllObjects(changeMachineService.ticketsByDay(new DateUtil().getNow()));
 		} else {
 			model.addAllObjects(changeMachineService.ticketsByDay(DateUtil.getDate(sfrom)));
 		}

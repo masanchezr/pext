@@ -1,7 +1,5 @@
 package com.gu.employee.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +11,7 @@ import com.gu.dbaccess.entities.BarDrinkEntity;
 import com.gu.employee.validators.IncomeValidator;
 import com.gu.services.income.IncomeService;
 import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.date.DateUtil;
 
 @Controller
 public class IncomeController {
@@ -43,7 +42,7 @@ public class IncomeController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, incomeservice.save(income));
 			model.setViewName(ConstantsJsp.DAILY);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;
 

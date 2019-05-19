@@ -73,13 +73,13 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	 */
 	public BigDecimal getIncomeTotalMonth() {
 		return changeMachineRepository
-				.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new Date());
+				.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new DateUtil().getNow());
 	}
 
 	public void reset() {
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		TakeEntity take = new TakeEntity();
-		Date now = new Date();
+		Date now = new DateUtil().getNow();
 		ChangeMachineTotalEntity cmt = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineTotalEntity cmtn = new ChangeMachineTotalEntity();
 		PaymentEntity pay = new PaymentEntity();
@@ -101,8 +101,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		PaymentEntity pay = new PaymentEntity();
 		pay.setIdpayment(Constants.CHANGEMACHINE);
 		Date takedate = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
-		BigDecimal tpvs = tpvrepository.sumByCreationdateAndPayment(pay, takedate, new Date());
-		BigDecimal awardscm = changeMachineRepository.sumByCreationdateBetween(takedate, new Date());
+		BigDecimal tpvs = tpvrepository.sumByCreationdateAndPayment(pay, takedate, new DateUtil().getNow());
+		BigDecimal awardscm = changeMachineRepository.sumByCreationdateBetween(takedate, new DateUtil().getNow());
 		if (tpvs != null) {
 			awards = tpvs;
 		}
@@ -133,7 +133,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	public Daily save(ChangeMachineEntity cm) {
-		Date today = new Date();
+		Date today = new DateUtil().getNow();
 		cm.setCreationdate(today);
 		changeMachineRepository.save(cm);
 		return dailyservice.getDailyEmployee(today);
@@ -164,8 +164,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		String authStringEnc = new String(authEncBytes);
 		address = address.concat(startdate).concat(DateUtil.getStringDateFormatyyyyMMdd(from)).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(from)).concat(endate)
-				.concat(DateUtil.getStringDateFormatyyyyMMdd(new Date())).concat(space)
-				.concat(DateUtil.getStringDateFormatHHmm(new Date())).concat(restaddress);
+				.concat(DateUtil.getStringDateFormatyyyyMMdd(new DateUtil().getNow())).concat(space)
+				.concat(DateUtil.getStringDateFormatHHmm(new DateUtil().getNow())).concat(restaddress);
 		URL url = new URL(address);
 		URLConnection connection = url.openConnection();
 		connection.setDoOutput(true);
@@ -338,7 +338,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public void entryToVisible(BigDecimal amount) {
 		ChangeMachineTotalEntity last = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineTotalEntity entity = new ChangeMachineTotalEntity();
-		entity.setCreationdate(new Date());
+		entity.setCreationdate(new DateUtil().getNow());
 		entity.setDeposit(last.getDeposit().subtract(amount));
 		entity.setVisible(last.getVisible().add(amount));
 		changeMachineTotalRepository.save(entity);

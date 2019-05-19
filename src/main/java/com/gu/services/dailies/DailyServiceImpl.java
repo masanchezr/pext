@@ -30,6 +30,7 @@ import com.gu.dbaccess.repositories.TPVRepository;
 import com.gu.services.changemachine.ChangeMachineService;
 import com.gu.services.changemachine.TicketServer;
 import com.gu.util.constants.Constants;
+import com.gu.util.date.DateUtil;
 
 /**
  * The Class DailyServiceImpl.
@@ -248,7 +249,7 @@ public class DailyServiceImpl implements DailyService {
 
 	public void calculateDailies(Date date) {
 		Calendar calendar = Calendar.getInstance();
-		while (date.compareTo(new Date()) < 0) {
+		while (date.compareTo(new DateUtil().getNow()) < 0) {
 			getDaily(date);
 			calendar.setTime(date);
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -261,19 +262,24 @@ public class DailyServiceImpl implements DailyService {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 9);
 		date = calendar.getTime();
-		List<OperationEntity> operations = operationsRepository.findByCreationdateBetween(date, new Date());
-		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdateBetween(date, new Date());
-		List<BarDrinkEntity> income = incomeRepository.findByCreationdateBetween(date, new Date());
-		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdateBetween(date, new Date());
-		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdateBetween(date, new Date());
-		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date, new Date());
+		List<OperationEntity> operations = operationsRepository.findByCreationdateBetween(date,
+				new DateUtil().getNow());
+		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdateBetween(date,
+				new DateUtil().getNow());
+		List<BarDrinkEntity> income = incomeRepository.findByCreationdateBetween(date, new DateUtil().getNow());
+		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdateBetween(date,
+				new DateUtil().getNow());
+		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdateBetween(date,
+				new DateUtil().getNow());
+		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date,
+				new DateUtil().getNow());
 		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndateBetween(date,
-				new Date());
+				new DateUtil().getNow());
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
-				new Date());
-		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new Date());
+				new DateUtil().getNow());
+		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new DateUtil().getNow());
 		List<ChangeMachineEntity> changemachine = changeMachineService.getOperationsTicketServerBetweenDates(date,
-				new Date());
+				new DateUtil().getNow());
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);

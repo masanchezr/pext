@@ -54,10 +54,10 @@ public class GratificationServiceImpl implements GratificationService {
 	 */
 	public Daily save(GratificationEntity g, String user) {
 		EmployeeEntity employee = employeesrepository.findByUsername(user);
-		g.setPaydate(new Date());
+		g.setPaydate(new DateUtil().getNow());
 		g.setEmployeepay(employee);
 		gratificationRepository.save(g);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	private void generateTicket(GratificationEntity g, String path) {
@@ -89,12 +89,12 @@ public class GratificationServiceImpl implements GratificationService {
 	}
 
 	public GratificationEntity searchGratificationActive(Long id) {
-		return gratificationRepository.findByIdgratificationAndPaydateIsNull(id, new Date());
+		return gratificationRepository.findByIdgratificationAndPaydateIsNull(id, new DateUtil().getNow());
 	}
 
 	public List<GratificationEntity> lastNumGratifications() {
-		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new Date()), -1),
-				new Date());
+		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1),
+				new DateUtil().getNow());
 	}
 
 	public void registerNumberGratification(GratificationEntity g, String user, String path) {
@@ -112,7 +112,7 @@ public class GratificationServiceImpl implements GratificationService {
 			c.set(Calendar.HOUR_OF_DAY, 23);
 			c.set(Calendar.MINUTE, 59);
 			expirationdate = c.getTime();
-			g.setCreationdate(new Date());
+			g.setCreationdate(new DateUtil().getNow());
 			g.setEmployee(employee);
 			g.setUsefromdate(usefromdate);
 			g.setExpirationdate(expirationdate);

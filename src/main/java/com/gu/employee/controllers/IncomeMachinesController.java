@@ -1,7 +1,5 @@
 package com.gu.employee.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +12,7 @@ import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
 import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.date.DateUtil;
 
 @Controller
 public class IncomeMachinesController {
@@ -39,7 +38,7 @@ public class IncomeMachinesController {
 		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSUCCESSEMPLOYEE);
 		model.addObject(ConstantsJsp.DAILY, incomemachineService.save(imachine));
 		model.setViewName(ConstantsJsp.DAILY);
-		model.addObject(ConstantsJsp.DATEDAILY, new Date());
+		model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
 		return model;
 	}
 

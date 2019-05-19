@@ -11,6 +11,7 @@ import com.gu.dbaccess.entities.OpenMachineEntity;
 import com.gu.dbaccess.repositories.CausesRepository;
 import com.gu.dbaccess.repositories.EmployeesRepository;
 import com.gu.dbaccess.repositories.OpenMachinesRepository;
+import com.gu.util.date.DateUtil;
 
 public class OpenMachineServiceImpl implements OpenMachineService {
 
@@ -37,7 +38,7 @@ public class OpenMachineServiceImpl implements OpenMachineService {
 	public void save(OpenMachineEntity om, String user) {
 		EmployeeEntity employee = employeesrepository.findByUsername(user);
 		om.setEmployee(employee);
-		om.setCreationdate(new Date());
+		om.setCreationdate(new DateUtil().getNow());
 		openmachinesrepository.save(om);
 	}
 

@@ -1,7 +1,5 @@
 package com.gu.employee.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,7 @@ public class OpenMachineController {
 		ModelAndView model = new ModelAndView(Constants.OPENMACHINES);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		openmachineservice.save(om, user);
-		model.addObject(Constants.OPENMACHINES, openmachineservice.getOpenMachines(new Date()));
+		model.addObject(Constants.OPENMACHINES, openmachineservice.getOpenMachines(om.getCreationdate()));
 		return model;
 	}
 

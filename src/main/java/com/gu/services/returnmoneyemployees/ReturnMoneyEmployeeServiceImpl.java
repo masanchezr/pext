@@ -28,10 +28,10 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 				.findById(returnme.getIdreturnmoneyemployee());
 		if (opreturnme.isPresent()) {
 			returnme = opreturnme.get();
-			returnme.setReturndate(new Date());
+			returnme.setReturndate(new DateUtil().getNow());
 			returnMoneyEmployeesRepository.save(returnme);
 		}
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {
@@ -52,9 +52,9 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 	}
 
 	public Daily savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
-		returnme.setCreationdate(new Date());
+		returnme.setCreationdate(new DateUtil().getNow());
 		returnMoneyEmployeesRepository.save(returnme);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	@Override

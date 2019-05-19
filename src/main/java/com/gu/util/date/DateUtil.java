@@ -17,8 +17,10 @@ import java.util.Set;
  */
 public class DateUtil {
 
-	private DateUtil() {
+	private Date now;
 
+	public DateUtil() {
+		setNow(new Date());
 	}
 
 	/**
@@ -170,5 +172,19 @@ public class DateUtil {
 
 	public static Date getDateFormatddMMyyyy(Date date) {
 		return getDate(getStringDateFormatddMMyyyy(date));
+	}
+
+	/**
+	 * @return the now
+	 */
+	public Date getNow() {
+		return now;
+	}
+
+	/**
+	 * @param now the now to set
+	 */
+	public void setNow(Date now) {
+		this.now = now;
 	}
 }

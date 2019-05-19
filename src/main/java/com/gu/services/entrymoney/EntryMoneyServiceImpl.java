@@ -43,27 +43,27 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
-		entrymoney.setCreationdate(new Date());
+		entrymoney.setCreationdate(new DateUtil().getNow());
 		entryMoneyRepository.save(entrymoney);
 		if (entryMoneyForm.getOrigin().equals(Constants.getOrigin()[0])) {
 			SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
 			safe.setIdsafe(null);
 			safe.setTotal(safe.getTotal().subtract(amount));
 			safe.setAmount(amount.negate());
-			safe.setCreationdate(new Date());
+			safe.setCreationdate(new DateUtil().getNow());
 			safe.setDescription("CAJA COMÚN");
 			safeRepository.save(safe);
 		}
-		return dailyService.getDaily(new Date());
+		return dailyService.getDaily(new DateUtil().getNow());
 	}
 
 	public Daily saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm) {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
-		entrymoney.setCreationdate(new Date());
+		entrymoney.setCreationdate(new DateUtil().getNow());
 		entryMoneyRepository.save(entrymoney);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	public List<EntryMoneyEntity> findByDates(Date from, Date until) {
@@ -76,24 +76,24 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
 		BigDecimal amount = entryMoney.getAmount();
 		entrymoney.setAmount(amount.negate());
-		entrymoney.setCreationdate(new Date());
+		entrymoney.setCreationdate(new DateUtil().getNow());
 		entrymoney.setDescription("Máquina de cambio");
 		entryMoneyRepository.save(entrymoney);
 		machine.setAmount(amount);
-		machine.setCreationdate(new Date());
+		machine.setCreationdate(new DateUtil().getNow());
 		machine.setIdchangemachine(changemachinerepository
 				.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc().getIdchangemachine() + 1);
-		machinetotal.setCreationdate(new Date());
+		machinetotal.setCreationdate(new DateUtil().getNow());
 		machinetotal.setDeposit(changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc().getDeposit()
 				.add(entryMoney.getAmount()));
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
-		return dailyService.getDailyEmployee(new Date());
+		return dailyService.getDailyEmployee(new DateUtil().getNow());
 	}
 
 	public BigDecimal saveAdd(SafeEntity safe) {
 		BigDecimal total = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
-		safe.setCreationdate(new Date());
+		safe.setCreationdate(new DateUtil().getNow());
 		safe.setTotal(total.add(safe.getAmount()));
 		return safeRepository.save(safe).getTotal();
 	}
@@ -114,7 +114,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
 		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
-		Date today = new Date();
+		Date today = new DateUtil().getNow();
 		totalcm.setCreationdate(today);
 		totalcm.setDeposit(amount.add(changemachinetotal.getDeposit()));
 		totalcm.setVisible(changemachinetotal.getVisible());
@@ -142,7 +142,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
 		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
-		Date today = new Date();
+		Date today = new DateUtil().getNow();
 		totalcm.setCreationdate(today);
 		totalcm.setVisible(amount.add(changemachinetotal.getVisible()));
 		totalcm.setDeposit(changemachinetotal.getDeposit());
