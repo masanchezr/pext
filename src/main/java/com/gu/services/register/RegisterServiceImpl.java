@@ -3,12 +3,15 @@ package com.gu.services.register;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.EmployeeEntity;
+import com.gu.dbaccess.entities.MetadataEntity;
 import com.gu.dbaccess.entities.RegisterEntity;
 import com.gu.dbaccess.repositories.EmployeesRepository;
+import com.gu.dbaccess.repositories.MetadataRepository;
 import com.gu.dbaccess.repositories.RegisterRepository;
 import com.gu.util.date.DateUtil;
 
@@ -19,6 +22,9 @@ public class RegisterServiceImpl implements RegisterService {
 
 	@Autowired
 	private EmployeesRepository employeesRepository;
+
+	@Autowired
+	private MetadataRepository metadataRepository;
 
 	/**
 	 * @Autowired private Mapper mapper;
@@ -33,7 +39,8 @@ public class RegisterServiceImpl implements RegisterService {
 	 *            List<InOut> inout = new ArrayList<InOut>();
 	 *            Iterator<EmployeeEntity> ilin = lin.iterator(); InEntity in; Long
 	 *            id; while (ilin.hasNext()) { id = ilin.next().getIdemployee(); if
-	 *            (id != null) { in = new InEntity(); in.setDate(new DateUtil().getNow());
+	 *            (id != null) { in = new InEntity(); in.setDate(new
+	 *            DateUtil().getNow());
 	 *            in.setEmployee(employeesRepository.findById(id));
 	 *            inRepository.save(in); inout.add(mapper.map(in, InOut.class)); } }
 	 * 
@@ -49,19 +56,13 @@ public class RegisterServiceImpl implements RegisterService {
 	 **/
 	public void registerIn(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		if (employee.getEnabled().equals(Boolean.TRUE)) {
+		Optional<MetadataEntity> ip = metadataRepository.findById("ipgoldenusera");
+		if (employee.getEnabled().equals(Boolean.TRUE) && ip.isPresent() && ip.get().getValue().equals(ipaddress)) {
 			RegisterEntity register = registerRepository
 					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), employee);
 			if (register == null) {
-				register = new RegisterEntity();
-				register.setEmployee(employee);
-				register.setCreationdate(new DateUtil().getNow());
-				register.setIpaddress(ipaddress);
-				register.setEmployee(employee);
-				register.setCreationdate(new DateUtil().getNow());
-				register.setIpaddress(ipaddress);
+				register = setRegister(employee, ipaddress);
 				register.setTimein(new DateUtil().getNow());
-				register.setActive(Boolean.TRUE);
 				registerRepository.save(register);
 			}
 		}
@@ -69,22 +70,27 @@ public class RegisterServiceImpl implements RegisterService {
 
 	public void registerOut(String user, String ipaddress) {
 		EmployeeEntity employee = employeesRepository.findByUsername(user);
-		if (employee.getEnabled().equals(Boolean.TRUE)) {
+		Optional<MetadataEntity> ip = metadataRepository.findById("ipgoldenusera");
+		if (employee.getEnabled().equals(Boolean.TRUE) && ip.isPresent() && ip.get().getValue().equals(ipaddress)) {
 			RegisterEntity register = registerRepository
 					.findByCreationdateAndEmployee(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), employee);
 			if (register == null) {
-				register = new RegisterEntity();
-				register.setEmployee(employee);
-				register.setCreationdate(new DateUtil().getNow());
-				register.setIpaddress(ipaddress);
-				register.setEmployee(employee);
-				register.setCreationdate(new DateUtil().getNow());
-				register.setIpaddress(ipaddress);
-				register.setActive(Boolean.TRUE);
+				register = setRegister(employee, ipaddress);
 			}
 			register.setTimeout(new DateUtil().getNow());
 			registerRepository.save(register);
 		}
+	}
+
+	private RegisterEntity setRegister(EmployeeEntity employee, String ipaddress) {
+		RegisterEntity register = new RegisterEntity();
+		register.setEmployee(employee);
+		register.setCreationdate(new DateUtil().getNow());
+		register.setEmployee(employee);
+		register.setCreationdate(new DateUtil().getNow());
+		register.setIpaddress(ipaddress);
+		register.setActive(Boolean.TRUE);
+		return register;
 	}
 
 	public List<RegisterEntity> findByDates(String datefrom, String dateuntil) {
