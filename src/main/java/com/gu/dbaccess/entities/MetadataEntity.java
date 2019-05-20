@@ -17,7 +17,7 @@ public class MetadataEntity {
 	private String description;
 
 	@Column(name = "value")
-	private Integer value;
+	private String value;
 
 	public String getName() {
 		return name;
@@ -35,11 +35,11 @@ public class MetadataEntity {
 		this.description = description;
 	}
 
-	public Integer getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 

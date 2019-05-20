@@ -93,8 +93,8 @@ public class GratificationServiceImpl implements GratificationService {
 	}
 
 	public List<GratificationEntity> lastNumGratifications() {
-		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1),
-				new DateUtil().getNow());
+		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(
+				DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1), new DateUtil().getNow());
 	}
 
 	public void registerNumberGratification(GratificationEntity g, String user, String path) {
@@ -104,7 +104,7 @@ public class GratificationServiceImpl implements GratificationService {
 		Date usefromdate;
 		Optional<MetadataEntity> optionalmetadata = metadataRepository.findById("amountgratifications");
 		if (optionalmetadata.isPresent()) {
-			g.setAmount(optionalmetadata.get().getValue());
+			g.setAmount(Integer.valueOf(optionalmetadata.get().getValue()));
 			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
 			c.set(Calendar.HOUR_OF_DAY, 0);
 			c.set(Calendar.MINUTE, 0);
