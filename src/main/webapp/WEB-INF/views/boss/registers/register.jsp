@@ -35,6 +35,9 @@
 					</tbody>
 				</table>
 			</div>
+			<p>
+				<spring:message code="dataprotec" />
+			</p>
 		</div>
 	</div>
 </div>
