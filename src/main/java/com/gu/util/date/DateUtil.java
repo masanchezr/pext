@@ -185,6 +185,6 @@ public class DateUtil {
 	 * @param now the now to set
 	 */
 	public void setNow(Date now) {
-		this.now = getDateFormatddMMyyyy(now);
+		this.now = now;
 	}
 }
