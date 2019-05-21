@@ -23,7 +23,7 @@ public class IncomeMachineServiceImpl implements IncomeMachineService {
 	public Daily save(IncomeMachineEntity imachine) {
 		imachine.setCreationdate(new DateUtil().getNow());
 		incomemachinesrepository.save(imachine);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {

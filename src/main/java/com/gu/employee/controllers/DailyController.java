@@ -28,7 +28,7 @@ public class DailyController {
 	@RequestMapping(value = "/employee/daily")
 	public ModelAndView daily() {
 		ModelAndView model = new ModelAndView();
-		Daily daily = dailyService.getDailyEmployee(new DateUtil().getNow());
+		Daily daily = dailyService.getDailyEmployee();
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 		} else {

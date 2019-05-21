@@ -24,7 +24,7 @@ public class IncomeServiceImpl implements IncomeService {
 	public Daily save(BarDrinkEntity income) {
 		income.setCreationdate(new DateUtil().getNow());
 		incomerepository.save(income);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {

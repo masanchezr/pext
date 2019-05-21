@@ -31,7 +31,7 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 			returnme.setReturndate(new DateUtil().getNow());
 			returnMoneyEmployeesRepository.save(returnme);
 		}
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {
@@ -54,7 +54,7 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 	public Daily savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
 		returnme.setCreationdate(new DateUtil().getNow());
 		returnMoneyEmployeesRepository.save(returnme);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	@Override

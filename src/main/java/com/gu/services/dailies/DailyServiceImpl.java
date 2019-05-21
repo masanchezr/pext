@@ -257,8 +257,9 @@ public class DailyServiceImpl implements DailyService {
 		}
 	}
 
-	public Daily getDailyEmployee(Date date) {
-		Daily daily = getDaily(date);
+	public Daily getDailyEmployee() {
+		Date date = new DateUtil().getNow();
+		Daily daily = getDaily(DateUtil.getDateFormatddMMyyyy(date));
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 9);
 		date = calendar.getTime();

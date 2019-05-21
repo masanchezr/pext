@@ -57,7 +57,7 @@ public class GratificationServiceImpl implements GratificationService {
 		g.setPaydate(new DateUtil().getNow());
 		g.setEmployeepay(employee);
 		gratificationRepository.save(g);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	private void generateTicket(GratificationEntity g, String path) {

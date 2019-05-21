@@ -47,7 +47,7 @@ public class OperationServiceImpl implements OperationService {
 			operation.setMachine(null);
 		}
 		operationRepository.save(operation);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public Daily update(OperationEntity operation) {

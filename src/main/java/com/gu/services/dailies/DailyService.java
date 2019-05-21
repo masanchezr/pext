@@ -21,5 +21,5 @@ public interface DailyService {
 
 	public void calculateDailies(Date date);
 
-	public Daily getDailyEmployee(Date date);
+	public Daily getDailyEmployee();
 }

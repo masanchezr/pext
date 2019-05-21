@@ -63,7 +63,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new DateUtil().getNow());
 		entryMoneyRepository.save(entrymoney);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public List<EntryMoneyEntity> findByDates(Date from, Date until) {
@@ -88,7 +88,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 				.add(entryMoney.getAmount()));
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal saveAdd(SafeEntity safe) {

@@ -23,7 +23,7 @@ public class IncomeLuckiaServiceImpl implements IncomeLuckiaService {
 	public Daily save(IncomeLuckiaEntity iluckia) {
 		iluckia.setCreationdate(new DateUtil().getNow());
 		incomeluckiarepository.save(iluckia);
-		return dailyService.getDailyEmployee(new DateUtil().getNow());
+		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {

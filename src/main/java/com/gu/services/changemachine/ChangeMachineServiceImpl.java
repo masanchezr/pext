@@ -136,7 +136,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		Date today = new DateUtil().getNow();
 		cm.setCreationdate(today);
 		changeMachineRepository.save(cm);
-		return dailyservice.getDailyEmployee(today);
+		return dailyservice.getDailyEmployee();
 	}
 
 	public void loadDataTicketServer() {
