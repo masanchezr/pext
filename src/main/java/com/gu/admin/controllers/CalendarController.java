@@ -31,6 +31,10 @@ public class CalendarController {
 	@Autowired
 	private CalendarService calendarService;
 
+	private static final String MODELWEEKFORM = "weekForm";
+
+	private static final String MODELSCHEDULE = "schedule";
+
 	@RequestMapping(value = "/admin/calendar")
 	public ModelAndView calendar(WeekForm week) {
 		ModelAndView model = new ModelAndView("calendar");
@@ -44,8 +48,8 @@ public class CalendarController {
 			model.addObject(ConstantsJsp.TIMES, calendarService.getTimesActive());
 			schedule.setSchedule(lscheduleform);
 		} else {
-			List<TimeEntity> times = new ArrayList<TimeEntity>();
-			Set<TimeEntity> settimes = new TreeSet<TimeEntity>();
+			List<TimeEntity> times = new ArrayList<>();
+			Set<TimeEntity> settimes = new TreeSet<>();
 			Collections.sort(lscheduleform);
 			times.addAll(calendarService.getTimesActive());
 			settimes.addAll(times);
@@ -61,22 +65,21 @@ public class CalendarController {
 	@RequestMapping(value = "/admin/newcalendar")
 	public ModelAndView newcalendar() {
 		ModelAndView model = new ModelAndView("newcalendar");
-		model.addObject("weekForm", new WeekForm());
+		model.addObject(MODELWEEKFORM, new WeekForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/saveschedule")
 	public ModelAndView saveSchedule(ScheduleForm sform) {
 		ModelAndView model = new ModelAndView("successadmin");
-		model.addObject("schedule", calendarService.save(sform.getSchedule()));
-		// model.addObject(ConstantsJsp.TIMES, calendarService.getTimesActive());
+		model.addObject(MODELSCHEDULE, calendarService.save(sform.getSchedule()));
 		return model;
 	}
 
 	@RequestMapping(value = "/admin/searchschedule")
 	public ModelAndView searchschedule() {
 		ModelAndView model = new ModelAndView("searchschedule");
-		model.addObject("weekForm", new WeekForm());
+		model.addObject(MODELWEEKFORM, new WeekForm());
 		return model;
 	}
 
@@ -87,24 +90,24 @@ public class CalendarController {
 		List<Schedule> schedule = calendarService.getSchedule(sweek);
 		if (schedule == null || schedule.isEmpty()) {
 			model.setViewName("searchschedule");
-			model.addObject("weekForm", week);
+			model.addObject(MODELWEEKFORM, week);
 			result.rejectValue("week", "noschedule");
 		} else {
-			List<TimeEntity> times = new ArrayList<TimeEntity>();
+			List<TimeEntity> times = new ArrayList<>();
 			Iterator<Schedule> ischedule = schedule.iterator();
 			while (ischedule.hasNext()) {
 				times.add(ischedule.next().getTime());
 			}
-			Set<TimeEntity> settimes = new TreeSet<TimeEntity>();
+			Set<TimeEntity> settimes = new TreeSet<>();
 			Collections.sort(schedule);
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
 			model.addObject(ConstantsJsp.TIMES, times);
 			model.addObject("dates", DateUtil.getDates(sweek));
-			model.addObject("schedule", schedule);
+			model.addObject(MODELSCHEDULE, schedule);
 			model.addObject("week", sweek);
-			model.setViewName("schedule");
+			model.setViewName(MODELSCHEDULE);
 		}
 		return model;
 	}

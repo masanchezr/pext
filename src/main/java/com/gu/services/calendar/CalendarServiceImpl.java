@@ -66,8 +66,9 @@ public class CalendarServiceImpl implements CalendarService {
 
 	public List<Schedule> getSchedule(String week) {
 		List<Date> dates = DateUtil.getDates(week);
-		List<ScheduleEntity> lschedule = scheduleRepository.findByDatescheduleBetween(dates.get(0),
-				dates.get(dates.size() - 1));
+		List<ScheduleEntity> lschedule = scheduleRepository.findByDatescheduleBetween(
+				DateUtil.getDateFormatddMMyyyy(dates.get(0)),
+				DateUtil.getDateFormatddMMyyyy(dates.get(dates.size() - 1)));
 		List<Schedule> lscheduleform = new ArrayList<>();
 		List<EmployeeEntity> employees = new ArrayList<>();
 		ScheduleEntity schedule;

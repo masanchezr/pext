@@ -7,7 +7,7 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="schedule" /></a></li>
-	<li class="breadcrumb-item active"><spring:message code="calendar" /></li>
+	<li class="breadcrumb-item active"><spring:message code="newweekcalendar" /></li>
 </ol>
 <form:form action="saveschedule" modelAttribute="scheduleForm" role="form">
 	<div class="row">

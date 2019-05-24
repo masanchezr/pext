@@ -67,6 +67,22 @@ public class ScheduleEntity implements Comparable<ScheduleEntity> {
 		return this.getTime().compareTo(o.getTime());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateschedule == null) ? 0 : dateschedule.hashCode());
+		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
+		result = prime * result + ((idschedule == null) ? 0 : idschedule.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
