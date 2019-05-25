@@ -216,4 +216,17 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/changemachine/newentrydirect.jsp" />
 	</definition>
+	<definition name="registeradmin" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/boss/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/registers/register.jsp" />
+	</definition>
+	<definition name="searchregistersadmin"
+		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/registers/searchregisters.jsp" />
+	</definition>
 </tiles-definitions>

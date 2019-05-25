@@ -1,4 +1,4 @@
-package com.gu.boss.controllers;
+package com.gu.admin.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,39 +8,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
-import com.gu.services.register.RegisterService;
+import com.gu.services.register.FicticionalRegisterService;
 import com.gu.util.constants.ConstantsJsp;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
-public class RegisterController {
+public class RegisterAdminController {
 
 	@Autowired
-	private RegisterService registerservice;
+	private FicticionalRegisterService ficticionalRegisterService;
 
 	@Autowired
 	private SearchDatesFormValidator searchDatesFormValidator;
 
-	@RequestMapping(value = "/register")
+	@RequestMapping(value = "/admin/searchregister")
+	public ModelAndView searchregister() {
+		ModelAndView model = new ModelAndView("searchregistersadmin");
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		return model;
+	}
+
+	@RequestMapping(value = "/admin/register")
 	public ModelAndView register(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model = new ModelAndView();
 			model.addObject(ConstantsJsp.FORMSEARCH, sdf);
-			model.setViewName(ConstantsJsp.VIEWSEARCHREGISTER);
+			model.setViewName("searchregistersadmin");
 			return model;
 		} else {
-			model.addObject("registers", registerservice.findByDates(sdf.getDatefrom(), sdf.getDateuntil()));
-			model.setViewName(ConstantsJsp.VIEWREGISTER);
+			model.addObject("registers", ficticionalRegisterService.findByDates(sdf.getDatefrom(), sdf.getDateuntil()));
+			model.setViewName("registeradmin");
 		}
 		return model;
 	}
 
-	@RequestMapping(value = "/searchregister")
-	public ModelAndView searchregister() {
-		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSEARCHREGISTER);
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
-		return model;
-	}
 }

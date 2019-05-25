@@ -97,6 +97,9 @@
 						<li><spring:url value="/admin/searchschedule"
 								var="searchschedule" /><a href="${searchschedule}"><spring:message
 									code="searchschedule" /></a></li>
+						<li><spring:url value="/admin/searchregister"
+								var="searchregister" /><a href="${searchregister}"> <spring:message
+									code="register" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="pendingissues" />"><spring:url

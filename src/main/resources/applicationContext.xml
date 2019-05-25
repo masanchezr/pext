@@ -79,4 +79,6 @@
 	<bean id="tpvservice" class="com.gu.services.tpv.TPVServiceImpl" />
 	<bean id="openmachineservice"
 		class="com.gu.services.openmachines.OpenMachineServiceImpl" />
+	<bean id="ficticionalRegisterService"
+		class="com.gu.services.register.FicticionalRegisterServiceImpl" />
 </beans>

@@ -1,7 +1,6 @@
 package com.gu.services.register;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,39 +95,34 @@ public class RegisterServiceImpl implements RegisterService {
 	public List<RegisterEntity> findByDates(String datefrom, String dateuntil) {
 		Date from;
 		Date until;
-		EmployeeEntity employee;
-		Iterable<EmployeeEntity> employees = employeesRepository.findByEnabledTrue();
-		Iterator<EmployeeEntity> iemployees = employees.iterator();
+		/**
+		 * EmployeeEntity employee; Iterable<EmployeeEntity> employees =
+		 * employeesRepository.findByEnabledTrue(); // Iterator<EmployeeEntity>
+		 * iemployees = employees.iterator();
+		 **/
 		if (dateuntil == null || dateuntil.isEmpty()) {
 			until = new DateUtil().getNow();
 		} else {
 			until = DateUtil.getDate(dateuntil);
 		}
 		from = DateUtil.getDate(datefrom);
-		List<Date> dates = DateUtil.getDates(from, until);
-		// Desactivamos los registros que no queremos mostrar
-		while (iemployees.hasNext()) {
-			employee = iemployees.next();
-			disabledRegister(employee, dates);
-		}
+		/**
+		 * List<Date> dates = DateUtil.getDates(from, until); Desactivamos los registros
+		 * que no queremos mostrar while (iemployees.hasNext()) { employee =
+		 * iemployees.next(); disabledRegister(employee, dates); }
+		 **/
 		return registerRepository.findByCreationdateBetweenAndActiveTrue(from, until);
 	}
 
-	private void disabledRegister(EmployeeEntity employee, List<Date> dates) {
-		Date date;
-		RegisterEntity register;
-		Iterator<Date> idates = dates.iterator();
-		while (idates.hasNext()) {
-			date = idates.next();
-			// cuidado cambiar que hay varios registros de antes cambiar la tabla con uk
-			register = registerRepository.findByCreationdateAndEmployee(date, employee);
-			if (register == null) {
-				register = registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -1), employee);
-				if (register != null) {
-					register.setActive(Boolean.FALSE);
-					registerRepository.save(register);
-				}
-			}
-		}
-	}
+	/**
+	 * private void disabledRegister(EmployeeEntity employee, List<Date> dates) {
+	 * Date date; RegisterEntity register; Iterator<Date> idates = dates.iterator();
+	 * while (idates.hasNext()) { date = idates.next(); // cuidado cambiar que hay
+	 * varios registros de antes cambiar la tabla con uk register =
+	 * registerRepository.findByCreationdateAndEmployee(date, employee); if
+	 * (register == null) { register =
+	 * registerRepository.findByCreationdateAndEmployee(DateUtil.addDays(date, -1),
+	 * employee); if (register != null) { register.setActive(Boolean.FALSE);
+	 * registerRepository.save(register); } } } }
+	 **/
 }

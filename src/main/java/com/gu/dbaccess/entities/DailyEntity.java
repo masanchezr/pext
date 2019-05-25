@@ -20,6 +20,7 @@ public class DailyEntity implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DAILYDATE")
@@ -41,8 +42,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the finalamount.
 	 *
-	 * @param finalamount
-	 *            the new finalamount
+	 * @param finalamount the new finalamount
 	 */
 	public void setFinalamount(BigDecimal finalamount) {
 		this.finalamount = finalamount;
@@ -60,8 +60,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the dailydate.
 	 *
-	 * @param dailydate
-	 *            the new dailydate
+	 * @param dailydate the new dailydate
 	 */
 	public void setDailydate(Date dailydate) {
 		this.dailydate = dailydate;

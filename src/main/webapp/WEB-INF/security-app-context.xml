@@ -105,6 +105,8 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/newentryvisible"
 			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/searchregister"
+			access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/admin/login"
 			default-target-url="/admin/admin"
 			authentication-failure-url="/admin/login"
