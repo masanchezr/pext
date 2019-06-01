@@ -68,14 +68,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
-	/**
-	 * Dinero invertido en la máquina de cambio
-	 */
-	public BigDecimal getIncomeTotalMonth() {
-		return changeMachineRepository
-				.sumIncomeBetweenDates(takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new DateUtil().getNow());
-	}
-
 	public void reset() {
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		TakeEntity take = new TakeEntity();
@@ -86,8 +78,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		pay.setIdpayment(Constants.CHANGEMACHINE);
 		take.setTakedate(now);
 		cmtn.setCreationdate(now);
-		cmtn.setDeposit(cmt.getDeposit().subtract(changeMachineRepository.sumByCreationdateBetween(from, now))
+		cmtn.setVisible(cmt.getVisible().subtract(changeMachineRepository.sumByCreationdateBetween(from, now))
 				.subtract(tpvrepository.sumByCreationdateAndPayment(pay, from, now)));
+		cmtn.setDeposit(cmt.getDeposit());
 		changeMachineTotalRepository.save(cmtn);
 		takingsRepository.save(take);
 	}
@@ -110,6 +103,14 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			awards = awards.add(awardscm);
 		}
 		return awards;
+	}
+
+	/**
+	 * Dinero invertido en la máquina de cambio
+	 */
+	public BigDecimal getIncomeTotalMonth() {
+		return changeMachineRepository.sumIncomeBetweenDates(
+				takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new DateUtil().getNow());
 	}
 
 	public Map<String, Object> ticketsByDay(Date date) {
