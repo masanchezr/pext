@@ -13,6 +13,9 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
+					<div class="form-group">
+					<p><spring:message code=""/></p>
+					</div>
 						<div class="form-group">
 							<spring:message code="date" var="datemessage" />
 							<form:input class="form-control" type="text" path="datefrom"
@@ -27,7 +30,7 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
-								<spring:message code="search" />
+								<spring:message code="reset" />
 							</form:button>
 						</div>
 					</div>

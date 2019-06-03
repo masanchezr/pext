@@ -91,7 +91,7 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/luckiaAward"
 			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/admin/resetcm"
+		<intercept-url pattern="/admin/reset"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/searchmonthreset"
 			access="hasRole('ROLE_ADMIN')" />
