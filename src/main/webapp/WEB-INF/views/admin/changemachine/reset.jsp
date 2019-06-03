@@ -15,10 +15,8 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<spring:message code="date" var="datemessage" />
-							<div id="sandbox-container">
-								<form:input class="form-control" type="text" path="datefrom"
-									placeholder="${datemessage}" />
-							</div>
+							<form:input class="form-control" type="text" path="datefrom"
+								placeholder="${datemessage}" />
 							<p class="text-danger">
 								<form:errors path="datefrom" />
 							</p>
