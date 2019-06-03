@@ -68,10 +68,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
-	public void reset() {
+	public void reset(String sdate) {
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		TakeEntity take = new TakeEntity();
-		Date now = new DateUtil().getNow();
+		Date now;
+		if (Util.isEmpty(sdate)) {
+			now = new DateUtil().getNow();
+		} else {
+			now = DateUtil.getDate(sdate);
+		}
 		ChangeMachineTotalEntity cmt = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineTotalEntity cmtn = new ChangeMachineTotalEntity();
 		PaymentEntity pay = new PaymentEntity();

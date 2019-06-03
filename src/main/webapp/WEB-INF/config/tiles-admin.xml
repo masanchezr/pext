@@ -229,4 +229,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/registers/searchregisters.jsp" />
 	</definition>
+	<definition name="resetcm" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/changemachine/reset.jsp" />
+	</definition>
 </tiles-definitions>

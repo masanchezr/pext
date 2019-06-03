@@ -13,7 +13,7 @@ public interface ChangeMachineService {
 
 	public BigDecimal getIncomeTotalMonth();
 
-	public void reset();
+	public void reset(String sdate);
 
 	public BigDecimal getAwards();
 

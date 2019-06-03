@@ -81,7 +81,7 @@
 						<li><spring:url value="/admin/searchticketsByDay"
 								var="ticketsbyday"></spring:url> <a href="${ticketsbyday}"><spring:message
 									code="ticketsbyday" /></a></li>
-						<li><spring:url value="/admin/resetcm" var="reset"></spring:url>
+						<li><spring:url value="/admin/reset" var="reset"></spring:url>
 							<a href="${reset}"><spring:message code="resetmonthend" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"

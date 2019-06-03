@@ -70,9 +70,16 @@ public class ChangeMachineAdminController {
 	}
 
 	@RequestMapping(value = "/admin/resetcm")
-	public ModelAndView resetcm() {
-		changeMachineService.reset();
+	public ModelAndView resetcm(@ModelAttribute("dateForm") SearchByDatesForm date) {
+		changeMachineService.reset(date.getDatefrom());
 		return changemachinetotal();
+	}
+
+	@RequestMapping(value = "/admin/reset")
+	public ModelAndView reset() {
+		ModelAndView model = new ModelAndView("resetcm");
+		model.addObject("dateForm", new SearchByDatesForm());
+		return model;
 	}
 
 	@RequestMapping(value = "/admin/ticketsByDay")
