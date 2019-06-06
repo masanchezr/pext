@@ -10,7 +10,7 @@ public interface CalendarService {
 
 	public List<TimeEntity> getTimesActive();
 
-	public List<ScheduleEntity> save(List<Schedule> schedule);
+	public List<ScheduleEntity> save(List<Schedule> list);
 
 	public List<Schedule> getSchedule(String sweek);
 
