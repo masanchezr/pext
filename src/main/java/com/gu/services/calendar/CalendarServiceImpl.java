@@ -14,6 +14,7 @@ import com.gu.dbaccess.entities.ScheduleEntity;
 import com.gu.dbaccess.entities.TimeEntity;
 import com.gu.dbaccess.repositories.ScheduleRepository;
 import com.gu.dbaccess.repositories.TimeRepository;
+import com.gu.util.constants.Constants;
 import com.gu.util.date.DateUtil;
 
 public class CalendarServiceImpl implements CalendarService {
@@ -61,6 +62,7 @@ public class CalendarServiceImpl implements CalendarService {
 		Iterator<ScheduleEntity> ilschedule = lschedule.iterator();
 		Schedule schedule;
 		ScheduleEntity entity;
+		EmployeeEntity employee;
 		List<EmployeeScheduleEntity> employees;
 		Iterator<EmployeeScheduleEntity> iemployees;
 		while (ilschedule.hasNext()) {
@@ -72,7 +74,10 @@ public class CalendarServiceImpl implements CalendarService {
 			employees = entity.getEmployees();
 			iemployees = employees.iterator();
 			while (iemployees.hasNext()) {
-				schedule.getEmployees().add(iemployees.next().getEmployee());
+				employee = iemployees.next().getEmployee();
+				if (!employee.getIdemployee().equals(Constants.NOBODY)) {
+					schedule.getEmployees().add(employee);
+				}
 			}
 			calendar.add(schedule);
 		}
