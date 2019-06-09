@@ -45,10 +45,12 @@ public class CalendarServiceImpl implements CalendarService {
 		s.setTime(next.getTime());
 		s.setEmployees(new ArrayList<>());
 		for (EmployeeEntity employee : employees) {
-			EmployeeScheduleEntity e = new EmployeeScheduleEntity();
-			e.setEmployee(employee);
-			e.setSchedule(s);
-			s.getEmployees().add(e);
+			if (!employee.getIdemployee().equals(Constants.NOBODY)) {
+				EmployeeScheduleEntity e = new EmployeeScheduleEntity();
+				e.setEmployee(employee);
+				e.setSchedule(s);
+				s.getEmployees().add(e);
+			}
 		}
 		return s;
 	}
