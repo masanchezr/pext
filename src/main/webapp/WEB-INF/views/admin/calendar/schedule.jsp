@@ -40,6 +40,7 @@
 									end="${statusdate.index+(status.index*7)+6}">
 									<td><c:forEach items="${s.employees}" var="employee">
 											<c:out value="${employee.alias}" />
+											<br />
 										</c:forEach></td>
 								</c:forEach>
 							</tr>
