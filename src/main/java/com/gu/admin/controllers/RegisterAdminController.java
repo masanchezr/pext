@@ -3,8 +3,9 @@ package com.gu.admin.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -21,25 +22,25 @@ public class RegisterAdminController {
 	@Autowired
 	private SearchDatesFormValidator searchDatesFormValidator;
 
-	@RequestMapping(value = "/admin/searchregister")
+	@GetMapping("/admin/searchregister")
 	public ModelAndView searchregister() {
-		ModelAndView model = new ModelAndView("searchregistersadmin");
+		ModelAndView model = new ModelAndView("admin/registers/searchregisters");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/admin/register")
+	@PostMapping("/admin/register")
 	public ModelAndView register(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model = new ModelAndView();
 			model.addObject(ConstantsJsp.FORMSEARCH, sdf);
-			model.setViewName("searchregistersadmin");
+			model.setViewName("admin/registers/searchregisters");
 			return model;
 		} else {
 			model.addObject("registers", ficticionalRegisterService.findByDates(sdf.getDatefrom(), sdf.getDateuntil()));
-			model.setViewName("registeradmin");
+			model.setViewName("admin/registers/register");
 		}
 		return model;
 	}

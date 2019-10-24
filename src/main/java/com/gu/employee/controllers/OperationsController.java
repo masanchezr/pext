@@ -1,15 +1,18 @@
 package com.gu.employee.controllers;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.EmployeeEntity;
 import com.gu.dbaccess.entities.OperationEntity;
+import com.gu.forms.Operation;
 import com.gu.services.awards.AwardService;
 import com.gu.services.employees.EmployeeService;
 import com.gu.services.machines.MachineService;
@@ -26,23 +29,26 @@ public class OperationsController {
 	private AwardService awardService;
 
 	@Autowired
-	private MachineService machineService;
+	private EmployeeService employeeService;
 
 	@Autowired
-	private PaymentService paymentService;
+	private MachineService machineService;
 
 	@Autowired
 	private OperationService operationService;
 
 	@Autowired
-	private EmployeeService employeeService;
+	private PaymentService paymentService;
 
 	@Autowired
 	private OperationsValidator operationsValidator;
 
-	private static final String VIEWNEWOPERATION = "newoperation";
+	@Autowired
+	private Mapper mapper;
 
-	@RequestMapping(value = "/employee/newoperation")
+	private static final String VIEWNEWOPERATION = "employee/expenses/operations/newoperation";
+
+	@GetMapping("/employee/newoperation")
 	public ModelAndView newoperation() {
 		ModelAndView model = new ModelAndView(VIEWNEWOPERATION);
 		model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
@@ -53,10 +59,11 @@ public class OperationsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/saveoperation")
-	public ModelAndView saveoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation,
+	@PostMapping("/employee/saveoperation")
+	public ModelAndView saveoperation(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		OperationEntity op = mapper.map(operation, OperationEntity.class);
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWOPERATION);
@@ -65,7 +72,7 @@ public class OperationsController {
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
 			model.addObject(ConstantsJsp.OPERATION, operation);
-		} else if (operationService.getOperationNotAllowed(operation) != null) {
+		} else if (operationService.getOperationNotAllowed(op) != null) {
 			model.setViewName(VIEWNEWOPERATION);
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
@@ -79,8 +86,8 @@ public class OperationsController {
 				EmployeeEntity employee = employeeService.getEmployeeByUserName(user);
 				operation.setEmployee(employee);
 			}
-			model.addObject(ConstantsJsp.DAILY, operationService.save(operation));
-			model.setViewName(ConstantsJsp.DAILY);
+			model.addObject(ConstantsJsp.DAILY, operationService.save(op));
+			model.setViewName("employee/daily/daily");
 		}
 		return model;
 	}

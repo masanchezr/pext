@@ -1,14 +1,18 @@
 package com.gu.employee.controllers;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.BarDrinkEntity;
+import com.gu.employee.forms.BarDrink;
 import com.gu.employee.validators.IncomeValidator;
+import com.gu.services.dailies.DailyService;
 import com.gu.services.income.IncomeService;
 import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
@@ -16,32 +20,39 @@ import com.gu.util.date.DateUtil;
 @Controller
 public class IncomeController {
 
+	/** The daily service. */
+	@Autowired
+	private DailyService dailyService;
+
 	@Autowired
 	private IncomeService incomeservice;
 
 	@Autowired
 	private IncomeValidator incomeValidator;
 
-	private static final String VIEWNEWINCOME = "newincome";
+	@Autowired
+	private Mapper mapper;
 
-	@RequestMapping(value = "/employee/newincome")
+	private static final String VIEWNEWINCOME = "employee/income/newincome";
+
+	@GetMapping("/employee/newincome")
 	public ModelAndView newincome() {
 		ModelAndView model = new ModelAndView(VIEWNEWINCOME);
 		model.addObject(ConstantsJsp.FORMINCOME, new BarDrinkEntity());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/saveincome")
-	public ModelAndView saveincome(@ModelAttribute(ConstantsJsp.FORMINCOME) BarDrinkEntity income,
-			BindingResult result) {
+	@PostMapping("/employee/saveincome")
+	public ModelAndView saveincome(@ModelAttribute(ConstantsJsp.FORMINCOME) BarDrink income, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		incomeValidator.validate(income, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWINCOME);
 			model.addObject(ConstantsJsp.FORMINCOME, income);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, incomeservice.save(income));
-			model.setViewName(ConstantsJsp.DAILY);
+			incomeservice.save(mapper.map(income, BarDrinkEntity.class));
+			model.addObject(ConstantsJsp.DAILY, dailyService.getDailyEmployee());
+			model.setViewName("employee/daily/daily");
 			model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;

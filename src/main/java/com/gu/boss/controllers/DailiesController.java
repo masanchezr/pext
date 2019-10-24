@@ -3,14 +3,13 @@ package com.gu.boss.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -31,19 +30,10 @@ public class DailiesController {
 
 	@Autowired
 	private SearchDatesFormValidator searchDatesFormValidator;
-
-	private static final String VIEWSEARCHCALCULATEDAILIES = "searchcalculatedailies";
 	private static final String FORMSEARCHDAILY = "searchDailyForm";
-	private static final String VIEWSEARCHDAILY = "searchdaily";
+	private static final String VIEWSEARCHDAILY = "boss/dailies/searchdaily";
 
-	@RequestMapping(value = "/searchcalculatedailies")
-	public ModelAndView searchCalculateDailies() {
-		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
-		model.addObject(FORMSEARCHDAILY, new SearchByDatesForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/daily")
+	@GetMapping("/daily")
 	public ModelAndView daily() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHDAILY);
 		model.addObject(FORMSEARCHDAILY, new SearchByDatesForm());
@@ -56,7 +46,7 @@ public class DailiesController {
 	 * @param sdf the sdf
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/resultdaily")
+	@PostMapping("/resultdaily")
 	public ModelAndView searchDaily(@ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model;
 		String sdate = sdf.getDatefrom();
@@ -99,32 +89,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/calculatedailies")
-	public ModelAndView calculateDailies(@ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf,
-			HttpServletRequest request, BindingResult arg1) {
-		ModelAndView model = new ModelAndView();
-		searchDatesFormValidator.validate(sdf, arg1);
-		if (arg1.hasErrors()) {
-			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
-		} else {
-			String sdate = sdf.getDatefrom();
-			Date date = DateUtil.getDate(sdf.getDatefrom());
-			if (date != null) {
-				Calendar c = Calendar.getInstance();
-				c.set(2015, 2, 31);
-				date = DateUtil.getDate(sdate);
-				if (date.after(c.getTime())) {
-					dailyService.calculateDailies(date);
-					model.setViewName(ConstantsJsp.SUCCESS);
-				} else {
-					model.setViewName(VIEWSEARCHCALCULATEDAILIES);
-				}
-			}
-		}
-		return model;
-	}
-
-	@RequestMapping(value = "/beforeday{date}")
+	@GetMapping("/beforeday{date}")
 	public ModelAndView beforeday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Calendar c = Calendar.getInstance();
@@ -151,11 +116,12 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/beforeday")
+	@GetMapping("/beforeday")
 	public ModelAndView beforeday() {
 		ModelAndView model = new ModelAndView();
 		Date date = DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1);
-		Daily daily = dailyService.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1));
+		Daily daily = dailyService
+				.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1));
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYBOSS);
 		} else {
@@ -166,7 +132,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/againday{date}")
+	@GetMapping("/againday{date}")
 	public ModelAndView againday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Date date = DateUtil.getDate(sdate);

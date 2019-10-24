@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{tpv}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newtpv}"></li>
+	</ol>
+	<form method="post" th:action="@{savetpv}" th:object="${tpv}">
+		<div class="row">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<input class="form-control" th:field="*{idtpv}"
+								th:placeholder="#{num}" />
+							<p class="text-danger" th:if="${#fields.hasErrors('idtpv')}"
+								th:errors="*{idtpv}"></p>
+						</div>
+						<div class="form-group">
+							<input class="form-control" th:field="*{amount}"
+								th:placeholder="#{amount}" />
+							<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
+								th:errors="*{amount}"></p>
+						</div>
+						<div class="form-group">
+							<input class="form-control" th:field="*{creationdate}"
+								th:placeholder="#{date}" />
+							<p class="text-danger"
+								th:if="${#fields.hasErrors('creationdate')}"
+								th:errors="*{creationdate}"></p>
+						</div>
+						<div class="form-group">
+							<span th:text="#{payment}"></span> <select class="form-control"
+								th:field="*{pay.idpayment}" id="payments">
+								<option th:each="pay:${payments}" th:value="${pay.idpayment}"
+									th:text="${pay.name}" th:bgcolor="${pay.color}" />
+							</select>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-danger" value="submit" id="button">
+								<span th:text="#{save}"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

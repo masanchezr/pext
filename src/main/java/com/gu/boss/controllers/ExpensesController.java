@@ -2,8 +2,9 @@ package com.gu.boss.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -16,16 +17,16 @@ public class ExpensesController {
 	@Autowired
 	private OperationService operationService;
 
-	@RequestMapping(value = "/summaryexpenses")
+	@GetMapping("/summaryexpenses")
 	public ModelAndView searchexpenses() {
-		ModelAndView model = new ModelAndView("searchexpenses");
+		ModelAndView model = new ModelAndView("boss/expenses/searchexpenses");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/resultexpenses")
+	@PostMapping("/resultexpenses")
 	public ModelAndView resultexpenses(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView("resultexpenses");
+		ModelAndView model = new ModelAndView("boss/expenses/result");
 		model.addAllObjects(operationService.findExpensesByMonth(searchForm.getDatefrom()));
 		return model;
 	}

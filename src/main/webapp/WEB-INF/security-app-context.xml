@@ -9,9 +9,12 @@
 	<beans:import resource="classpath*:applicationContext.xml" />
 	<beans:bean name="pbkdf2Encoder"
 		class="org.springframework.security.crypto.password.Pbkdf2PasswordEncoder" />
+	<http pattern="/resources/**" security="none" />
 	<http pattern="/employee/**"
 		authentication-manager-ref="authenticationMgr">
 		<access-denied-handler error-page="/403employee" />
+		<logout logout-url="/employee/j_spring_security_logout"
+			logout-success-url="/employee/login" invalidate-session="true" />
 		<intercept-url pattern="/employee/admin"
 			access="hasAnyRole('ROLE_USER','ROLE_RD')" />
 		<intercept-url pattern="/employee/myincidents"

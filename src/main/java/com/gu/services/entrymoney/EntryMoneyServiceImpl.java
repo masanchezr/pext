@@ -16,16 +16,10 @@ import com.gu.dbaccess.repositories.ChangeMachineRepository;
 import com.gu.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.gu.dbaccess.repositories.EntryMoneyRepository;
 import com.gu.dbaccess.repositories.SafeRepository;
-import com.gu.services.dailies.Daily;
-import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
 import com.gu.util.date.DateUtil;
 
 public class EntryMoneyServiceImpl implements EntryMoneyService {
-
-	/** The daily service. */
-	@Autowired
-	private DailyService dailyService;
 
 	@Autowired
 	private EntryMoneyRepository entryMoneyRepository;
@@ -39,7 +33,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	@Autowired
 	private ChangeMachineTotalRepository changemachinetotalrepository;
 
-	public Daily saveEntryMoney(EntryMoneyForm entryMoneyForm) {
+	public void saveEntryMoney(EntryMoneyForm entryMoneyForm) {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
@@ -54,23 +48,21 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 			safe.setDescription("CAJA COMÚN");
 			safeRepository.save(safe);
 		}
-		return dailyService.getDaily(new DateUtil().getNow());
 	}
 
-	public Daily saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm) {
+	public void saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm) {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new DateUtil().getNow());
 		entryMoneyRepository.save(entrymoney);
-		return dailyService.getDailyEmployee();
 	}
 
 	public List<EntryMoneyEntity> findByDates(Date from, Date until) {
 		return entryMoneyRepository.findByCreationdateBetween(from, until);
 	}
 
-	public Daily saveEntryMachine(EntryMoneyForm entryMoney) {
+	public void saveEntryMachine(EntryMoneyForm entryMoney) {
 		ChangeMachineTotalEntity machinetotal = new ChangeMachineTotalEntity();
 		ChangeMachineEntity machine = new ChangeMachineEntity();
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
@@ -88,7 +80,6 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 				.add(entryMoney.getAmount()));
 		changemachinerepository.save(machine);
 		changemachinetotalrepository.save(machinetotal);
-		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal saveAdd(SafeEntity safe) {

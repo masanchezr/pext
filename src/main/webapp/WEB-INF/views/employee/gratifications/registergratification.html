@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{gratifications}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{registergratification}"></li>
+	</ol>
+	<form method="post" th:action="@{registergratification}"
+		th:object="${gratification}" role="form">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="form-group">
+								<input class="form-control" th:field="*{client}"
+									th:placeholder="#{client}" />
+								<p class="text-danger" th:if="${#fields.hasErrors('client')}"
+									th:errors="*{client}"></p>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

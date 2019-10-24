@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{schedule}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newweekcalendar}"></li>
+	</ol>
+	<form th:action="@{saveschedule}" th:object="${scheduleForm}"
+		method="post" role="form">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th th:text="#{week}"><th:block th:text="${week}" /></th>
+							<th th:text="#{monday}"></th>
+							<th th:text="#{tuesday}"></th>
+							<th th:text="#{wednesday}"></th>
+							<th th:text="#{thursday}"></th>
+							<th th:text="#{friday}"></th>
+							<th th:text="#{saturday}"></th>
+							<th th:text="#{sunday}"></th>
+						</tr>
+						<tr>
+							<td></td>
+							<th:block th:each="date: ${dates}">
+								<td th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
+							</th:block>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="time: ${times}">
+							<td th:text="${time.name}"></td>
+							<th:block th:each="date: ${dates}">
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[0].idemployee}">
+										<option th:each="employee: ${employees}"
+											th:value="${employee.idemployee}"
+											th:text="${employee.username}" />
+								</select> <select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[1].idemployee}">
+										<option th:each="employee: ${employees}"
+											th:value="${employee.idemployee}"
+											th:text="${employee.username}" />
+								</select> <select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[2].idemployee}">
+										<option th:each="employee: ${employees}"
+											th:value="${employee.idemployee}"
+											th:text="${employee.username}" />
+								</select> <input type="hidden"
+									th:attr="name='schedule['+${dateStat.index+(timeStat.index*7)}+'].time.idtime'"
+									th:value="${time.idtime}" /> <input type="hidden"
+									th:attr="name='schedule['+${dateStat.index+(timeStat.index*7)}+'].dateschedule'"
+									th:value="${date}" /></td>
+							</th:block>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group">
+				<button class="btn btn-danger" value="submit">
+					<span th:text="#{save}"></span>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

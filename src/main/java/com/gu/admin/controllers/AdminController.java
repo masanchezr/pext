@@ -3,7 +3,7 @@ package com.gu.admin.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * The Class AdminController.
@@ -19,10 +19,10 @@ public class AdminController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/admin/login")
+	@GetMapping("/admin/login")
 	public String login() {
 		log.warn("probando login");
-		return "loginadmin";
+		return "admin/login";
 	}
 
 	/**
@@ -30,19 +30,9 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/admin/admin")
+	@GetMapping("/admin/admin")
 	public String admin() {
-		return "admin";
-	}
-
-	/**
-	 * Error.
-	 * 
-	 * @return the string
-	 */
-	@RequestMapping(value = "/admin/error")
-	public String error() {
-		return "error";
+		return "admin/admin";
 	}
 
 	/**
@@ -50,8 +40,8 @@ public class AdminController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403admin")
+	@GetMapping("/403admin")
 	public String accessDeniedPage() {
-		return "403admin";
+		return "admin/403";
 	}
 }

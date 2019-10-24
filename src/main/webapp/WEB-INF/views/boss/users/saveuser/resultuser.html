@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<span th:text="${user.username}"></span> <span
+		th:text="${user.password}"></span> <span th:text="${user.enabled}"></span>
+</div>
+</html>

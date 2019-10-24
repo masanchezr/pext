@@ -10,7 +10,7 @@ import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.admin.forms.Schedule;
@@ -26,20 +26,20 @@ public class ScheduleController {
 	@Autowired
 	private CalendarService calendarService;
 
-	@RequestMapping(value = "/employee/searchschedule")
+	@GetMapping("/employee/searchschedule")
 	public ModelAndView searchschedule() {
-		ModelAndView model = new ModelAndView("searchschedulee");
+		ModelAndView model = new ModelAndView("employee/calendar/searchschedule");
 		model.addObject("weekForm", new WeekForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultschedule")
+	@GetMapping("/employee/resultschedule")
 	public ModelAndView resultschedule(WeekForm week, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		String sweek = week.getWeek();
 		List<Schedule> schedule = calendarService.getSchedule(sweek);
 		if (schedule == null || schedule.isEmpty()) {
-			model.setViewName("searchschedulee");
+			model.setViewName("employee/calendar/searchschedule");
 			model.addObject("weekForm", week);
 			result.rejectValue("week", "noschedule");
 		} else {
@@ -57,7 +57,7 @@ public class ScheduleController {
 			model.addObject("dates", DateUtil.getDates(sweek));
 			model.addObject("schedule", schedule);
 			model.addObject("week", sweek);
-			model.setViewName("schedulee");
+			model.setViewName("employee/calendar/schedule");
 		}
 		return model;
 	}

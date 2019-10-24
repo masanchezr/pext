@@ -103,21 +103,6 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
-	public static String getStringDateFormatddMMyyyy(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		return sdf.format(date);
-	}
-
-	public static String getStringDateFormatddMMyyyyHHmm(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		return sdf.format(date);
-	}
-
-	public static String getStringDateFormatHHmm(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		return sdf.format(date);
-	}
-
 	public static List<Date> getDates(String sweek) {
 		List<Date> dates = new ArrayList<>(7);
 		Calendar calendar = Calendar.getInstance();
@@ -144,6 +129,26 @@ public class DateUtil {
 			cfrom.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		return dates;
+	}
+
+	public static String getStringDateFormatBarddMMyyyy(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(date);
+	}
+
+	public static String getStringDateFormatddMMyyyy(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		return sdf.format(date);
+	}
+
+	public static String getStringDateFormatddMMyyyyHHmm(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		return sdf.format(date);
+	}
+
+	public static String getStringDateFormatHHmm(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		return sdf.format(date);
 	}
 
 	public static String getStringDateFormatyyyyMMdd(Date date) {

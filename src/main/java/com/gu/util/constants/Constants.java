@@ -30,7 +30,7 @@ public class Constants {
 	public static final int AGE = 18;
 
 	/** EXTENSION PNG **/
-	public static final String PNG = ".png";
+	public static final String PNG = ".png}";
 
 	private static final String[] ORIGIN = { "CAJA FUERTE", "EXTERIOR (BANCO)" };
 

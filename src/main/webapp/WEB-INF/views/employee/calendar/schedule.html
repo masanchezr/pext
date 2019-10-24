@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" th:text="#{schedule}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th th:text="#{week}"><th:block th:text="${week}" /></th>
+								<th th:text="#{monday}"></th>
+								<th th:text="#{tuesday}"></th>
+								<th th:text="#{wednesday}"></th>
+								<th th:text="#{thursday}"></th>
+								<th th:text="#{friday}"></th>
+								<th th:text="#{saturday}"></th>
+								<th th:text="#{sunday}"></th>
+							</tr>
+							<tr>
+								<td></td>
+								<th:block th:each="date: ${dates}">
+									<td th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
+								</th:block>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="time,iterTime: ${times}">
+								<td th:text="${time.name}"></td>
+								<th:block
+									th:each="index : ${#numbers.sequence(iterTime.index*7,(iterTime.index*7)+6)}">
+									<td><th:block
+											th:each="employee: ${schedule[index].employees}">
+											<p th:text="${employee.username}">
+										</th:block></td>
+								</th:block>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

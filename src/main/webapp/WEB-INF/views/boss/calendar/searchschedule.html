@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{schedule}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{selectweek}"></li>
+	</ol>
+	<form method="post" th:action="@{resultschedule"
+		th:object="${weekForm}">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<span th:text="#{week}"></span>
+								<div class="input-append date">
+									<input type="week" th:field="*{week}" />
+								</div>
+								<p class="text-danger" th:if="${#fields.hasErrors('week')}"
+									th:errors="*{week}"></p>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit">
+									<span th:text="#{search}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{users}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newuser}"></li>
+	</ol>
+	<form method="post" th:action="@{saveuser}" th:object="${user}">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="form-group">
+						<input class="form-control" th:field="*{name}"
+							th:placeholder="#{fullname}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}"></p>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{alias}"
+							th:placeholder="#{alias}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('alias')}"
+							th:errors="*{alias}"></p>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{username}"
+							th:placeholder="#{username}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('username')}"
+							th:errors="*{username}"></p>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{password}"
+							th:placeholder="#{password}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}"></p>
+					</div>
+					<div class="form-group">
+						<span th:text="#{active}"></span> <input type="checkbox"
+							th:field="*{enabled}" />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{role}"
+							th:placeholder="#{role}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('role')}"
+							th:errors="*{role}"></p>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-danger" value="submit">
+							<span th:text="#{save}"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

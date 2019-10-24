@@ -11,19 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gu.dbaccess.entities.EmployeeEntity;
 import com.gu.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.gu.dbaccess.repositories.ReturnMoneyEmployeesRepository;
-import com.gu.services.dailies.Daily;
-import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
 
 public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeService {
 
 	@Autowired
-	private DailyService dailyService;
-
-	@Autowired
 	private ReturnMoneyEmployeesRepository returnMoneyEmployeesRepository;
 
-	public Daily savereturn(ReturnMoneyEmployeeEntity returnme) {
+	public void savereturn(ReturnMoneyEmployeeEntity returnme) {
 		Optional<ReturnMoneyEmployeeEntity> opreturnme = returnMoneyEmployeesRepository
 				.findById(returnme.getIdreturnmoneyemployee());
 		if (opreturnme.isPresent()) {
@@ -31,7 +26,6 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 			returnme.setReturndate(new DateUtil().getNow());
 			returnMoneyEmployeesRepository.save(returnme);
 		}
-		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {
@@ -51,10 +45,9 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		return returnMoneyEmployeesRepository.findByEmployeeAndReturndateIsNull(employee);
 	}
 
-	public Daily savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
+	public void savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
 		returnme.setCreationdate(new DateUtil().getNow());
 		returnMoneyEmployeesRepository.save(returnme);
-		return dailyService.getDailyEmployee();
 	}
 
 	@Override

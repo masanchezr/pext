@@ -3,8 +3,9 @@ package com.gu.boss.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -21,23 +22,23 @@ public class SafeBossController {
 	@Autowired
 	private SearchDatesFormValidator searchdatesformvalidator;
 
-	private static final String VIEWSEARCHENTRYSORTSAFE = "searchentrysortsafe";
+	private static final String VIEWSEARCHENTRYSORTSAFE = "boss/safe/searchentrysortsafe";
 
-	@RequestMapping(value = "/safetotal")
+	@GetMapping("/safetotal")
 	public ModelAndView safetotal() {
-		ModelAndView model = new ModelAndView("safetotal");
+		ModelAndView model = new ModelAndView("boss/safe/safe");
 		model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.searchTotalSafe());
 		return model;
 	}
 
-	@RequestMapping(value = "/searchentrysortsafe")
+	@GetMapping("/searchentrysortsafe")
 	public ModelAndView searchbydates() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHENTRYSORTSAFE);
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/resultentrysortsafe")
+	@PostMapping("/resultentrysortsafe")
 	public ModelAndView resultentrysortsafe(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -47,7 +48,7 @@ public class SafeBossController {
 			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
 		} else {
 			model.addObject("resultsearch", safeService.searchByDates(searchForm.getDatefrom()));
-			model.setViewName("resultentrysortsafe");
+			model.setViewName("boss/safe/resultentrysortsafe");
 		}
 		return model;
 	}

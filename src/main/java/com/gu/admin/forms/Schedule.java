@@ -58,20 +58,26 @@ public class Schedule implements Comparable<Schedule> {
 			return false;
 		Schedule other = (Schedule) obj;
 		if (dateschedule == null) {
-			if (other.dateschedule != null)
+			if (other.dateschedule != null) {
 				return false;
-		} else if (!dateschedule.equals(other.dateschedule))
+			}
+		} else if (!dateschedule.equals(other.dateschedule)) {
 			return false;
+		}
 		if (employees == null) {
-			if (other.employees != null)
+			if (other.employees != null) {
 				return false;
-		} else if (!employees.equals(other.employees))
+			}
+		} else if (!employees.equals(other.employees)) {
 			return false;
+		}
 		if (time == null) {
-			if (other.time != null)
+			if (other.time != null) {
 				return false;
-		} else if (!time.equals(other.time))
+			}
+		} else if (!time.equals(other.time)) {
 			return false;
+		}
 		return true;
 	}
 }

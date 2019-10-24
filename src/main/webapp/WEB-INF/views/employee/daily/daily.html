@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" th:text="#{daily}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{concept}"></th>
+								<th th:text="#{date}"></th>
+								<th th:text="#{amount}"></th>
+								<th th:text="#{payment}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="operation:${daily.operations}">
+								<td th:if="${operation.machine!=null}"><span
+									th:text="${operation.machine.name}"></span></td>
+								<td th:if="${operation.award!=null}"><span
+									th:text="${operation.award.name}"></span></td>
+								<td th:text="${operation.creationdate}"></td>
+								<td><span th:text="${operation.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td th:text="${operation.pay.name}"></td>
+							</tr>
+							<tr th:each="operation:${daily.gratifications}">
+								<td><span th:text="#{gratification}"></span> <span
+									th:text="${operation.idgratification}"></span> <span
+									th:text="${operation.machine.name}"></span></td>
+								<td th:text="${operation.paydate}"></td>
+								<td><span th:text="${operation.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td th:text="#{comun}"></td>
+							</tr>
+							<tr th:each="entryMoney:${daily.entriesMoney}">
+								<td><span th:text="#{entrymoney}"></span></td>
+								<td th:text="${entryMoney.creationdate}"></td>
+								<td><span th:text="${entryMoney.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td></td>
+							</tr>
+							<tr th:each="income:${daily.income}">
+								<td th:text="${income.description}"></td>
+								<td th:text="${income.creationdate}"></td>
+								<td><span th:text="${income.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td></td>
+							</tr>
+							<tr th:each="income:${daily.returns}">
+								<td><span th:text="#{returnmoneyemployee}"></span> <span
+									th:text="${income.employee.alias}"></span></td>
+								<td th:text="${income.returndate}"></td>
+								<td><span th:text="${income.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td></td>
+							</tr>
+							<tr th:each="money:${daily.moneyadvance}">
+								<td><span th:text="#{moneyadvance}"></span> <span
+									th:text="${money.employee.alias}"></span></td>
+								<td th:text="${money.creationdate}"></td>
+								<td><span th:text="${money.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td th:text="#{comun}"></td>
+							</tr>
+							<tr th:each="income:${daily.incomeluckia}">
+								<td th:text="#{incomeluckia}"></td>
+								<td th:text="${income.creationdate}"></td>
+								<td><span th:text="${income.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td></td>
+							</tr>
+							<tr th:each="income:${daily.incomemachines}">
+								<td><span th:text="#{incomemachine}"></span><span
+									th:text="${income.machine.name}"></span></td>
+								<td th:text="${income.creationdate}"></td>
+								<td><span th:text="${income.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td></td>
+							</tr>
+							<tr th:each="tpv:${daily.tpvs}">
+								<td><span th:text="#{tpv}"></span> <span
+									th:text="${tpv.idtpv}"></span></td>
+								<td th:text="${tpv.creationdate}"></td>
+								<td><span th:text="${tpv.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td th:text="${tpv.pay.name}"></td>
+							</tr>
+							<tr th:each="lcm:${daily.listchangemachine}">
+								<td><span th:text="${lcm.idchangemachine}"></span> <span
+									th:text="${lcm.machine.name}"></span></td>
+								<td th:text="${lcm.creationdate}"></td>
+								<td><span th:text="${lcm.amount}"></span> <i
+									class="fa fa-euro-sign"></i></td>
+								<td th:text="#{changemachine}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<span th:text="#{totalamount}"></span> <span
+								th:text="${daily.finalamount}"></span> <i
+								class="fa fa-euro-sign"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

@@ -2,7 +2,7 @@ package com.gu.employee.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.services.dailies.Daily;
@@ -25,15 +25,15 @@ public class DailyController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/daily")
+	@GetMapping("/employee/daily")
 	public ModelAndView daily() {
 		ModelAndView model = new ModelAndView();
 		Daily daily = dailyService.getDailyEmployee();
 		if (daily.getFinalamount() == null) {
-			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+			model.setViewName("employee/daily/notdaily");
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
-			model.setViewName(ConstantsJsp.DAILY);
+			model.setViewName("employee/daily/daily");
 			model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;

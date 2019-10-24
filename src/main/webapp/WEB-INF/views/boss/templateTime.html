@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<head th:replace="boss/header"></head>
+<body id="page-top">
+	<!-- csrt support -->
+	<form th:action="@{/j_spring_security_logout}" method="post"
+		id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+	<div id="wrapper">
+		<ul
+			class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{admin}">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-dragon"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">
+					<span th:text="#{goldenusera}"></span>
+				</div>
+			</a>
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item"><a th:href="@{daily}" class="nav-link"><i
+					class="fa fa-calendar fa-fw"></i><span th:text="#{dailies}"></span></a></li>
+			<li class="nav-item"><a th:href="@{summaryexpenses}"
+				class="nav-link"><i class="fa fa-euro-sign fa-fw"></i> <span
+					th:text="#{summaryexpenses}"></span></a></li>
+			<li class="nav-item"><a th:href="@{summaryincome}"
+				class="nav-link"><i class="fa fa-beer fa-fw"></i><span
+					th:text="#{summaryincome}"></span></a></li>
+			<li class="nav-item"><a th:href="@{searchrecharges}"
+				class="nav-link"><i class="fa fa-funnel-dollar fa-fw"></i> <span
+					th:text="#{recharges}"></span></a></li>
+			<li class="nav-item"><a th:href="@{searchopenmachines}"
+				class="nav-link"><i class="fas fa-lock-open"></i> <span
+					th:text="#{openmachines}"></span></a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseTPV"
+				aria-expanded="true" aria-controls="collpaseTPV"><i
+					class="fa fa-credit-card fa-fw"></i> <span th:text="#{tpv}"></span>
+			</a>
+				<div id="collapseTPV" class="collapse" aria-labelledby="headingTPV"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a th:href="@{searchtpv}" class="collapse-item"><span
+							th:text="#{searchtpv}"></span></a> <a th:href="@{newtpv}"
+							class="collapse-item"><span th:text="#{newtpv}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseSafe"
+				aria-expanded="true" aria-controls="collpaseSafe"><i
+					class="fa fa-inbox fa-fw"></i> <span th:text="#{safe}"></span> </a>
+				<div id="collapseSafe" class="collapse"
+					data-parent="#accordionSidebar" aria-labelledby="headingSafe">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a th:href="@{safetotal}" class="collapse-item"><span
+							th:text="#{safetotal}"></span></a> <a class="collapse-item"
+							th:href="@{searchentrysortsafe}"><span
+							th:text="#{entrysortsafe}"></span></a>
+					</div>
+				</div>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseUsers"
+				aria-expanded="true" aria-controls="collpaseUsers"><i
+					class="fa fa-users fa-fw"></i> <span th:text="#{users}"></span> </a>
+				<div id="collapseUsers" class="collapse"
+					data-parent="#accordionSidebar" aria-labelledby="headingUsers">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a th:href="@{enabledisableuser}" class="collapse-item"> <span
+							th:text="#{updateuser}"></span>
+						</a><a th:href="@{newuser}" class="collapse-item"> <span
+							th:text="#{newuser}"></span>
+						</a>
+					</div>
+				</div></li>
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+		</ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Sidebar Toggle (Topbar) -->
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<ul class="navbar-nav ml-auto">
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small">Cerrar</span>
+						</a> <!-- Dropdown - User Information -->
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>
+							</div></li>
+					</ul>
+				</nav>
+				<div class="container-fluid" th:include="this :: content"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fa fa-angle-up"></i>
+	</a>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<span th:text="#{readyToLeave}"></span>
+					</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true" th:text="#{close}"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span th:text="#{selectlogout}"></span>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">
+						<span th:text="#{cancel}"></span>
+					</button>
+					<a class="btn btn-danger" href="javascript:formSubmit()"><span
+						th:text="#{logout}"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	function formSubmit() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
+	<script type="text/javascript" th:src="@{resources/js/jquery.min.js}"></script>
+	<script th:src="@{resources/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{resources/js/jquery.easing.min.js}"></script>
+	<script th:src="@{resources/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{resources/js/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{resources/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{resources/js/sb-admin-datatables.min.js}"></script>
+	<script
+		th:src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js}"></script>
+	<script th:src="@{resources/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{resources/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{resources/js/bootstrap-datepicker.es.min.js}"></script>
+	<script>
+	$('.timepicker').timepicker({
+		timeFormat : 'hh:mm p',
+		interval : 60,
+		dynamic : true,
+		minTime : '00',
+		maxTime : '23',
+		dropdown : true,
+		scrollbar : true
+	});
+	$(function() {
+		$("#sandbox-container input").datepicker({
+			language : "es",
+			autoclose : true,
+			todayHighlight : true
+		});
+	});
+</script>
+
+</body>
+</html>

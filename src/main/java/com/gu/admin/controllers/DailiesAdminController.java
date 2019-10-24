@@ -5,9 +5,10 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -25,34 +26,35 @@ public class DailiesAdminController {
 	@Autowired
 	private DailyService dailyService;
 
-	@RequestMapping(value = "/admin/daily")
+	@GetMapping("/admin/daily")
 	public ModelAndView daily() {
-		ModelAndView model = new ModelAndView("searchdailyadmin");
+		ModelAndView model = new ModelAndView("admin/dailies/searchdaily");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/admin/resultdaily")
+	@PostMapping("/admin/resultdaily")
 	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView();
 		String sdate = searchForm.getDatefrom();
+		Date now = new DateUtil().getNow();
 		Date date;
 		String view;
 		if (Util.isEmpty(sdate)) {
-			date = DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow());
-			view = "dailyadminarrow";
+			date = DateUtil.getDateFormatddMMyyyy(now);
+			view = "admin/dailies/dailyarrow";
 		} else {
 			date = DateUtil.getDate(sdate);
 			view = ConstantsJsp.VIEWDAILYADMINARROWS;
 		}
-		if (date.before(new DateUtil().getNow()) || date.equals(new DateUtil().getNow())) {
+		if (date.before(now) || date.equals(now)) {
 			Daily daily = dailyService.getDaily(date);
 			if (daily.getFinalamount() == null) {
 				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 			} else {
 				model.addObject(ConstantsJsp.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsJsp.DATEDAILY, date);
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 			}
 		} else {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
@@ -60,7 +62,7 @@ public class DailiesAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/admin/beforeday{date}")
+	@GetMapping("/admin/beforeday{date}")
 	public ModelAndView beforeday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Calendar c = Calendar.getInstance();
@@ -76,7 +78,7 @@ public class DailiesAdminController {
 				} else {
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(ConstantsJsp.VIEWDAILYADMINARROWS);
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
@@ -87,7 +89,7 @@ public class DailiesAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/admin/againday{date}")
+	@GetMapping("/admin/againday{date}")
 	public ModelAndView againday(@PathVariable(Constants.DATE) String sdate) {
 		ModelAndView model = new ModelAndView();
 		Date date = DateUtil.getDate(sdate);
@@ -103,13 +105,13 @@ public class DailiesAdminController {
 					String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
 					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
-						view = "dailyadminarrow";
+						view = "admin/dailies/dailyarrow";
 					} else {
-						view = "dailyadminarrows";
+						view = ConstantsJsp.VIEWDAILYADMINARROWS;
 					}
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {

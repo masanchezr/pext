@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.services.messages.MessageService;
@@ -32,9 +32,9 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/employee/login")
+	@GetMapping("/employee/login")
 	public String login() {
-		return "loginemployee";
+		return "employee/login";
 	}
 
 	/**
@@ -42,9 +42,9 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/employee/admin")
+	@GetMapping("/employee/admin")
 	public ModelAndView admin(HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("adminemployee");
+		ModelAndView model = new ModelAndView("employee/admin");
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		if (ipAddress == null) {
@@ -55,7 +55,7 @@ public class EmployeeController {
 		return model;
 	}
 
-	@RequestMapping("/employee/logout")
+	@GetMapping("/employee/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -74,8 +74,8 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403employee")
+	@GetMapping("/403employee")
 	public String accessDeniedPage() {
-		return "403employee";
+		return "employee/403";
 	}
 }

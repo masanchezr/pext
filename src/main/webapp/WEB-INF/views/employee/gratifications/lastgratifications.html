@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{gratifications}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{lastgratifications}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{number}"></th>
+								<th th:text="#{date}"></th>
+								<th th:text="#{client}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="operation:${gratifications}">
+								<td th:text="${operation.idgratification}"></td>
+								<td th:text="${operation.creationdate}"></td>
+								<td th:text="${operation.client}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

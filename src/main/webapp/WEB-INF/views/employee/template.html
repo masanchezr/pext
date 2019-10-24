@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<head>
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/resources/styles/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/resources/styles/sb-admin-2.css}" rel="stylesheet">
+<!-- Custom Fonts -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link th:href="@{/resources/styles/dataTables.bootstrap4.min.css}"
+	rel="stylesheet">
+<link th:href="@{/resources/styles/bootstrap-datepicker.min.css}"
+	rel="stylesheet">
+<link rel="shortcut icon" th:href="@{/resources/img/admin/favicon.png}"
+	type="image/png">
+<title th:text="#{goldusera}"></title>
+</head>
+<body id="page-top">
+	<!-- csrt support -->
+	<form th:action="@{/employee/j_spring_security_logout}" method="post"
+		id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+	<div id="wrapper">
+		<ul
+			class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{admin}">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-dragon"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">
+					<span th:text="#{goldusera}"></span>
+				</div>
+			</a>
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapsexpenses"
+				aria-expanded="true" aria-controls="collapsexpenses"><i
+					class="fa fa-euro-sign fa-fw"></i> <span th:text="#{expenses}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingxpenses" id="collapsexpenses">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a th:href="@{newmoneyadvance}" class="collapse-item"><span
+							th:text="#{moneyadvance}"></span></a> <a th:href="@{newoperation}"
+							class="collapse-item"><span th:text="#{otheroperations}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#"
+				data-target="#collapseGratifications" aria-expanded="true"
+				aria-controls="collapseGratifications"><i
+					class="fa fa-money-bill-alt fa-fw"></i> <span
+					th:text="#{gratifications}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingGratifications" id="collapseGratifications">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{registernumber}"> <span
+							th:text="#{registergratification}"></span></a><a
+							class="collapse-item" th:href="@{newgratification}"> <span
+							th:text="#{paygratification}"></span></a><a class="collapse-item"
+							th:href="@{lastgratifications}"> <span
+							th:text="#{lastgratifications}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseIncome"
+				aria-expanded="true" aria-controls="collapseIncome"><i
+					class="fa fa-beer fa-fw"></i> <span th:text="#{income}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingIncome" id="collapseIncome">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{newincome}"><span
+							th:text="#{bardrinks}"></span></a><a class="collapse-item"
+							th:href="@{newincomeluckia}"><span th:text="#{incomeluckia}"></span></a><a
+							class="collapse-item" th:href="@{newincomemachine}"><span
+							th:text="#{incomemachine}"></span></a><a th:href="@{newreturn}"
+							class="collapse-item"><span th:text="#{returnmoneyemployee}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a th:href="@{newopenmachine}"
+				class="nav-link"> <i class="fas fa-lock-open"></i> <span
+					th:text="#{openmachine}"></span></a></li>
+			<!--li class="nav-item">
+					title="<span
+								th:text="#{searchschedule}" />"><spring:url
+						value="/employee/searchschedule" var="searchschedule" /><a
+					th:href="@{searchschedule}" class="nav-link"> <i
+						class="fa fa-calendar fa-fw"></i> <span 
+								th:text="#{searchschedule}" ></span></a></li-->
+			<li class="nav-item"><a th:href="@{daily}" class="nav-link">
+					<i class="fa fa-calendar-alt fa-fw"></i> <span th:text="#{daily}"></span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseincidents"
+				aria-expanded="true" aria-controls="collapseincidents"> <i
+					class="fa fa-exclamation"></i> <span class="nav-link-text"
+					th:text="#{incidents}"></span>
+			</a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingincidents" id="collapseincidents">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{newincident}"><span
+							th:text="#{newincident}"></span></a> <a class="collapse-item"
+							th:href="@{myincidents}"><span th:text="#{myincidents}"></span></a>
+					</div>
+				</div></li>
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+		</ul>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Sidebar Toggle (Topbar) -->
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small"
+								th:text="#{close}"></span>
+						</a> <!-- Dropdown - User Information -->
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>
+							</div></li>
+					</ul>
+				</nav>
+				<div class="container-fluid" th:include="this :: content"></div>
+			</div>
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fa fa-angle-up"></i>
+	</a>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<span th:text="#{readyToLeave}"></span>
+					</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true" th:text="#{close}"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span th:text="#{selectlogout}"></span>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">
+						<span th:text="#{cancel}"></span>
+					</button>
+					<a class="btn btn-danger" href="javascript:formSubmit()"><span
+						th:text="#{logout}"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/resources/js/jquery.min.js}">
+	</script>
+	<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/resources/js/jquery.easing.min.js}">
+	</script>
+	<script th:src="@{/resources/js/jquery.dataTables.min.js}">
+	</script>
+	<script th:src="@{/resources/js/dataTables.bootstrap4.min.js}">
+	</script>
+	<script th:src="@{/resources/js/sb-admin-2.min.js}">
+	</script>
+	<script th:src="@{/resources/js/employee/operations.js}">
+	</script>
+	<script th:src="@{/resources/js/bootstrap-datepicker.min.js}">
+	</script>
+	<script th:src="@{/resources/js/bootstrap-datepicker.es.min.js}">
+	</script>
+	<script>
+		$(function() {
+			$("#sandbox-container input").datepicker({
+				language : "es",
+				autoclose : true,
+				todayHighlight : true
+			});
+		});
+	</script>
+	<script>
+	function formSubmit() {
+		$("#logoutForm").submit();
+	}
+</script>
+</body>
+</html>

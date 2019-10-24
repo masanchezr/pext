@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{income}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{summary}"></span></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{income}"></th>
+								<th th:text="#{amount}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="#{bardrinks}"></td>
+								<td><span th:text="${bardrinks}"><i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+							<tr>
+								<td th:text="#{incomeluckia}"></td>
+								<td><span th:text="${luckia}"> <i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+							<tr>
+								<td th:text="#{incomemachine}"></td>
+								<td><span th:text="${incomemachines}"> <i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+							<tr>
+								<td th:text="#{returnmoneyemployee}"></td>
+								<td><span th:text="${returns}"> <i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<span th:text="#{total}"></span> <span th:text="${total}"> <i
+						class="fa fa-euro-sign"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

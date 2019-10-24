@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{operations}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newoperation}"></li>
+	</ol>
+	<form method="post" th:action="@{saveoperation}"
+		th:object="${operation}">
+		<input type="hidden" th:attr="name='idoperation'"
+			th:value="${operation.idoperation}" />
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<span th:text="#{payment}"></span> <select class="form-control"
+									th:field="*{pay.idpayment}">
+									<option th:each="pay:${payments}" th:value="${pay.idpayment}"
+										th:text="${pay.name}" th:bgcolor="${pay.color}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{amount}"
+									th:placeholder="#{amount}" />
+								<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
+									th:errors="*{amount}"></p>
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{description}"
+									th:placeholder="#{descriptionph}" />
+								<p class="text-danger"
+									th:if="${#fields.hasErrors('description')}"
+									th:errors="*{description}"></p>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<span th:text="#{machine}"></span> <select class="form-control"
+									th:field="*{machine.idmachine}">
+									<option th:each="m:${machines}" th:value="${m.idmachine}"
+										th:text="${m.name}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<span th:text="#{award}"></span> <select class="form-control"
+									th:field="*{award.idaward}">
+									<option th:each="award:${awards}" th:value="${award.idaward}"
+										th:text="${award.name}" th:bgcolor="${award.color}" />
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

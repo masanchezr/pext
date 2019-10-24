@@ -23,11 +23,10 @@ public class StringToDateConverter extends DozerConverter<String, Date> {
 
 	@Override
 	public Date convertTo(String source, Date destination) {
-		Date date = null;
 		if (!Util.isEmpty(source)) {
-			date = DateUtil.getDate(source);
+			destination = DateUtil.getDate(source);
 		}
-		return date;
+		return destination;
 	}
 
 	@Override

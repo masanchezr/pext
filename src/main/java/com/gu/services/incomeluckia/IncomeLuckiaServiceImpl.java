@@ -8,28 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.IncomeLuckiaEntity;
 import com.gu.dbaccess.repositories.IncomeLuckiaRepository;
-import com.gu.services.dailies.Daily;
-import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
 
 public class IncomeLuckiaServiceImpl implements IncomeLuckiaService {
 
 	@Autowired
-	private DailyService dailyService;
-
-	@Autowired
 	private IncomeLuckiaRepository incomeluckiarepository;
 
-	public Daily save(IncomeLuckiaEntity iluckia) {
+	public void save(IncomeLuckiaEntity iluckia) {
 		iluckia.setCreationdate(new DateUtil().getNow());
 		incomeluckiarepository.save(iluckia);
-		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
-		Date from, until;
+		Date from;
+		Date until;
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 		from = calendar.getTime();

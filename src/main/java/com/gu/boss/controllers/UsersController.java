@@ -3,8 +3,9 @@ package com.gu.boss.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.boss.validators.UserValidator;
@@ -22,23 +23,23 @@ public class UsersController {
 	@Autowired
 	private UserValidator userValidator;
 
-	private static final String VIEWNEWUSER = "newuser";
+	private static final String VIEWNEWUSER = "boss/users/saveuser/newuser";
 
-	@RequestMapping(value = "/enabledisableuser")
+	@GetMapping("/enabledisableuser")
 	public ModelAndView enabledisableuser() {
-		ModelAndView model = new ModelAndView("allusers");
+		ModelAndView model = new ModelAndView("boss/users/update/allusers");
 		model.addObject("users", userService.allUsers());
 		model.addObject("userForm", new User());
 		return model;
 	}
 
-	@RequestMapping(value = "/update")
+	@GetMapping("/update")
 	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
 		model.addObject(ConstantsJsp.USER, user);
 		if (result.hasErrors()) {
-			model.setViewName("updateuser");
+			model.setViewName("boss/users/update/updateuser");
 		} else {
 			userService.update(user);
 			model = enabledisableuser();
@@ -46,21 +47,21 @@ public class UsersController {
 		return model;
 	}
 
-	@RequestMapping(value = "/newuser")
+	@GetMapping("/newuser")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView(VIEWNEWUSER);
 		model.addObject(ConstantsJsp.USER, new User());
 		return model;
 	}
 
-	@RequestMapping(value = "/updateuser")
+	@GetMapping("/updateuser")
 	public ModelAndView updateUser(@ModelAttribute("userForm") User user) {
-		ModelAndView model = new ModelAndView("updateuser");
+		ModelAndView model = new ModelAndView("boss/users/update/updateuser");
 		model.addObject(ConstantsJsp.USER, userService.findUser(user.getUsername()));
 		return model;
 	}
 
-	@RequestMapping(value = "/saveuser")
+	@PostMapping("/saveuser")
 	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
@@ -73,7 +74,7 @@ public class UsersController {
 				model.setViewName(VIEWNEWUSER);
 				result.rejectValue(Constants.USERNAME, "exists");
 			} else {
-				model.setViewName("resultuser");
+				model.setViewName("boss/users/saveuser/resultuser");
 				userService.newUser(user);
 			}
 		}

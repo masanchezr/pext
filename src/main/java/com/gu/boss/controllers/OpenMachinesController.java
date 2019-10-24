@@ -4,8 +4,9 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -21,16 +22,16 @@ public class OpenMachinesController {
 	@Autowired
 	private OpenMachineService openmachineservice;
 
-	@RequestMapping("/searchopenmachines")
+	@GetMapping("/searchopenmachines")
 	public ModelAndView searchopenmachines() {
-		ModelAndView model = new ModelAndView("searchopenmachines");
+		ModelAndView model = new ModelAndView("boss/openmachines/search");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping("/openmachines")
+	@PostMapping("/openmachines")
 	public ModelAndView openmachines(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView("openmachinesboss");
+		ModelAndView model = new ModelAndView("boss/openmachines/openmachines");
 		String sdate = searchForm.getDatefrom();
 		Date date = new DateUtil().getNow();
 		if (!Util.isEmpty(sdate)) {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{expenses}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{summary}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{award}"></th>
+								<th th:text="#{total}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="s:${expenses}">
+								<td th:text="${s.award.name}"></td>
+								<td><span th:text="${s.amount}"><i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+							<tr>
+								<td th:text="#{gratifications}"></td>
+								<td><span th:text="${gratifications}"><i
+										class="fa fa-euro-sign"></i></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<span th:text="#{total}"></span> <span th:text="${total}"> <i
+						class="fa fa-euro-sign"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

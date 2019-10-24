@@ -1,14 +1,17 @@
 package com.gu.boss.controllers;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.dbaccess.entities.OperationEntity;
+import com.gu.forms.Operation;
 import com.gu.services.awards.AwardService;
 import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
@@ -35,10 +38,13 @@ public class OperationsBossController {
 	@Autowired
 	private OperationsValidator operationsValidator;
 
-	@RequestMapping(value = "/updateoperation{id}")
+	@Autowired
+	private Mapper mapper;
+
+	@GetMapping("/updateoperation{id}")
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
 		OperationEntity operation = operationService.findById(id);
-		ModelAndView model = new ModelAndView("updateoperationboss");
+		ModelAndView model = new ModelAndView("boss/newoperation");
 		model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
@@ -46,28 +52,28 @@ public class OperationsBossController {
 		return model;
 	}
 
-	@RequestMapping(value = "/saveoperation")
-	public ModelAndView saveoperationboss(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation,
+	@PostMapping("/saveoperation")
+	public ModelAndView saveoperationboss(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
-			model.setViewName("updateoperationboss");
+			model.setViewName("boss/newoperation");
 			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
 			model.addObject(ConstantsJsp.OPERATION, operation);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, operationService.update(operation));
-			model.setViewName(ConstantsJsp.SUCCESS);
+			model.addObject(ConstantsJsp.DAILY, operationService.update(mapper.map(operation, OperationEntity.class)));
+			model.setViewName("boss/success");
 		}
 		return model;
 	}
 
-	@RequestMapping(value = "/deleteoperation")
-	public ModelAndView deleteoperation(@ModelAttribute(ConstantsJsp.OPERATION) OperationEntity operation) {
-		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
-		operationService.delete(operation);
+	@GetMapping("/deleteoperation")
+	public ModelAndView deleteoperation(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation) {
+		ModelAndView model = new ModelAndView("boss/success");
+		operationService.delete(mapper.map(operation, OperationEntity.class));
 		return model;
 	}
 }

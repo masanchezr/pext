@@ -8,22 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.IncomeMachineEntity;
 import com.gu.dbaccess.repositories.IncomeMachinesRepository;
-import com.gu.services.dailies.Daily;
-import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
 
 public class IncomeMachineServiceImpl implements IncomeMachineService {
 
 	@Autowired
-	private DailyService dailyService;
-
-	@Autowired
 	private IncomeMachinesRepository incomemachinesrepository;
 
-	public Daily save(IncomeMachineEntity imachine) {
+	public void save(IncomeMachineEntity imachine) {
 		imachine.setCreationdate(new DateUtil().getNow());
 		incomemachinesrepository.save(imachine);
-		return dailyService.getDailyEmployee();
 	}
 
 	public BigDecimal findIncomeByMonth(String month) {

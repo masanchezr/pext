@@ -3,10 +3,10 @@ package com.gu.boss.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * The Class AdminController.
+ * The Class BossController.
  */
 @Controller
 public class BossController {
@@ -19,10 +19,10 @@ public class BossController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/login")
+	@GetMapping("/login")
 	public String login() {
 		log.warn("probando login");
-		return "loginboss";
+		return "boss/login";
 	}
 
 	/**
@@ -30,19 +30,9 @@ public class BossController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/adminboss")
+	@GetMapping("/adminboss")
 	public String admin() {
-		return "adminboss";
-	}
-
-	/**
-	 * Error.
-	 * 
-	 * @return the string
-	 */
-	@RequestMapping(value = "/error")
-	public String error() {
-		return "error";
+		return "boss/admin";
 	}
 
 	/**
@@ -50,8 +40,8 @@ public class BossController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403")
+	@GetMapping("/403")
 	public String accessDeniedPage() {
-		return "403";
+		return "boss/403";
 	}
 }

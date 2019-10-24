@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
@@ -30,16 +31,16 @@ public class IncomeBossController {
 	@Autowired
 	private ReturnMoneyEmployeeService returnmoneyemployeeservice;
 
-	@RequestMapping(value = "/summaryincome")
+	@GetMapping("/summaryincome")
 	public ModelAndView summaryincome() {
-		ModelAndView model = new ModelAndView("summaryincome");
+		ModelAndView model = new ModelAndView("boss/income/searchincome");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/resultincome")
+	@PostMapping("/resultincome")
 	public ModelAndView resultincome(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
-		ModelAndView model = new ModelAndView("resultincome");
+		ModelAndView model = new ModelAndView("boss/income/result");
 		BigDecimal bardrinks = incomeService.findIncomeByMonth(searchForm.getDatefrom());
 		BigDecimal luckia = incomeluckiaservice.findIncomeByMonth(searchForm.getDatefrom());
 		BigDecimal incomemachines = incomemachineservice.findIncomeByMonth(searchForm.getDatefrom());

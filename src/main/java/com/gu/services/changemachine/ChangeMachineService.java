@@ -3,7 +3,6 @@ package com.gu.services.changemachine;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
@@ -16,8 +15,6 @@ public interface ChangeMachineService {
 	public void reset(String sdate);
 
 	public BigDecimal getAwards();
-
-	public Map<String, Object> ticketsByDay(Date date);
 
 	public ChangeMachineEntity findById(Long idchangemachine);
 

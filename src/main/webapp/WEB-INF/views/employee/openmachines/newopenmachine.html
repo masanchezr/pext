@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{openmachines}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newopenmachine}"></li>
+	</ol>
+	<form method="post" th:action="@{saveopenmachine}"
+		th:object="${openmachine}">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<span th:text="#{machine}"></span> <select class="form-control"
+									th:field="*{machine.idmachine}">
+									<option th:each="m:${machines}" th:value="${m.idmachine}"
+										th:text="${m.name}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<span th:text="#{cause}"></span> <select class="form-control"
+									th:field="*{cause.idcause}">
+									<option th:each="c:${causes}" th:value="${c.idcause}"
+										th:text="${c.cause}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:placeholder="#{descriptionph}"
+									th:field="*{description}" />
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:placeholder="#{amount}"
+									th:field="*{amount}" />
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit" id="button">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

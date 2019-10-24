@@ -8,11 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
@@ -41,7 +38,6 @@ import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.services.mails.MailService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 
@@ -116,22 +112,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public BigDecimal getIncomeTotalMonth() {
 		return changeMachineRepository.sumIncomeBetweenDates(
 				takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new DateUtil().getNow());
-	}
-
-	public Map<String, Object> ticketsByDay(Date date) {
-		Map<String, Object> map = null;
-		BigDecimal amount = BigDecimal.ZERO;
-		List<ChangeMachineEntity> lcm = changeMachineRepository.findByCreationdate(date);
-		if (lcm != null && !lcm.isEmpty()) {
-			Iterator<ChangeMachineEntity> ilcm = lcm.iterator();
-			while (ilcm.hasNext()) {
-				amount = amount.add(ilcm.next().getAmount());
-			}
-			map = new HashMap<>();
-			map.put(ConstantsJsp.OPERATIONS, lcm);
-			map.put(Constants.AMOUNT, amount);
-		}
-		return map;
 	}
 
 	public ChangeMachineEntity findById(Long idchangemachine) {
