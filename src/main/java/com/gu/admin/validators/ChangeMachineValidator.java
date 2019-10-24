@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 import com.gu.admin.forms.ChangeMachine;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 public class ChangeMachineValidator implements Validator {
 
@@ -20,7 +20,7 @@ public class ChangeMachineValidator implements Validator {
 		ChangeMachine cm = (ChangeMachine) arg0;
 		BigDecimal amount = cm.getAmount();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
 

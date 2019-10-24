@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 /**
@@ -32,9 +32,9 @@ public class DailyController {
 		if (daily.getFinalamount() == null) {
 			model.setViewName("employee/daily/notdaily");
 		} else {
-			model.addObject(ConstantsJsp.DAILY, daily);
+			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName("employee/daily/daily");
-			model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
+			model.addObject(ConstantsViews.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;
 	}

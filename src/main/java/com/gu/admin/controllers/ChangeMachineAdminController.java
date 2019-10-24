@@ -20,7 +20,7 @@ import com.gu.services.awards.AwardService;
 import com.gu.services.changemachine.ChangeMachineService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class ChangeMachineAdminController {
@@ -47,8 +47,8 @@ public class ChangeMachineAdminController {
 	public ModelAndView changemachinetotal() {
 		ModelAndView model = new ModelAndView("admin/changemachine/changemachinetotal");
 		model.addObject("totalmonth", changeMachineService.getIncomeTotalMonth());
-		model.addObject(ConstantsJsp.TOTAL, changeMachineService.getTotal());
-		model.addObject(ConstantsJsp.AWARDS, changeMachineService.getAwards());
+		model.addObject(ConstantsViews.TOTAL, changeMachineService.getTotal());
+		model.addObject(ConstantsViews.AWARDS, changeMachineService.getAwards());
 		return model;
 	}
 
@@ -92,7 +92,7 @@ public class ChangeMachineAdminController {
 		ModelAndView model = new ModelAndView(UPDATEVIEW);
 		model.addObject(CHANGEMACHINE, changeMachineService.findById(id));
 		model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-		model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
+		model.addObject(ConstantsViews.AWARDS, awardservice.getAwardsChangeMachine());
 		return model;
 	}
 
@@ -103,21 +103,21 @@ public class ChangeMachineAdminController {
 		changeMachineAdminValidator.validate(cm, result);
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-			model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
+			model.addObject(ConstantsViews.AWARDS, awardservice.getAwardsChangeMachine());
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);
 		} else {
 			ChangeMachineEntity cmentity = changeMachineService.findById(cm.getIdchangemachine());
 			if (cmentity != null) {
 				model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-				model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
+				model.addObject(ConstantsViews.AWARDS, awardservice.getAwardsChangeMachine());
 				model.addObject(CHANGEMACHINE, cm);
 				model.setViewName(UPDATEVIEW);
-				result.rejectValue(Constants.IDCHANGEMACHINE, ConstantsJsp.ERRORSELECTID);
+				result.rejectValue(Constants.IDCHANGEMACHINE, ConstantsViews.ERRORSELECTID);
 			} else {
-				model.addObject(ConstantsJsp.DAILY,
+				model.addObject(ConstantsViews.DAILY,
 						changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
-				model.setViewName(ConstantsJsp.VIEWDAILYADMINARROWS);
+				model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 			}
 		}
 		return model;
@@ -130,12 +130,12 @@ public class ChangeMachineAdminController {
 		changeMachineAdminValidator.validate(cm, result);
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-			model.addObject(ConstantsJsp.AWARDS, awardservice.getAwardsChangeMachine());
+			model.addObject(ConstantsViews.AWARDS, awardservice.getAwardsChangeMachine());
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
-			model.setViewName(ConstantsJsp.VIEWDAILYADMINARROWS);
+			model.addObject(ConstantsViews.DAILY, changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
+			model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 		}
 		return model;
 	}

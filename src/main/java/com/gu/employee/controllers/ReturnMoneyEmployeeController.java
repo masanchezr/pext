@@ -17,7 +17,7 @@ import com.gu.employee.forms.ReturnMoneyEmployee;
 import com.gu.services.dailies.DailyService;
 import com.gu.services.employees.EmployeeService;
 import com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class ReturnMoneyEmployeeController {
@@ -43,15 +43,15 @@ public class ReturnMoneyEmployeeController {
 		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnmoneyemployeeservice.findAdvanceByEmployee(employee);
 		model.addObject(FORMMONEYADVANCE, moneyadvance);
-		model.addObject(ConstantsJsp.FORMINCOME, new ReturnMoneyEmployee());
+		model.addObject(ConstantsViews.FORMINCOME, new ReturnMoneyEmployee());
 		return model;
 	}
 
 	@PostMapping("/employee/savereturn")
-	public ModelAndView savereturn(@ModelAttribute(ConstantsJsp.FORMINCOME) ReturnMoneyEmployee returnme) {
+	public ModelAndView savereturn(@ModelAttribute(ConstantsViews.FORMINCOME) ReturnMoneyEmployee returnme) {
 		ModelAndView model = new ModelAndView();
 		returnmoneyemployeeservice.savereturn(mapper.map(returnme, ReturnMoneyEmployeeEntity.class));
-		model.addObject(ConstantsJsp.DAILY, dailyService.getDailyEmployee());
+		model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 		model.setViewName("employee/daily/daily");
 		return model;
 	}
@@ -60,7 +60,7 @@ public class ReturnMoneyEmployeeController {
 	public ModelAndView newmoneyadvance() {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		model.addObject(ConstantsJsp.USER, user);
+		model.addObject(ConstantsViews.USER, user);
 		model.addObject(FORMMONEYADVANCE, new ReturnMoneyEmployeeEntity());
 		model.setViewName("employee/expenses/moneyadvance/newmoneyadvance");
 		return model;
@@ -76,7 +76,7 @@ public class ReturnMoneyEmployeeController {
 		// miramos primero que no supere el importe
 		if (returnmoneyemployeeservice.isAllowedAdvances(entity)) {
 			returnmoneyemployeeservice.savemoneyadvance(entity);
-			model.addObject(ConstantsJsp.DAILY, dailyService.getDailyEmployee());
+			model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 			model.setViewName("employee/daily/daily");
 			return model;
 		} else {

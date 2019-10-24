@@ -18,7 +18,7 @@ import com.gu.admin.forms.Schedule;
 import com.gu.admin.forms.WeekForm;
 import com.gu.dbaccess.entities.TimeEntity;
 import com.gu.services.calendar.CalendarService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -54,7 +54,7 @@ public class CalendarBossController {
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
-			model.addObject(ConstantsJsp.TIMES, times);
+			model.addObject(ConstantsViews.TIMES, times);
 			model.addObject("dates", DateUtil.getDates(sweek));
 			model.addObject("schedule", schedule);
 			model.addObject("week", sweek);

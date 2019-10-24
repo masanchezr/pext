@@ -20,7 +20,7 @@ import com.gu.admin.forms.WeekForm;
 import com.gu.dbaccess.entities.TimeEntity;
 import com.gu.services.calendar.CalendarService;
 import com.gu.services.employees.EmployeeService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -42,11 +42,11 @@ public class CalendarController {
 		ScheduleForm schedule = new ScheduleForm();
 		String sweek = week.getWeek();
 		List<Schedule> lscheduleform = calendarService.getSchedule(sweek);
-		model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
+		model.addObject(ConstantsViews.EMPLOYEES, employeeService.allEmployeesActives());
 		model.addObject("week", sweek);
 		model.addObject("dates", DateUtil.getDates(sweek));
 		if (lscheduleform == null || lscheduleform.isEmpty()) {
-			model.addObject(ConstantsJsp.TIMES, calendarService.getTimesActive());
+			model.addObject(ConstantsViews.TIMES, calendarService.getTimesActive());
 			schedule.setSchedule(lscheduleform);
 		} else {
 			List<TimeEntity> times = new ArrayList<>();
@@ -56,7 +56,7 @@ public class CalendarController {
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
-			model.addObject(ConstantsJsp.TIMES, times);
+			model.addObject(ConstantsViews.TIMES, times);
 			schedule.setSchedule(lscheduleform);
 		}
 		model.addObject("scheduleForm", schedule);
@@ -104,7 +104,7 @@ public class CalendarController {
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);
-			model.addObject(ConstantsJsp.TIMES, times);
+			model.addObject(ConstantsViews.TIMES, times);
 			model.addObject("dates", DateUtil.getDates(sweek));
 			model.addObject(MODELSCHEDULE, schedule);
 			model.addObject("week", sweek);

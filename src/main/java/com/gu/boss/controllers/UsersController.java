@@ -12,7 +12,7 @@ import com.gu.boss.validators.UserValidator;
 import com.gu.services.users.User;
 import com.gu.services.users.UserService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class UsersController {
@@ -34,10 +34,10 @@ public class UsersController {
 	}
 
 	@GetMapping("/update")
-	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
+	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsViews.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
-		model.addObject(ConstantsJsp.USER, user);
+		model.addObject(ConstantsViews.USER, user);
 		if (result.hasErrors()) {
 			model.setViewName("boss/users/update/updateuser");
 		} else {
@@ -50,26 +50,26 @@ public class UsersController {
 	@GetMapping("/newuser")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView(VIEWNEWUSER);
-		model.addObject(ConstantsJsp.USER, new User());
+		model.addObject(ConstantsViews.USER, new User());
 		return model;
 	}
 
 	@GetMapping("/updateuser")
 	public ModelAndView updateUser(@ModelAttribute("userForm") User user) {
 		ModelAndView model = new ModelAndView("boss/users/update/updateuser");
-		model.addObject(ConstantsJsp.USER, userService.findUser(user.getUsername()));
+		model.addObject(ConstantsViews.USER, userService.findUser(user.getUsername()));
 		return model;
 	}
 
 	@PostMapping("/saveuser")
-	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
+	public ModelAndView saveUser(@ModelAttribute(ConstantsViews.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWUSER);
-			model.addObject(ConstantsJsp.USER, new User());
+			model.addObject(ConstantsViews.USER, new User());
 		} else {
-			model.addObject(ConstantsJsp.USER, user);
+			model.addObject(ConstantsViews.USER, user);
 			if (userService.findUser(user.getUsername()) != null) {
 				model.setViewName(VIEWNEWUSER);
 				result.rejectValue(Constants.USERNAME, "exists");

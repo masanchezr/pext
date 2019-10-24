@@ -19,7 +19,7 @@ import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.validators.OperationsValidator;
 
 @Controller
@@ -52,15 +52,15 @@ public class OperationsController {
 	public ModelAndView newoperation() {
 		ModelAndView model = new ModelAndView(VIEWNEWOPERATION);
 		model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
-		model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
-		model.addObject(ConstantsJsp.OPERATION, new OperationEntity());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.AWARDS, awardService.searchAllAwardsActiveByOrder());
+		model.addObject(ConstantsViews.EMPLOYEES, employeeService.allEmployeesActives());
+		model.addObject(ConstantsViews.OPERATION, new OperationEntity());
 		return model;
 	}
 
 	@PostMapping("/employee/saveoperation")
-	public ModelAndView saveoperation(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation,
+	public ModelAndView saveoperation(@ModelAttribute(ConstantsViews.OPERATION) Operation operation,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		OperationEntity op = mapper.map(operation, OperationEntity.class);
@@ -68,17 +68,17 @@ public class OperationsController {
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWOPERATION);
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
-			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
-			model.addObject(ConstantsJsp.OPERATION, operation);
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsViews.EMPLOYEES, employeeService.allEmployeesActives());
+			model.addObject(ConstantsViews.OPERATION, operation);
 		} else if (operationService.getOperationNotAllowed(op) != null) {
 			model.setViewName(VIEWNEWOPERATION);
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
-			model.addObject(ConstantsJsp.EMPLOYEES, employeeService.allEmployeesActives());
-			model.addObject(ConstantsJsp.OPERATION, operation);
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsViews.EMPLOYEES, employeeService.allEmployeesActives());
+			model.addObject(ConstantsViews.OPERATION, operation);
 			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
 			if (operation.getEmployee().getIdemployee().equals(1L)) {
@@ -86,7 +86,7 @@ public class OperationsController {
 				EmployeeEntity employee = employeeService.getEmployeeByUserName(user);
 				operation.setEmployee(employee);
 			}
-			model.addObject(ConstantsJsp.DAILY, operationService.save(op));
+			model.addObject(ConstantsViews.DAILY, operationService.save(op));
 			model.setViewName("employee/daily/daily");
 		}
 		return model;

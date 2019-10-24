@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.MessageEntity;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 public class MessageValidator implements Validator {
 
@@ -15,9 +15,9 @@ public class MessageValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEFROM, ConstantsJsp.ERRORSELECTDATE);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEUNTIL, ConstantsJsp.ERRORSELECTDATE);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "smessage", ConstantsJsp.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEFROM, ConstantsViews.ERRORSELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DATEUNTIL, ConstantsViews.ERRORSELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "smessage", ConstantsViews.ERRORSELECTDESCRIPTION);
 	}
 
 }

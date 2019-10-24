@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.changemachine.ChangeMachineService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class ChangeMachineController {
@@ -20,12 +20,12 @@ public class ChangeMachineController {
 	@GetMapping("/searchrecharges")
 	public ModelAndView searchRecharges() {
 		ModelAndView model = new ModelAndView("boss/recharges/searchrecharges");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@PostMapping("/recharges")
-	public ModelAndView recharges(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
+	public ModelAndView recharges(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("boss/recharges/recharges");
 		model.addObject("recharges", changeMachineService.recharges(searchForm.getDatefrom()));
 		return model;

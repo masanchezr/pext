@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Entity
 @Table(name = "safe")
@@ -31,7 +31,7 @@ public class SafeEntity {
 	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
-	@Column(name = ConstantsJsp.TOTAL)
+	@Column(name = ConstantsViews.TOTAL)
 	private BigDecimal total;
 
 	@Column(name = Constants.DESCRIPTION)

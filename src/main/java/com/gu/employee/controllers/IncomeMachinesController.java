@@ -15,7 +15,7 @@ import com.gu.services.dailies.DailyService;
 import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -39,17 +39,17 @@ public class IncomeMachinesController {
 		FunctionalityEntity functionality = new FunctionalityEntity();
 		functionality.setIdfuncionality(Constants.INCOMEMACHINE);
 		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
-		model.addObject(ConstantsJsp.FORMINCOME, new IncomeMachine());
+		model.addObject(ConstantsViews.FORMINCOME, new IncomeMachine());
 		return model;
 	}
 
 	@PostMapping("/employee/saveincomemachine")
-	public ModelAndView saveincomemachine(@ModelAttribute(ConstantsJsp.FORMINCOME) IncomeMachine imachine) {
+	public ModelAndView saveincomemachine(@ModelAttribute(ConstantsViews.FORMINCOME) IncomeMachine imachine) {
 		ModelAndView model = new ModelAndView();
 		incomemachineService.save(mapper.map(imachine, IncomeMachineEntity.class));
-		model.addObject(ConstantsJsp.DAILY, dailyService.getDailyEmployee());
+		model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 		model.setViewName("employee/daily/daily");
-		model.addObject(ConstantsJsp.DATEDAILY, new DateUtil().getNow());
+		model.addObject(ConstantsViews.DATEDAILY, new DateUtil().getNow());
 		return model;
 	}
 

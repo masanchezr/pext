@@ -15,7 +15,7 @@ import com.gu.dbaccess.entities.IncidentEntity;
 import com.gu.employee.validators.IncidentValidator;
 import com.gu.forms.Incident;
 import com.gu.services.incidents.IncidentService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class IncidentsController {
@@ -32,12 +32,12 @@ public class IncidentsController {
 	@GetMapping("/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("employee/incidents/newincident");
-		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
+		model.addObject(ConstantsViews.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
 	@PostMapping("/employee/saveincident")
-	public ModelAndView saveIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident,
+	public ModelAndView saveIncident(@ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		incidentValidator.validate(incident, result);
@@ -47,7 +47,7 @@ public class IncidentsController {
 			model.setViewName("employee/incidents/resultsaveincident");
 			incidentService.save(mapper.map(incident, IncidentEntity.class));
 		}
-		model.addObject(ConstantsJsp.FORMINCIDENT, incident);
+		model.addObject(ConstantsViews.FORMINCIDENT, incident);
 		return model;
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.register.RegisterService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
@@ -22,25 +22,25 @@ public class RegisterController {
 	private SearchDatesFormValidator searchDatesFormValidator;
 
 	@GetMapping("/register")
-	public ModelAndView register(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
+	public ModelAndView register(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model = new ModelAndView();
-			model.addObject(ConstantsJsp.FORMSEARCH, sdf);
-			model.setViewName(ConstantsJsp.VIEWSEARCHREGISTER);
+			model.addObject(ConstantsViews.FORMSEARCH, sdf);
+			model.setViewName(ConstantsViews.VIEWSEARCHREGISTER);
 			return model;
 		} else {
 			model.addObject("registers", registerservice.findByDates(sdf.getDatefrom(), sdf.getDateuntil()));
-			model.setViewName(ConstantsJsp.VIEWREGISTER);
+			model.setViewName(ConstantsViews.VIEWREGISTER);
 		}
 		return model;
 	}
 
 	@GetMapping("/searchregister")
 	public ModelAndView searchregister() {
-		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSEARCHREGISTER);
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		ModelAndView model = new ModelAndView(ConstantsViews.VIEWSEARCHREGISTER);
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 }

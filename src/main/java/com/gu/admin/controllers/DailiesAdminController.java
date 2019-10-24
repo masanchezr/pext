@@ -15,7 +15,7 @@ import com.gu.forms.SearchByDatesForm;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 
@@ -29,12 +29,12 @@ public class DailiesAdminController {
 	@GetMapping("/admin/daily")
 	public ModelAndView daily() {
 		ModelAndView model = new ModelAndView("admin/dailies/searchdaily");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@PostMapping("/admin/resultdaily")
-	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
+	public ModelAndView resultdaily(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView();
 		String sdate = searchForm.getDatefrom();
 		Date now = new DateUtil().getNow();
@@ -45,19 +45,19 @@ public class DailiesAdminController {
 			view = "admin/dailies/dailyarrow";
 		} else {
 			date = DateUtil.getDate(sdate);
-			view = ConstantsJsp.VIEWDAILYADMINARROWS;
+			view = ConstantsViews.VIEWDAILYADMINARROWS;
 		}
 		if (date.before(now) || date.equals(now)) {
 			Daily daily = dailyService.getDaily(date);
 			if (daily.getFinalamount() == null) {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+				model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 			} else {
-				model.addObject(ConstantsJsp.DAILY, daily);
+				model.addObject(ConstantsViews.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 			}
 		} else {
-			model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+			model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 		}
 		return model;
 	}
@@ -74,15 +74,15 @@ public class DailiesAdminController {
 				date = DateUtil.addDays(date, -1);
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
-					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+					model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 				} else {
-					model.addObject(ConstantsJsp.DAILY, daily);
-					model.setViewName(ConstantsJsp.VIEWDAILYADMINARROWS);
-					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
+					model.addObject(ConstantsViews.DAILY, daily);
+					model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
+					model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+				model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 				existdaily = true;
 			}
 		}
@@ -99,7 +99,7 @@ public class DailiesAdminController {
 			if (date.compareTo(new DateUtil().getNow()) < 0) {
 				Daily daily = dailyService.getDaily(date);
 				if (daily.getFinalamount() == null) {
-					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+					model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
 					String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
@@ -107,15 +107,15 @@ public class DailiesAdminController {
 					if (stoday.compareTo(sdate) == 0) {
 						view = "admin/dailies/dailyarrow";
 					} else {
-						view = ConstantsJsp.VIEWDAILYADMINARROWS;
+						view = ConstantsViews.VIEWDAILYADMINARROWS;
 					}
-					model.addObject(ConstantsJsp.DAILY, daily);
+					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, sdate);
+					model.addObject(ConstantsViews.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
+				model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
 				existdaily = true;
 			}
 		}

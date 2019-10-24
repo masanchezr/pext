@@ -1,8 +1,8 @@
 package com.gu.util.constants;
 
-public class ConstantsJsp {
+public class ConstantsViews {
 
-	private ConstantsJsp() {
+	private ConstantsViews() {
 
 	}
 

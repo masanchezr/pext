@@ -17,7 +17,7 @@ import com.gu.services.machines.MachineService;
 import com.gu.services.operations.OperationService;
 import com.gu.services.payments.PaymentService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.validators.OperationsValidator;
 
 @Controller
@@ -46,32 +46,32 @@ public class OperationsBossController {
 		OperationEntity operation = operationService.findById(id);
 		ModelAndView model = new ModelAndView("boss/newoperation");
 		model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-		model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
-		model.addObject(ConstantsJsp.OPERATION, operation);
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.AWARDS, awardService.searchAllAwardsActiveByOrder());
+		model.addObject(ConstantsViews.OPERATION, operation);
 		return model;
 	}
 
 	@PostMapping("/saveoperation")
-	public ModelAndView saveoperationboss(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation,
+	public ModelAndView saveoperationboss(@ModelAttribute(ConstantsViews.OPERATION) Operation operation,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		operationsValidator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName("boss/newoperation");
 			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-			model.addObject(ConstantsJsp.AWARDS, awardService.searchAllAwardsActiveByOrder());
-			model.addObject(ConstantsJsp.OPERATION, operation);
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.AWARDS, awardService.searchAllAwardsActiveByOrder());
+			model.addObject(ConstantsViews.OPERATION, operation);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, operationService.update(mapper.map(operation, OperationEntity.class)));
+			model.addObject(ConstantsViews.DAILY, operationService.update(mapper.map(operation, OperationEntity.class)));
 			model.setViewName("boss/success");
 		}
 		return model;
 	}
 
 	@GetMapping("/deleteoperation")
-	public ModelAndView deleteoperation(@ModelAttribute(ConstantsJsp.OPERATION) Operation operation) {
+	public ModelAndView deleteoperation(@ModelAttribute(ConstantsViews.OPERATION) Operation operation) {
 		ModelAndView model = new ModelAndView("boss/success");
 		operationService.delete(mapper.map(operation, OperationEntity.class));
 		return model;

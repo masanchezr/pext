@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.register.FicticionalRegisterService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.validators.SearchDatesFormValidator;
 
 @Controller
@@ -25,17 +25,17 @@ public class RegisterAdminController {
 	@GetMapping("/admin/searchregister")
 	public ModelAndView searchregister() {
 		ModelAndView model = new ModelAndView("admin/registers/searchregisters");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@PostMapping("/admin/register")
-	public ModelAndView register(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
+	public ModelAndView register(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		searchDatesFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model = new ModelAndView();
-			model.addObject(ConstantsJsp.FORMSEARCH, sdf);
+			model.addObject(ConstantsViews.FORMSEARCH, sdf);
 			model.setViewName("admin/registers/searchregisters");
 			return model;
 		} else {

@@ -17,7 +17,7 @@ import com.gu.employee.forms.OpenMachine;
 import com.gu.services.machines.MachineService;
 import com.gu.services.openmachines.OpenMachineService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 @Controller
@@ -38,13 +38,13 @@ public class OpenMachineController {
 		FunctionalityEntity functionality = new FunctionalityEntity();
 		functionality.setIdfuncionality(Constants.OPENMACHINE);
 		model.addObject("causes", openmachineservice.getCauses());
-		model.addObject(ConstantsJsp.FORMOPENMACHINE, new OpenMachine());
+		model.addObject(ConstantsViews.FORMOPENMACHINE, new OpenMachine());
 		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
 		return model;
 	}
 
 	@PostMapping("/employee/saveopenmachine")
-	public ModelAndView saveopenmachine(@ModelAttribute(ConstantsJsp.FORMOPENMACHINE) OpenMachine om) {
+	public ModelAndView saveopenmachine(@ModelAttribute(ConstantsViews.FORMOPENMACHINE) OpenMachine om) {
 		ModelAndView model = new ModelAndView("employee/openmachines/openmachines");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		openmachineservice.save(mapper.map(om, OpenMachineEntity.class), user);

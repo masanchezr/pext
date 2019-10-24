@@ -23,7 +23,7 @@ import com.gu.dbaccess.repositories.OperationsRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 
 public class OperationServiceImpl implements OperationService {
@@ -107,7 +107,7 @@ public class OperationServiceImpl implements OperationService {
 		total = total.add(BigDecimal.valueOf(g));
 		result.put(Constants.GRATIFICATIONS, g);
 		result.put("expenses", expenses);
-		result.put(ConstantsJsp.TOTAL, total);
+		result.put(ConstantsViews.TOTAL, total);
 		return result;
 	}
 

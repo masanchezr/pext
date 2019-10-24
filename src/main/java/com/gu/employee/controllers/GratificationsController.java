@@ -25,7 +25,7 @@ import com.gu.employee.validators.GratificationsValidator;
 import com.gu.services.gratifications.GratificationService;
 import com.gu.services.machines.MachineService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class GratificationsController {
@@ -80,7 +80,7 @@ public class GratificationsController {
 				model.setViewName(VIEWNEWGRATIFICATION);
 			} else {
 				gratification.setMachine(g.getMachine());
-				model.addObject(ConstantsJsp.DAILY, gratificationservice.save(gratification, user));
+				model.addObject(ConstantsViews.DAILY, gratificationservice.save(gratification, user));
 				model.setViewName("employee/daily/daily");
 			}
 		}
@@ -114,7 +114,7 @@ public class GratificationsController {
 				response.flushBuffer();
 			} catch (IOException e) {
 				model.setViewName(VIEWREGISTERGRATIFICATION);
-				arg1.rejectValue(ConstantsJsp.CLIENT, "notopenfile");
+				arg1.rejectValue(ConstantsViews.CLIENT, "notopenfile");
 			}
 		}
 		return model;

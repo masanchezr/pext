@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.EntryMoneyEntity;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 public class EntryMoneyValidator implements Validator {
 
@@ -17,11 +17,11 @@ public class EntryMoneyValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		EntryMoneyEntity money = (EntryMoneyEntity) arg0;
 		BigDecimal amount = money.getAmount();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
 

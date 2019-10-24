@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.dbaccess.entities.IncidentEntity;
 import com.gu.forms.Incident;
 import com.gu.services.incidents.IncidentService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class IncidentsAdminController {
@@ -26,7 +26,7 @@ public class IncidentsAdminController {
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject("incidents", incidentService.searchAllIncidents());
-		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
+		model.addObject(ConstantsViews.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
@@ -34,20 +34,20 @@ public class IncidentsAdminController {
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject("incidents", incidentService.searchPending());
-		model.addObject(ConstantsJsp.FORMINCIDENT, new IncidentEntity());
+		model.addObject(ConstantsViews.FORMINCIDENT, new IncidentEntity());
 		return model;
 	}
 
 	@PostMapping("/admin/searchincident")
-	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
+	public ModelAndView searchIncident(@ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
-		model.addObject(ConstantsJsp.FORMINCIDENT,
+		model.addObject(ConstantsViews.FORMINCIDENT,
 				mapper.map(incidentService.searchIncident(mapper.map(incident, IncidentEntity.class)), Incident.class));
 		return model;
 	}
 
 	@PostMapping("/admin/resolvedincident")
-	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
+	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(mapper.map(incident, IncidentEntity.class));
 		}

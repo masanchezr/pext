@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gu.forms.SearchByDatesForm;
 import com.gu.services.openmachines.OpenMachineService;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 import com.gu.util.date.DateUtil;
 import com.gu.util.string.Util;
 
@@ -25,12 +25,12 @@ public class OpenMachinesController {
 	@GetMapping("/searchopenmachines")
 	public ModelAndView searchopenmachines() {
 		ModelAndView model = new ModelAndView("boss/openmachines/search");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@PostMapping("/openmachines")
-	public ModelAndView openmachines(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
+	public ModelAndView openmachines(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("boss/openmachines/openmachines");
 		String sdate = searchForm.getDatefrom();
 		Date date = new DateUtil().getNow();

@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 public class TPValidator implements Validator {
 
@@ -15,9 +15,9 @@ public class TPValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDTPV, ConstantsJsp.ERRORSELECTID);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.CREATIONDATE, ConstantsJsp.ERRORSELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDTPV, ConstantsViews.ERRORSELECTID);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.CREATIONDATE, ConstantsViews.ERRORSELECTDATE);
 	}
 
 }

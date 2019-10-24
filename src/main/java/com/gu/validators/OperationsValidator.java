@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.gu.forms.Operation;
 import com.gu.util.constants.Constants;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 public class OperationsValidator implements Validator {
 
@@ -20,11 +20,11 @@ public class OperationsValidator implements Validator {
 		Operation operation = (Operation) arg0;
 		BigDecimal amount = operation.getAmount();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 		if (operation.getAward().getIdaward().compareTo(Constants.OTHERAWARDS) == 0
 				|| (operation.getAward().getIdaward().compareTo(Constants.EATANDDRINKS) == 0)) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		}
 	}
 

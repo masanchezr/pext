@@ -13,7 +13,7 @@ import com.gu.admin.forms.Safe;
 import com.gu.admin.validators.SafeValidator;
 import com.gu.dbaccess.entities.SafeEntity;
 import com.gu.services.entrymoney.EntryMoneyService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class SafeController {
@@ -46,7 +46,7 @@ public class SafeController {
 			model.setViewName("admin/safe/safe");
 			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveAdd(mapper.map(safe, SafeEntity.class)));
+			model.addObject(ConstantsViews.TOTALAMOUNT, safeService.saveAdd(mapper.map(safe, SafeEntity.class)));
 			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;
@@ -67,7 +67,7 @@ public class SafeController {
 			model.setViewName("admin/changemachine/newentrychangemachine");
 			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveSub(mapper.map(safe, SafeEntity.class)));
+			model.addObject(ConstantsViews.TOTALAMOUNT, safeService.saveSub(mapper.map(safe, SafeEntity.class)));
 			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;
@@ -88,7 +88,7 @@ public class SafeController {
 			model.setViewName("admin/changemachine/newentrydirect");
 			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.saveSubDirect(mapper.map(safe, SafeEntity.class)));
+			model.addObject(ConstantsViews.TOTALAMOUNT, safeService.saveSubDirect(mapper.map(safe, SafeEntity.class)));
 			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;
@@ -97,7 +97,7 @@ public class SafeController {
 	@GetMapping("/admin/totalsafe")
 	public ModelAndView totalsafe() {
 		ModelAndView model = new ModelAndView(VIEWTOTALSAFE);
-		model.addObject(ConstantsJsp.TOTALAMOUNT, safeService.searchTotalSafe());
+		model.addObject(ConstantsViews.TOTALAMOUNT, safeService.searchTotalSafe());
 		return model;
 	}
 }

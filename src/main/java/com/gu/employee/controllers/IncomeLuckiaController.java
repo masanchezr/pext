@@ -12,7 +12,7 @@ import com.gu.dbaccess.entities.IncomeLuckiaEntity;
 import com.gu.employee.forms.IncomeLuckia;
 import com.gu.services.dailies.DailyService;
 import com.gu.services.incomeluckia.IncomeLuckiaService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class IncomeLuckiaController {
@@ -39,7 +39,7 @@ public class IncomeLuckiaController {
 	public ModelAndView saveincomeluckia(@ModelAttribute(FORMLUCKIA) IncomeLuckia iluckia) {
 		ModelAndView model = new ModelAndView();
 		incomeLuckiaService.save(mapper.map(iluckia, IncomeLuckiaEntity.class));
-		model.addObject(ConstantsJsp.DAILY, dailyService.getDailyEmployee());
+		model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 		model.setViewName("employee/daily/daily");
 		return model;
 	}

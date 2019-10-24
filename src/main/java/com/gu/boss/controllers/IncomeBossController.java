@@ -14,7 +14,7 @@ import com.gu.services.income.IncomeService;
 import com.gu.services.incomeluckia.IncomeLuckiaService;
 import com.gu.services.incomemachines.IncomeMachineService;
 import com.gu.services.returnmoneyemployees.ReturnMoneyEmployeeService;
-import com.gu.util.constants.ConstantsJsp;
+import com.gu.util.constants.ConstantsViews;
 
 @Controller
 public class IncomeBossController {
@@ -34,12 +34,12 @@ public class IncomeBossController {
 	@GetMapping("/summaryincome")
 	public ModelAndView summaryincome() {
 		ModelAndView model = new ModelAndView("boss/income/searchincome");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		return model;
 	}
 
 	@PostMapping("/resultincome")
-	public ModelAndView resultincome(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchByDatesForm searchForm) {
+	public ModelAndView resultincome(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm) {
 		ModelAndView model = new ModelAndView("boss/income/result");
 		BigDecimal bardrinks = incomeService.findIncomeByMonth(searchForm.getDatefrom());
 		BigDecimal luckia = incomeluckiaservice.findIncomeByMonth(searchForm.getDatefrom());
@@ -62,7 +62,7 @@ public class IncomeBossController {
 		model.addObject("luckia", luckia);
 		model.addObject("incomemachines", incomemachines);
 		model.addObject("returns", returns);
-		model.addObject(ConstantsJsp.TOTAL, total);
+		model.addObject(ConstantsViews.TOTAL, total);
 		return model;
 	}
 }
