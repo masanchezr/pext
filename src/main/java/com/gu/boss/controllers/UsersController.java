@@ -54,7 +54,7 @@ public class UsersController {
 		return model;
 	}
 
-	@GetMapping("/updateuser")
+	@PostMapping("/updateuser")
 	public ModelAndView updateUser(@ModelAttribute("userForm") User user) {
 		ModelAndView model = new ModelAndView("boss/users/update/updateuser");
 		model.addObject(ConstantsViews.USER, userService.findUser(user.getUsername()));
