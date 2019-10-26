@@ -33,7 +33,7 @@ public class UsersController {
 		return model;
 	}
 
-	@GetMapping("/update")
+	@PostMapping("/update")
 	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsViews.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		userValidator.validate(user, result);
