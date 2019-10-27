@@ -26,12 +26,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="operation:${daily.operations}">
-								<td th:if="${operation.machine!=null}"><span
-									th:text="${operation.machine.name}"></span><span
-									th:text="${operation.description}" class="text-xs"></span></td>
-								<td th:if="${operation.award!=null}"><span
-									th:text="${operation.award.name}"></span><span
-									th:text="${operation.description}" class="text-xs"></span></td>
+								<td th:if="${operation.machine!=null}"><p
+										th:text="${operation.machine.name}"></p>
+									<p th:text="${operation.description}" class="text-xs"></p></td>
+								<td th:if="${operation.award!=null}"><p
+										th:text="${operation.award.name}"></p>
+									<p th:text="${operation.description}" class="text-xs"></p></td>
 								<td th:text="${operation.creationdate}"></td>
 								<td><a
 									th:href="@{'updateoperation'+${operation.idoperation}}"><span
