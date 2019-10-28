@@ -84,7 +84,7 @@ public class DailiesController {
 			}
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(view);
-			model.addObject(ConstantsViews.DATEDAILY, date);
+			model.addObject(ConstantsViews.DATEDAILY, sdate);
 		}
 		return model;
 	}
