@@ -74,7 +74,7 @@ public class ChangeMachineAdminController {
 		}
 	}
 
-	@GetMapping("/admin/resetcm")
+	@PostMapping("/admin/resetcm")
 	public ModelAndView resetcm(@ModelAttribute("dateForm") SearchByDatesForm date) {
 		changeMachineService.reset(date.getDatefrom());
 		return changemachinetotal();
