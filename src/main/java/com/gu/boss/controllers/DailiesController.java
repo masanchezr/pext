@@ -148,7 +148,7 @@ public class DailiesController {
 					String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
 					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
-						view = "dailybossarrow";
+						view = ConstantsViews.VIEWDAILYBOSSARROW;
 					} else {
 						view = ConstantsViews.VIEWDAILYBOSSARROWS;
 					}
