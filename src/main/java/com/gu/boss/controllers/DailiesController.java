@@ -105,7 +105,7 @@ public class DailiesController {
 				} else {
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(ConstantsViews.VIEWDAILYBOSSARROWS);
-					model.addObject(ConstantsViews.DATEDAILY, date);
+					model.addObject(ConstantsViews.DATEDAILY, (DateUtil.getDateFormatddMMyyyy(date)));
 					existdaily = true;
 				}
 			} else {

@@ -24,8 +24,12 @@
 							<tr th:each="operation:${daily.operations}">
 								<td th:if="${operation.machine!=null}"><p
 										th:text="${operation.machine.name}"></p>
-									<p th:text="${operation.description}" class="text-xs"></p></td>
-								<td th:if="${operation.award!=null}"><p
+									<p th:text="${operation.description}" class="text-xs"></p> <th:block
+										th:if="${operation.award!=null&&operation.machine==null}">
+										<p th:text="${operation.award.name}"></p>
+										<p th:text="${operation.description}" class="text-xs"></p>
+									</th:block></td>
+								<td th:if="${operation.award!=null&&operation.machine==null}"><p
 										th:text="${operation.award.name}"></p>
 									<p th:text="${operation.description}" class="text-xs"></p></td>
 								<td th:text="${operation.creationdate}"></td>
