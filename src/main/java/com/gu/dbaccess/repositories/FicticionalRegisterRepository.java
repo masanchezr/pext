@@ -13,8 +13,8 @@ import com.gu.dbaccess.entities.FicticionalRegisterEntity;
 
 public interface FicticionalRegisterRepository extends CrudRepository<FicticionalRegisterEntity, Long> {
 
-	public List<FicticionalRegisterEntity> findByCreationdateBetween(@Temporal(TemporalType.DATE) Date from,
-			@Temporal(TemporalType.DATE) Date until);
+	public List<FicticionalRegisterEntity> findByCreationdateBetweenOrderByCreationdate(
+			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until);
 
 	public FicticionalRegisterEntity findByCreationdateAndEmployee(@Temporal(TemporalType.DATE) Date date,
 			EmployeeEntity employee);

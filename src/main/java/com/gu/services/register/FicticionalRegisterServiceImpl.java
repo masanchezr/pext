@@ -61,7 +61,7 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 				}
 			}
 		}
-		return registerRepository.findByCreationdateBetween(dfrom, duntil);
+		return registerRepository.findByCreationdateBetweenOrderByCreationdate(dfrom, duntil);
 	}
 
 	private void saveRegister(ScheduleEntity se, EmployeeEntity employee, Calendar e, Calendar d) {
