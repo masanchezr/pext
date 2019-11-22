@@ -16,7 +16,7 @@
 						<thead>
 							<tr>
 								<th th:text="#{dni}"></th>
-								<th th:text="#{ame}"></th>
+								<th th:text="#{name}"></th>
 								<th th:text="#{date}"></th>
 								<th th:text="#{timefrom}"></th>
 								<th th:text="#{timeuntil}"></th>
@@ -32,6 +32,20 @@
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<a th:href="@{'/downloadpdf'+${datefrom}+'/'+${dateuntil}}"
+								class="d-none d-sm-inline-block btn btn-sm btn-primary
+									shadow-sm"><i
+								class="fas fa-download fa-sm text-white-50"></i> <span
+								th:text="#{downloadpdf}"></span></a>
+						</div>
+					</div>
+				</div>
+				<div th:if="${#lists.isEmpty(registers)}">
+					<span th:text="#{noresults}"></span>
 				</div>
 				<p th:text="#{dataprotec}"></p>
 			</div>
