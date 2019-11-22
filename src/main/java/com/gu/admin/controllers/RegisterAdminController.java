@@ -67,7 +67,7 @@ public class RegisterAdminController {
 		return model;
 	}
 
-	@GetMapping("/downloadpdf{datefrom}/{dateuntil}")
+	@GetMapping("/admin/downloadpdf{datefrom}/{dateuntil}")
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/register/register");
