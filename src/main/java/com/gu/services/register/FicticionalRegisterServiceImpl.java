@@ -97,7 +97,7 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 		try (PdfWriter writer = new PdfWriter(file)) {
 			PdfDocument pdf = new PdfDocument(writer);
 			Document document = new Document(pdf);
-			float[] columns = { 30f, 30f, 30f, 30f, 30f, 30f, 30f };
+			float[] columns = { 30f, 30f, 30f, 30f, 30f };
 			Table table = new Table(columns);
 			Iterator<FicticionalRegisterEntity> iregister = register.iterator();
 			FicticionalRegisterEntity r;
