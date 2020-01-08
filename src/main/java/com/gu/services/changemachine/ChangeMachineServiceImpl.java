@@ -65,7 +65,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
 	public void reset(String sdate) {
-		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		TakeEntity take = new TakeEntity();
 		Date now;
 		if (Util.isEmpty(sdate)) {
@@ -73,16 +72,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		} else {
 			now = DateUtil.getDate(sdate);
 		}
-		ChangeMachineTotalEntity cmt = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-		ChangeMachineTotalEntity cmtn = new ChangeMachineTotalEntity();
-		PaymentEntity pay = new PaymentEntity();
-		pay.setIdpayment(Constants.CHANGEMACHINE);
 		take.setTakedate(now);
-		cmtn.setCreationdate(now);
-		cmtn.setVisible(cmt.getVisible().subtract(changeMachineRepository.sumByCreationdateBetween(from, now))
-				.subtract(tpvrepository.sumByCreationdateAndPayment(pay, from, now)));
-		cmtn.setDeposit(cmt.getDeposit());
-		changeMachineTotalRepository.save(cmtn);
 		takingsRepository.save(take);
 	}
 
@@ -222,6 +212,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			tpv.setAmount(amount);
 			tpv.setIdtpv(idtpv);
 			tpvrepository.save(tpv);
+			subtractChangeMachineTotal(amount);
 		}
 	}
 
@@ -292,6 +283,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setCreationdate(date);
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
+		subtractChangeMachineTotal(amount);
+	}
+
+	private void subtractChangeMachineTotal(BigDecimal amount) {
+		ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
+				.findFirstByOrderByIdchangemachinetotalDesc();
+		totalentity.setIdchangemachinetotal(null);
+		totalentity.setVisible(totalentity.getVisible().subtract(amount));
+		changeMachineTotalRepository.save(totalentity);
 	}
 
 	@Override
