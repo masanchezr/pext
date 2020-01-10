@@ -16,6 +16,7 @@ import com.gu.boss.forms.TPV;
 import com.gu.boss.validators.TPValidator;
 import com.gu.dbaccess.entities.TPVEntity;
 import com.gu.forms.SearchByDatesForm;
+import com.gu.services.changemachine.ChangeMachineService;
 import com.gu.services.payments.PaymentService;
 import com.gu.services.tpv.TPVService;
 import com.gu.util.constants.Constants;
@@ -24,6 +25,9 @@ import com.gu.util.date.DateUtil;
 
 @Controller
 public class TPVController {
+
+	@Autowired
+	private ChangeMachineService changeMachineService;
 
 	@Autowired
 	private PaymentService paymentservice;
@@ -88,6 +92,7 @@ public class TPVController {
 				Calendar now = Calendar.getInstance();
 				calendartpv.setTime(datetpv);
 				model.addObject(ConstantsViews.DAILY, tpvservice.save(mapper.map(tpv, TPVEntity.class)));
+				changeMachineService.subtractChangeMachineTotal(tpv.getAmount());
 				if (calendartpv.get(Calendar.YEAR) == now.get(Calendar.YEAR)
 						&& calendartpv.get(Calendar.MONTH) == now.get(Calendar.MONTH)
 						&& calendartpv.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {

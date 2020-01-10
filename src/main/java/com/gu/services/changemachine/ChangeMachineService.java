@@ -32,4 +32,6 @@ public interface ChangeMachineService {
 
 	public void entryToVisible(BigDecimal amount);
 
+	void subtractChangeMachineTotal(BigDecimal amount);
+
 }

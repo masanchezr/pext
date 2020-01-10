@@ -286,7 +286,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		subtractChangeMachineTotal(amount);
 	}
 
-	private void subtractChangeMachineTotal(BigDecimal amount) {
+	@Override
+	public void subtractChangeMachineTotal(BigDecimal amount) {
 		ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
 				.findFirstByOrderByIdchangemachinetotalDesc();
 		totalentity.setIdchangemachinetotal(null);
