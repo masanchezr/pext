@@ -177,15 +177,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		Long idtpv;
 		while (itrs.hasNext()) {
 			nodes = itrs.next().childNodes();
-			if (((TextNode) nodes.get(5).childNode(0)).getWholeText().equals("CLOSE")) {
+			if (((TextNode) nodes.get(6).childNode(0)).getWholeText().equals("CLOSE")) {
 				node = (TextNode) nodes.get(3).childNode(0);
 				award = node.getWholeText();
-				node = (TextNode) nodes.get(6).childNode(0);
+				node = (TextNode) nodes.get(7).childNode(0);
 				date = DateUtil.getDate(node.getWholeText());
-				node = (TextNode) nodes.get(8).childNode(0);
+				node = (TextNode) nodes.get(10).childNode(0);
 				samount = node.getWholeText();
 				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
-				node = (TextNode) nodes.get(9).childNode(0);
+				node = (TextNode) nodes.get(11).childNode(0);
 				scomments = node.getWholeText();
 				if (award.equals("TPV") && Util.isNumeric(scomments)) {
 					idtpv = Long.valueOf(scomments);
