@@ -4,15 +4,16 @@
 <div th:fragment="content">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active" th:text="#{entrymoneymachine}"></li>
+		<li class="breadcrumb-item" th:text="#{extrahours}"></li>
+		<li class="breadcrumb-item active" th:text="#{onlyforturnfour}"></li>
 	</ol>
 	<form method="post" th:action="@{extrahoursave}"
 		th:object="${extrahours}" role="form">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<div class="input-group date" id="departuretime"
 									data-target-input="nearest">
@@ -36,6 +37,8 @@
 										th:errors="description"></label>
 								</div>
 							</div>
+						</div>
+						<div class="col-lg-4">
 							<div class="form-group">
 								<button class="btn btn-danger" value="submit">
 									<span th:text="#{save}"></span>

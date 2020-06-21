@@ -111,7 +111,8 @@
 					</div>
 				</div></li>
 			<li class="nav-item"><a th:href="@{extrahours}" class="nav-link">
-					<i class="fa fa-calendar-alt fa-fw"></i> <span th:text="#{extrahours}"></span>
+					<i class="fa fa-calendar-alt fa-fw"></i> <span
+					th:text="#{extrahours}"></span>
 			</a></li>
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -211,12 +212,7 @@
 	</script>
 	<script>
 	$(function() {
-		$('#datetimefrom').datetimepicker({
-			format : 'HH:mm:ss'
-		});
-	});
-	$(function() {
-		$('#datetimeuntil').datetimepicker({
+		$('#departuretime').datetimepicker({
 			format : 'HH:mm:ss'
 		});
 	});
