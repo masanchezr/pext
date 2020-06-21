@@ -1,8 +1,8 @@
 package com.gu.services.extrahours;
 
-import java.util.Calendar;
 import java.util.Date;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gu.dbaccess.entities.ExtraHoursEntity;
@@ -14,15 +14,12 @@ public class ExtraHourServiceImpl implements ExtraHourService {
 	@Autowired
 	private ExtraHoursRepository extrahoursRepository;
 
+	@Autowired
+	private Mapper mapper;
+
 	@Override
 	public void save(ExtraHours extrahours) {
-		ExtraHoursEntity entity = new ExtraHoursEntity();
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.HOUR, extrahours.getHour());
-		c.set(Calendar.MINUTE, extrahours.getMinute());
-		entity.setDeparturetime(c.getTime());
-		entity.setEmployee(extrahours.getEmployee());
-		entity.setDescription(extrahours.getDescription());
+		ExtraHoursEntity entity = mapper.map(extrahours, ExtraHoursEntity.class);
 		entity.setSystemtime(new Date());
 		extrahoursRepository.save(entity);
 	}

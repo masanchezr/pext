@@ -39,4 +39,13 @@
 			<b>message</b>
 		</field>
 	</mapping>
+	<mapping>
+		<class-a>com.gu.employee.forms.ExtraHours</class-a>
+		<class-b>com.gu.dbaccess.entities.ExtraHoursEntity</class-b>
+		<field
+			custom-converter="com.gu.converters.StringToTimeConverter">
+			<a>departuretime</a>
+			<b>departuretime</b>
+		</field>
+	</mapping>
 </mappings>

@@ -1,6 +1,7 @@
 package com.gu.employee.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,16 +17,21 @@ public class ExtraHoursController {
 
 	@GetMapping("/employee/extrahours")
 	public ModelAndView extrahours() {
-		ModelAndView model = new ModelAndView("extrahours");
+		ModelAndView model = new ModelAndView("/employee/extrahours");
 		model.addObject("extrahours", new ExtraHours());
 		return model;
 	}
 
 	@PostMapping("/employee/extrahoursave")
-	public ModelAndView extrahoursave(@ModelAttribute("extrahours") ExtraHours extrahours) {
+	public ModelAndView extrahoursave(@ModelAttribute("extrahours") ExtraHours extrahours, BindingResult errors) {
 		ModelAndView model = new ModelAndView();
-		extraHourService.save(extrahours);
-		model.setViewName("/employee/success");
+		if (errors.hasErrors()) {
+			model.setViewName("/employee/extrahours");
+			model.addObject("extrahours", extrahours);
+		} else {
+			extraHourService.save(extrahours);
+			model.setViewName("/employee/success");
+		}
 		return model;
 	}
 

@@ -4,29 +4,11 @@ import com.gu.dbaccess.entities.EmployeeEntity;
 
 public class ExtraHours {
 
-	private int hour;
-
-	private int minute;
+	private String departuretime;
 
 	private String description;
 
 	private EmployeeEntity employee;
-
-	public int getHour() {
-		return hour;
-	}
-
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-
-	public int getMinute() {
-		return minute;
-	}
-
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
 
 	public String getDescription() {
 		return description;
@@ -42,6 +24,14 @@ public class ExtraHours {
 
 	public void setEmployee(EmployeeEntity employee) {
 		this.employee = employee;
+	}
+
+	public String getDeparturetime() {
+		return departuretime;
+	}
+
+	public void setDeparturetime(String departuretime) {
+		this.departuretime = departuretime;
 	}
 
 }

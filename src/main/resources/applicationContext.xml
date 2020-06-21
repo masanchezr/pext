@@ -35,6 +35,8 @@
 		class="com.gu.employee.validators.GratificationsValidator" />
 	<bean id="changeMachineValidator"
 		class="com.gu.employee.validators.ChangeMachineValidator" />
+	<bean id="extraHoursValidator"
+		class="com.gu.employee.validators.ExtraHoursValidator" />
 	<bean id="safevalidator"
 		class="com.gu.admin.validators.SafeValidator" />
 	<bean id="changeMachineAdminValidator"
