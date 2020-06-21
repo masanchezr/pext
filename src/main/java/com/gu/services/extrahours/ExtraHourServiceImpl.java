@@ -18,6 +18,7 @@ public class ExtraHourServiceImpl implements ExtraHourService {
 	public void save(ExtraHours extrahours) {
 		ExtraHoursEntity entity = new ExtraHoursEntity();
 		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR, extrahours.getHour());
 		entity.setEmployee(extrahours.getEmployee());
 		entity.setDescription(extrahours.getDescription());
 		entity.setSystemtime(new Date());
