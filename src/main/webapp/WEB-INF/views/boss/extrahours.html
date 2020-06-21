@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{extrahours}"></span></a></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{systemtime}"></th>
+								<th th:text="#{timeemployee}"></th>
+								<th th:text="#{employee}"></th>
+								<th th:text="#{description}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="extrahour:${extrahours}">
+								<td th:text="${extrahour.systemtime}"></td>
+								<td th:text="${extrahour.departuretime}"></td>
+								<td th:text="${extrahour.employee.alias}"></td>
+								<td th:text="${extrahour.description}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
