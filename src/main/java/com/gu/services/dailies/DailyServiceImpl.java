@@ -100,7 +100,10 @@ public class DailyServiceImpl implements DailyService {
 			dEntity = new DailyEntity();
 			dEntity.setDailydate(date);
 		} else if (previousdaily == null) {
-			return daily;
+			previousdaily = dailyRepository.findFirstByOrderByDailydateDesc();
+			previousamount = previousdaily.getFinalamount();
+			dEntity = new DailyEntity();
+			dEntity.setDailydate(date);
 		} else {
 			previousamount = previousdaily.getFinalamount();
 		}
