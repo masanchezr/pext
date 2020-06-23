@@ -64,6 +64,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
+	private static final String BASIC = "Basic ";
+
+	@Override
 	public void reset(String sdate) {
 		TakeEntity take = new TakeEntity();
 		Date now;
@@ -76,10 +79,12 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		takingsRepository.save(take);
 	}
 
+	@Override
 	public ChangeMachineTotalEntity getTotal() {
 		return changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
 	}
 
+	@Override
 	public BigDecimal getAwards() {
 		BigDecimal awards = BigDecimal.ZERO;
 		PaymentEntity pay = new PaymentEntity();
@@ -99,15 +104,18 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	/**
 	 * Dinero invertido en la máquina de cambio
 	 */
+	@Override
 	public BigDecimal getIncomeTotalMonth() {
 		return changeMachineRepository.sumIncomeBetweenDates(
 				takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate(), new DateUtil().getNow());
 	}
 
+	@Override
 	public ChangeMachineEntity findById(Long idchangemachine) {
 		return changeMachineRepository.findById(idchangemachine).orElse(null);
 	}
 
+	@Override
 	public Daily save(ChangeMachineEntity cm) {
 		Date today = new DateUtil().getNow();
 		cm.setCreationdate(today);
@@ -115,6 +123,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		return dailyservice.getDailyEmployee();
 	}
 
+	@Override
 	public void loadDataTicketServer() {
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnection(from).getInputStream()))) {
@@ -145,7 +154,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		URL url = new URL(address);
 		URLConnection connection = url.openConnection();
 		connection.setDoOutput(true);
-		connection.setRequestProperty("Authorization", "Basic " + authStringEnc);
+		connection.setRequestProperty("Authorization", BASIC.concat(authStringEnc));
 		return connection;
 	}
 
@@ -306,6 +315,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				.findByAwardIsNotNullAndMachineIsNotNullAndCreationdateBetweenOrderByCreationdate(from, until);
 	}
 
+	@Override
 	public List<ChangeMachineEntity> recharges(String month) {
 		Date date = DateUtil.getDate(month);
 		Calendar calendar = Calendar.getInstance();
