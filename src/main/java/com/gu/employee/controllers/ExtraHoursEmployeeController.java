@@ -15,7 +15,7 @@ import com.gu.services.employees.EmployeeService;
 import com.gu.services.extrahours.ExtraHourService;
 
 @Controller
-public class ExtraHoursController {
+public class ExtraHoursEmployeeController {
 
 	@Autowired
 	private EmployeeService employeeservice;

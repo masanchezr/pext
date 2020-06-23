@@ -154,6 +154,8 @@
 			access="hasRole('ROLE_BOSS')" />
 		<intercept-url pattern="/newtpv"
 			access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/extrahours"
+			access="hasRole('ROLE_BOSS')" />
 	</http>
 
 	<authentication-manager id="authenticationMgr">

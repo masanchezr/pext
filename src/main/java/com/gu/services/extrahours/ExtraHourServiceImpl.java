@@ -24,4 +24,9 @@ public class ExtraHourServiceImpl implements ExtraHourService {
 		extrahoursRepository.save(entity);
 	}
 
+	@Override
+	public Iterable<ExtraHoursEntity> findAll() {
+		return extrahoursRepository.findAll();
+	}
+
 }
