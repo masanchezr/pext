@@ -39,18 +39,9 @@
 			</a>
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapsexpenses"
-				aria-expanded="true" aria-controls="collapsexpenses"><i
-					class="fa fa-euro-sign fa-fw"></i> <span th:text="#{expenses}"></span></a>
-				<div class="collapse" data-parent="#accordionSidebar"
-					aria-labelledby="headingxpenses" id="collapsexpenses">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a th:href="@{newmoneyadvance}" class="collapse-item"><span
-							th:text="#{moneyadvance}"></span></a> <a th:href="@{newoperation}"
-							class="collapse-item"><span th:text="#{otheroperations}"></span></a>
-					</div>
-				</div></li>
+			<li class="nav-item"><a th:href="@{newoperation}"
+				class="nav-link"> <i class="fa fa-euro-sign fa-fw"></i> <span
+					th:text="#{expenses}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				data-toggle="collapse" href="#"
 				data-target="#collapseGratifications" aria-expanded="true"
@@ -79,8 +70,9 @@
 							th:text="#{bardrinks}"></span></a><a class="collapse-item"
 							th:href="@{newincomeluckia}"><span th:text="#{incomeluckia}"></span></a><a
 							class="collapse-item" th:href="@{newincomemachine}"><span
-							th:text="#{incomemachine}"></span></a><a th:href="@{newreturn}"
-							class="collapse-item"><span th:text="#{returnmoneyemployee}"></span></a>
+							th:text="#{incomemachine}"></span></a>
+						<!--<a th:href="@{newreturn}"
+							class="collapse-item"><span th:text="#{returnmoneyemployee}"></span></a> -->
 					</div>
 				</div></li>
 			<li class="nav-item"><a th:href="@{newopenmachine}"
