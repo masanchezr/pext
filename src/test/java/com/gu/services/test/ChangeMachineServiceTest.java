@@ -1,6 +1,6 @@
 package com.gu.services.test;
 
-import java.math.BigDecimal;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,18 +18,17 @@ public class ChangeMachineServiceTest {
 	private ChangeMachineService changeMachineService;
 
 	@Test
-	public void getAwardsTest() {
-		BigDecimal awards = changeMachineService.getAwards();
-		System.out.println(awards.toString());
+	void getAwardsTest() {
+		assertNotNull(changeMachineService.getAwards());
 	}
 
 	@Test
-	public void getIncomeTotalMonthTest() {
-		System.out.println(changeMachineService.getIncomeTotalMonth());
+	void getIncomeTotalMonthTest() {
+		assertNotNull(changeMachineService.getIncomeTotalMonth());
 	}
 
 	@Test
-	public void loadDataTicketServerTest() {
+	void loadDataTicketServerTest() {
 		changeMachineService.loadDataTicketServer();
 	}
 }
