@@ -10,5 +10,4 @@ import com.gu.dbaccess.entities.DailyEntity;
  * The Interface DailyRepository.
  */
 public interface DailyRepository extends CrudRepository<DailyEntity, Date> {
-	public DailyEntity findFirstByOrderByDailydateDesc();
 }

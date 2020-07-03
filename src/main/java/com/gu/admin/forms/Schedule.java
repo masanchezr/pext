@@ -5,7 +5,7 @@ import java.util.List;
 import com.gu.dbaccess.entities.EmployeeEntity;
 import com.gu.dbaccess.entities.TimeEntity;
 
-public class Schedule implements Comparable<Schedule> {
+public class Schedule {
 	private String dateschedule;
 	private List<EmployeeEntity> employees;
 	private TimeEntity time;
@@ -32,10 +32,6 @@ public class Schedule implements Comparable<Schedule> {
 
 	public void setTime(TimeEntity time) {
 		this.time = time;
-	}
-
-	public int compareTo(Schedule o) {
-		return this.getTime().compareTo(o.getTime());
 	}
 
 	@Override

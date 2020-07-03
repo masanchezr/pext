@@ -1,7 +1,5 @@
 package com.gu.dbaccess.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +11,7 @@ import com.gu.util.constants.Constants;
 
 @Entity
 @Table(name = "timetable")
-public class TimeEntity implements Comparable<TimeEntity> {
+public class TimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +22,10 @@ public class TimeEntity implements Comparable<TimeEntity> {
 	private String name;
 
 	@Column(name = "entry")
-	private Date entry;
+	private String entry;
 
 	@Column(name = "departure")
-	private Date departure;
+	private String departure;
 
 	@Column(name = "active")
 	private Boolean active;
@@ -51,19 +49,19 @@ public class TimeEntity implements Comparable<TimeEntity> {
 		this.name = name;
 	}
 
-	public Date getEntry() {
+	public String getEntry() {
 		return entry;
 	}
 
-	public void setEntry(Date entry) {
+	public void setEntry(String entry) {
 		this.entry = entry;
 	}
 
-	public Date getDeparture() {
+	public String getDeparture() {
 		return departure;
 	}
 
-	public void setDeparture(Date departure) {
+	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
 
@@ -81,23 +79,6 @@ public class TimeEntity implements Comparable<TimeEntity> {
 
 	public void setOrder(Integer order) {
 		this.order = order;
-	}
-
-	public int compareTo(TimeEntity o) {
-		return this.getOrder().compareTo(o.getOrder());
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (o != null) {
-			if (this.getClass() != o.getClass()) {
-				return false;
-			} else {
-				return this.getIdtime().equals(((TimeEntity) o).getIdtime());
-			}
-		} else {
-			return false;
-		}
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.gu.boss.controllers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +49,6 @@ public class CalendarBossController {
 				times.add(ischedule.next().getTime());
 			}
 			Set<TimeEntity> settimes = new TreeSet<>();
-			Collections.sort(schedule);
 			settimes.addAll(times);
 			times.clear();
 			times.addAll(settimes);

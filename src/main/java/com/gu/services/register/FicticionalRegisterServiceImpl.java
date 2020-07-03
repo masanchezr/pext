@@ -76,10 +76,10 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 					TimeEntity time = se.getTime();
 					fre.setCreationdate(se.getDateschedule());
 					fre.setEmployee(employee);
-					e.setTime(time.getEntry());
+					e.setTime(DateUtil.getDate(time.getEntry()));
 					e.set(Calendar.MINUTE, rand.nextInt(60));
 					e.set(Calendar.SECOND, rand.nextInt(60));
-					d.setTime(time.getDeparture());
+					d.setTime(DateUtil.getDate(time.getDeparture()));
 					d.set(Calendar.MINUTE, rand.nextInt(60));
 					d.set(Calendar.SECOND, rand.nextInt(60));
 					fre.setTimein(e.getTime());
@@ -103,19 +103,34 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 			FicticionalRegisterEntity r;
 			Paragraph para = new Paragraph(
 					"Estos datos solo podrán cederse a terceros con la finalidad de dar cumplimiento a las obligaciones de carácter legal o contractual relacionadas con el desarrollo de la actividad laboral.");
+			Paragraph dni = new Paragraph("DNI");
+			Paragraph name = new Paragraph("Nombre");
+			Paragraph date = new Paragraph("Fecha");
+			Paragraph in = new Paragraph("Hora entrada");
+			Paragraph out = new Paragraph("Hora salida");
+			Paragraph dniemployee;
+			Paragraph nameemployee;
+			Paragraph creationdate;
+			Paragraph timein;
+			Paragraph timeout;
 			document.add(new Paragraph("GOLDEN USERA S.L. Registro de empleados").setItalic());
-			table.addCell(new Cell().add("DNI"));
-			table.addCell(new Cell().add("Nombre"));
-			table.addCell(new Cell().add("Fecha"));
-			table.addCell(new Cell().add("Hora entrada"));
-			table.addCell(new Cell().add("Hora salida"));
+			table.addCell(new Cell().add(dni));
+			table.addCell(new Cell().add(name));
+			table.addCell(new Cell().add(date));
+			table.addCell(new Cell().add(in));
+			table.addCell(new Cell().add(out));
 			while (iregister.hasNext()) {
 				r = iregister.next();
-				table.addCell(new Cell().add(r.getEmployee().getDni()));
-				table.addCell(new Cell().add(r.getEmployee().getName()));
-				table.addCell(new Cell().add(r.getCreationdate().toString()));
-				table.addCell(new Cell().add(r.getTimein().toString()));
-				table.addCell(new Cell().add(String.valueOf((r.getTimeout()))));
+				dniemployee = new Paragraph(r.getEmployee().getDni());
+				nameemployee = new Paragraph(r.getEmployee().getName());
+				creationdate = new Paragraph(r.getCreationdate().toString());
+				timein = new Paragraph(r.getTimein().toString());
+				timeout = new Paragraph(String.valueOf((r.getTimeout())));
+				table.addCell(new Cell().add(dniemployee));
+				table.addCell(new Cell().add(nameemployee));
+				table.addCell(new Cell().add(creationdate));
+				table.addCell(new Cell().add(timein));
+				table.addCell(new Cell().add(timeout));
 			}
 			document.add(table);
 			document.add(para);

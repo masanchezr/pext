@@ -20,7 +20,8 @@ import com.gu.dbaccess.repositories.MetadataRepository;
 import com.gu.services.dailies.Daily;
 import com.gu.services.dailies.DailyService;
 import com.gu.util.date.DateUtil;
-import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
@@ -66,7 +67,7 @@ public class GratificationServiceImpl implements GratificationService {
 			PdfDocument pdf = new PdfDocument(writer);
 			PageSize page = PageSize.A4.rotate();
 			Document document = new Document(pdf, page);
-			PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_BOLD);
+			PdfFont font = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD, PdfEncodings.WINANSI);
 			document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n" + g.getAmount().toString() + "  DRAGONES").setFont(font)
 					.setFontSize(14).setTextAlignment(TextAlignment.CENTER));
 			// Create a List
