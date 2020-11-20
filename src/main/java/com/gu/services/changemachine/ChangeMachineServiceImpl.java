@@ -301,7 +301,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Override
 	public void subtractChangeMachineTotal(String ip, BigDecimal amount, String award) {
-		if ("127.0.0.1".equals(ip) && "CCM SPORTIUM".equals(award)) {
+		if ("127.0.0.1".equals(ip) && !"CCM SPORTIUM".equals(award)) {
 			ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
 					.findFirstByOrderByIdchangemachinetotalDesc();
 			totalentity.setIdchangemachinetotal(null);
