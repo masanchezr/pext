@@ -7,15 +7,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springframework-version>5.2.9.RELEASE</org.springframework-version>
-		<spring-security-version>5.4.1</spring-security-version>
+		<org.springframework-version>5.3.3</org.springframework-version>
+		<spring-security-version>5.4.2</spring-security-version>
 		<sourceEncoding>UTF-8</sourceEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.war.plugin.version>3.3.0</maven.war.plugin.version>
+		<maven.war.plugin.version>3.3.1</maven.war.plugin.version>
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-		<maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+		<maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -187,12 +187,12 @@
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
-			<version>3.0.11.RELEASE</version>
+			<version>3.0.12.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
-			<version>3.0.11.RELEASE</version>
+			<version>3.0.12.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -202,23 +202,23 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>2.3.3.RELEASE</version>
+			<version>2.4.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.6.2</version>
+			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
+			<version>8.0.22</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.18.Final</version>
+			<version>5.4.27.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -233,17 +233,17 @@
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>pdfa</artifactId>
-			<version>7.1.11</version>
+			<version>7.1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>layout</artifactId>
-			<version>7.1.11</version>
+			<version>7.1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>forms</artifactId>
-			<version>7.1.11</version>
+			<version>7.1.14</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -258,7 +258,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.11.1</version>
+			<version>2.12.1</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
