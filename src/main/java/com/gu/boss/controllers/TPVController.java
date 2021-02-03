@@ -92,7 +92,7 @@ public class TPVController {
 				Calendar now = Calendar.getInstance();
 				calendartpv.setTime(datetpv);
 				model.addObject(ConstantsViews.DAILY, tpvservice.save(mapper.map(tpv, TPVEntity.class)));
-				changeMachineService.subtractChangeMachineTotal("127.0.0.1", tpv.getAmount(), "TPV");
+				changeMachineService.subtractChangeMachineTotal("127.0.0.1", tpv.getAmount());
 				if (calendartpv.get(Calendar.YEAR) == now.get(Calendar.YEAR)
 						&& calendartpv.get(Calendar.MONTH) == now.get(Calendar.MONTH)
 						&& calendartpv.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {

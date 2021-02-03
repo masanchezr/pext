@@ -224,7 +224,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			tpv.setAmount(amount);
 			tpv.setIdtpv(idtpv);
 			tpvrepository.save(tpv);
-			subtractChangeMachineTotal(ip, amount, "TPV");
+			subtractChangeMachineTotal(ip, amount);
 		}
 	}
 
@@ -296,12 +296,12 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setCreationdate(date);
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
-		subtractChangeMachineTotal(ip, amount, award);
+		subtractChangeMachineTotal(ip, amount);
 	}
 
 	@Override
-	public void subtractChangeMachineTotal(String ip, BigDecimal amount, String award) {
-		if ("127.0.0.1".equals(ip)&&!"CCM SPORTIUM".equals(award)) {
+	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
+		if ("127.0.0.1".equals(ip)) {
 			ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
 					.findFirstByOrderByIdchangemachinetotalDesc();
 			totalentity.setIdchangemachinetotal(null);
