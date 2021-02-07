@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
+import com.gu.dbaccess.entities.CollectionEntity;
+import com.gu.dbaccess.entities.TakeEntity;
 import com.gu.services.dailies.Daily;
 
 public interface ChangeMachineService {
@@ -33,5 +35,9 @@ public interface ChangeMachineService {
 	public void entryToVisible(BigDecimal amount);
 
 	void subtractChangeMachineTotal(String ip, BigDecimal amount);
+
+	Iterable<TakeEntity> getAllTakings();
+
+	public List<CollectionEntity> manualpayments(Long idtake);
 
 }

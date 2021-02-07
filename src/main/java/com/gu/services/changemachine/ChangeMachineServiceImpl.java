@@ -6,8 +6,10 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gu.dbaccess.entities.AwardsChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineEntity;
 import com.gu.dbaccess.entities.ChangeMachineTotalEntity;
+import com.gu.dbaccess.entities.CollectionEntity;
 import com.gu.dbaccess.entities.MachineEntity;
 import com.gu.dbaccess.entities.PaymentEntity;
 import com.gu.dbaccess.entities.TPVEntity;
@@ -345,5 +348,34 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		entity.setDeposit(last.getDeposit().subtract(amount));
 		entity.setVisible(last.getVisible().add(amount));
 		changeMachineTotalRepository.save(entity);
+	}
+
+	@Override
+	public List<CollectionEntity> manualpayments(Long idtake) {
+		List<CollectionEntity> collection = null;
+		TakeEntity take = takingsRepository.findById(idtake).orElse(new TakeEntity());
+		TakeEntity takeEntity = takingsRepository.findById(idtake + 1L).orElse(null);
+		if (takeEntity != null) {
+			collection = new ArrayList<>();
+			CollectionEntity c;
+			Date until = takeEntity.getTakedate();
+			List<Object[]> objects = changeMachineRepository.sumByCreationdateBetweenAndAward(take.getTakedate(),
+					until);
+			Iterator<Object[]> iobjects = objects.iterator();
+			Object[] o;
+			while (iobjects.hasNext()) {
+				o = iobjects.next();
+				c = new CollectionEntity();
+				c.setMachine((MachineEntity) o[0]);
+				c.setAmount((BigDecimal) o[1]);
+				collection.add(c);
+			}
+		}
+		return collection;
+	}
+
+	@Override
+	public Iterable<TakeEntity> getAllTakings() {
+		return takingsRepository.findAll();
 	}
 }

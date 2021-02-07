@@ -156,6 +156,8 @@
 			access="hasRole('ROLE_BOSS')" />
 		<intercept-url pattern="/extrahours"
 			access="hasRole('ROLE_BOSS')" />
+		<intercept-url pattern="/manualpayments"
+			access="hasRole('ROLE_BOSS')" />
 	</http>
 
 	<authentication-manager id="authenticationMgr">

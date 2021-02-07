@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="boss/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{manualpayments}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{manualpaymentsdesc}"></li>
+	</ol>
+	<form method="post" th:action="@{resultManualPayments}"
+		th:object="${collection}">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<span th:text="#{collection}"></span> <select
+									class="form-control" th:field="*{id}">
+									<option th:each="t:${takings}" th:value="${t.idtake}"
+										th:text="${t.takedate}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit">
+									<span th:text="#{search}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

@@ -48,4 +48,7 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 
 	public List<ChangeMachineEntity> findByAwardAndCreationdateBetween(AwardsChangeMachineEntity award,
 			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until);
+
+	@Query("select m, sum(c.amount) from ChangeMachineEntity c, MachineEntity m where c.creationdate>=?1 and c.creationdate<=?2 and c.award in (1,4) and m=c.machine group by c.machine")
+	public List<Object[]> sumByCreationdateBetweenAndAward(Date from, Date until);
 }
