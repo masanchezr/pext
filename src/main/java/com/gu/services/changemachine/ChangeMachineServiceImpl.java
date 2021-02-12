@@ -144,7 +144,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		String startdate = "StartDate=";
 		String endate = "&EndDate=";
 		String space = "%20";
-		String restaddress = "&User=admin&Pass".concat("word=1234");
+		String restaddress = "&User=root&Pass".concat("word=ccm10");
 		String name = "ccm";
 		String pass = "ccm10";
 		String authString = name + ":" + pass;
