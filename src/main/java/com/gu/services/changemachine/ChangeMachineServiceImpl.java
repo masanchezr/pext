@@ -186,6 +186,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		Date date;
 		BigDecimal amount;
 		String scomments;
+		String ip;
 		Long idtpv;
 		while (itrs.hasNext()) {
 			nodes = itrs.next().childNodes();
@@ -194,6 +195,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				award = node.getWholeText();
 				node = (TextNode) nodes.get(7).childNode(0);
 				date = DateUtil.getDate(node.getWholeText());
+				node = (TextNode) nodes.get(9).childNode(0);
+				ip = node.getWholeText();
 				node = (TextNode) nodes.get(10).childNode(0);
 				samount = node.getWholeText();
 				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
@@ -201,12 +204,12 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				scomments = node.getWholeText();
 				if (award.equals("TPV") && Util.isNumeric(scomments)) {
 					idtpv = Long.valueOf(scomments);
-					loadTPV(date, amount, idtpv);
+					loadTPV(ip, date, amount, idtpv);
 				} else {
 					node = (TextNode) nodes.get(2).childNode(0);
 					Long id = Long.valueOf(node.getWholeText());
 					if (!changeMachineRepository.existsById(id)) {
-						loadChangeMachineEntity(award, scomments, date, id, amount);
+						loadChangeMachineEntity(ip, award, scomments, date, id, amount);
 					}
 				}
 			}
@@ -214,7 +217,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		compareTotal(doc);
 	}
 
-	private void loadTPV(Date date, BigDecimal amount, Long idtpv) {
+	private void loadTPV(String ip, Date date, BigDecimal amount, Long idtpv) {
 		if (!tpvrepository.findById(idtpv).isPresent()) {
 			TPVEntity tpv = new TPVEntity();
 			PaymentEntity pay = new PaymentEntity();
@@ -224,7 +227,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			tpv.setAmount(amount);
 			tpv.setIdtpv(idtpv);
 			tpvrepository.save(tpv);
-			subtractChangeMachineTotal(amount);
+			subtractChangeMachineTotal(ip, amount);
 		}
 	}
 
@@ -256,7 +259,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		}
 	}
 
-	private void loadChangeMachineEntity(String award, String scomments, Date date, Long id, BigDecimal amount) {
+	private void loadChangeMachineEntity(String ip, String award, String scomments, Date date, Long id,
+			BigDecimal amount) {
 		AwardsChangeMachineEntity awardentity = new AwardsChangeMachineEntity();
 		MachineEntity machine;
 		ChangeMachineEntity cm = new ChangeMachineEntity();
@@ -295,16 +299,18 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setCreationdate(date);
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
-		subtractChangeMachineTotal(amount);
+		subtractChangeMachineTotal(ip, amount);
 	}
 
 	@Override
-	public void subtractChangeMachineTotal(BigDecimal amount) {
-		ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
-				.findFirstByOrderByIdchangemachinetotalDesc();
-		totalentity.setIdchangemachinetotal(null);
-		totalentity.setVisible(totalentity.getVisible().subtract(amount));
-		changeMachineTotalRepository.save(totalentity);
+	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
+		if ("127.0.0.1".equals(ip)) {
+			ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
+					.findFirstByOrderByIdchangemachinetotalDesc();
+			totalentity.setIdchangemachinetotal(null);
+			totalentity.setVisible(totalentity.getVisible().subtract(amount));
+			changeMachineTotalRepository.save(totalentity);
+		}
 	}
 
 	@Override
