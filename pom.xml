@@ -1,117 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gu.web</groupId>
-	<artifactId>web</artifactId>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.sboot</groupId>
+	<artifactId>golden</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<name>golden</name>
+	<description>Proyecto para golden usera</description>
 	<properties>
-		<org.springframework-version>5.3.4</org.springframework-version>
-		<spring-security-version>5.4.5</spring-security-version>
+		<java.version>1.8</java.version>
 		<sourceEncoding>UTF-8</sourceEncoding>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.war.plugin.version>3.3.1</maven.war.plugin.version>
-		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-		<maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
 	</properties>
 	<profiles>
 		<profile>
-			<id>development</id>
-			<activation>
-				<property>
-					<name>environment.type</name>
-					<value>dev</value>
-				</property>
-			</activation>
+			<id>dev</id>
 			<properties>
-				<database.url>jdbc:mysql://localhost:3307/usera?serverTimezone=Europe/Madrid</database.url>
-				<database.user>root</database.user>
-				<database.password>Angeles0466+</database.password>
-				<anyvalue.name>God</anyvalue.name>
+				<activatedProperties>dev</activatedProperties>
 			</properties>
-			<build>
-				<finalName>usera</finalName>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>${maven.war.plugin.version}</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>${maven.compiler.plugin.version}</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-							<source>1.8</source>
-							<target>1.8</target>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>${maven.resources.plugin.version}</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.22.2</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-							<argLine>-Dfile.encoding=UTF-8</argLine>
-						</configuration>
-					</plugin>
-				</plugins>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
 		</profile>
-		<!-- mvn install -Denvironment.type=production -->
 		<profile>
 			<id>openshift</id>
-			<activation>
-				<property>
-					<name>environment.type</name>
-					<value>production</value>
-				</property>
-			</activation>
 			<properties>
-				<database.url>jdbc:mysql://172.30.47.207:3306/useradb?serverTimezone=Europe/Madrid</database.url>
-				<database.user>user4R4</database.user>
-				<database.password>JIwBbTOI3PJE1RkH</database.password>
+				<activatedProperties>prod</activatedProperties>
 			</properties>
 			<build>
-				<finalName>usera</finalName>
+				<finalName>ROOT</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>${maven.war.plugin.version}</version>
+						<version>3.3.1</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
-							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 							<outputDirectory>deployments</outputDirectory>
-							<warName>ROOT</warName>
+							<!-- warName>ROOT</warName -->
 						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>${maven.compiler.plugin.version}</version>
+						<version>3.8.1</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
 							<source>1.8</source>
@@ -121,104 +57,56 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>${maven.resources.plugin.version}</version>
+						<version>3.2.0</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
 						</configuration>
 					</plugin>
 				</plugins>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
 			</build>
 		</profile>
 	</profiles>
 	<dependencies>
-		<!-- Spring -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring-security-version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring-security-version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring-security-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${org.springframework-version}</version>
-			<scope>test</scope>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 
-		<!-- Servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf</artifactId>
-			<version>3.0.12.RELEASE</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf-spring5</artifactId>
-			<version>3.0.12.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>2.4.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.7.0</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.22</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.4.27.Final</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -226,9 +114,14 @@
 			<version>5.5.1</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -246,29 +139,24 @@
 			<version>7.1.14</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.14</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.12.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
