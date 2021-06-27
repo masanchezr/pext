@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sboot.golden.dbaccess.entities.IncidentEntity;
 import com.sboot.golden.dbaccess.repositories.IncidentRepository;
-import com.sboot.golden.services.mails.MailService;
+import com.sboot.golden.services.mails.EmailService;
 import com.sboot.golden.util.date.DateUtil;
 
 @Service
@@ -19,14 +19,15 @@ public class IncidentServiceImpl implements IncidentService {
 	@Autowired
 	private IncidentRepository incidentRepository;
 
+	@Autowired
+	private EmailService emailService;
+
 	public void save(IncidentEntity incident) {
-		MailService mailService;
 		incident.setCreationdate(new DateUtil().getNow());
 		incident.setState(Boolean.FALSE);
 		incident = incidentRepository.save(incident);
-		mailService = new MailService(incident.getDescription(), "godomin1971@gmail.com",
-				"NUEVA INCIDENCIA GOLDEN USERA");
-		mailService.start();
+		emailService.sendSimpleMessage("godomin1971@gmail.com", "NUEVA INCIDENCIA GOLDEN USERA",
+				incident.getDescription());
 	}
 
 	public void resolve(IncidentEntity incident) {

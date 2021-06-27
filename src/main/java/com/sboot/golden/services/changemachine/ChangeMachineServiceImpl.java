@@ -40,7 +40,7 @@ import com.sboot.golden.dbaccess.repositories.TPVRepository;
 import com.sboot.golden.dbaccess.repositories.TakingsRepository;
 import com.sboot.golden.services.dailies.Daily;
 import com.sboot.golden.services.dailies.DailyService;
-import com.sboot.golden.services.mails.MailService;
+import com.sboot.golden.services.mails.EmailService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
 import com.sboot.golden.util.string.Util;
@@ -52,16 +52,19 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	private DailyService dailyservice;
 
 	@Autowired
+	private EmailService emailService;
+
+	@Autowired
 	private ChangeMachineRepository changeMachineRepository;
 
 	@Autowired
 	private ChangeMachineTotalRepository changeMachineTotalRepository;
 
 	@Autowired
-	private TakingsRepository takingsRepository;
+	private MachinesRepository machinesRepository;
 
 	@Autowired
-	private MachinesRepository machinesRepository;
+	private TakingsRepository takingsRepository;
 
 	@Autowired
 	private TPVRepository tpvrepository;
@@ -255,9 +258,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		BigDecimal total = new BigDecimal(sarray);
 		BigDecimal totalbbdd = getAwards();
 		if (total.compareTo(totalbbdd) != 0) {
-			MailService mail = new MailService("No coinciden premios dados.", null,
-					"NO COINCIDEN PREMIOS TICKET SERVER");
-			mail.start();
+			emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "NO COINCIDEN PREMIOS TICKET SERVER",
+					"No coinciden premios dados");
 		}
 	}
 

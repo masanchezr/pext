@@ -39,7 +39,6 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<version>3.3.1</version>
 						<configuration>
-							<encoding>${sourceEncoding}</encoding>
 							<outputDirectory>deployments</outputDirectory>
 							<!-- warName>ROOT</warName -->
 						</configuration>
@@ -104,6 +103,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -142,11 +145,6 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
 		</dependency>
 	</dependencies>
 
