@@ -93,16 +93,12 @@ public class GratificationsController {
 	}
 
 	@PostMapping("/employee/registergratification")
-	public ModelAndView registerGratification(
+	public void registerGratification(
 			@Validated(GratificationsValidator.class) @ModelAttribute(GRATIFICATION) Gratification g,
 			BindingResult arg1, HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("employee/success");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
-		if (arg1.hasErrors()) {
-			model.addObject(GRATIFICATION, g);
-			model.setViewName(VIEWREGISTERGRATIFICATION);
-		} else {
+		if (!arg1.hasErrors()) {
 			File file = new File(path.concat("ticket.pdf"));
 			gratificationservice.registerNumberGratification(mapper.map(g, GratificationEntity.class), user, path);
 			response.setContentType("application/force-download");
@@ -111,11 +107,9 @@ public class GratificationsController {
 				IOUtils.copy(inputStream, response.getOutputStream());
 				response.flushBuffer();
 			} catch (IOException e) {
-				model.setViewName(VIEWREGISTERGRATIFICATION);
 				arg1.rejectValue(ConstantsViews.CLIENT, "notopenfile");
 			}
 		}
-		return model;
 	}
 
 	@GetMapping("/employee/lastgratifications")
