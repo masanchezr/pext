@@ -4,8 +4,8 @@
 	xsi:schemaLocation='http://dozer.sourceforge.net 
                    http://dozer.sourceforge.net/schema/beanmapping.xsd'>
 	<mapping>
-		<class-a>com.gu.admin.forms.Schedule</class-a>
-		<class-b>com.gu.dbaccess.entities.ScheduleEntity</class-b>
+		<class-a>com.sboot.golden.admin.forms.Schedule</class-a>
+		<class-b>com.sboot.golden.dbaccess.entities.ScheduleEntity</class-b>
 		<field
 			custom-converter="com.gu.converters.StringToDateConverter">
 			<a>dateschedule</a>
@@ -13,8 +13,8 @@
 		</field>
 	</mapping>
 	<mapping>
-		<class-a>com.gu.boss.forms.TPV</class-a>
-		<class-b>com.gu.dbaccess.entities.TPVEntity</class-b>
+		<class-a>com.sboot.golden.boss.forms.TPV</class-a>
+		<class-b>com.sboot.golden.dbaccess.entities.TPVEntity</class-b>
 		<field
 			custom-converter="com.gu.converters.StringToDateConverter">
 			<a>creationdate</a>
@@ -22,8 +22,8 @@
 		</field>
 	</mapping>
 	<mapping>
-		<class-a>com.gu.services.messages.Message</class-a>
-		<class-b>com.gu.dbaccess.entities.MessageEntity</class-b>
+		<class-a>com.sboot.golden.services.messages.Message</class-a>
+		<class-b>com.sboot.golden.dbaccess.entities.MessageEntity</class-b>
 		<field
 			custom-converter="com.gu.converters.StringToTimeConverter">
 			<a>datefrom</a>
@@ -40,8 +40,8 @@
 		</field>
 	</mapping>
 	<mapping>
-		<class-a>com.gu.employee.forms.ExtraHours</class-a>
-		<class-b>com.gu.dbaccess.entities.ExtraHoursEntity</class-b>
+		<class-a>com.sboot.golden.employee.forms.ExtraHours</class-a>
+		<class-b>com.sboot.golden.dbaccess.entities.ExtraHoursEntity</class-b>
 		<field
 			custom-converter="com.gu.converters.StringToTimeConverter">
 			<a>departuretime</a>
