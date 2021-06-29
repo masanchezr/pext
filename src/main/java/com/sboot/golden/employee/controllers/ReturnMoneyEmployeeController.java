@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.sboot.golden.employee.forms.ReturnMoneyEmployee;
 import com.sboot.golden.services.dailies.DailyService;
@@ -40,7 +40,7 @@ public class ReturnMoneyEmployeeController {
 	public ModelAndView newreturn() {
 		ModelAndView model = new ModelAndView("employee/income/returnmoneyemployee");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
+		UserEntity employee = employeeservice.getEmployeeByUserName(user);
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnmoneyemployeeservice.findAdvanceByEmployee(employee);
 		model.addObject(FORMMONEYADVANCE, moneyadvance);
 		model.addObject(ConstantsViews.FORMINCOME, new ReturnMoneyEmployee());
@@ -70,7 +70,7 @@ public class ReturnMoneyEmployeeController {
 	public Object moneyadvance(@ModelAttribute(FORMMONEYADVANCE) ReturnMoneyEmployee returnme) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
+		UserEntity employee = employeeservice.getEmployeeByUserName(user);
 		returnme.setEmployee(employee);
 		ReturnMoneyEmployeeEntity entity = mapper.map(returnme, ReturnMoneyEmployeeEntity.class);
 		// miramos primero que no supere el importe

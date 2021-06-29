@@ -2,17 +2,17 @@ package com.sboot.golden.employee.forms;
 
 import java.util.List;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 
 public class CheckboxesEmp {
 
-	private List<EmployeeEntity> employees;
+	private List<UserEntity> employees;
 
-	public List<EmployeeEntity> getEmployees() {
+	public List<UserEntity> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<EmployeeEntity> employees) {
+	public void setEmployees(List<UserEntity> employees) {
 		this.employees = employees;
 	}
 }

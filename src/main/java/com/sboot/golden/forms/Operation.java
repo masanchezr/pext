@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.sboot.golden.dbaccess.entities.AwardEntity;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.MachineEntity;
 import com.sboot.golden.dbaccess.entities.PaymentEntity;
 
@@ -22,7 +22,7 @@ public class Operation {
 
 	private PaymentEntity pay;
 
-	private EmployeeEntity employee;
+	private UserEntity employee;
 
 	private String description;
 
@@ -74,11 +74,11 @@ public class Operation {
 		this.pay = pay;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

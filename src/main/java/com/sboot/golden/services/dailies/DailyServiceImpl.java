@@ -59,7 +59,7 @@ public class DailyServiceImpl implements DailyService {
 	private IncomeMachinesRepository incomemachinesRepository;
 
 	@Autowired
-	private ReturnMoneyEmployeesRepository returnMoneyEmployeesRepository;
+	private ReturnMoneyEmployeesRepository returnMoneyUsersRepository;
 
 	@Autowired
 	private GratificationsRepository gratificationRepository;
@@ -132,7 +132,7 @@ public class DailyServiceImpl implements DailyService {
 
 	private void setMoneyAdvance(Daily daily, Date date) {
 		BigDecimal moneyadvanceamount = BigDecimal.ZERO;
-		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdate(date);
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyUsersRepository.findByCreationdate(date);
 		if (moneyadvance != null && !moneyadvance.isEmpty()) {
 			Iterator<ReturnMoneyEmployeeEntity> iincome = moneyadvance.iterator();
 			while (iincome.hasNext()) {
@@ -146,7 +146,7 @@ public class DailyServiceImpl implements DailyService {
 
 	private void setReturns(Daily daily, Date date) {
 		BigDecimal returnmoneyamount = BigDecimal.ZERO;
-		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndate(date);
+		List<ReturnMoneyEmployeeEntity> returns = returnMoneyUsersRepository.findByReturndate(date);
 		if (returns != null && !returns.isEmpty()) {
 			Iterator<ReturnMoneyEmployeeEntity> iincome = returns.iterator();
 			while (iincome.hasNext()) {
@@ -273,9 +273,9 @@ public class DailyServiceImpl implements DailyService {
 				new DateUtil().getNow());
 		List<GratificationEntity> gratifications = gratificationRepository.findByPaydateBetween(date,
 				new DateUtil().getNow());
-		List<ReturnMoneyEmployeeEntity> returns = returnMoneyEmployeesRepository.findByReturndateBetween(date,
+		List<ReturnMoneyEmployeeEntity> returns = returnMoneyUsersRepository.findByReturndateBetween(date,
 				new DateUtil().getNow());
-		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyEmployeesRepository.findByCreationdateBetween(date,
+		List<ReturnMoneyEmployeeEntity> moneyadvance = returnMoneyUsersRepository.findByCreationdateBetween(date,
 				new DateUtil().getNow());
 		List<TPVEntity> tpvs = tpvrepository.findByCreationdateBetween(date, new DateUtil().getNow());
 		List<ChangeMachineEntity> changemachine = changeMachineService.getOperationsTicketServerBetweenDates(date,

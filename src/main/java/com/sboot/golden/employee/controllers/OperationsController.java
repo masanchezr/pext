@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
 import com.sboot.golden.dbaccess.entities.OperationEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.forms.Operation;
 import com.sboot.golden.services.awards.AwardService;
 import com.sboot.golden.services.employees.EmployeeService;
@@ -79,9 +79,9 @@ public class OperationsController {
 			model.addObject(ConstantsViews.OPERATION, operation);
 			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
-			if (operation.getEmployee().getIdemployee().equals(1L)) {
+			if (operation.getEmployee().getId().equals(Constants.NOBODY)) {
 				String user = SecurityContextHolder.getContext().getAuthentication().getName();
-				EmployeeEntity employee = employeeService.getEmployeeByUserName(user);
+				UserEntity employee = employeeService.getEmployeeByUserName(user);
 				operation.setEmployee(employee);
 			}
 			model.addObject(ConstantsViews.DAILY, operationService.save(op));

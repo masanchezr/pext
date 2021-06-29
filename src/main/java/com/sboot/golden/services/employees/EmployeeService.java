@@ -2,11 +2,11 @@ package com.sboot.golden.services.employees;
 
 import java.util.List;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 
 public interface EmployeeService {
 	
-	public List<EmployeeEntity> allEmployeesActives();
+	public List<UserEntity> allEmployeesActives();
 
-	public EmployeeEntity getEmployeeByUserName(String user);
+	public UserEntity getEmployeeByUserName(String user);
 }

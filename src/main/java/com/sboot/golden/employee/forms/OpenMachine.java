@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.sboot.golden.dbaccess.entities.CauseEntity;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.MachineEntity;
 
 public class OpenMachine {
@@ -20,7 +20,7 @@ public class OpenMachine {
 
 	private BigDecimal amount;
 
-	private EmployeeEntity employee;
+	private UserEntity employee;
 
 	private MachineEntity machine;
 
@@ -58,11 +58,11 @@ public class OpenMachine {
 		this.amount = amount;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

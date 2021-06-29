@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.sboot.golden.dbaccess.repositories.ReturnMoneyEmployeesRepository;
 import com.sboot.golden.util.date.DateUtil;
@@ -18,15 +18,15 @@ import com.sboot.golden.util.date.DateUtil;
 public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeService {
 
 	@Autowired
-	private ReturnMoneyEmployeesRepository returnMoneyEmployeesRepository;
+	private ReturnMoneyEmployeesRepository returnMoneyUsersRepository;
 
 	public void savereturn(ReturnMoneyEmployeeEntity returnme) {
-		Optional<ReturnMoneyEmployeeEntity> opreturnme = returnMoneyEmployeesRepository
+		Optional<ReturnMoneyEmployeeEntity> opreturnme = returnMoneyUsersRepository
 				.findById(returnme.getIdreturnmoneyemployee());
 		if (opreturnme.isPresent()) {
 			returnme = opreturnme.get();
 			returnme.setReturndate(new DateUtil().getNow());
-			returnMoneyEmployeesRepository.save(returnme);
+			returnMoneyUsersRepository.save(returnme);
 		}
 	}
 
@@ -40,16 +40,16 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		from = calendar.getTime();
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		until = calendar.getTime();
-		return returnMoneyEmployeesRepository.searchSumReturnByMonth(from, until);
+		return returnMoneyUsersRepository.searchSumReturnByMonth(from, until);
 	}
 
-	public List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(EmployeeEntity employee) {
-		return returnMoneyEmployeesRepository.findByEmployeeAndReturndateIsNull(employee);
+	public List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(UserEntity employee) {
+		return returnMoneyUsersRepository.findByEmployeeAndReturndateIsNull(employee);
 	}
 
 	public void savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
 		returnme.setCreationdate(new DateUtil().getNow());
-		returnMoneyEmployeesRepository.save(returnme);
+		returnMoneyUsersRepository.save(returnme);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		until = calendar.getTime();
 		BigDecimal threedhundredfifty = new BigDecimal(350);
-		BigDecimal advance = returnMoneyEmployeesRepository.searchSumAdvanceByMonth(from, until,
+		BigDecimal advance = returnMoneyUsersRepository.searchSumAdvanceByMonth(from, until,
 				returnme.getEmployee());
 		if (advance == null) {
 			advance = BigDecimal.ZERO;

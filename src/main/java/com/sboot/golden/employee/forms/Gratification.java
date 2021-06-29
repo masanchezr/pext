@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.MachineEntity;
 
 public class Gratification {
@@ -22,9 +22,9 @@ public class Gratification {
 
 	private String client;
 
-	private EmployeeEntity employee;
+	private UserEntity employee;
 
-	private EmployeeEntity employeepay;
+	private UserEntity employeepay;
 
 	private MachineEntity machine;
 
@@ -70,19 +70,19 @@ public class Gratification {
 		this.client = client;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 
-	public EmployeeEntity getEmployeepay() {
+	public UserEntity getEmployeepay() {
 		return employeepay;
 	}
 
-	public void setEmployeepay(EmployeeEntity employeepay) {
+	public void setEmployeepay(UserEntity employeepay) {
 		this.employeepay = employeepay;
 	}
 

@@ -23,10 +23,10 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.GratificationEntity;
 import com.sboot.golden.dbaccess.entities.MetadataEntity;
-import com.sboot.golden.dbaccess.repositories.EmployeesRepository;
+import com.sboot.golden.dbaccess.repositories.UsersRepository;
 import com.sboot.golden.dbaccess.repositories.GratificationsRepository;
 import com.sboot.golden.dbaccess.repositories.MetadataRepository;
 import com.sboot.golden.services.dailies.Daily;
@@ -40,7 +40,7 @@ public class GratificationServiceImpl implements GratificationService {
 	private GratificationsRepository gratificationRepository;
 
 	@Autowired
-	private EmployeesRepository employeesrepository;
+	private UsersRepository employeesrepository;
 
 	@Autowired
 	private MetadataRepository metadataRepository;
@@ -56,7 +56,7 @@ public class GratificationServiceImpl implements GratificationService {
 	 * pagamos la propina
 	 */
 	public Daily save(GratificationEntity g, String user) {
-		EmployeeEntity employee = employeesrepository.findByUsername(user);
+		UserEntity employee = employeesrepository.findByUsername(user);
 		g.setPaydate(new DateUtil().getNow());
 		g.setEmployeepay(employee);
 		gratificationRepository.save(g);
@@ -101,7 +101,7 @@ public class GratificationServiceImpl implements GratificationService {
 	}
 
 	public void registerNumberGratification(GratificationEntity g, String user, String path) {
-		EmployeeEntity employee = employeesrepository.findByUsername(user);
+		UserEntity employee = employeesrepository.findByUsername(user);
 		Calendar c = Calendar.getInstance();
 		Date expirationdate;
 		Date usefromdate;

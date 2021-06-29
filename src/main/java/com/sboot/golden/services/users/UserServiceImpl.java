@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
-import com.sboot.golden.dbaccess.entities.RoleEntity;
 import com.sboot.golden.dbaccess.entities.UserEntity;
-import com.sboot.golden.dbaccess.repositories.EmployeesRepository;
-import com.sboot.golden.dbaccess.repositories.RolesRepository;
+import com.sboot.golden.dbaccess.entities.UserEntity;
+import com.sboot.golden.dbaccess.repositories.UsersRepository;
 import com.sboot.golden.dbaccess.repositories.UsersRepository;
 
 @Service
@@ -23,10 +21,7 @@ public class UserServiceImpl implements UserService {
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private EmployeesRepository employeesRepository;
-
-	@Autowired
-	private RolesRepository rolesRepository;
+	private UsersRepository employeesRepository;
 
 	@Autowired
 	private PasswordEncoder pbkdf2Encoder;
@@ -45,7 +40,7 @@ public class UserServiceImpl implements UserService {
 				entity.setEnabled(Boolean.TRUE);
 			}
 			user = mapper.map(usersRepository.save(entity), User.class);
-			EmployeeEntity employee = employeesRepository.findByUsername(entity.getUsername());
+			UserEntity employee = employeesRepository.findByUsername(entity.getUsername());
 			if (employee != null) {
 				Boolean stateEmployee = employee.getEnabled();
 				if (stateEmployee.equals(Boolean.TRUE)) {
@@ -62,8 +57,7 @@ public class UserServiceImpl implements UserService {
 	public void newUser(User user) {
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
 		usersRepository.save(mapper.map(user, UserEntity.class));
-		employeesRepository.save(mapper.map(user, EmployeeEntity.class));
-		rolesRepository.save(mapper.map(user, RoleEntity.class));
+		employeesRepository.save(mapper.map(user, UserEntity.class));
 	}
 
 	public void updatePassword(User user) {
@@ -105,7 +99,7 @@ public class UserServiceImpl implements UserService {
 	public void update(User user) {
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
 		usersRepository.save(mapper.map(user, UserEntity.class));
-		EmployeeEntity employee = employeesRepository.findByUsername(user.getUsername());
+		UserEntity employee = employeesRepository.findByUsername(user.getUsername());
 		if (employee != null) {
 			Boolean state = employee.getEnabled();
 			if (state.equals(Boolean.TRUE)) {

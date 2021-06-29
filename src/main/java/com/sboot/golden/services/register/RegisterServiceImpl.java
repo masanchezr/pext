@@ -18,10 +18,10 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.MetadataEntity;
 import com.sboot.golden.dbaccess.entities.RegisterEntity;
-import com.sboot.golden.dbaccess.repositories.EmployeesRepository;
+import com.sboot.golden.dbaccess.repositories.UsersRepository;
 import com.sboot.golden.dbaccess.repositories.MetadataRepository;
 import com.sboot.golden.dbaccess.repositories.RegisterRepository;
 import com.sboot.golden.util.date.DateUtil;
@@ -33,7 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
 	private RegisterRepository registerRepository;
 
 	@Autowired
-	private EmployeesRepository employeesRepository;
+	private UsersRepository employeesRepository;
 
 	@Autowired
 	private MetadataRepository metadataRepository;
@@ -52,7 +52,7 @@ public class RegisterServiceImpl implements RegisterService {
 	 *            cardConexion.connect(0, "T=1"); CommandAPDU cpadu= new
 	 *            CommandAPDU(); ResponseAPDU rapdu=cardConexion.(capdu);
 	 *            List<InOut> inout = new ArrayList<InOut>();
-	 *            Iterator<EmployeeEntity> ilin = lin.iterator(); InEntity in; Long
+	 *            Iterator<UserEntity> ilin = lin.iterator(); InEntity in; Long
 	 *            id; while (ilin.hasNext()) { id = ilin.next().getIdemployee(); if
 	 *            (id != null) { in = new InEntity(); in.setDate(new
 	 *            DateUtil().getNow());
@@ -61,16 +61,16 @@ public class RegisterServiceImpl implements RegisterService {
 	 * 
 	 *            }
 	 * 
-	 *            public List<Register> out(List<EmployeeEntity> lout) {
+	 *            public List<Register> out(List<UserEntity> lout) {
 	 *            List<Register> inout = new ArrayList<Register>();
-	 *            Iterator<EmployeeEntity> ilin = lout.iterator(); OutEntity in;
+	 *            Iterator<UserEntity> ilin = lout.iterator(); OutEntity in;
 	 *            while (ilin.hasNext()) { in = new OutEntity(); in.setOutdate(new
 	 *            Date()); in.setEmployee(mapper.map(ilin.next(),
-	 *            EmployeeEntity.class)); outRepository.save(in);
+	 *            UserEntity.class)); outRepository.save(in);
 	 *            inout.add(mapper.map(in, Register.class)); } return inout; }
 	 **/
 	public void registerIn(String user, String ipaddress) {
-		EmployeeEntity employee = employeesRepository.findByUsername(user);
+		UserEntity employee = employeesRepository.findByUsername(user);
 		Optional<MetadataEntity> ip = metadataRepository.findById("ipgoldenusera");
 		if (employee.getEnabled().equals(Boolean.TRUE) && ip.isPresent() && ip.get().getValue().equals(ipaddress)) {
 			RegisterEntity register = registerRepository
@@ -84,7 +84,7 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	public void registerOut(String user, String ipaddress) {
-		EmployeeEntity employee = employeesRepository.findByUsername(user);
+		UserEntity employee = employeesRepository.findByUsername(user);
 		Optional<MetadataEntity> ip = metadataRepository.findById("ipgoldenusera");
 		if (employee.getEnabled().equals(Boolean.TRUE) && ip.isPresent() && ip.get().getValue().equals(ipaddress)) {
 			RegisterEntity register = registerRepository
@@ -97,7 +97,7 @@ public class RegisterServiceImpl implements RegisterService {
 		}
 	}
 
-	private RegisterEntity setRegister(EmployeeEntity employee, String ipaddress) {
+	private RegisterEntity setRegister(UserEntity employee, String ipaddress) {
 		RegisterEntity register = new RegisterEntity();
 		register.setEmployee(employee);
 		register.setCreationdate(new DateUtil().getNow());
@@ -112,8 +112,8 @@ public class RegisterServiceImpl implements RegisterService {
 		Date from;
 		Date until;
 		/**
-		 * EmployeeEntity employee; Iterable<EmployeeEntity> employees =
-		 * employeesRepository.findByEnabledTrue(); // Iterator<EmployeeEntity>
+		 * UserEntity employee; Iterable<UserEntity> employees =
+		 * employeesRepository.findByEnabledTrue(); // Iterator<UserEntity>
 		 * iemployees = employees.iterator();
 		 **/
 		if (dateuntil == null || dateuntil.isEmpty()) {
@@ -179,7 +179,7 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	/**
-	 * private void disabledRegister(EmployeeEntity employee, List<Date> dates) {
+	 * private void disabledRegister(UserEntity employee, List<Date> dates) {
 	 * Date date; RegisterEntity register; Iterator<Date> idates = dates.iterator();
 	 * while (idates.hasNext()) { date = idates.next(); // cuidado cambiar que hay
 	 * varios registros de antes cambiar la tabla con uk register =

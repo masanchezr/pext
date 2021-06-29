@@ -36,8 +36,8 @@ public class OpenMachineEntity {
 	private BigDecimal amount;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployee", referencedColumnName = "idemployee")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "idemployee")
+	private UserEntity employee;
 
 	@ManyToOne
 	@JoinColumn(name = "idmachine", referencedColumnName = "idmachine")
@@ -79,11 +79,11 @@ public class OpenMachineEntity {
 		this.amount = amount;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

@@ -41,12 +41,12 @@ public class GratificationEntity {
 	private String client;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployee", referencedColumnName = "idemployee")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "idemployee")
+	private UserEntity employee;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployeepay", referencedColumnName = "idemployee")
-	private EmployeeEntity employeepay;
+	@JoinColumn(name = "idemployeepay")
+	private UserEntity employeepay;
 
 	@ManyToOne
 	@JoinColumn(name = "idmachine", referencedColumnName = "idmachine")
@@ -95,19 +95,19 @@ public class GratificationEntity {
 		this.client = client;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 
-	public EmployeeEntity getEmployeepay() {
+	public UserEntity getEmployeepay() {
 		return employeepay;
 	}
 
-	public void setEmployeepay(EmployeeEntity employeepay) {
+	public void setEmployeepay(UserEntity employeepay) {
 		this.employeepay = employeepay;
 	}
 

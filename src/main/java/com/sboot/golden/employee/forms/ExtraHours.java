@@ -1,6 +1,6 @@
 package com.sboot.golden.employee.forms;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 
 public class ExtraHours {
 
@@ -8,7 +8,7 @@ public class ExtraHours {
 
 	private String description;
 
-	private EmployeeEntity employee;
+	private UserEntity employee;
 
 	public String getDescription() {
 		return description;
@@ -18,11 +18,11 @@ public class ExtraHours {
 		this.description = description;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

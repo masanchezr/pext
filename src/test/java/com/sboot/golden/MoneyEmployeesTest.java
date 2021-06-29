@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.services.returnmoneyemployees.ReturnMoneyEmployeeService;
 
 @SpringBootTest
@@ -21,8 +21,8 @@ class MoneyEmployeesTest {
 	@Test
 	void isAllowedAdvancesTest() {
 		ReturnMoneyEmployeeEntity returnme = new ReturnMoneyEmployeeEntity();
-		EmployeeEntity employee = new EmployeeEntity();
-		employee.setIdemployee(2L);
+		UserEntity employee = new UserEntity();
+		employee.setId(2L);
 		returnme.setEmployee(employee);
 		returnme.setAmount(new BigDecimal(200));
 		assertTrue(moneyemployeeservice.isAllowedAdvances(returnme));

@@ -3,7 +3,7 @@ package com.sboot.golden.services.returnmoneyemployees;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
 
 public interface ReturnMoneyEmployeeService {
@@ -12,7 +12,7 @@ public interface ReturnMoneyEmployeeService {
 
 	BigDecimal findIncomeByMonth(String datefrom);
 
-	List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(EmployeeEntity employee);
+	List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(UserEntity employee);
 
 	void savemoneyadvance(ReturnMoneyEmployeeEntity returnme);
 

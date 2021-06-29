@@ -35,8 +35,8 @@ public class FicticionalRegisterEntity {
 	private Date timeout;
 
 	@ManyToOne
-	@JoinColumn(name = "IDEMPLOYEE", referencedColumnName = "IDEMPLOYEE")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "IDEMPLOYEE")
+	private UserEntity employee;
 
 	/**
 	 * @return the id
@@ -97,14 +97,14 @@ public class FicticionalRegisterEntity {
 	/**
 	 * @return the employee
 	 */
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
 	/**
 	 * @param employee the employee to set
 	 */
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

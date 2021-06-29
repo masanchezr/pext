@@ -19,8 +19,8 @@ public class EmployeeScheduleEntity {
 	private Long idemployeeschedule;
 
 	@ManyToOne
-	@JoinColumn(name = "IDEMPLOYEE", referencedColumnName = "IDEMPLOYEE")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "IDEMPLOYEE")
+	private UserEntity employee;
 
 	@ManyToOne
 	@JoinColumn(name = "IDSCHEDULE")
@@ -43,14 +43,14 @@ public class EmployeeScheduleEntity {
 	/**
 	 * @return the employee
 	 */
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
 	/**
 	 * @param employee the employee to set
 	 */
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

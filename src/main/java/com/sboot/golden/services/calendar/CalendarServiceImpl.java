@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sboot.golden.admin.forms.Schedule;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
 import com.sboot.golden.dbaccess.entities.EmployeeScheduleEntity;
 import com.sboot.golden.dbaccess.entities.ScheduleEntity;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.repositories.ScheduleRepository;
 import com.sboot.golden.dbaccess.repositories.TimeRepository;
 import com.sboot.golden.util.constants.Constants;
@@ -41,13 +41,13 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	private ScheduleEntity mapper(Schedule next) {
-		List<EmployeeEntity> employees = next.getEmployees();
+		List<UserEntity> employees = next.getEmployees();
 		ScheduleEntity s = new ScheduleEntity();
 		s.setDateschedule(DateUtil.getDate(next.getDateschedule()));
 		s.setTime(next.getTime());
 		s.setEmployees(new ArrayList<>());
-		for (EmployeeEntity employee : employees) {
-			if (!employee.getIdemployee().equals(Constants.NOBODY)) {
+		for (UserEntity employee : employees) {
+			if (!employee.getId().equals(Constants.NOBODY)) {
 				EmployeeScheduleEntity e = new EmployeeScheduleEntity();
 				e.setEmployee(employee);
 				e.setSchedule(s);
@@ -66,7 +66,7 @@ public class CalendarServiceImpl implements CalendarService {
 		Iterator<ScheduleEntity> ilschedule = lschedule.iterator();
 		Schedule schedule;
 		ScheduleEntity entity;
-		EmployeeEntity employee;
+		UserEntity employee;
 		List<EmployeeScheduleEntity> employees;
 		Iterator<EmployeeScheduleEntity> iemployees;
 		while (ilschedule.hasNext()) {
@@ -79,7 +79,7 @@ public class CalendarServiceImpl implements CalendarService {
 			iemployees = employees.iterator();
 			while (iemployees.hasNext()) {
 				employee = iemployees.next().getEmployee();
-				if (!employee.getIdemployee().equals(Constants.NOBODY)) {
+				if (!employee.getId().equals(Constants.NOBODY)) {
 					schedule.getEmployees().add(employee);
 				}
 			}

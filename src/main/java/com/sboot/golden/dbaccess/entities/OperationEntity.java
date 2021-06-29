@@ -46,8 +46,8 @@ public class OperationEntity {
 	private PaymentEntity pay;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployee", referencedColumnName = "idemployee")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "idemployee")
+	private UserEntity employee;
 
 	@Column(name = Constants.DESCRIPTION)
 	private String description;
@@ -100,11 +100,11 @@ public class OperationEntity {
 		this.pay = pay;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

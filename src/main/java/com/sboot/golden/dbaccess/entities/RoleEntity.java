@@ -7,45 +7,42 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sboot.golden.util.constants.Constants;
-
 @Entity
-@Table(name = "roles")
+@Table(name = "authoritiesusers")
 public class RoleEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idrole")
+	@Column(name = "id")
 	private Long idrole;
 
-	@Column(name = Constants.USERNAME)
-	private String username;
+	@Column(name = "userid")
+	private Long useride;
 
-	@Column(name = Constants.ROLE)
-	private String role;
+	@Column(name = "authorityid")
+	private AuthorityEntity role;
 
 	public Long getIdrole() {
 		return idrole;
 	}
 
-	public void setIdrole(Long idrole) {
-		this.idrole = idrole;
+	public Long getUseride() {
+		return useride;
 	}
 
-	public String getUsername() {
-		return username;
+	public void setUseride(Long useride) {
+		this.useride = useride;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getRole() {
+	public AuthorityEntity getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(AuthorityEntity role) {
 		this.role = role;
 	}
 
+	public void setIdrole(Long idrole) {
+		this.idrole = idrole;
+	}
 }

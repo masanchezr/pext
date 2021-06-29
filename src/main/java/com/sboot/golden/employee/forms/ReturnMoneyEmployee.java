@@ -5,13 +5,13 @@ import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 
 public class ReturnMoneyEmployee {
 
 	private Long idreturnmoneyemployee;
 
-	private EmployeeEntity employee;
+	private UserEntity employee;
 
 	@CreatedDate
 	private Date creationdate;
@@ -30,11 +30,11 @@ public class ReturnMoneyEmployee {
 		this.idreturnmoneyemployee = idreturnmoneyemployee;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

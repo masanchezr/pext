@@ -26,8 +26,8 @@ public class ReturnMoneyEmployeeEntity {
 	private Long idreturnmoneyemployee;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployee", referencedColumnName = "idemployee")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "idemployee", referencedColumnName = "id")
+	private UserEntity employee;
 
 	@Column(name = Constants.CREATIONDATE)
 	@CreatedDate
@@ -50,11 +50,11 @@ public class ReturnMoneyEmployeeEntity {
 		this.idreturnmoneyemployee = idreturnmoneyemployee;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

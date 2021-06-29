@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.sboot.golden.util.constants.Constants;
+
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
@@ -35,6 +37,15 @@ public class UserEntity implements Serializable {
 
 	@Column(name = "enabled")
 	private Boolean enabled;
+
+	@Column(name = "fullname")
+	private String name;
+
+	@Column(name = Constants.ALIAS)
+	private String alias;
+
+	@Column(name = "dni")
+	private String dni;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "authoritiesusers", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "authorityid"))
@@ -78,5 +89,29 @@ public class UserEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 }

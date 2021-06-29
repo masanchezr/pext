@@ -41,8 +41,8 @@ public class RegisterEntity {
 	private Boolean active;
 
 	@ManyToOne
-	@JoinColumn(name = "IDEMPLOYEE", referencedColumnName = "IDEMPLOYEE")
-	private EmployeeEntity employee;
+	@JoinColumn(name = "IDEMPLOYEE")
+	private UserEntity employee;
 
 	public Long getIdregister() {
 		return idregister;
@@ -60,11 +60,11 @@ public class RegisterEntity {
 		this.creationdate = date;
 	}
 
-	public EmployeeEntity getEmployee() {
+	public UserEntity getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(EmployeeEntity employee) {
+	public void setEmployee(UserEntity employee) {
 		this.employee = employee;
 	}
 

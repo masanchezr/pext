@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.employee.forms.ExtraHours;
 import com.sboot.golden.services.employees.EmployeeService;
 import com.sboot.golden.services.extrahours.ExtraHourService;
@@ -38,7 +38,7 @@ public class ExtraHoursEmployeeController {
 			model.addObject("extrahours", extrahours);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			EmployeeEntity employee = employeeservice.getEmployeeByUserName(user);
+			UserEntity employee = employeeservice.getEmployeeByUserName(user);
 			extrahours.setEmployee(employee);
 			extraHourService.save(extrahours);
 			model.setViewName("/employee/success");

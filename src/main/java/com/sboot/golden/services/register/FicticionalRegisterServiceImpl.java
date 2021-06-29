@@ -21,11 +21,11 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.sboot.golden.dbaccess.entities.EmployeeEntity;
 import com.sboot.golden.dbaccess.entities.EmployeeScheduleEntity;
 import com.sboot.golden.dbaccess.entities.FicticionalRegisterEntity;
 import com.sboot.golden.dbaccess.entities.ScheduleEntity;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.repositories.FicticionalRegisterRepository;
 import com.sboot.golden.dbaccess.repositories.ScheduleRepository;
 import com.sboot.golden.util.constants.Constants;
@@ -51,7 +51,7 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 		if (schedule != null && !schedule.isEmpty()) {
 			Iterator<ScheduleEntity> ischedule = schedule.iterator();
 			ScheduleEntity se;
-			EmployeeEntity employee;
+			UserEntity employee;
 			Calendar e = Calendar.getInstance();
 			Calendar d = Calendar.getInstance();
 			while (ischedule.hasNext()) {
@@ -66,8 +66,8 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 		return registerRepository.findByCreationdateBetweenOrderByCreationdate(dfrom, duntil);
 	}
 
-	private void saveRegister(ScheduleEntity se, EmployeeEntity employee, Calendar e, Calendar d) {
-		if (!employee.getIdemployee().equals(Constants.NOBODY)) {
+	private void saveRegister(ScheduleEntity se, UserEntity employee, Calendar e, Calendar d) {
+		if (!employee.getId().equals(Constants.NOBODY)) {
 			FicticionalRegisterEntity fre = registerRepository.findByCreationdateAndEmployee(se.getDateschedule(),
 					employee);
 			if (fre == null) {
