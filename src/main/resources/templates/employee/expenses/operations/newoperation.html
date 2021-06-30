@@ -57,9 +57,9 @@
 								</select>
 							</div>
 							<div class="invisible" id="divemployee">
-								<select class="form-control" th:field="*{employee.idemployee}">
+								<select class="form-control" th:field="*{employee.id}">
 									<option th:each="employee:${employees}"
-										th:value="${employee.idemployee}" th:text="${employee.alias}" />
+										th:value="${employee.id}" th:text="${employee.alias}" />
 								</select>
 							</div>
 							<div class="invisible" id="textstaple">

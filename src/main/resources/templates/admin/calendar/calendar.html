@@ -38,18 +38,15 @@
 								<td><select class="form-control"
 									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[0].idemployee}">
 										<option th:each="employee: ${employees}"
-											th:value="${employee.idemployee}"
-											th:text="${employee.username}" />
+											th:value="${employee.id}" th:text="${employee.username}" />
 								</select> <select class="form-control"
 									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[1].idemployee}">
 										<option th:each="employee: ${employees}"
-											th:value="${employee.idemployee}"
-											th:text="${employee.username}" />
+											th:value="${employee.id}" th:text="${employee.username}" />
 								</select> <select class="form-control"
 									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[2].idemployee}">
 										<option th:each="employee: ${employees}"
-											th:value="${employee.idemployee}"
-											th:text="${employee.username}" />
+											th:value="${employee.id}" th:text="${employee.username}" />
 								</select> <input type="hidden"
 									th:attr="name='schedule['+${dateStat.index+(timeStat.index*7)}+'].time.idtime'"
 									th:value="${time.idtime}" /> <input type="hidden"
