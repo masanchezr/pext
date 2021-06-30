@@ -46,7 +46,7 @@ public class OperationEntity {
 	private PaymentEntity pay;
 
 	@ManyToOne
-	@JoinColumn(name = "idemployee")
+	@JoinColumn(name = "idemployee", referencedColumnName = "id")
 	private UserEntity employee;
 
 	@Column(name = Constants.DESCRIPTION)
