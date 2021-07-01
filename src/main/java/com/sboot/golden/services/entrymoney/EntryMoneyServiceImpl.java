@@ -43,12 +43,12 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entryMoneyRepository.save(entrymoney);
 		if (entryMoneyForm.getOrigin().equals(Constants.getOrigin()[0])) {
 			SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
-			safe.setIdsafe(null);
-			safe.setTotal(safe.getTotal().subtract(amount));
-			safe.setAmount(amount.negate());
-			safe.setCreationdate(new DateUtil().getNow());
-			safe.setDescription("CAJA COMÚN");
-			safeRepository.save(safe);
+			SafeEntity newsafe = new SafeEntity();
+			newsafe.setTotal(safe.getTotal().subtract(amount));
+			newsafe.setAmount(amount.negate());
+			newsafe.setCreationdate(new DateUtil().getNow());
+			newsafe.setDescription("CAJA COMÚN");
+			safeRepository.save(newsafe);
 		}
 	}
 
