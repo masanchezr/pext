@@ -24,7 +24,7 @@
 				</div>
 			</a>
 			<!-- Divider -->
-			<hr class="sidebar-divider my-0">
+			<li class="border-top my-3"></li>
 			<li class="nav-item"><a th:href="@{daily}" class="nav-link"><i
 					class="fa fa-calendar fa-fw"></i><span th:text="#{dailies}"></span></a>
 			</li>
@@ -33,7 +33,7 @@
 					th:text="#{entrymoney}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				aria-expanded="true" aria-controls="collpaseSafe" href="#"
-				data-target="#collapseSafe" data-toggle="collapse"><i
+				data-bs-target="#collapseSafe" data-bs-toggle="collapse"><i
 					class="fa fa-inbox fa-fw"></i> <span th:text="#{safe}"></span> </a>
 				<div id="collapseSafe" class="collapse"
 					aria-labelledby="headingSafe" data-parent="#accordionSidebar">
@@ -45,7 +45,7 @@
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				aria-expanded="true" aria-controls="collpase" href="#"
-				data-target="#collapseChangeMachine" data-toggle="collapse"><i
+				data-bs-target="#collapseChangeMachine" data-bs-toggle="collapse"><i
 					class="fa fa-money-bill-alt fa-fw"></i><span
 					th:text="#{changemachine}"></span></a>
 				<div id="collapseChangeMachine" class="collapse"
@@ -64,7 +64,7 @@
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				aria-expanded="true" aria-controls="collpase" href="#"
-				data-target="#collapseschedule" data-toggle="collapse"><i
+				data-bs-target="#collapseschedule" data-bs-toggle="collapse"><i
 					class="fa fa-calendar fa-fw"></i> <span th:text="#{schedule}"></span>
 			</a>
 				<div id="collapseschedule" class="collapse"
@@ -82,7 +82,7 @@
 					th:text="#{pendingissues}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				aria-expanded="true" aria-controls="collpasemessages" href="#"
-				data-target="#collapsemessages" data-toggle="collapse"> <i
+				data-bs-target="#collapsemessages" data-bs-toggle="collapse"> <i
 					class="fa fa-comments"></i> <span th:text="#{messages}"></span>
 			</a>
 				<div class="collapse" data-parent="#accordionSidebar"
@@ -94,7 +94,7 @@
 					</div>
 				</div></li>
 			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
+			<li class="border-top my-3"></li>
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">
 				<button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -114,20 +114,10 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
+							role="button" data-bs-toggle="modal"
+							data-bs-target="#logoutModal"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small">Cerrar</span>
-						</a> <!-- Dropdown - User Information -->
-							<div
-								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="userDropdown">
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal"
-									data-target="#logoutModal"> <i
-									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
-								</a>
-							</div></li>
+						</a></li>
 					</ul>
 				</nav>
 				<div class="container-fluid" th:include="this :: content"></div>
@@ -147,17 +137,15 @@
 					<h5 class="modal-title" id="exampleModalLabel">
 						<span th:text="#{readyToLeave}"></span>
 					</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true" th:text="#{close}"></span>
-					</button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<span th:text="#{selectlogout}"></span>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">
+						data-bs-dismiss="modal">
 						<span th:text="#{cancel}"></span>
 					</button>
 					<a class="btn btn-danger" href="javascript:formSubmit()"><span
@@ -167,10 +155,10 @@
 		</div>
 	</div>
 	<script>
-	function formSubmit() {
-		document.getElementById("logoutForm").submit();
-	}
-</script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
 	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	<script type="text/javascript"
@@ -179,22 +167,22 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script th:src="@{/js/jquery.easing.min.js}"></script>
-	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
-	<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
-	<script th:src="@{/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{/js/jquery.dataTables.js}"></script>
+	<script th:src="@{/js/dataTables.bootstrap.js}"></script>
+	<script th:src="@{/js/sb-admin-2.js}"></script>
 	<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 	<script th:src="@{/js/bootstrap-datepicker.es.min.js}"></script>
 	<script type="text/javascript">
-	$(function() {
-		$('#datetimefrom').datetimepicker({
-			format : 'HH:mm:ss'
+		$(function() {
+			$('#datetimefrom').datetimepicker({
+				format : 'HH:mm:ss'
+			});
 		});
-	});
-	$(function() {
-		$('#datetimeuntil').datetimepicker({
-			format : 'HH:mm:ss'
+		$(function() {
+			$('#datetimeuntil').datetimepicker({
+				format : 'HH:mm:ss'
+			});
 		});
-	});
-</script>
+	</script>
 </body>
 </html>

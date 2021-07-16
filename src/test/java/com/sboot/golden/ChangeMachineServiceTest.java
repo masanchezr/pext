@@ -22,4 +22,9 @@ class ChangeMachineServiceTest {
 	void getIncomeTotalMonthTest() {
 		Assertions.assertNotNull(changeMachineService.getIncomeTotalMonth());
 	}
+
+	@Test
+	void loadDataTicketServerTest() {
+		changeMachineService.loadDataTicketServer();
+	}
 }

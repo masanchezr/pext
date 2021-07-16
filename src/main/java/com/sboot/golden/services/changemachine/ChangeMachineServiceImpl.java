@@ -311,9 +311,11 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		if ("127.0.0.1".equals(ip)) {
 			ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
 					.findFirstByOrderByIdchangemachinetotalDesc();
-			totalentity.setIdchangemachinetotal(null);
-			totalentity.setVisible(totalentity.getVisible().subtract(amount));
-			changeMachineTotalRepository.save(totalentity);
+			ChangeMachineTotalEntity total = new ChangeMachineTotalEntity();
+			total.setVisible(totalentity.getVisible().subtract(amount));
+			total.setCreationdate(new Date());
+			total.setDeposit(totalentity.getDeposit());
+			changeMachineTotalRepository.save(total);
 		}
 	}
 
