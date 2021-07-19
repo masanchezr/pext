@@ -97,15 +97,5 @@ public class UserServiceImpl implements UserService {
 	public void update(User user) {
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
 		usersRepository.save(mapper.map(user, UserEntity.class));
-		UserEntity employee = employeesRepository.findByUsername(user.getUsername());
-		if (employee != null) {
-			Boolean state = employee.getEnabled();
-			if (state.equals(Boolean.TRUE)) {
-				employee.setEnabled(Boolean.FALSE);
-			} else {
-				employee.setEnabled(Boolean.TRUE);
-			}
-			mapper.map(employeesRepository.save(employee), user);
-		}
 	}
 }
