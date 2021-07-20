@@ -39,7 +39,7 @@ public class UsersController {
 		if (result.hasErrors()) {
 			model.setViewName("boss/users/update/updateuser");
 		} else {
-			userService.update(user);
+			userService.newUser(user);
 			model = enabledisableuser();
 		}
 		return model;

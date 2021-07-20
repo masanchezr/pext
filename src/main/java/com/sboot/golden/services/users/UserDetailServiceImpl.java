@@ -61,7 +61,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		return encode;
 	}
 
-	public List<UserEntity> allEmployeesActives() {
+	public Iterable<UserEntity> allEmployeesActives() {
 		return usersRepository.findByEnabledTrue();
 	}
 }

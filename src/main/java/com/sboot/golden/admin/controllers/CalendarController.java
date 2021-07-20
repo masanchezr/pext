@@ -18,7 +18,7 @@ import com.sboot.golden.admin.forms.ScheduleForm;
 import com.sboot.golden.admin.forms.WeekForm;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
 import com.sboot.golden.services.calendar.CalendarService;
-import com.sboot.golden.services.employees.EmployeeService;
+import com.sboot.golden.services.users.UserService;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.date.DateUtil;
 
@@ -26,7 +26,7 @@ import com.sboot.golden.util.date.DateUtil;
 public class CalendarController {
 
 	@Autowired
-	private EmployeeService employeeService;
+	private UserService employeeService;
 
 	@Autowired
 	private CalendarService calendarService;
@@ -41,7 +41,7 @@ public class CalendarController {
 		ScheduleForm schedule = new ScheduleForm();
 		String sweek = week.getWeek();
 		List<Schedule> lscheduleform = calendarService.getSchedule(sweek);
-		model.addObject(ConstantsViews.EMPLOYEES, employeeService.allEmployeesActives());
+		model.addObject(ConstantsViews.EMPLOYEES, employeeService.allUsersEnabled());
 		model.addObject("week", sweek);
 		model.addObject("dates", DateUtil.getDates(sweek));
 		if (lscheduleform == null || lscheduleform.isEmpty()) {

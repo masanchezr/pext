@@ -19,9 +19,6 @@ public class UserServiceImpl implements UserService {
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private UsersRepository employeesRepository;
-
-	@Autowired
 	private PasswordEncoder pbkdf2Encoder;
 
 	@Autowired
@@ -38,7 +35,7 @@ public class UserServiceImpl implements UserService {
 				entity.setEnabled(Boolean.TRUE);
 			}
 			user = mapper.map(usersRepository.save(entity), User.class);
-			UserEntity employee = employeesRepository.findByUsername(entity.getUsername());
+			UserEntity employee = usersRepository.findByUsername(entity.getUsername());
 			if (employee != null) {
 				Boolean stateEmployee = employee.getEnabled();
 				if (stateEmployee.equals(Boolean.TRUE)) {
@@ -46,16 +43,10 @@ public class UserServiceImpl implements UserService {
 				} else {
 					employee.setEnabled(Boolean.TRUE);
 				}
-				mapper.map(employeesRepository.save(employee), user);
+				mapper.map(usersRepository.save(employee), user);
 			}
 		}
 		return user;
-	}
-
-	public void newUser(User user) {
-		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
-		usersRepository.save(mapper.map(user, UserEntity.class));
-		employeesRepository.save(mapper.map(user, UserEntity.class));
 	}
 
 	public void updatePassword(User user) {
@@ -93,9 +84,13 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
-	@Override
-	public void update(User user) {
+	public void newUser(User user) {
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
 		usersRepository.save(mapper.map(user, UserEntity.class));
+	}
+
+	@Override
+	public List<User> allUsersEnabled() {
+		return mapper(usersRepository.findByEnabledTrue());
 	}
 }

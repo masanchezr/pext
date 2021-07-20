@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.employee.forms.ExtraHours;
-import com.sboot.golden.services.employees.EmployeeService;
 import com.sboot.golden.services.extrahours.ExtraHourService;
+import com.sboot.golden.services.users.User;
+import com.sboot.golden.services.users.UserService;
 
 @Controller
 public class ExtraHoursEmployeeController {
 
 	@Autowired
-	private EmployeeService employeeservice;
+	private ExtraHourService extraHourService;
 
 	@Autowired
-	private ExtraHourService extraHourService;
+	private UserService employeeservice;
 
 	@GetMapping("/employee/extrahours")
 	public ModelAndView extrahours() {
@@ -38,7 +38,7 @@ public class ExtraHoursEmployeeController {
 			model.addObject("extrahours", extrahours);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			UserEntity employee = employeeservice.getEmployeeByUserName(user);
+			User employee = employeeservice.findUser(user);
 			extrahours.setEmployee(employee);
 			extraHourService.save(extrahours);
 			model.setViewName("/employee/success");

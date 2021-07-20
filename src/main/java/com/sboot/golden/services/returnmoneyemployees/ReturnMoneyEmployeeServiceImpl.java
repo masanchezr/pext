@@ -6,16 +6,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.repositories.ReturnMoneyEmployeesRepository;
+import com.sboot.golden.services.users.User;
 import com.sboot.golden.util.date.DateUtil;
 
 @Service
 public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeService {
+
+	@Autowired
+	private Mapper mapped;
 
 	@Autowired
 	private ReturnMoneyEmployeesRepository returnMoneyUsersRepository;
@@ -43,8 +48,8 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		return returnMoneyUsersRepository.searchSumReturnByMonth(from, until);
 	}
 
-	public List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(UserEntity employee) {
-		return returnMoneyUsersRepository.findByEmployeeAndReturndateIsNull(employee);
+	public List<ReturnMoneyEmployeeEntity> findAdvanceByEmployee(User employee) {
+		return returnMoneyUsersRepository.findByEmployeeAndReturndateIsNull(mapped.map(employee, UserEntity.class));
 	}
 
 	public void savemoneyadvance(ReturnMoneyEmployeeEntity returnme) {
@@ -62,8 +67,7 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		until = calendar.getTime();
 		BigDecimal threedhundredfifty = new BigDecimal(350);
-		BigDecimal advance = returnMoneyUsersRepository.searchSumAdvanceByMonth(from, until,
-				returnme.getEmployee());
+		BigDecimal advance = returnMoneyUsersRepository.searchSumAdvanceByMonth(from, until, returnme.getEmployee());
 		if (advance == null) {
 			advance = BigDecimal.ZERO;
 		}

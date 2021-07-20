@@ -14,6 +14,6 @@ public interface UserService {
 
 	public List<User> allUsers();
 
-	public void update(User user);
+	public List<User> allUsersEnabled();
 
 }

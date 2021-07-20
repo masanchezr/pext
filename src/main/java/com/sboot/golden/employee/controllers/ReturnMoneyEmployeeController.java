@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.sboot.golden.employee.forms.ReturnMoneyEmployee;
 import com.sboot.golden.services.dailies.DailyService;
-import com.sboot.golden.services.employees.EmployeeService;
 import com.sboot.golden.services.returnmoneyemployees.ReturnMoneyEmployeeService;
+import com.sboot.golden.services.users.User;
+import com.sboot.golden.services.users.UserService;
 import com.sboot.golden.util.constants.ConstantsViews;
 
 @Controller
 public class ReturnMoneyEmployeeController {
 
 	@Autowired
-	private EmployeeService employeeservice;
-
-	@Autowired
 	private DailyService dailyService;
 
 	@Autowired
 	private ReturnMoneyEmployeeService returnmoneyemployeeservice;
+
+	@Autowired
+	private UserService employeeservice;
 
 	@Autowired
 	private Mapper mapper;
@@ -40,7 +40,7 @@ public class ReturnMoneyEmployeeController {
 	public ModelAndView newreturn() {
 		ModelAndView model = new ModelAndView("employee/income/returnmoneyemployee");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		UserEntity employee = employeeservice.getEmployeeByUserName(user);
+		User employee = employeeservice.findUser(user);
 		List<ReturnMoneyEmployeeEntity> moneyadvance = returnmoneyemployeeservice.findAdvanceByEmployee(employee);
 		model.addObject(FORMMONEYADVANCE, moneyadvance);
 		model.addObject(ConstantsViews.FORMINCOME, new ReturnMoneyEmployee());
@@ -70,7 +70,7 @@ public class ReturnMoneyEmployeeController {
 	public Object moneyadvance(@ModelAttribute(FORMMONEYADVANCE) ReturnMoneyEmployee returnme) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		UserEntity employee = employeeservice.getEmployeeByUserName(user);
+		User employee = employeeservice.findUser(user);
 		returnme.setEmployee(employee);
 		ReturnMoneyEmployeeEntity entity = mapper.map(returnme, ReturnMoneyEmployeeEntity.class);
 		// miramos primero que no supere el importe
