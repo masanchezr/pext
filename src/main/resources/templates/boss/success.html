@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:include="boss/template :: page">
-<div class="row">
-	<div class="col-12">
-		<h1 th:text="success"></h1>
+<div th:fragment="content">
+	<div class="row">
+		<div class="col-12">
+			<h1 th:text="#{success}"></h1>
+		</div>
 	</div>
 </div>
 </html>
