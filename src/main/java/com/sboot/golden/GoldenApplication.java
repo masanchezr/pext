@@ -1,9 +1,6 @@
 package com.sboot.golden;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.dozer.DozerBeanMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -60,12 +57,8 @@ public class GoldenApplication {
 		return messageSource;
 	}
 
-	@Bean(name = "org.dozer.Mapper")
-	public DozerBeanMapper dozerBean() {
-		List<String> mappingFiles = Arrays.asList("dozer-mappings.xml");
-		DozerBeanMapper dozerBean = new DozerBeanMapper();
-		dozerBean.setMappingFiles(mappingFiles);
-		return dozerBean;
+	@Bean(name = "org.modelmapper.ModelMapper")
+	public ModelMapper bean() {
+		return new ModelMapper();
 	}
-
 }

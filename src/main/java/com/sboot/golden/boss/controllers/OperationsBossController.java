@@ -1,6 +1,6 @@
 package com.sboot.golden.boss.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,7 +37,7 @@ public class OperationsBossController {
 	private OperationService operationService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@GetMapping("/updateoperation{id}")
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {

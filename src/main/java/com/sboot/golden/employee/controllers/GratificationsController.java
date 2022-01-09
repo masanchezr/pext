@@ -8,7 +8,7 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class GratificationsController {
 	private MachineService machineservice;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String GRATIFICATION = "gratification";
 	private static final String VIEWNEWGRATIFICATION = "employee/gratifications/gratification";

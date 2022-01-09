@@ -1,6 +1,6 @@
 package com.sboot.golden.employee.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class IncomeLuckiaController {
 	private IncomeLuckiaService incomeLuckiaService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String FORMLUCKIA = "iluckia";
 

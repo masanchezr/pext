@@ -1,6 +1,6 @@
 package com.sboot.golden.admin.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +23,7 @@ public class SafeController {
 	private EntryMoneyService safeService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String FORMSALE = "safeForm";
 

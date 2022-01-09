@@ -42,7 +42,7 @@ public class RegisterServiceImpl implements RegisterService {
 	private static Logger log = LoggerFactory.getLogger(RegisterServiceImpl.class);
 
 	/**
-	 * @Autowired private Mapper mapper;
+	 * @Autowired private ModelMapper mapper;
 	 * 
 	 * 
 	 *            public void in() {

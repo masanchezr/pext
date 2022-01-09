@@ -2,7 +2,7 @@ package com.sboot.golden.employee.controllers;
 
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,7 +25,7 @@ public class IncidentsController {
 	private IncidentService incidentService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@GetMapping("/employee/newincident")
 	public ModelAndView newIncident() {

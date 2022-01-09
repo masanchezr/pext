@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder pbkdf2Encoder;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public User disableEnableUser(Long id) {
 		User user = null;

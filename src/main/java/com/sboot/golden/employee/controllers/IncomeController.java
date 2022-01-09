@@ -1,6 +1,6 @@
 package com.sboot.golden.employee.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,7 +29,7 @@ public class IncomeController {
 	private IncomeService incomeservice;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String VIEWNEWINCOME = "employee/income/newincome";
 
