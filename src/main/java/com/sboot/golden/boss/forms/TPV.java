@@ -6,7 +6,7 @@ import com.sboot.golden.dbaccess.entities.PaymentEntity;
 
 public class TPV {
 	private Long idtpv;
-	private String creationdate;
+	private String sdate;
 	private BigDecimal amount;
 	private PaymentEntity pay;
 
@@ -18,12 +18,12 @@ public class TPV {
 		this.idtpv = idtpv;
 	}
 
-	public String getCreationdate() {
-		return creationdate;
+	public String getSdate() {
+		return sdate;
 	}
 
-	public void setCreationdate(String creationdate) {
-		this.creationdate = creationdate;
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
 	}
 
 	public BigDecimal getAmount() {

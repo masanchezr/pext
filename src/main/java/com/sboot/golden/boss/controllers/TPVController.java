@@ -83,7 +83,7 @@ public class TPVController {
 				result.rejectValue(Constants.IDTPV, "exists");
 				model.addObject(ConstantsViews.PAYMENTS, paymentservice.findAll());
 			} else {
-				Date datetpv = DateUtil.getDate(tpv.getCreationdate());
+				Date datetpv = DateUtil.getDate(tpv.getSdate());
 				Calendar calendartpv = Calendar.getInstance();
 				Calendar now = Calendar.getInstance();
 				calendartpv.setTime(datetpv);

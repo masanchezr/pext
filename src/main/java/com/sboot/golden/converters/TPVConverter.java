@@ -17,7 +17,7 @@ public class TPVConverter {
 
 	public TPVEntity convertToEntity(TPV tpv) {
 		TPVEntity entity = mapper.map(tpv, TPVEntity.class);
-		entity.setCreationdate(DateUtil.getDate(tpv.getCreationdate()));
+		entity.setCreationdate(DateUtil.getDate(tpv.getSdate()));
 		return entity;
 	}
 
