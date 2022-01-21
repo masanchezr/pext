@@ -20,6 +20,7 @@ import com.sboot.golden.dbaccess.entities.OperationEntity;
 import com.sboot.golden.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.sboot.golden.dbaccess.entities.TPVEntity;
 import com.sboot.golden.dbaccess.repositories.BarDrinksRepository;
+import com.sboot.golden.dbaccess.repositories.ChangeMachineRepository;
 import com.sboot.golden.dbaccess.repositories.DailyRepository;
 import com.sboot.golden.dbaccess.repositories.EntryMoneyRepository;
 import com.sboot.golden.dbaccess.repositories.GratificationsRepository;
@@ -38,6 +39,9 @@ import com.sboot.golden.util.date.DateUtil;
  */
 @Service
 public class DailyServiceImpl implements DailyService {
+
+	@Autowired
+	private ChangeMachineRepository changeMachineRepository;
 
 	@Autowired
 	private OperationsRepository operationsRepository;
@@ -291,5 +295,13 @@ public class DailyServiceImpl implements DailyService {
 		daily.setListchangemachine(changemachine);
 		daily.setMoneyadvance(moneyadvance);
 		return daily;
+	}
+
+	@Override
+	public Daily save(ChangeMachineEntity cm) {
+		Date today = new DateUtil().getNow();
+		cm.setCreationdate(today);
+		changeMachineRepository.save(cm);
+		return getDailyEmployee();
 	}
 }

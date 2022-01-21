@@ -8,7 +8,6 @@ import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
 import com.sboot.golden.dbaccess.entities.CollectionEntity;
 import com.sboot.golden.dbaccess.entities.TakeEntity;
-import com.sboot.golden.services.dailies.Daily;
 
 public interface ChangeMachineService {
 
@@ -19,8 +18,6 @@ public interface ChangeMachineService {
 	public BigDecimal getAwards();
 
 	public ChangeMachineEntity findById(Long idchangemachine);
-
-	public Daily save(ChangeMachineEntity cm);
 
 	public void loadDataTicketServer();
 

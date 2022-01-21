@@ -38,8 +38,6 @@ import com.sboot.golden.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.sboot.golden.dbaccess.repositories.MachinesRepository;
 import com.sboot.golden.dbaccess.repositories.TPVRepository;
 import com.sboot.golden.dbaccess.repositories.TakingsRepository;
-import com.sboot.golden.services.dailies.Daily;
-import com.sboot.golden.services.dailies.DailyService;
 import com.sboot.golden.services.mails.EmailService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
@@ -47,9 +45,6 @@ import com.sboot.golden.util.string.Util;
 
 @Service
 public class ChangeMachineServiceImpl implements ChangeMachineService {
-
-	@Autowired
-	private DailyService dailyservice;
 
 	@Autowired
 	private EmailService emailService;
@@ -121,14 +116,6 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	@Override
 	public ChangeMachineEntity findById(Long idchangemachine) {
 		return changeMachineRepository.findById(idchangemachine).orElse(null);
-	}
-
-	@Override
-	public Daily save(ChangeMachineEntity cm) {
-		Date today = new DateUtil().getNow();
-		cm.setCreationdate(today);
-		changeMachineRepository.save(cm);
-		return dailyservice.getDailyEmployee();
 	}
 
 	@Override

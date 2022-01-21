@@ -19,6 +19,7 @@ import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
 import com.sboot.golden.forms.SearchByDatesForm;
 import com.sboot.golden.services.awards.AwardService;
 import com.sboot.golden.services.changemachine.ChangeMachineService;
+import com.sboot.golden.services.dailies.DailyService;
 import com.sboot.golden.services.machines.MachineService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
@@ -31,6 +32,9 @@ public class ChangeMachineAdminController {
 
 	@Autowired
 	private ChangeMachineService changeMachineService;
+
+	@Autowired
+	private DailyService dailyService;
 
 	@Autowired
 	private MachineService machineService;
@@ -113,8 +117,7 @@ public class ChangeMachineAdminController {
 				model.setViewName(UPDATEVIEW);
 				result.rejectValue(Constants.IDCHANGEMACHINE, ConstantsViews.ERRORSELECTID);
 			} else {
-				model.addObject(ConstantsViews.DAILY,
-						changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
+				model.addObject(ConstantsViews.DAILY, dailyService.save(mapper.map(cm, ChangeMachineEntity.class)));
 				model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 			}
 		}
@@ -132,7 +135,7 @@ public class ChangeMachineAdminController {
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);
 		} else {
-			model.addObject(ConstantsViews.DAILY, changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
+			model.addObject(ConstantsViews.DAILY, dailyService.save(mapper.map(cm, ChangeMachineEntity.class)));
 			model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 		}
 		return model;
