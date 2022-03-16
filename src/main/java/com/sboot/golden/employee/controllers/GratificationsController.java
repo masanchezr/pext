@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sboot.golden.dbaccess.entities.FunctionalityEntity;
 import com.sboot.golden.dbaccess.entities.GratificationEntity;
 import com.sboot.golden.employee.forms.Gratification;
 import com.sboot.golden.employee.validators.GratificationsValidator;
@@ -48,7 +49,9 @@ public class GratificationsController {
 	@GetMapping("/employee/newgratification")
 	public ModelAndView newgratification() {
 		ModelAndView model = new ModelAndView(VIEWNEWGRATIFICATION);
-		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
+		FunctionalityEntity functionality = new FunctionalityEntity();
+		functionality.setIdfuncionality(Constants.GRATIFICATIONSFUNCTIONALITY);
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
 		model.addObject(GRATIFICATION, new GratificationEntity());
 		return model;
 	}
