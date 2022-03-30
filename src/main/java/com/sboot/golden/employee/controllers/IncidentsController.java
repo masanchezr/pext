@@ -2,18 +2,17 @@ package com.sboot.golden.employee.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.dbaccess.entities.IncidentEntity;
-import com.sboot.golden.employee.validators.IncidentValidator;
 import com.sboot.golden.forms.Incident;
 import com.sboot.golden.services.incidents.IncidentService;
 import com.sboot.golden.util.constants.ConstantsViews;
@@ -35,9 +34,7 @@ public class IncidentsController {
 	}
 
 	@PostMapping("/employee/saveincident")
-	public ModelAndView saveIncident(
-			@Validated(IncidentValidator.class) @ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident,
-			BindingResult result) {
+	public ModelAndView saveIncident(@Valid Incident incident, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("employee/incidents/newincident");

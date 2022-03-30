@@ -2,12 +2,12 @@ package com.sboot.golden.admin.controllers;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +17,6 @@ import com.sboot.golden.services.entrymoney.EntryMoneyService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.date.DateUtil;
-import com.sboot.golden.validators.EntryMoneyValidator;
 
 @Controller
 public class EntryMoneyAdminController {
@@ -38,9 +37,7 @@ public class EntryMoneyAdminController {
 	}
 
 	@PostMapping("/admin/saveentrymoney")
-	public ModelAndView saveEntryMoney(
-			@Validated(EntryMoneyValidator.class) @ModelAttribute(ConstantsViews.FORMENTRYMONEY) EntryMoneyForm entryMoney,
-			BindingResult result) {
+	public ModelAndView saveEntryMoney(@Valid EntryMoneyForm entryMoney, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMENTRYMONEY, entryMoney);

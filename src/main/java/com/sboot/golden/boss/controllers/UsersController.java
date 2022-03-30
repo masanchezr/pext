@@ -1,15 +1,15 @@
 package com.sboot.golden.boss.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.boss.validators.UserValidator;
 import com.sboot.golden.services.users.User;
 import com.sboot.golden.services.users.UserService;
 import com.sboot.golden.util.constants.Constants;
@@ -32,8 +32,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/update")
-	public ModelAndView resultenabledisableuser(
-			@Validated(UserValidator.class) @ModelAttribute(ConstantsViews.USER) User user, BindingResult result) {
+	public ModelAndView resultenabledisableuser(@Valid User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.USER, user);
 		if (result.hasErrors()) {
@@ -60,8 +59,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/saveuser")
-	public ModelAndView saveUser(@Validated(UserValidator.class) @ModelAttribute(ConstantsViews.USER) User user,
-			BindingResult result) {
+	public ModelAndView saveUser(@Valid User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWUSER);

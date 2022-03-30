@@ -1,10 +1,11 @@
 package com.sboot.golden.admin.controllers;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.admin.forms.ChangeMachine;
 import com.sboot.golden.admin.forms.EntryMoneyForm;
-import com.sboot.golden.admin.validators.ChangeMachineValidator;
 import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
 import com.sboot.golden.forms.SearchByDatesForm;
@@ -99,9 +99,7 @@ public class ChangeMachineAdminController {
 	}
 
 	@PostMapping("/admin/savepaymentchangemachine")
-	public ModelAndView savepaymentchangemachine(
-			@Validated(ChangeMachineValidator.class) @ModelAttribute(CHANGEMACHINE) ChangeMachine cm,
-			BindingResult result) {
+	public ModelAndView savepaymentchangemachine(@Valid ChangeMachine cm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
@@ -125,9 +123,7 @@ public class ChangeMachineAdminController {
 	}
 
 	@PostMapping("/admin/updatepaymentchangemachine")
-	public ModelAndView updatepaymentchangemachine(
-			@Validated(ChangeMachineValidator.class) @ModelAttribute(CHANGEMACHINE) ChangeMachine cm,
-			BindingResult result) {
+	public ModelAndView updatepaymentchangemachine(@Valid ChangeMachine cm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());

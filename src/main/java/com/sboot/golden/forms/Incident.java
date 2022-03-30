@@ -2,12 +2,19 @@ package com.sboot.golden.forms;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.CreatedDate;
+
+import com.sboot.golden.util.constants.ConstantsViews;
 
 public class Incident {
 
 	private Long idincident;
 
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	@CreatedDate

@@ -3,17 +3,17 @@ package com.sboot.golden.boss.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.boss.forms.TPV;
-import com.sboot.golden.boss.validators.TPValidator;
 import com.sboot.golden.converters.TPVConverter;
 import com.sboot.golden.forms.SearchByDatesForm;
 import com.sboot.golden.services.changemachine.ChangeMachineService;
@@ -69,7 +69,7 @@ public class TPVController {
 	}
 
 	@PostMapping("/savetpv")
-	public ModelAndView savetpv(@Validated(TPValidator.class) @ModelAttribute(FORMTPV) TPV tpv, BindingResult result) {
+	public ModelAndView savetpv(@Valid TPV tpv, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWTPV);

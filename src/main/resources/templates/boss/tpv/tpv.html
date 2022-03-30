@@ -15,9 +15,8 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<input class="form-control" th:field="*{idtpv}"
-								th:placeholder="#{num}" />
-							<p class="text-danger" th:if="${#fields.hasErrors('idtpv')}"
-								th:errors="*{idtpv}"></p>
+								th:placeholder="#{num}" /> <label class="text-danger"
+								th:if="${#fields.hasErrors('idtpv')}" th:errors="*{idtpv}"></label>
 						</div>
 						<div class="form-group">
 							<input class="form-control" th:field="*{amount}"
