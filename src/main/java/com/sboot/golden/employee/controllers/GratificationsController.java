@@ -14,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +36,9 @@ public class GratificationsController {
 
 	@Autowired
 	private MachineService machineservice;
+
+	@Autowired
+	private GratificationsValidator validator;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -96,11 +98,11 @@ public class GratificationsController {
 	}
 
 	@PostMapping("/employee/registergratification")
-	public void registerGratification(
-			@Validated(GratificationsValidator.class) @ModelAttribute(GRATIFICATION) Gratification g,
-			BindingResult arg1, HttpServletResponse response) {
+	public void registerGratification(@ModelAttribute(GRATIFICATION) Gratification g, BindingResult arg1,
+			HttpServletResponse response) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		validator.validate(g, arg1);
 		if (!arg1.hasErrors()) {
 			File file = new File(path.concat("ticket.pdf"));
 			gratificationservice.registerNumberGratification(mapper.map(g, GratificationEntity.class), user, path);

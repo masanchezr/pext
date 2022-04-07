@@ -4,9 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +34,9 @@ public class OperationsAdminController {
 	private OperationService operationService;
 
 	@Autowired
+	private OperationsValidator validator;
+
+	@Autowired
 	private ModelMapper mapper;
 
 	public static final String VIEWUPDATEOPERATIONADMIN = "admin/newoperation";
@@ -52,11 +53,10 @@ public class OperationsAdminController {
 	}
 
 	@GetMapping("/admin/saveoperation")
-	public ModelAndView saveoperation(
-			@Validated(OperationsValidator.class) @ModelAttribute(ConstantsViews.OPERATION) Operation operation,
-			BindingResult result) {
+	public ModelAndView saveoperation(Operation operation, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		OperationEntity op = mapper.map(operation, OperationEntity.class);
+		validator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWUPDATEOPERATIONADMIN);
 			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());

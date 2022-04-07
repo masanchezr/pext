@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,16 +33,18 @@ public class RegisterController {
 	@Autowired
 	private RegisterService registerService;
 
+	@Autowired
+	private SearchDatesFormValidator validator;
+
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
 	@GetMapping("/register")
-	public ModelAndView register(
-			@Validated(SearchDatesFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm sdf,
-			BindingResult arg1) {
+	public ModelAndView register(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String sfrom = sdf.getDatefrom();
 		String suntil = sdf.getDateuntil();
+		validator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model = new ModelAndView();
 			model.addObject(ConstantsViews.FORMSEARCH, sdf);

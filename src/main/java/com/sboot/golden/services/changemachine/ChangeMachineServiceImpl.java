@@ -263,29 +263,27 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				String sub = scomments.substring(1, 4);
 				machine = new MachineEntity();
 				if (Util.isNumeric(sub)) {
-					machine.setIdmachine(Long.valueOf(sub));
+					machine.setOrdermachine(Long.valueOf(sub));
 				} else {
 					sub = scomments.substring(1, 3);
 					if (Util.isNumeric(sub)) {
-						machine.setIdmachine(Long.valueOf(sub));
+						machine.setOrdermachine(Long.valueOf(sub));
 					} else {
-						machine.setIdmachine(Long.valueOf(scomments.substring(1, 2)));
+						machine.setOrdermachine(Long.valueOf(scomments.substring(1, 2)));
 					}
 				}
-				cm.setMachine(machine);
+				machine = machinesRepository.findByOrdermachineAndOnoffTrue(machine.getOrdermachine());
 			} else if (award.equals("RECARGAS")) {
 				awardentity.setIdawardchangemachine(3L);
 				machine = machinesRepository.findByNameticket(scomments);
-				cm.setMachine(machine);
 			} else {
 				awardentity.setIdawardchangemachine(1L);
 				machine = machinesRepository.findByNameticket(scomments);
-				cm.setMachine(machine);
 			}
 		} else {
 			awardentity.setIdawardchangemachine(1L);
-			cm.setMachine(machine);
 		}
+		cm.setMachine(machine);
 		cm.setAward(awardentity);
 		cm.setCreationdate(date);
 		cm.setAmount(amount);

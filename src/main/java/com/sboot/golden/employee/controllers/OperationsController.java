@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +41,9 @@ public class OperationsController {
 	private UserService employeeService;
 
 	@Autowired
+	private OperationsValidator validator;
+
+	@Autowired
 	private ModelMapper mapper;
 
 	private static final String VIEWNEWOPERATION = "employee/expenses/operations/newoperation";
@@ -59,11 +60,10 @@ public class OperationsController {
 	}
 
 	@PostMapping("/employee/saveoperation")
-	public ModelAndView saveoperation(
-			@Validated(OperationsValidator.class) @ModelAttribute(ConstantsViews.OPERATION) Operation operation,
-			BindingResult result) {
+	public ModelAndView saveoperation(Operation operation, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		OperationEntity op = mapper.map(operation, OperationEntity.class);
+		validator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWOPERATION);
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());

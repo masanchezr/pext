@@ -6,7 +6,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +27,10 @@ public class DailiesController {
 	/** The daily service. */
 	@Autowired
 	private DailyService dailyService;
+
+	@Autowired
+	private SearchDatesFormValidator validator;
+
 	private static final String FORMSEARCHDAILY = "searchDailyForm";
 	private static final String VIEWSEARCHDAILY = "boss/dailies/searchdaily";
 
@@ -45,9 +48,7 @@ public class DailiesController {
 	 * @return the model and view
 	 */
 	@PostMapping("/resultdaily")
-	public ModelAndView searchDaily(
-			@Validated(SearchDatesFormValidator.class) @ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf,
-			BindingResult arg1) {
+	public ModelAndView searchDaily(@ModelAttribute(FORMSEARCHDAILY) SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model;
 		String sdate = sdf.getDatefrom();
 		Date date;
@@ -55,6 +56,7 @@ public class DailiesController {
 			date = DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow());
 			return getDailyModel(date);
 		} else {
+			validator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
 				model = new ModelAndView();
 				model.addObject(FORMSEARCHDAILY, sdf);
