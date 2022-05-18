@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import com.sboot.golden.util.date.DateUtil;
 public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeService {
 
 	@Autowired
-	private Mapper mapped;
+	private ModelMapper mapped;
 
 	@Autowired
 	private ReturnMoneyEmployeesRepository returnMoneyUsersRepository;

@@ -1,10 +1,24 @@
 package com.sboot.golden.services.messages;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.sboot.golden.util.constants.ConstantsViews;
+
 public class Message {
 	private Long idmessage;
+
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String smessage;
 	private Boolean active;
+
+	@NotNull(message = ConstantsViews.ERRORSELECTDATE)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDATE)
 	private String datefrom;
+
+	@NotNull(message = ConstantsViews.ERRORSELECTDATE)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDATE)
 	private String dateuntil;
 
 	public Long getIdmessage() {

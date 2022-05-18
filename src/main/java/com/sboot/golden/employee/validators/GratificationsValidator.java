@@ -1,5 +1,6 @@
 package com.sboot.golden.employee.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -8,6 +9,7 @@ import com.sboot.golden.employee.forms.Gratification;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.string.Util;
 
+@Component
 public class GratificationsValidator implements Validator {
 
 	public boolean supports(Class<?> arg0) {

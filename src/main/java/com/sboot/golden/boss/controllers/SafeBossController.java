@@ -3,7 +3,6 @@ package com.sboot.golden.boss.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +18,9 @@ public class SafeBossController {
 
 	@Autowired
 	private EntryMoneyService safeService;
+
+	@Autowired
+	private SearchDatesFormValidator validator;
 
 	private static final String VIEWSEARCHENTRYSORTSAFE = "boss/safe/searchentrysortsafe";
 
@@ -37,10 +39,10 @@ public class SafeBossController {
 	}
 
 	@PostMapping("/resultentrysortsafe")
-	public ModelAndView resultentrysortsafe(
-			@Validated(SearchDatesFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm,
+	public ModelAndView resultentrysortsafe(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		validator.validate(searchForm, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWSEARCHENTRYSORTSAFE);
 			model.addObject(ConstantsViews.FORMSEARCH, searchForm);

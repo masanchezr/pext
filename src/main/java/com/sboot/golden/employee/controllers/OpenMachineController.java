@@ -2,7 +2,7 @@ package com.sboot.golden.employee.controllers;
 
 import java.util.Date;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class OpenMachineController {
 	private OpenMachineService openmachineservice;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@GetMapping("/employee/newopenmachine")
 	public ModelAndView newopenmachine() {

@@ -1,15 +1,15 @@
 package com.sboot.golden.admin.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sboot.golden.admin.validators.MessageValidator;
 import com.sboot.golden.services.messages.Message;
 import com.sboot.golden.services.messages.MessageService;
 import com.sboot.golden.util.constants.Constants;
@@ -30,9 +30,7 @@ public class MessagesController {
 	}
 
 	@PostMapping("/admin/savemessage")
-	public ModelAndView savemessage(
-			@Validated(MessageValidator.class) @ModelAttribute(Constants.MESSAGE) Message message,
-			BindingResult result) {
+	public ModelAndView savemessage(@Valid Message message, BindingResult result) {
 		if (result.hasErrors()) {
 			ModelAndView model = new ModelAndView(VIEWNEWMESSAGE);
 			model.addObject(Constants.MESSAGE, message);

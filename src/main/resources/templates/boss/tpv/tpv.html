@@ -15,9 +15,8 @@
 					<div class="col-lg-6">
 						<div class="form-group">
 							<input class="form-control" th:field="*{idtpv}"
-								th:placeholder="#{num}" />
-							<p class="text-danger" th:if="${#fields.hasErrors('idtpv')}"
-								th:errors="*{idtpv}"></p>
+								th:placeholder="#{num}" /> <label class="text-danger"
+								th:if="${#fields.hasErrors('idtpv')}" th:errors="*{idtpv}"></label>
 						</div>
 						<div class="form-group">
 							<input class="form-control" th:field="*{amount}"
@@ -26,11 +25,10 @@
 								th:errors="*{amount}"></p>
 						</div>
 						<div class="form-group">
-							<input class="form-control" th:field="*{creationdate}"
+							<input class="form-control" th:field="*{sdate}"
 								th:placeholder="#{date}" />
-							<p class="text-danger"
-								th:if="${#fields.hasErrors('creationdate')}"
-								th:errors="*{creationdate}"></p>
+							<p class="text-danger" th:if="${#fields.hasErrors('sdate')}"
+								th:errors="*{sdate}"></p>
 						</div>
 						<div class="form-group">
 							<span th:text="#{payment}"></span> <select class="form-control"

@@ -3,10 +3,14 @@ package com.sboot.golden.admin.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.CreatedDate;
 
 import com.sboot.golden.dbaccess.entities.AwardsChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.MachineEntity;
+import com.sboot.golden.util.constants.ConstantsViews;
 
 public class ChangeMachine {
 
@@ -15,6 +19,8 @@ public class ChangeMachine {
 	@CreatedDate
 	private Date creationdate;
 
+	@NotNull(message = ConstantsViews.ERRORSELECTAMOUNT)
+	@DecimalMin(value = "0.1")
 	private BigDecimal amount;
 
 	private AwardsChangeMachineEntity award;

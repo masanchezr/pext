@@ -1,17 +1,16 @@
 package com.sboot.golden.admin.controllers;
 
-import org.dozer.Mapper;
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.admin.forms.Safe;
-import com.sboot.golden.admin.validators.SafeValidator;
 import com.sboot.golden.dbaccess.entities.SafeEntity;
 import com.sboot.golden.services.entrymoney.EntryMoneyService;
 import com.sboot.golden.util.constants.ConstantsViews;
@@ -23,7 +22,7 @@ public class SafeController {
 	private EntryMoneyService safeService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String FORMSALE = "safeForm";
 
@@ -37,8 +36,7 @@ public class SafeController {
 	}
 
 	@PostMapping("/admin/savesafe")
-	public ModelAndView savesafe(@Validated(SafeValidator.class) @ModelAttribute(FORMSALE) Safe safe,
-			BindingResult result) {
+	public ModelAndView savesafe(@Valid Safe safe, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("admin/safe/safe");
@@ -58,8 +56,7 @@ public class SafeController {
 	}
 
 	@PostMapping("/admin/saveentrymachine")
-	public ModelAndView saveentrymachine(@Validated(SafeValidator.class) @ModelAttribute(FORMSALE) Safe safe,
-			BindingResult result) {
+	public ModelAndView saveentrymachine(@Valid Safe safe, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("admin/changemachine/newentrychangemachine");
@@ -79,8 +76,7 @@ public class SafeController {
 	}
 
 	@PostMapping("/admin/saveentrydirect")
-	public ModelAndView saveentrydirectmachine(@Validated(SafeValidator.class) @ModelAttribute(FORMSALE) Safe safe,
-			BindingResult result) {
+	public ModelAndView saveentrydirectmachine(@Valid Safe safe, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("admin/changemachine/newentrydirect");

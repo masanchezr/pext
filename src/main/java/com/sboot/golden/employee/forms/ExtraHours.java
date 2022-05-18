@@ -1,11 +1,19 @@
 package com.sboot.golden.employee.forms;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.sboot.golden.services.users.User;
+import com.sboot.golden.util.constants.ConstantsViews;
 
 public class ExtraHours {
 
+	@NotNull(message = "{selectdeparturetime}")
+	@NotEmpty(message = "{selectdeparturetime}")
 	private String departuretime;
 
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	private User employee;

@@ -2,11 +2,22 @@ package com.sboot.golden.boss.forms;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.sboot.golden.dbaccess.entities.PaymentEntity;
+import com.sboot.golden.util.constants.ConstantsViews;
 
 public class TPV {
+
+	@NotNull(message = ConstantsViews.ERRORSELECTID)
 	private Long idtpv;
-	private String creationdate;
+
+	@NotNull
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDATE)
+	private String sdate;
+
+	@NotNull(message = ConstantsViews.ERRORSELECTAMOUNT)
 	private BigDecimal amount;
 	private PaymentEntity pay;
 
@@ -18,12 +29,12 @@ public class TPV {
 		this.idtpv = idtpv;
 	}
 
-	public String getCreationdate() {
-		return creationdate;
+	public String getSdate() {
+		return sdate;
 	}
 
-	public void setCreationdate(String creationdate) {
-		this.creationdate = creationdate;
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
 	}
 
 	public BigDecimal getAmount() {

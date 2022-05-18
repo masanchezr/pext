@@ -1,18 +1,17 @@
 package com.sboot.golden.employee.controllers;
 
-import org.dozer.Mapper;
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.dbaccess.entities.BarDrinkEntity;
 import com.sboot.golden.employee.forms.BarDrink;
-import com.sboot.golden.employee.validators.IncomeValidator;
 import com.sboot.golden.services.dailies.DailyService;
 import com.sboot.golden.services.income.IncomeService;
 import com.sboot.golden.util.constants.ConstantsViews;
@@ -29,7 +28,7 @@ public class IncomeController {
 	private IncomeService incomeservice;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String VIEWNEWINCOME = "employee/income/newincome";
 
@@ -41,9 +40,7 @@ public class IncomeController {
 	}
 
 	@PostMapping("/employee/saveincome")
-	public ModelAndView saveincome(
-			@Validated(IncomeValidator.class) @ModelAttribute(ConstantsViews.FORMINCOME) BarDrink income,
-			BindingResult result) {
+	public ModelAndView saveincome(@Valid BarDrink income, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWINCOME);

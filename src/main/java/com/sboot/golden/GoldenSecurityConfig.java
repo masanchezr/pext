@@ -1,7 +1,6 @@
 package com.sboot.golden;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -9,14 +8,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import com.sboot.golden.services.users.UserDetailServiceImpl;
 
 public class GoldenSecurityConfig {
-
-	PasswordEncoder pbkdf2Encoder;
 
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
@@ -107,12 +102,6 @@ public class GoldenSecurityConfig {
 
 		// Setting Service to find User in the database.
 		// And Setting PassswordEncoder
-		auth.userDetailsService(userDetailsService).passwordEncoder(pbkdf2Encoder());
-	}
-
-	@Bean
-	public PasswordEncoder pbkdf2Encoder() {
-		pbkdf2Encoder = new Pbkdf2PasswordEncoder();
-		return pbkdf2Encoder;
+		auth.userDetailsService(userDetailsService);
 	}
 }

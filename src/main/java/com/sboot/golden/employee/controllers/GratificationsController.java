@@ -8,18 +8,18 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sboot.golden.dbaccess.entities.FunctionalityEntity;
 import com.sboot.golden.dbaccess.entities.GratificationEntity;
 import com.sboot.golden.employee.forms.Gratification;
 import com.sboot.golden.employee.validators.GratificationsValidator;
@@ -38,7 +38,10 @@ public class GratificationsController {
 	private MachineService machineservice;
 
 	@Autowired
-	private Mapper mapper;
+	private GratificationsValidator validator;
+
+	@Autowired
+	private ModelMapper mapper;
 
 	private static final String GRATIFICATION = "gratification";
 	private static final String VIEWNEWGRATIFICATION = "employee/gratifications/gratification";
@@ -48,7 +51,9 @@ public class GratificationsController {
 	@GetMapping("/employee/newgratification")
 	public ModelAndView newgratification() {
 		ModelAndView model = new ModelAndView(VIEWNEWGRATIFICATION);
-		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
+		FunctionalityEntity functionality = new FunctionalityEntity();
+		functionality.setIdfuncionality(Constants.GRATIFICATIONSFUNCTIONALITY);
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesByFuncionality(functionality));
 		model.addObject(GRATIFICATION, new GratificationEntity());
 		return model;
 	}
@@ -93,11 +98,11 @@ public class GratificationsController {
 	}
 
 	@PostMapping("/employee/registergratification")
-	public void registerGratification(
-			@Validated(GratificationsValidator.class) @ModelAttribute(GRATIFICATION) Gratification g,
-			BindingResult arg1, HttpServletResponse response) {
+	public void registerGratification(@ModelAttribute(GRATIFICATION) Gratification g, BindingResult arg1,
+			HttpServletResponse response) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		validator.validate(g, arg1);
 		if (!arg1.hasErrors()) {
 			File file = new File(path.concat("ticket.pdf"));
 			gratificationservice.registerNumberGratification(mapper.map(g, GratificationEntity.class), user, path);

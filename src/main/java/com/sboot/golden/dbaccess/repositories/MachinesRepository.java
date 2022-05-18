@@ -23,4 +23,6 @@ public interface MachinesRepository extends CrudRepository<MachineEntity, Long> 
 	public List<MachineEntity> findByOnoffTrueOrderByOrdermachine();
 
 	public MachineEntity findByNameticket(String award);
+
+	public MachineEntity findByOrdermachineAndOnoffTrue(Long ordermachine);
 }

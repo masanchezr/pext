@@ -1,10 +1,11 @@
 package com.sboot.golden.admin.controllers;
 
-import org.dozer.Mapper;
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.admin.forms.ChangeMachine;
 import com.sboot.golden.admin.forms.EntryMoneyForm;
-import com.sboot.golden.admin.validators.ChangeMachineValidator;
 import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
 import com.sboot.golden.forms.SearchByDatesForm;
 import com.sboot.golden.services.awards.AwardService;
 import com.sboot.golden.services.changemachine.ChangeMachineService;
+import com.sboot.golden.services.dailies.DailyService;
 import com.sboot.golden.services.machines.MachineService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
@@ -33,10 +34,13 @@ public class ChangeMachineAdminController {
 	private ChangeMachineService changeMachineService;
 
 	@Autowired
+	private DailyService dailyService;
+
+	@Autowired
 	private MachineService machineService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String CHANGEMACHINE = "changemachine";
 	private static final String UPDATEVIEW = "admin/changemachine/updatechangemachine";
@@ -95,9 +99,7 @@ public class ChangeMachineAdminController {
 	}
 
 	@PostMapping("/admin/savepaymentchangemachine")
-	public ModelAndView savepaymentchangemachine(
-			@Validated(ChangeMachineValidator.class) @ModelAttribute(CHANGEMACHINE) ChangeMachine cm,
-			BindingResult result) {
+	public ModelAndView savepaymentchangemachine(@Valid ChangeMachine cm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
@@ -113,8 +115,7 @@ public class ChangeMachineAdminController {
 				model.setViewName(UPDATEVIEW);
 				result.rejectValue(Constants.IDCHANGEMACHINE, ConstantsViews.ERRORSELECTID);
 			} else {
-				model.addObject(ConstantsViews.DAILY,
-						changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
+				model.addObject(ConstantsViews.DAILY, dailyService.save(mapper.map(cm, ChangeMachineEntity.class)));
 				model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 			}
 		}
@@ -122,9 +123,7 @@ public class ChangeMachineAdminController {
 	}
 
 	@PostMapping("/admin/updatepaymentchangemachine")
-	public ModelAndView updatepaymentchangemachine(
-			@Validated(ChangeMachineValidator.class) @ModelAttribute(CHANGEMACHINE) ChangeMachine cm,
-			BindingResult result) {
+	public ModelAndView updatepaymentchangemachine(@Valid ChangeMachine cm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(Constants.MACHINES, machineService.searchMachinesOrder());
@@ -132,7 +131,7 @@ public class ChangeMachineAdminController {
 			model.addObject(CHANGEMACHINE, cm);
 			model.setViewName(UPDATEVIEW);
 		} else {
-			model.addObject(ConstantsViews.DAILY, changeMachineService.save(mapper.map(cm, ChangeMachineEntity.class)));
+			model.addObject(ConstantsViews.DAILY, dailyService.save(mapper.map(cm, ChangeMachineEntity.class)));
 			model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 		}
 		return model;

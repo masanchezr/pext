@@ -2,7 +2,7 @@ package com.sboot.golden.services.extrahours;
 
 import java.util.Date;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ExtraHourServiceImpl implements ExtraHourService {
 	private ExtraHoursRepository extrahoursRepository;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public void save(ExtraHours extrahours) {

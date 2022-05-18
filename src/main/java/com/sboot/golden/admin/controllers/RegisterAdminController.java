@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -14,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +26,6 @@ import com.sboot.golden.services.register.FicticionalRegisterService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.date.DateUtil;
-import com.sboot.golden.validators.SearchDatesFormValidator;
 
 @Controller
 public class RegisterAdminController {
@@ -46,9 +44,7 @@ public class RegisterAdminController {
 	}
 
 	@PostMapping("/admin/register")
-	public ModelAndView register(
-			@Validated(SearchDatesFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm sdf,
-			BindingResult arg1) {
+	public ModelAndView register(@Valid SearchByDatesForm sdf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String sfrom = sdf.getDatefrom();
 		String suntil = sdf.getDateuntil();

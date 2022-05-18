@@ -1,10 +1,15 @@
 package com.sboot.golden.services.users;
 
+import javax.validation.constraints.NotEmpty;
+
 public class User {
 
 	private Long id;
+
+	@NotEmpty(message = "selectuser")
 	private String username;
 
+	@NotEmpty(message = "selectpassword")
 	private String password;
 
 	private boolean enabled;

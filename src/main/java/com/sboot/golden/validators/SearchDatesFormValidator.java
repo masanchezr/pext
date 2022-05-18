@@ -2,6 +2,7 @@ package com.sboot.golden.validators;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -9,6 +10,7 @@ import com.sboot.golden.forms.SearchByDatesForm;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
 
+@Component
 public class SearchDatesFormValidator implements Validator {
 
 	public boolean supports(Class<?> arg0) {

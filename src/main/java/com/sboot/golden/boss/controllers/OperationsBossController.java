@@ -1,10 +1,9 @@
 package com.sboot.golden.boss.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +36,10 @@ public class OperationsBossController {
 	private OperationService operationService;
 
 	@Autowired
-	private Mapper mapper;
+	private OperationsValidator validator;
+
+	@Autowired
+	private ModelMapper mapper;
 
 	@GetMapping("/updateoperation{id}")
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
@@ -51,10 +53,9 @@ public class OperationsBossController {
 	}
 
 	@PostMapping("/saveoperation")
-	public ModelAndView saveoperationboss(
-			@Validated(OperationsValidator.class) @ModelAttribute(ConstantsViews.OPERATION) Operation operation,
-			BindingResult result) {
+	public ModelAndView saveoperationboss(Operation operation, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		validator.validate(operation, result);
 		if (result.hasErrors()) {
 			model.setViewName("boss/newoperation");
 			model.addObject(Constants.MACHINES, machineService.searchAllMachinesOrder());
