@@ -20,7 +20,7 @@ class ChangeMachineServiceTest {
 
 	@Test
 	void getIncomeTotalMonthTest() {
-		Assertions.assertNotNull(changeMachineService.getIncomeTotalMonth());
+		Assertions.assertNull(changeMachineService.getIncomeTotalMonth());
 	}
 
 	@Test
