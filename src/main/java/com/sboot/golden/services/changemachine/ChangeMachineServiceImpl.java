@@ -120,6 +120,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Override
 	public void loadDataTicketServer() {
+		/**
+		 * Busco la última fecha de recaudación
+		 */
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnection(from).getInputStream()))) {
 			readFile(in);
@@ -130,6 +133,13 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		}
 	}
 
+	/**
+	 * Monto la url con la última fecha de recaudación hasta este mismo instante
+	 * 
+	 * @param from
+	 * @return URLConnection
+	 * @throws IOException
+	 */
 	private URLConnection getConnection(Date from) throws IOException {
 		String address = "http://"
 				.concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?"));
@@ -210,7 +220,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	private void loadTPV(String ip, Date date, BigDecimal amount, Long idtpv) {
-		if (!tpvrepository.findById(idtpv).isPresent()) {
+		if (!tpvrepository.existsById(idtpv)) {
 			TPVEntity tpv = new TPVEntity();
 			PaymentEntity pay = new PaymentEntity();
 			pay.setIdpayment(Constants.MAQUINACAMBIO);
