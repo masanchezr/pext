@@ -47,6 +47,7 @@ public class DateUtil {
 		patterns.put("\\d{2}:\\d{2}\\s\\w{2}", "hh:mm aa");
 		patterns.put("\\d{2}:\\d{2}:\\d{2}", "hh:mm:ss");
 		patterns.put("\\d{2}/\\d{2}/\\d{4}\\s\\d{2}:\\d{2}:\\d{2}", "dd/MM/yyyy HH:mm:ss");
+		patterns.put("\\d{2}/\\d{2}/\\d{4}\\s\\d{2}:\\d{2}:\\d{2}.\\d{3}", "dd/MM/yyyy HH:mm:ss.SSS");
 		Set<String> spatterns = patterns.keySet();
 		Iterator<String> ipatterns = spatterns.iterator();
 		while (ipatterns.hasNext() && sdf == null) {
