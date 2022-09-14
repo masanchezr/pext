@@ -1,9 +1,7 @@
 package com.sboot.golden.dbaccess.entities;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "schedule")
@@ -33,10 +27,9 @@ public class ScheduleEntity {
 	@JoinColumn(name = "IDTIME", referencedColumnName = "IDTIME")
 	private TimeEntity time;
 
-	@JoinColumn(name = "IDSCHEDULE")
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<EmployeeScheduleEntity> employees;
+	@ManyToOne
+	@JoinColumn(name = "IDEMPLOYEE")
+	private UserEntity employee;
 
 	public Long getIdschedule() {
 		return idschedule;
@@ -63,16 +56,16 @@ public class ScheduleEntity {
 	}
 
 	/**
-	 * @return the employees
+	 * @return the employee
 	 */
-	public List<EmployeeScheduleEntity> getEmployees() {
-		return employees;
+	public UserEntity getEmployee() {
+		return employee;
 	}
 
 	/**
-	 * @param employees the employees to set
+	 * @param employee the employee to set
 	 */
-	public void setEmployees(List<EmployeeScheduleEntity> employees) {
-		this.employees = employees;
+	public void setEmployee(UserEntity employee) {
+		this.employee = employee;
 	}
 }

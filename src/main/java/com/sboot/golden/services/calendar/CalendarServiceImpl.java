@@ -5,11 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sboot.golden.admin.forms.Schedule;
-import com.sboot.golden.dbaccess.entities.EmployeeScheduleEntity;
 import com.sboot.golden.dbaccess.entities.ScheduleEntity;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
 import com.sboot.golden.dbaccess.entities.UserEntity;
@@ -17,6 +13,9 @@ import com.sboot.golden.dbaccess.repositories.ScheduleRepository;
 import com.sboot.golden.dbaccess.repositories.TimeRepository;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
@@ -41,19 +40,10 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	private ScheduleEntity mapper(Schedule next) {
-		List<UserEntity> employees = next.getEmployees();
 		ScheduleEntity s = new ScheduleEntity();
 		s.setDateschedule(DateUtil.getDate(next.getDateschedule()));
 		s.setTime(next.getTime());
-		s.setEmployees(new ArrayList<>());
-		for (UserEntity employee : employees) {
-			if (!employee.getId().equals(Constants.NOBODY)) {
-				EmployeeScheduleEntity e = new EmployeeScheduleEntity();
-				e.setEmployee(employee);
-				e.setSchedule(s);
-				s.getEmployees().add(e);
-			}
-		}
+		s.setEmployee(next.getEmployee());
 		return s;
 	}
 
@@ -67,25 +57,19 @@ public class CalendarServiceImpl implements CalendarService {
 		Schedule schedule;
 		ScheduleEntity entity;
 		UserEntity employee;
-		List<EmployeeScheduleEntity> employees;
-		Iterator<EmployeeScheduleEntity> iemployees;
 		while (ilschedule.hasNext()) {
 			schedule = new Schedule();
 			entity = ilschedule.next();
 			schedule.setDateschedule(DateUtil.getStringDateFormatddMMyyyy(entity.getDateschedule()));
 			schedule.setTime(entity.getTime());
-			schedule.setEmployees(new ArrayList<>());
-			employees = entity.getEmployees();
-			iemployees = employees.iterator();
-			while (iemployees.hasNext()) {
-				employee = iemployees.next().getEmployee();
-				if (!employee.getId().equals(Constants.NOBODY)) {
-					schedule.getEmployees().add(employee);
-				}
+			employee = entity.getEmployee();
+			if (!employee.getId().equals(Constants.NOBODY)) {
+				schedule.setEmployee(employee);
 			}
 			calendar.add(schedule);
 		}
 		return calendar;
+
 	}
 
 	public Iterable<TimeEntity> getTimes() {

@@ -10,26 +10,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.sboot.golden.dbaccess.entities.EmployeeScheduleEntity;
 import com.sboot.golden.dbaccess.entities.FicticionalRegisterEntity;
 import com.sboot.golden.dbaccess.entities.ScheduleEntity;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.repositories.FicticionalRegisterRepository;
 import com.sboot.golden.dbaccess.repositories.ScheduleRepository;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class FicticionalRegisterServiceImpl implements FicticionalRegisterService {
@@ -50,26 +48,20 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 		List<ScheduleEntity> schedule = scheduleRepository.findByDatescheduleBetween(dfrom, duntil);
 		if (schedule != null && !schedule.isEmpty()) {
 			Iterator<ScheduleEntity> ischedule = schedule.iterator();
-			ScheduleEntity se;
-			UserEntity employee;
 			Calendar e = Calendar.getInstance();
 			Calendar d = Calendar.getInstance();
 			while (ischedule.hasNext()) {
-				se = ischedule.next();
-				Iterator<EmployeeScheduleEntity> iemployees = se.getEmployees().iterator();
-				while (iemployees.hasNext()) {
-					employee = iemployees.next().getEmployee();
-					saveRegister(se, employee, e, d);
-				}
+				ischedule.next();
+				saveRegister(ischedule.next(), e, d);
 			}
 		}
 		return registerRepository.findByCreationdateBetweenOrderByCreationdate(dfrom, duntil);
 	}
 
-	private void saveRegister(ScheduleEntity se, UserEntity employee, Calendar e, Calendar d) {
-		if (!employee.getId().equals(Constants.NOBODY)) {
+	private void saveRegister(ScheduleEntity se, Calendar e, Calendar d) {
+		if (!se.getEmployee().getId().equals(Constants.NOBODY)) {
 			FicticionalRegisterEntity fre = registerRepository.findByCreationdateAndEmployee(se.getDateschedule(),
-					employee);
+					se.getEmployee());
 			if (fre == null) {
 				Random rand;
 				try {
@@ -77,7 +69,7 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 					fre = new FicticionalRegisterEntity();
 					TimeEntity time = se.getTime();
 					fre.setCreationdate(se.getDateschedule());
-					fre.setEmployee(employee);
+					fre.setEmployee(se.getEmployee());
 					e.setTime(DateUtil.getDate(time.getEntry()));
 					e.set(Calendar.MINUTE, rand.nextInt(60));
 					e.set(Calendar.SECOND, rand.nextInt(60));
