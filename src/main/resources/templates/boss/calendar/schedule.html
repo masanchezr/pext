@@ -13,35 +13,34 @@
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table">
+						<caption>Cuadrante</caption>
 						<thead>
 							<tr>
-								<th th:text="#{week}"><th:block th:text="${week}" /></th>
-								<th th:text="#{monday}"></th>
-								<th th:text="#{tuesday}"></th>
-								<th th:text="#{wednesday}"></th>
-								<th th:text="#{thursday}"></th>
-								<th th:text="#{friday}"></th>
-								<th th:text="#{saturday}"></th>
-								<th th:text="#{sunday}"></th>
+								<th colspan="2" th:text="#{monday}"></th>
+								<th colspan="2" th:text="#{tuesday}"></th>
+								<th colspan="2" th:text="#{wednesday}"></th>
+								<th colspan="2" th:text="#{thursday}"></th>
+								<th colspan="2" th:text="#{friday}"></th>
+								<th colspan="2" th:text="#{saturday}"></th>
+								<th colspan="2" th:text="#{sunday}"></th>
 							</tr>
 							<tr>
-								<td></td>
 								<th:block th:each="date: ${dates}">
-									<td th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
+									<td colspan="2" th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
 								</th:block>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="time,iterTime: ${times}">
-								<td th:text="${time.name}"></td>
-								<th:block
-									th:each="index : ${#numbers.sequence(iterTime.index*7,(iterTime.index*7)+6)}">
-									<td><th:block
-											th:each="employee: ${schedule[index].employees}">
-											<p th:text="${employee.username}">
-										</th:block></td>
-								</th:block>
-							</tr>
+							<th:block th:each="indextime: ${#numbers.sequence(0, 2)}">
+								<tr>
+									<th:block th:each="date,iterdate: ${dates}">
+										<th:block th:with="index=${(iterdate.index*3)+indextime}">
+											<td th:text="${schedule[index].time.name}"></td>
+											<td th:text="${schedule[index].employee.alias}"></td>
+										</th:block>
+									</th:block>
+								</tr>
+							</th:block>
 						</tbody>
 					</table>
 				</div>

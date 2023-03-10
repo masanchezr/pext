@@ -13,18 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
-import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sboot.golden.dbaccess.entities.AwardsChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
@@ -42,6 +30,18 @@ import com.sboot.golden.services.mails.EmailService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
 import com.sboot.golden.util.string.Util;
+
+import org.apache.commons.codec.binary.Base64;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ChangeMachineServiceImpl implements ChangeMachineService {
@@ -120,9 +120,20 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Override
 	public void loadDataTicketServer() {
+		/**
+		 * Busco la última fecha de recaudación
+		 */
 		Date from = takingsRepository.findFirstByOrderByIdtakeDesc().getTakedate();
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnection(from).getInputStream()))) {
-			readFile(in);
+		try (BufferedReader in = new BufferedReader(
+				new InputStreamReader(getConnectionReportTicketsDate(from).getInputStream()))) {
+			readFileReportTicketsDate(in);
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+		} finally {
+			logger.debug(java.util.logging.Level.SEVERE.getName());
+		}
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnectionEvents().getInputStream()))) {
+			readFileEvents(in);
 		} catch (IOException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
@@ -130,7 +141,85 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		}
 	}
 
-	private URLConnection getConnection(Date from) throws IOException {
+	private void readFileEvents(BufferedReader in) {
+		String response;
+		String result = "";
+		try {
+			for (int i = 0; i < 10; i++)
+				while ((response = in.readLine()) != null)
+					result = result.concat(response);
+			in.close();
+			loadDataEvents(result);
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+		}
+
+	}
+
+	private void loadDataEvents(String result) {
+		ChangeMachineTotalEntity cmt = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+		ChangeMachineTotalEntity entity;
+		Date from = cmt.getCreationdate();
+		Document doc = Jsoup.parse(result);
+		Elements trs = doc.getElementsByClass("tbl-row");
+		ListIterator<Element> itrs = trs.listIterator();
+		List<Node> nodes;
+		TextNode node;
+		Date date;
+		String type;
+		String text;
+		String[] split;
+		Element element;
+		BigDecimal amount;
+		while (itrs.hasNext()) {
+			nodes = itrs.next().childNodes();
+			node = (TextNode) nodes.get(0).childNode(0);
+			// cuidado viene con milisegundos
+			date = DateUtil.getDate(node.getWholeText());
+			if (date.after(from)) {
+				element = (Element) nodes.get(1);
+				element = (Element) element.childNodes().get(0);
+				node = (TextNode) element.childNodes().get(0);
+				type = node.getWholeText();
+				if (type.equals("Recargas por apuestas")) {
+					node = (TextNode) nodes.get(2).childNode(0);
+					text = node.getWholeText();
+					split = text.split(":");
+					amount = new BigDecimal(split[split.length - 1]);
+					entity = new ChangeMachineTotalEntity();
+					entity.setVisible(cmt.getVisible().add(amount));
+					entity.setDeposit(cmt.getDeposit());
+					entity.setCreationdate(new Date());
+					changeMachineTotalRepository.save(entity);
+				}
+			}
+		}
+	}
+
+	private URLConnection getConnectionEvents() throws IOException {
+		String address = "http://".concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/listLogs.php?"));
+		String restaddress = "&User=root&Pass".concat("word=ccm10");
+		String name = "ccm";
+		String pass = "ccm10";
+		String authString = name + ":" + pass;
+		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+		String authStringEnc = new String(authEncBytes);
+		address = address.concat(restaddress);
+		URL url = new URL(address);
+		URLConnection connection = url.openConnection();
+		connection.setDoOutput(true);
+		connection.setRequestProperty("Authorization", BASIC.concat(authStringEnc));
+		return connection;
+	}
+
+	/**
+	 * Monto la url con la última fecha de recaudación hasta este mismo instante
+	 * 
+	 * @param from
+	 * @return URLConnection
+	 * @throws IOException
+	 */
+	private URLConnection getConnectionReportTicketsDate(Date from) throws IOException {
 		String address = "http://"
 				.concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?"));
 		String startdate = "StartDate=";
@@ -153,7 +242,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		return connection;
 	}
 
-	private void readFile(BufferedReader in) {
+	private void readFileReportTicketsDate(BufferedReader in) {
 		String response;
 		String result = "";
 		try {
@@ -210,7 +299,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	private void loadTPV(String ip, Date date, BigDecimal amount, Long idtpv) {
-		if (!tpvrepository.findById(idtpv).isPresent()) {
+		if (!tpvrepository.existsById(idtpv)) {
 			TPVEntity tpv = new TPVEntity();
 			PaymentEntity pay = new PaymentEntity();
 			pay.setIdpayment(Constants.MAQUINACAMBIO);
@@ -294,12 +383,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	@Override
 	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
 		if ("127.0.0.1".equals(ip)) {
-			ChangeMachineTotalEntity totalentity = changeMachineTotalRepository
-					.findFirstByOrderByIdchangemachinetotalDesc();
-			ChangeMachineTotalEntity total = new ChangeMachineTotalEntity();
-			total.setVisible(totalentity.getVisible().subtract(amount));
-			total.setCreationdate(new Date());
-			total.setDeposit(totalentity.getDeposit());
+			ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+			total.setVisible(total.getVisible().subtract(amount));
 			changeMachineTotalRepository.save(total);
 		}
 	}
@@ -333,11 +418,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Override
 	public void entryToVisible(BigDecimal amount) {
-		ChangeMachineTotalEntity last = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-		ChangeMachineTotalEntity entity = new ChangeMachineTotalEntity();
-		entity.setCreationdate(new DateUtil().getNow());
-		entity.setDeposit(last.getDeposit().subtract(amount));
-		entity.setVisible(last.getVisible().add(amount));
+		ChangeMachineTotalEntity entity = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+		entity.setDeposit(entity.getDeposit().subtract(amount));
+		entity.setVisible(entity.getVisible().add(amount));
 		changeMachineTotalRepository.save(entity);
 	}
 

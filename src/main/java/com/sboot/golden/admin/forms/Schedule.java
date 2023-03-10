@@ -1,13 +1,11 @@
 package com.sboot.golden.admin.forms;
 
-import java.util.List;
-
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.TimeEntity;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 
 public class Schedule {
 	private String dateschedule;
-	private List<UserEntity> employees;
+	private UserEntity employee;
 	private TimeEntity time;
 
 	public String getDateschedule() {
@@ -16,14 +14,6 @@ public class Schedule {
 
 	public void setDateschedule(String dateschedule) {
 		this.dateschedule = dateschedule;
-	}
-
-	public List<UserEntity> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<UserEntity> employees) {
-		this.employees = employees;
 	}
 
 	public TimeEntity getTime() {
@@ -39,7 +29,7 @@ public class Schedule {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dateschedule == null) ? 0 : dateschedule.hashCode());
-		result = prime * result + ((employees == null) ? 0 : employees.hashCode());
+		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		return result;
 	}
@@ -60,11 +50,11 @@ public class Schedule {
 		} else if (!dateschedule.equals(other.dateschedule)) {
 			return false;
 		}
-		if (employees == null) {
-			if (other.employees != null) {
+		if (employee == null) {
+			if (other.employee != null) {
 				return false;
 			}
-		} else if (!employees.equals(other.employees)) {
+		} else if (!employee.equals(other.employee)) {
 			return false;
 		}
 		if (time == null) {
@@ -75,5 +65,15 @@ public class Schedule {
 			return false;
 		}
 		return true;
+	}
+
+	public UserEntity getEmployee() {
+		return employee;
+
+	}
+
+	public void setEmployee(UserEntity employee) {
+		this.employee = employee;
+
 	}
 }

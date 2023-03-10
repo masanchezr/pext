@@ -5,9 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sboot.golden.admin.forms.EntryMoneyForm;
 import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
@@ -19,6 +16,9 @@ import com.sboot.golden.dbaccess.repositories.EntryMoneyRepository;
 import com.sboot.golden.dbaccess.repositories.SafeRepository;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EntryMoneyServiceImpl implements EntryMoneyService {
@@ -104,13 +104,10 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		ChangeMachineTotalEntity changemachinetotal = changemachinetotalrepository
 				.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineEntity entity = new ChangeMachineEntity();
-		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
 		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
 		Date today = new DateUtil().getNow();
-		totalcm.setCreationdate(today);
-		totalcm.setDeposit(amount.add(changemachinetotal.getDeposit()));
-		totalcm.setVisible(changemachinetotal.getVisible());
+		changemachinetotal.setDeposit(amount.add(changemachinetotal.getDeposit()));
 		entity.setCreationdate(today);
 		entity.setAmount(amount);
 		entity.setIdchangemachine(id + 1);
@@ -119,7 +116,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		safe.setAmount(amount.negate());
 		safe.setDescription("CHANGEMACHINE");
 		changemachinerepository.save(entity);
-		changemachinetotalrepository.save(totalcm);
+		changemachinetotalrepository.save(changemachinetotal);
 		return safeRepository.save(safe).getTotal();
 	}
 

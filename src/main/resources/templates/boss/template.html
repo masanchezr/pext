@@ -45,6 +45,21 @@
 				class="nav-link"><i class="fas fa-money-bill"></i> <span
 					th:text="#{manualpayments}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
+				aria-expanded="true" aria-controls="collpase" href="#"
+				data-bs-target="#collapseschedule" data-bs-toggle="collapse"><i
+					class="fa fa-calendar fa-fw"></i> <span th:text="#{schedule}"></span>
+			</a>
+				<div id="collapseschedule" class="collapse"
+					aria-labelledby="headingschedule" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a th:href="@{newcalendar}" class="collapse-item"><span
+							th:text="#{newschedule}"></span></a> <a th:href="@{searchschedule}"
+							class="collapse-item"><span th:text="#{searchschedule}"></span></a>
+						<a th:href="@{searchregister}" class="collapse-item"> <span
+							th:text="#{register}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
 				data-bs-toggle="collapse" href="#" data-bs-target="#collapseTPV"
 				aria-expanded="true" aria-controls="collpaseTPV"><i
 					class="fa fa-credit-card fa-fw"></i> <span th:text="#{tpv}"></span>

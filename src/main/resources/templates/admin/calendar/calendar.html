@@ -13,45 +13,75 @@
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table">
+					<caption>Cuadrante</caption>
 					<thead>
 						<tr>
-							<th th:text="#{week}"><th:block th:text="${week}" /></th>
-							<th th:text="#{monday}"></th>
-							<th th:text="#{tuesday}"></th>
-							<th th:text="#{wednesday}"></th>
-							<th th:text="#{thursday}"></th>
-							<th th:text="#{friday}"></th>
-							<th th:text="#{saturday}"></th>
-							<th th:text="#{sunday}"></th>
+							<th th:text="#{week}"></th>
+							<th colspan=2 th:text="#{monday}"></th>
+							<th colspan=2 th:text="#{tuesday}"></th>
+							<th colspan=2 th:text="#{wednesday}"></th>
+							<th colspan=2 th:text="#{thursday}"></th>
+							<th colspan=2 th:text="#{friday}"></th>
+							<th colspan=2 th:text="#{saturday}"></th>
+							<th colspan=2 th:text="#{sunday}"></th>
 						</tr>
 						<tr>
-							<td></td>
+							<th th:text="${week}" />
 							<th:block th:each="date: ${dates}">
-								<td th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
+								<td colspan=2 th:text="${#dates.format(date, 'dd-MM-yyyy')}"></td>
 							</th:block>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="time: ${times}">
-							<td th:text="${time.name}"></td>
+						<tr>
 							<th:block th:each="date: ${dates}">
 								<td><select class="form-control"
-									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[0].idemployee}">
+									th:field="*{schedule[__${dateStat.index}__].time.idtime}">
+										<option th:each="time: ${times}" th:value="${time.idtime}"
+											th:text="${time.name}" />
+								</select></td>
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index}__].employee.id}">
 										<option th:each="employee: ${employees}"
 											th:value="${employee.id}" th:text="${employee.username}" />
-								</select> <select class="form-control"
-									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[1].idemployee}">
+								</select></td>
+								<input type="hidden"
+									th:attr="name='schedule['+${dateStat.index}+'].dateschedule'"
+									th:value="${date}" />
+							</th:block>
+						</tr>
+						<tr>
+							<th:block th:each="date: ${dates}">
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(7)}__].time.idtime}">
+										<option th:each="time: ${times}" th:value="${time.idtime}"
+											th:text="${time.name}" />
+								</select></td>
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(7)}__].employee.id}">
 										<option th:each="employee: ${employees}"
 											th:value="${employee.id}" th:text="${employee.username}" />
-								</select> <select class="form-control"
-									th:field="*{schedule[__${dateStat.index+(timeStat.index*7)}__].employees[2].idemployee}">
+								</select></td>
+								<input type="hidden"
+									th:attr="name='schedule['+${dateStat.index+7}+'].dateschedule'"
+									th:value="${date}" />
+							</th:block>
+						</tr>
+						<tr>
+							<th:block th:each="date: ${dates}">
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(14)}__].time.idtime}">
+										<option th:each="time: ${times}" th:value="${time.idtime}"
+											th:text="${time.name}" />
+								</select></td>
+								<td><select class="form-control"
+									th:field="*{schedule[__${dateStat.index+(14)}__].employee.id}">
 										<option th:each="employee: ${employees}"
 											th:value="${employee.id}" th:text="${employee.username}" />
-								</select> <input type="hidden"
-									th:attr="name='schedule['+${dateStat.index+(timeStat.index*7)}+'].time.idtime'"
-									th:value="${time.idtime}" /> <input type="hidden"
-									th:attr="name='schedule['+${dateStat.index+(timeStat.index*7)}+'].dateschedule'"
-									th:value="${date}" /></td>
+								</select></td>
+								<input type="hidden"
+									th:attr="name='schedule['+${dateStat.index+14}+'].dateschedule'"
+									th:value="${date}" />
 							</th:block>
 						</tr>
 					</tbody>
