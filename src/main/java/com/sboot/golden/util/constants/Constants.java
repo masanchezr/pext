@@ -19,9 +19,6 @@ public class Constants {
 		return ORIGIN;
 	}
 
-	/** The Constant MARIANA. ROLE_NRA */
-	public static final String ROLE_NRA = "ROLE_NRA";
-
 	public static final Long MAQUINACAMBIO = 2L;
 
 	public static final Long CAJACOMUN = 1L;

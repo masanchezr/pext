@@ -1,19 +1,26 @@
 package com.sboot.golden.services.users;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.sboot.golden.dbaccess.entities.AuthorityEntity;
 import com.sboot.golden.dbaccess.entities.UserEntity;
+import com.sboot.golden.dbaccess.repositories.AuthorityRepository;
 import com.sboot.golden.dbaccess.repositories.UsersRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -23,39 +30,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private ModelMapper mapper;
-
-	public User disableEnableUser(Long id) {
-		User user = null;
-		UserEntity entity = usersRepository.findById(id).orElse(null);
-		if (entity != null) {
-			Boolean state = entity.getEnabled();
-			if (state.equals(Boolean.TRUE)) {
-				entity.setEnabled(Boolean.FALSE);
-			} else {
-				entity.setEnabled(Boolean.TRUE);
-			}
-			user = mapper.map(usersRepository.save(entity), User.class);
-			UserEntity employee = usersRepository.findByUsername(entity.getUsername());
-			if (employee != null) {
-				Boolean stateEmployee = employee.getEnabled();
-				if (stateEmployee.equals(Boolean.TRUE)) {
-					employee.setEnabled(Boolean.FALSE);
-				} else {
-					employee.setEnabled(Boolean.TRUE);
-				}
-				mapper.map(usersRepository.save(employee), user);
-			}
-		}
-		return user;
-	}
-
-	public void updatePassword(User user) {
-		UserEntity entity = usersRepository.findById(user.getId()).orElse(null);
-		if (entity != null) {
-			entity.setPassword(pbkdf2Encoder.encode(user.getPassword()));
-			usersRepository.save(entity);
-		}
-	}
 
 	@Override
 	public User findUser(String username) {
@@ -85,8 +59,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void newUser(User user) {
+		UserEntity entity;
+		AuthorityEntity authority = authorityRepository.findByAuthority("ROLE_".concat(user.getRole()));
+		Set<AuthorityEntity> authorities = new HashSet<AuthorityEntity>();
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
-		usersRepository.save(mapper.map(user, UserEntity.class));
+		entity = usersRepository.save(mapper.map(user, UserEntity.class));
+		// volvemos a guardar, una vez que tenemos ya el user
+		authorities.add(authority);
+		entity.setAuthority(authorities);
+		usersRepository.save(entity);
 	}
 
 	@Override
