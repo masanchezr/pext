@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.dbaccess.entities.FicticionalRegisterEntity;
 import com.sboot.golden.forms.SearchByDatesForm;
+import com.sboot.golden.services.metadata.MetadataService;
 import com.sboot.golden.services.register.FicticionalRegisterService;
-import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.date.DateUtil;
 
@@ -32,6 +32,9 @@ public class RegisterAdminController {
 
 	@Autowired
 	private FicticionalRegisterService ficticionalRegisterService;
+
+	@Autowired
+	private MetadataService metadataservice;
 
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(RegisterAdminController.class);
@@ -66,7 +69,7 @@ public class RegisterAdminController {
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/register/register");
-		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		String path = metadataservice.getValue("datadir");
 		File file = new File(path.concat("register.pdf"));
 		List<FicticionalRegisterEntity> register = ficticionalRegisterService.findByDates(from, until);
 		ficticionalRegisterService.generatePdf(register, file);

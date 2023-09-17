@@ -25,6 +25,7 @@ import com.sboot.golden.employee.forms.Gratification;
 import com.sboot.golden.employee.validators.GratificationsValidator;
 import com.sboot.golden.services.gratifications.GratificationService;
 import com.sboot.golden.services.machines.MachineService;
+import com.sboot.golden.services.metadata.MetadataService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
 
@@ -32,10 +33,13 @@ import com.sboot.golden.util.constants.ConstantsViews;
 public class GratificationsController {
 
 	@Autowired
-	private GratificationService gratificationservice;
+	private MachineService machineservice;
 
 	@Autowired
-	private MachineService machineservice;
+	private MetadataService metadataservice;
+
+	@Autowired
+	private GratificationService gratificationservice;
 
 	@Autowired
 	private GratificationsValidator validator;
@@ -101,10 +105,11 @@ public class GratificationsController {
 	public void registerGratification(@ModelAttribute(GRATIFICATION) Gratification g, BindingResult arg1,
 			HttpServletResponse response) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		String path = metadataservice.getValue("datadir");
 		validator.validate(g, arg1);
 		if (!arg1.hasErrors()) {
 			File file = new File(path.concat("ticket.pdf"));
+			file.setWritable(true);
 			gratificationservice.registerNumberGratification(mapper.map(g, GratificationEntity.class), user, path);
 			response.setContentType("application/force-download");
 			response.setHeader("Content-Disposition", "attachment; filename=ticket.pdf");
@@ -113,6 +118,7 @@ public class GratificationsController {
 				response.flushBuffer();
 			} catch (IOException e) {
 				arg1.rejectValue(ConstantsViews.CLIENT, "notopenfile");
+				System.out.println(e);
 			}
 		}
 	}

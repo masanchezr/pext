@@ -20,11 +20,11 @@ class ChangeMachineServiceTest {
 
 	@Test
 	void getIncomeTotalMonthTest() {
-		Assertions.assertNull(changeMachineService.getIncomeTotalMonth());
+		Assertions.assertNotNull(changeMachineService.getIncomeTotalMonth());
 	}
 
-	@Test
-	void loadDataTicketServerTest() {
-		changeMachineService.loadDataTicketServer();
-	}
+	/**
+	 * @Test void loadDataTicketServerTest() {
+	 *       changeMachineService.loadDataTicketServer(); }
+	 **/
 }

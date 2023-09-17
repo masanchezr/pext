@@ -21,14 +21,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sboot.golden.dbaccess.entities.RegisterEntity;
 import com.sboot.golden.forms.SearchByDatesForm;
+import com.sboot.golden.services.metadata.MetadataService;
 import com.sboot.golden.services.register.RegisterService;
-import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.constants.ConstantsViews;
 import com.sboot.golden.util.date.DateUtil;
 import com.sboot.golden.validators.SearchDatesFormValidator;
 
 @Controller
 public class RegisterController {
+
+	@Autowired
+	private MetadataService metadataservice;
 
 	@Autowired
 	private RegisterService registerService;
@@ -70,7 +73,7 @@ public class RegisterController {
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/register/register");
-		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+		String path = metadataservice.getValue("datadir");
 		File file = new File(path.concat("register.pdf"));
 		List<RegisterEntity> register = registerService.findByDates(from, until);
 		registerService.generatePdf(register, file);

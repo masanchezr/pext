@@ -23,12 +23,12 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.entities.GratificationEntity;
 import com.sboot.golden.dbaccess.entities.MetadataEntity;
-import com.sboot.golden.dbaccess.repositories.UsersRepository;
+import com.sboot.golden.dbaccess.entities.UserEntity;
 import com.sboot.golden.dbaccess.repositories.GratificationsRepository;
 import com.sboot.golden.dbaccess.repositories.MetadataRepository;
+import com.sboot.golden.dbaccess.repositories.UsersRepository;
 import com.sboot.golden.services.dailies.Daily;
 import com.sboot.golden.services.dailies.DailyService;
 import com.sboot.golden.util.date.DateUtil;
@@ -55,6 +55,7 @@ public class GratificationServiceImpl implements GratificationService {
 	/**
 	 * pagamos la propina
 	 */
+	@Override
 	public Daily save(GratificationEntity g, String user) {
 		UserEntity employee = employeesrepository.findByUsername(user);
 		g.setPaydate(new DateUtil().getNow());
@@ -65,6 +66,7 @@ public class GratificationServiceImpl implements GratificationService {
 
 	private void generateTicket(GratificationEntity g, String path) {
 		File file = new File(path.concat("ticket.pdf"));
+		file.setWritable(true);
 		try (PdfWriter writer = new PdfWriter(file)) {
 			PdfDocument pdf = new PdfDocument(writer);
 			PageSize page = PageSize.A4.rotate();
@@ -91,15 +93,18 @@ public class GratificationServiceImpl implements GratificationService {
 		}
 	}
 
+	@Override
 	public GratificationEntity searchGratificationActive(Long id) {
 		return gratificationRepository.findByIdgratificationAndPaydateIsNull(id, new DateUtil().getNow());
 	}
 
+	@Override
 	public List<GratificationEntity> lastNumGratifications() {
 		return gratificationRepository.findByCreationdateBetweenAndPaydateIsNull(
 				DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1), new DateUtil().getNow());
 	}
 
+	@Override
 	public void registerNumberGratification(GratificationEntity g, String user, String path) {
 		UserEntity employee = employeesrepository.findByUsername(user);
 		Calendar c = Calendar.getInstance();

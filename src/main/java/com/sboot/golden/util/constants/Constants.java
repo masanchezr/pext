@@ -45,8 +45,6 @@ public class Constants {
 
 	public static final Integer OTHERAWARDS = 16;
 
-	public static final String OPENSHIFT_DATA_DIR = "OPENSHIFT_DATA_DIR";
-
 	public static final String ACTIVE = "active";
 
 	public static final String DATE = "date";
@@ -73,8 +71,6 @@ public class Constants {
 	public static final String OPENMACHINES = "openmachines";
 
 	public static final String MACHINES = "machines";
-
-	public static final String IPGOLDEN = "TICKETSERVER";
 
 	public static final Long OPENMACHINE = 3L;
 

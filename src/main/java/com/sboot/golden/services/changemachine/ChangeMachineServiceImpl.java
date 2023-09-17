@@ -13,6 +13,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.codec.binary.Base64;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sboot.golden.dbaccess.entities.AwardsChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineEntity;
 import com.sboot.golden.dbaccess.entities.ChangeMachineTotalEntity;
@@ -27,27 +39,19 @@ import com.sboot.golden.dbaccess.repositories.MachinesRepository;
 import com.sboot.golden.dbaccess.repositories.TPVRepository;
 import com.sboot.golden.dbaccess.repositories.TakingsRepository;
 import com.sboot.golden.services.mails.EmailService;
+import com.sboot.golden.services.metadata.MetadataService;
 import com.sboot.golden.util.constants.Constants;
 import com.sboot.golden.util.date.DateUtil;
 import com.sboot.golden.util.string.Util;
-
-import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
-import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private MetadataService metadataservice;
 
 	@Autowired
 	private ChangeMachineRepository changeMachineRepository;
@@ -197,7 +201,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	private URLConnection getConnectionEvents() throws IOException {
-		String address = "http://".concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/listLogs.php?"));
+		String ip = metadataservice.getValue("ipgoldenusera");
+		String address = "http://".concat(ip.concat(":3080/TicketServer/listLogs.php?"));
 		String restaddress = "&User=root&Pass".concat("word=ccm10");
 		String name = "ccm";
 		String pass = "ccm10";
@@ -220,8 +225,8 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	 * @throws IOException
 	 */
 	private URLConnection getConnectionReportTicketsDate(Date from) throws IOException {
-		String address = "http://"
-				.concat(System.getenv(Constants.IPGOLDEN).concat(":3080/TicketServer/reportTicketsDateTime.php?"));
+		String ip = metadataservice.getValue("ipgoldenusera");
+		String address = "http://".concat(ip.concat(":3080/TicketServer/reportTicketsDateTime.php?"));
 		String startdate = "StartDate=";
 		String endate = "&EndDate=";
 		String space = "%20";
