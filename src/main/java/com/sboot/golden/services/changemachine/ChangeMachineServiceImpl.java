@@ -285,7 +285,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				ip = node.getWholeText();
 				node = (TextNode) nodes.get(10).childNode(0);
 				samount = node.getWholeText();
-				amount = new BigDecimal(samount.substring(0, samount.length() - 3).replaceFirst(",", ""));
+				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
 				node = (TextNode) nodes.get(11).childNode(0);
 				scomments = node.getWholeText();
 				if (award.equals("TPV") && Util.isNumeric(scomments)) {
