@@ -17,11 +17,11 @@ class UserServiceTest {
 	void newUserTest() {
 		User user = new User();
 		user.setEnabled(true);
-		user.setAlias("Prueba7");
-		user.setName("Prueba7");
-		user.setPassword("enpada");
+		user.setAlias("Prueba11");
+		user.setName("Prueba11");
+		user.setPassword("ROVIN");
 		user.setRole("USER");
-		user.setUsername("prueba7");
+		user.setUsername("prueba11");
 		if (userService.findUser(user.getUsername()) == null) {
 			userService.newUser(user);
 		}
