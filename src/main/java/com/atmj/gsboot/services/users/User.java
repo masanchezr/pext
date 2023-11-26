@@ -1,6 +1,6 @@
 package com.atmj.gsboot.services.users;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 public class User {
 

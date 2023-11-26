@@ -2,7 +2,6 @@ package com.atmj.gsboot.services.users;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		UserEntity appUser = usersRepository.findByUsername(username);
+		UserEntity appUser = usersRepository.findByUsernameAndEnabledTrue(username);
 		// Mapear nuestra lista de Authority con la de spring security
 		List<GrantedAuthority> grantList = new ArrayList<>();
 		for (AuthorityEntity authority : appUser.getAuthority()) {
@@ -35,27 +34,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
 			grantList.add(grantedAuthority);
 		}
 
-		// Crear El objeto UserDetails que va a ir en sesion y retornarlo.
+		// Crear El objeto UserDetails que va a ir en sesión y retornarlo.
 		return new org.springframework.security.core.userdetails.User(appUser.getUsername(), appUser.getPassword(),
 				grantList);
 	}
 
-	public void saveUser(UserEntity user) {
-		Optional<UserEntity> entity = usersRepository.findById(user.getId());
-		if (entity.isPresent()) {
-			UserEntity ue = entity.get();
-			ue.setPassword(encoder().encode(user.getPassword()));
-			usersRepository.save(ue);
-
-		} else {
-			user.setPassword(encoder().encode(user.getPassword()));
-			usersRepository.save(user);
-		}
-	}
-
 	@Bean
 	public PasswordEncoder encoder() {
-		return new Pbkdf2PasswordEncoder();
+		return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 	}
 
 	public Iterable<UserEntity> allEmployeesActives() {

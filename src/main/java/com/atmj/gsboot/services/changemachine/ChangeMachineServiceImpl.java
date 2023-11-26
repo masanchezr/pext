@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atmj.services.MetadataService;
 import com.atmj.gsboot.dbaccess.entities.AwardsChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineTotalEntity;
@@ -43,6 +42,7 @@ import com.atmj.gsboot.services.mails.EmailService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.date.DateUtil;
 import com.atmj.gsboot.util.string.Util;
+import com.atmj.services.MetadataService;
 
 @Service
 public class ChangeMachineServiceImpl implements ChangeMachineService {
@@ -434,12 +434,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		List<CollectionEntity> collection = null;
 		TakeEntity take = takingsRepository.findById(idtake).orElse(new TakeEntity());
 		TakeEntity takeEntity = takingsRepository.findById(idtake + 1L).orElse(null);
+		List<Long> awards = new ArrayList<>();
+		awards.add(1L);
+		awards.add(4L);
 		if (takeEntity != null) {
 			collection = new ArrayList<>();
 			CollectionEntity c;
 			Date until = takeEntity.getTakedate();
-			List<Object[]> objects = changeMachineRepository.sumByCreationdateBetweenAndAward(take.getTakedate(),
-					until);
+			List<Object[]> objects = changeMachineRepository.sumByCreationdateBetweenAndAward(take.getTakedate(), until,
+					awards);
 			Iterator<Object[]> iobjects = objects.iterator();
 			Object[] o;
 			while (iobjects.hasNext()) {

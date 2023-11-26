@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.TemporalType;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
@@ -13,6 +11,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.atmj.gsboot.dbaccess.entities.AwardsChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
+
+import jakarta.persistence.TemporalType;
 
 public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEntity, Long> {
 
@@ -49,6 +49,7 @@ public interface ChangeMachineRepository extends CrudRepository<ChangeMachineEnt
 	public List<ChangeMachineEntity> findByAwardAndCreationdateBetween(AwardsChangeMachineEntity award,
 			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until);
 
-	@Query("select m, sum(c.amount) from ChangeMachineEntity c, MachineEntity m where c.creationdate>=?1 and c.creationdate<=?2 and c.award in (1,4) and m=c.machine group by c.machine")
-	public List<Object[]> sumByCreationdateBetweenAndAward(Date from, Date until);
+	@Query("select m, sum(c.amount) from ChangeMachineEntity c, MachineEntity m where c.creationdate>=:from and c.creationdate<=:until and c.award.idawardchangemachine in (:awards) and m=c.machine group by c.machine")
+	public List<Object[]> sumByCreationdateBetweenAndAward(@Param("from") Date from, @Param("until") Date until,
+			@Param("awards") List<Long> awards);
 }

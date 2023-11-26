@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The Class BossController.
@@ -40,7 +41,7 @@ public class BossController {
 	 *
 	 * @return the string
 	 */
-	@GetMapping("/403")
+	@RequestMapping("/403")
 	public String accessDeniedPage() {
 		return "boss/403";
 	}

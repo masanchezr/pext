@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The Class AdminController.
@@ -40,7 +41,7 @@ public class AdminController {
 	 *
 	 * @return the string
 	 */
-	@GetMapping("/403admin")
+	@RequestMapping("/403admin")
 	public String accessDeniedPage() {
 		return "admin/403";
 	}

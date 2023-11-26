@@ -2,8 +2,8 @@ package com.atmj.gsboot.admin.forms;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import com.atmj.gsboot.util.constants.ConstantsViews;
 

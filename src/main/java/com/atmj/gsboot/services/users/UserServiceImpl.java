@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.atmj.dbaccess.entities.AuthorityEntity;
@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UsersRepository usersRepository;
-
-	@Autowired
-	private PasswordEncoder pbkdf2Encoder;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -61,8 +58,8 @@ public class UserServiceImpl implements UserService {
 	public void newUser(User user) {
 		UserEntity entity;
 		AuthorityEntity authority = authorityRepository.findByAuthority("ROLE_".concat(user.getRole()));
-		Set<AuthorityEntity> authorities = new HashSet<AuthorityEntity>();
-		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
+		Set<AuthorityEntity> authorities = new HashSet<>();
+		user.setPassword(Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8().encode(user.getPassword()));
 		entity = usersRepository.save(mapper.map(user, UserEntity.class));
 		// volvemos a guardar, una vez que tenemos ya el user
 		authorities.add(authority);

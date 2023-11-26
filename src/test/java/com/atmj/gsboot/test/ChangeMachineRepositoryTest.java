@@ -2,7 +2,9 @@ package com.atmj.gsboot.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,10 @@ class ChangeMachineRepositoryTest {
 	void sumByCreationdateBetweenAndAwardTest() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date from = sdf.parse("2020-01-01 09:00:00");
-		Assertions.assertNotNull(changemachinerepository.sumByCreationdateBetweenAndAward(from, new Date()));
+		List<Long> awards = new ArrayList<>();
+		awards.add(1L);
+		awards.add(4L);
+		Assertions.assertNotNull(changemachinerepository.sumByCreationdateBetweenAndAward(from, new Date(), awards));
 	}
 
 }

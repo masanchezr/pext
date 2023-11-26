@@ -10,7 +10,9 @@
 	<name>golden</name>
 	<description>Proyecto para golden usera</description>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sourceEncoding>UTF-8</sourceEncoding>
+		<java.version>17</java.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -30,7 +32,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>3.3.1</version>
 						<configuration>
 							<outputDirectory>deployments</outputDirectory>
 							<!-- warName>ROOT</warName -->
@@ -39,17 +40,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.8.1</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-							<source>1.8</source>
-							<target>1.8</target>
-						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>3.2.0</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
 						</configuration>
@@ -62,10 +56,9 @@
 		<dependency>
 			<groupId>atmj</groupId>
 			<artifactId>comun</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
