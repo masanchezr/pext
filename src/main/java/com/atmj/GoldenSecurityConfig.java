@@ -92,7 +92,7 @@ public class GoldenSecurityConfig {
 				AntPathRequestMatcher.antMatcher("/searchopenmachines"), AntPathRequestMatcher.antMatcher("/newtpv"),
 				AntPathRequestMatcher.antMatcher("/extrahours"), AntPathRequestMatcher.antMatcher("/manualpayments"))
 				.hasRole("BOSS").anyRequest().authenticated())
-				.formLogin(formLogin -> formLogin.loginPage("/login").permitAll().defaultSuccessUrl("/admin", true)
+				.formLogin(formLogin -> formLogin.loginPage("/login").permitAll().defaultSuccessUrl("/adminboss", true)
 						.failureForwardUrl("/403"))
 				.logout(logout -> logout.logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login")
 						.invalidateHttpSession(true))
