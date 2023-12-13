@@ -80,9 +80,9 @@ public class GoldenSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain bossFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers(AntPathRequestMatcher.antMatcher("/admin"),
-				AntPathRequestMatcher.antMatcher("/newuser"), AntPathRequestMatcher.antMatcher("/newentrymoney"),
-				AntPathRequestMatcher.antMatcher("/summaryincome"),
+		http.authorizeHttpRequests(authorize -> authorize.requestMatchers(
+				AntPathRequestMatcher.antMatcher("/adminboss"), AntPathRequestMatcher.antMatcher("/newuser"),
+				AntPathRequestMatcher.antMatcher("/newentrymoney"), AntPathRequestMatcher.antMatcher("/summaryincome"),
 				AntPathRequestMatcher.antMatcher("/summaryexpenses"),
 				AntPathRequestMatcher.antMatcher("/searchregister"),
 				AntPathRequestMatcher.antMatcher("/searchrecharges"), AntPathRequestMatcher.antMatcher("/daily"),
