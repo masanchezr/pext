@@ -25,8 +25,6 @@ public interface ChangeMachineService {
 
 	public List<ChangeMachineEntity> getOperationsTicketServerBetweenDates(Date from, Date until);
 
-	public List<ChangeMachineEntity> recharges(String datefrom);
-
 	public ChangeMachineTotalEntity getTotal();
 
 	public void entryToVisible(BigDecimal amount);
@@ -36,5 +34,7 @@ public interface ChangeMachineService {
 	Iterable<TakeEntity> getAllTakings();
 
 	public List<CollectionEntity> manualpayments(Long idtake);
+
+	public List<ChangeMachineEntity> recharges(Date from, Date takedate);
 
 }

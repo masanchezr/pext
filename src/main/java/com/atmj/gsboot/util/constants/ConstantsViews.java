@@ -41,4 +41,5 @@ public class ConstantsViews {
 	public static final String VIEWSEARCHREGISTER = "boss/registers/searchregisters";
 	public static final String MODELWEEKFORM = "weekForm";
 	public static final String MODELSCHEDULE = "schedule";
+	public static final String MODELCOLLECTION = "collection";
 }

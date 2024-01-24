@@ -8,4 +8,6 @@ public interface TakingsRepository extends CrudRepository<TakeEntity, Long> {
 
 	public TakeEntity findFirstByOrderByIdtakeDesc();
 
+	public Iterable<TakeEntity> findByOrderByIdtakeDesc();
+
 }

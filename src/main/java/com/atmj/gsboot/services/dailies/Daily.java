@@ -8,7 +8,7 @@ import com.atmj.gsboot.dbaccess.entities.BarDrinkEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.EntryMoneyEntity;
 import com.atmj.gsboot.dbaccess.entities.GratificationEntity;
-import com.atmj.gsboot.dbaccess.entities.IncomeLuckiaEntity;
+import com.atmj.gsboot.dbaccess.entities.IncomeSportsBetsEntity;
 import com.atmj.gsboot.dbaccess.entities.IncomeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.OperationEntity;
 import com.atmj.gsboot.dbaccess.entities.ReturnMoneyEmployeeEntity;
@@ -30,7 +30,7 @@ public class Daily {
 
 	private List<BarDrinkEntity> income;
 
-	private List<IncomeLuckiaEntity> incomeluckia;
+	private List<IncomeSportsBetsEntity> incomesportsbets;
 
 	private List<IncomeMachineEntity> incomemachines;
 
@@ -94,12 +94,12 @@ public class Daily {
 		this.date = date;
 	}
 
-	public List<IncomeLuckiaEntity> getIncomeluckia() {
-		return incomeluckia;
+	public List<IncomeSportsBetsEntity> getIncomesportsbets() {
+		return incomesportsbets;
 	}
 
-	public void setIncomeluckia(List<IncomeLuckiaEntity> incomeluckia) {
-		this.incomeluckia = incomeluckia;
+	public void setIncomesportsbets(List<IncomeSportsBetsEntity> incomesportsbets) {
+		this.incomesportsbets = incomesportsbets;
 	}
 
 	public List<IncomeMachineEntity> getIncomemachines() {

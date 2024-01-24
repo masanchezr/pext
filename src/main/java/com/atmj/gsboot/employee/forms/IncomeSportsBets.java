@@ -5,9 +5,9 @@ import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 
-public class IncomeLuckia {
+public class IncomeSportsBets {
 
-	private Long idincomeluckia;
+	private Long idincomesportsbets;
 
 	@CreatedDate
 	private Date creationdate;
@@ -16,12 +16,12 @@ public class IncomeLuckia {
 
 	private String description;
 
-	public Long getIdincomeluckia() {
-		return idincomeluckia;
+	public Long getIdincomesportsbets() {
+		return idincomesportsbets;
 	}
 
-	public void setIdincomeluckia(Long idincomeluckia) {
-		this.idincomeluckia = idincomeluckia;
+	public void setIdincomesportsbets(Long idincomesportsbets) {
+		this.idincomesportsbets = idincomesportsbets;
 	}
 
 	public Date getCreationdate() {

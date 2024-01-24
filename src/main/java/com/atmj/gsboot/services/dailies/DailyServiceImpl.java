@@ -14,7 +14,7 @@ import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.DailyEntity;
 import com.atmj.gsboot.dbaccess.entities.EntryMoneyEntity;
 import com.atmj.gsboot.dbaccess.entities.GratificationEntity;
-import com.atmj.gsboot.dbaccess.entities.IncomeLuckiaEntity;
+import com.atmj.gsboot.dbaccess.entities.IncomeSportsBetsEntity;
 import com.atmj.gsboot.dbaccess.entities.IncomeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.OperationEntity;
 import com.atmj.gsboot.dbaccess.entities.ReturnMoneyEmployeeEntity;
@@ -24,7 +24,7 @@ import com.atmj.gsboot.dbaccess.repositories.ChangeMachineRepository;
 import com.atmj.gsboot.dbaccess.repositories.DailyRepository;
 import com.atmj.gsboot.dbaccess.repositories.EntryMoneyRepository;
 import com.atmj.gsboot.dbaccess.repositories.GratificationsRepository;
-import com.atmj.gsboot.dbaccess.repositories.IncomeLuckiaRepository;
+import com.atmj.gsboot.dbaccess.repositories.IncomeSportsBetsRepository;
 import com.atmj.gsboot.dbaccess.repositories.IncomeMachinesRepository;
 import com.atmj.gsboot.dbaccess.repositories.OperationsRepository;
 import com.atmj.gsboot.dbaccess.repositories.ReturnMoneyEmployeesRepository;
@@ -57,7 +57,7 @@ public class DailyServiceImpl implements DailyService {
 	private BarDrinksRepository incomeRepository;
 
 	@Autowired
-	private IncomeLuckiaRepository incomeLuckiaRepository;
+	private IncomeSportsBetsRepository incomeSportsBetsRepository;
 
 	@Autowired
 	private IncomeMachinesRepository incomemachinesRepository;
@@ -86,7 +86,7 @@ public class DailyServiceImpl implements DailyService {
 		setGratifications(daily, date);
 		setEntriesMoney(daily, date);
 		setIncome(daily, date);
-		setIncomeLuckia(daily, date);
+		setIncomeSportsBets(daily, date);
 		setIncomeMachines(daily, date);
 		setReturns(daily, date);
 		setMoneyAdvance(daily, date);
@@ -176,17 +176,17 @@ public class DailyServiceImpl implements DailyService {
 		}
 	}
 
-	private void setIncomeLuckia(Daily daily, Date date) {
-		BigDecimal amountincomeluckia = BigDecimal.ZERO;
-		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdate(date);
-		if (incomeluckia != null) {
-			Iterator<IncomeLuckiaEntity> iincome = incomeluckia.iterator();
+	private void setIncomeSportsBets(Daily daily, Date date) {
+		BigDecimal amountincomesportsbets = BigDecimal.ZERO;
+		List<IncomeSportsBetsEntity> incomesportsbets = incomeSportsBetsRepository.findByCreationdate(date);
+		if (incomesportsbets != null) {
+			Iterator<IncomeSportsBetsEntity> iincome = incomesportsbets.iterator();
 			while (iincome.hasNext()) {
-				amountincomeluckia = amountincomeluckia.add(iincome.next().getAmount());
+				amountincomesportsbets = amountincomesportsbets.add(iincome.next().getAmount());
 			}
-			daily.setFinalamount(daily.getFinalamount().add(amountincomeluckia));
-			daily.setNumoperations(incomeluckia.size() + daily.getNumoperations());
-			daily.setIncomeluckia(incomeluckia);
+			daily.setFinalamount(daily.getFinalamount().add(amountincomesportsbets));
+			daily.setNumoperations(incomesportsbets.size() + daily.getNumoperations());
+			daily.setIncomesportsbets(incomesportsbets);
 		}
 	}
 
@@ -271,7 +271,7 @@ public class DailyServiceImpl implements DailyService {
 		List<EntryMoneyEntity> entriesMoney = entryMoneyRepository.findByCreationdateBetween(date,
 				new DateUtil().getNow());
 		List<BarDrinkEntity> income = incomeRepository.findByCreationdateBetween(date, new DateUtil().getNow());
-		List<IncomeLuckiaEntity> incomeluckia = incomeLuckiaRepository.findByCreationdateBetween(date,
+		List<IncomeSportsBetsEntity> incomesportsbets = incomeSportsBetsRepository.findByCreationdateBetween(date,
 				new DateUtil().getNow());
 		List<IncomeMachineEntity> incomemachines = incomemachinesRepository.findByCreationdateBetween(date,
 				new DateUtil().getNow());
@@ -287,7 +287,7 @@ public class DailyServiceImpl implements DailyService {
 		daily.setOperations(operations);
 		daily.setEntriesMoney(entriesMoney);
 		daily.setIncome(income);
-		daily.setIncomeluckia(incomeluckia);
+		daily.setIncomesportsbets(incomesportsbets);
 		daily.setIncomemachines(incomemachines);
 		daily.setGratifications(gratifications);
 		daily.setReturns(returns);

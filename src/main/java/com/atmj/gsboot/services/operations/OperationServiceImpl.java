@@ -2,7 +2,6 @@ package com.atmj.gsboot.services.operations;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -71,11 +70,8 @@ public class OperationServiceImpl implements OperationService {
 		}
 	}
 
-	public Map<String, Object> findExpensesByMonth(String month) {
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
+	@Override
+	public Map<String, ?> findExpenses(Date from, Date until) {
 		Object[] object;
 		List<Object[]> sum;
 		Iterator<Object[]> isum;
@@ -86,11 +82,6 @@ public class OperationServiceImpl implements OperationService {
 		List<GratificationEntity> gratifications;
 		Iterator<GratificationEntity> igratifications;
 		Integer g = 0;
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
 		gratifications = gratificationsrepository.findByPaydateBetween(from, until);
 		sum = operationRepository.searchSumByMonth(from, until);
 		isum = sum.iterator();

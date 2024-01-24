@@ -8,37 +8,37 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.atmj.gsboot.dbaccess.entities.IncomeLuckiaEntity;
-import com.atmj.gsboot.employee.forms.IncomeLuckia;
+import com.atmj.gsboot.dbaccess.entities.IncomeSportsBetsEntity;
+import com.atmj.gsboot.employee.forms.IncomeSportsBets;
 import com.atmj.gsboot.services.dailies.DailyService;
-import com.atmj.gsboot.services.incomeluckia.IncomeLuckiaService;
+import com.atmj.gsboot.services.incomesportsbets.IncomeSportsBetsService;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 
 @Controller
-public class IncomeLuckiaController {
+public class IncomeSportsBetsController {
 
 	@Autowired
 	private DailyService dailyService;
 
 	@Autowired
-	private IncomeLuckiaService incomeLuckiaService;
+	private IncomeSportsBetsService incomeSportsBetsService;
 
 	@Autowired
 	private ModelMapper mapper;
 
-	private static final String FORMLUCKIA = "iluckia";
+	private static final String FORMSPORTSBETS = "isportsbets";
 
-	@GetMapping("/employee/newincomeluckia")
-	public ModelAndView newincomeluckia() {
-		ModelAndView model = new ModelAndView("employee/income/newincomeluckia");
-		model.addObject(FORMLUCKIA, new IncomeLuckia());
+	@GetMapping("/employee/newincomesportsbets")
+	public ModelAndView newincomesportsbets() {
+		ModelAndView model = new ModelAndView("employee/income/newincomesportsbets");
+		model.addObject(FORMSPORTSBETS, new IncomeSportsBets());
 		return model;
 	}
 
-	@PostMapping("/employee/saveincomeluckia")
-	public ModelAndView saveincomeluckia(@ModelAttribute(FORMLUCKIA) IncomeLuckia iluckia) {
+	@PostMapping("/employee/saveincomesportsbets")
+	public ModelAndView saveincomesportsbets(@ModelAttribute(FORMSPORTSBETS) IncomeSportsBets isportsbets) {
 		ModelAndView model = new ModelAndView();
-		incomeLuckiaService.save(mapper.map(iluckia, IncomeLuckiaEntity.class));
+		incomeSportsBetsService.save(mapper.map(isportsbets, IncomeSportsBetsEntity.class));
 		model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 		model.setViewName("employee/daily/daily");
 		return model;

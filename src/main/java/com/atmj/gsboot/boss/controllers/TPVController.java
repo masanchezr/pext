@@ -3,8 +3,6 @@ package com.atmj.gsboot.boss.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,15 +11,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.atmj.gsboot.boss.forms.CollectionForm;
 import com.atmj.gsboot.boss.forms.TPV;
 import com.atmj.gsboot.converters.TPVConverter;
-import com.atmj.gsboot.forms.SearchByDatesForm;
 import com.atmj.gsboot.services.changemachine.ChangeMachineService;
 import com.atmj.gsboot.services.payments.PaymentService;
+import com.atmj.gsboot.services.takings.TakeService;
 import com.atmj.gsboot.services.tpv.TPVService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 import com.atmj.gsboot.util.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class TPVController {
@@ -31,6 +32,9 @@ public class TPVController {
 
 	@Autowired
 	private PaymentService paymentservice;
+
+	@Autowired
+	private TakeService takeService;
 
 	@Autowired
 	private TPVService tpvservice;
@@ -44,17 +48,19 @@ public class TPVController {
 	@GetMapping("/searchtpv")
 	public ModelAndView searchtpv() {
 		ModelAndView model = new ModelAndView("boss/tpv/searchtpv");
-		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
+		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
+		model.addObject("takings", takeService.getAllTakings());
 		return model;
 	}
 
 	@PostMapping("/resulttpv")
-	public ModelAndView resulttpv(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchByDatesForm searchForm) {
+	public ModelAndView resulttpv(@ModelAttribute(ConstantsViews.MODELCOLLECTION) CollectionForm c) {
 		ModelAndView model = new ModelAndView();
-		Date from = DateUtil.getDayMonthMinimum(searchForm.getDatefrom());
-		Date until = DateUtil.getDayMonthMaximum(searchForm.getDatefrom());
+		Long id = c.getId();
+		Date from = takeService.getFrom(id);
+		Date until = takeService.findById(id).getTakedate();
 		model.addObject("amount", tpvservice.sumByCreationdate(from, until));
-		model.addObject(tpvservice.getOperationsTpv(from, until));
+		model.addObject("operations", tpvservice.getOperationsTpv(from, until));
 		model.setViewName("boss/tpv/resulttpv");
 		return model;
 	}

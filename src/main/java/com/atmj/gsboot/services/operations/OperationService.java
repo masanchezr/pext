@@ -1,5 +1,6 @@
 package com.atmj.gsboot.services.operations;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.atmj.gsboot.dbaccess.entities.OperationEntity;
@@ -10,8 +11,6 @@ public interface OperationService {
 
 	public Daily save(OperationEntity operation);
 
-	public Map<String, Object> findExpensesByMonth(String month);
-
 	public OperationEntity findById(long id);
 
 	public Daily update(OperationEntity operation);
@@ -20,4 +19,5 @@ public interface OperationService {
 
 	public OperationNotAllowedEntity getOperationNotAllowed(OperationEntity operation);
 
+	public Map<String, ?> findExpenses(Date from, Date until);
 }

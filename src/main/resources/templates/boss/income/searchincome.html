@@ -9,17 +9,18 @@
 		<li class="breadcrumb-item active" th:text="#{summaryincome}"></li>
 	</ol>
 	<form method="post" th:action="@{resultincome}"
-		th:object="${searchDateForm}" autocomplete="off">
+		th:object="${collection}">
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
-								<div id="sandbox-container">
-									<input class="form-control" type="text" th:field="*{datefrom}"
-										th:placeholder="#{selectmonth}" />
-								</div>
+								<span th:text="#{collection}"></span> <select
+									class="form-control" th:field="*{id}">
+									<option th:each="t:${takings}" th:value="${t.idtake}"
+										th:text="${t.takedate}" />
+								</select>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-danger" value="submit">

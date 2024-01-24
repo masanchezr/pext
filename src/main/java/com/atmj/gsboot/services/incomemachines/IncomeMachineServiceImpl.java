@@ -1,7 +1,6 @@
 package com.atmj.gsboot.services.incomemachines;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +21,7 @@ public class IncomeMachineServiceImpl implements IncomeMachineService {
 		incomemachinesrepository.save(imachine);
 	}
 
-	public BigDecimal findIncomeByMonth(String month) {
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
+	public BigDecimal findIncomeByMonth(Date from, Date until) {
 		return incomemachinesrepository.searchSumByMonth(from, until);
 	}
 }

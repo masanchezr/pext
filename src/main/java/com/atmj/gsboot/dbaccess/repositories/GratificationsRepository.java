@@ -3,8 +3,6 @@ package com.atmj.gsboot.dbaccess.repositories;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.TemporalType;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.atmj.gsboot.dbaccess.entities.GratificationEntity;
 import com.atmj.gsboot.util.constants.Constants;
+
+import jakarta.persistence.TemporalType;
 
 public interface GratificationsRepository extends CrudRepository<GratificationEntity, Long> {
 

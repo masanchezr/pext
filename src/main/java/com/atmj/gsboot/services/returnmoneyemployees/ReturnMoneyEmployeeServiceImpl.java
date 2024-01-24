@@ -35,16 +35,7 @@ public class ReturnMoneyEmployeeServiceImpl implements ReturnMoneyEmployeeServic
 		}
 	}
 
-	public BigDecimal findIncomeByMonth(String month) {
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
+	public BigDecimal findIncomeByMonth(Date from, Date until) {
 		return returnMoneyUsersRepository.searchSumReturnByMonth(from, until);
 	}
 

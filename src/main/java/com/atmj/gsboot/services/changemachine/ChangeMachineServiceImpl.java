@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -406,18 +405,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	}
 
 	@Override
-	public List<ChangeMachineEntity> recharges(String month) {
-		Date date = DateUtil.getDate(month);
-		Calendar calendar = Calendar.getInstance();
-		Date from;
-		Date until;
+	public List<ChangeMachineEntity> recharges(Date from, Date until) {
 		AwardsChangeMachineEntity pay = new AwardsChangeMachineEntity();
 		pay.setIdawardchangemachine(Constants.RECHARGES);
-		calendar.setTime(date);
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-		from = calendar.getTime();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		until = calendar.getTime();
 		return changeMachineRepository.findByAwardAndCreationdateBetween(pay, from, until);
 	}
 
@@ -433,16 +423,15 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	public List<CollectionEntity> manualpayments(Long idtake) {
 		List<CollectionEntity> collection = null;
 		TakeEntity take = takingsRepository.findById(idtake).orElse(new TakeEntity());
-		TakeEntity takeEntity = takingsRepository.findById(idtake + 1L).orElse(null);
+		TakeEntity takeEntity = takingsRepository.findById(idtake - 1L).orElse(null);
 		List<Long> awards = new ArrayList<>();
 		awards.add(1L);
 		awards.add(4L);
 		if (takeEntity != null) {
 			collection = new ArrayList<>();
 			CollectionEntity c;
-			Date until = takeEntity.getTakedate();
-			List<Object[]> objects = changeMachineRepository.sumByCreationdateBetweenAndAward(take.getTakedate(), until,
-					awards);
+			List<Object[]> objects = changeMachineRepository.sumByCreationdateBetweenAndAward(take.getTakedate(),
+					takeEntity.getTakedate(), awards);
 			Iterator<Object[]> iobjects = objects.iterator();
 			Object[] o;
 			while (iobjects.hasNext()) {
