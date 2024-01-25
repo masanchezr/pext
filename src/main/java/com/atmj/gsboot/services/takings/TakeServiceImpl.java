@@ -35,7 +35,7 @@ public class TakeServiceImpl implements TakeService {
 
 	@Override
 	public TakeEntity findById(Long id) {
-		return takingsRepository.findById(id).get();
+		return takingsRepository.findById(id).orElse(null);
 	}
 
 }
