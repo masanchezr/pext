@@ -102,7 +102,6 @@ public class TPVController {
 				} else {
 					model.setViewName(ConstantsViews.VIEWDAILYBOSSARROWS);
 				}
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(datetpv));
 			}
 		}
 		return model;

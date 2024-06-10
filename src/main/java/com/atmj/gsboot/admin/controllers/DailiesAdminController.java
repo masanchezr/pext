@@ -54,7 +54,6 @@ public class DailiesAdminController {
 			} else {
 				model.addObject(ConstantsViews.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 			}
 		} else {
 			model.setViewName(ConstantsViews.VIEWNOTDAILYADMIN);
@@ -78,7 +77,6 @@ public class DailiesAdminController {
 				} else {
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
-					model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
@@ -111,7 +109,6 @@ public class DailiesAdminController {
 					}
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsViews.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {

@@ -1,7 +1,5 @@
 package com.atmj.gsboot.employee.controllers;
 
-import jakarta.validation.Valid;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,8 @@ import com.atmj.gsboot.employee.forms.BarDrink;
 import com.atmj.gsboot.services.dailies.DailyService;
 import com.atmj.gsboot.services.income.IncomeService;
 import com.atmj.gsboot.util.constants.ConstantsViews;
-import com.atmj.gsboot.util.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class IncomeController {
@@ -49,7 +48,6 @@ public class IncomeController {
 			incomeservice.save(mapper.map(income, BarDrinkEntity.class));
 			model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 			model.setViewName("employee/daily/daily");
-			model.addObject(ConstantsViews.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;
 

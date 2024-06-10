@@ -5,7 +5,7 @@
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#"><span
-				th:text="${daily.date}"></span></a></li>
+				th:text="${daily.sdate}"></span></a></li>
 		<li class="breadcrumb-item active"><span
 			th:text="${daily.numoperations}"></span> <span
 			th:text="#{operations}"></span></li>
@@ -128,7 +128,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<a th:href="@{'/beforeday' + ${datedaily}}">
+							<a th:href="@{'/beforeday' + ${daily.sdate}}">
 								<button class="btn btn-danger" type="button">
 									<i class="fas fa-arrow-circle-left"></i> <span
 										th:text="#{beforeday}"></span>
@@ -138,7 +138,7 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="pull-right">
-							<a th:href="@{'/againday' + ${datedaily}}">
+							<a th:href="@{'/againday' + ${daily.sdate}}">
 								<button class="btn btn-danger" type="button">
 									<span th:text="#{againday}"></span> <i
 										class="fas fa-arrow-circle-right"></i>

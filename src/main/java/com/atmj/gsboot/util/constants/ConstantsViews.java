@@ -13,7 +13,6 @@ public class ConstantsViews {
 	public static final String CLIENT = "client";
 	public static final String TIMES = "times";
 	public static final String DAILY = "daily";
-	public static final String DATEDAILY = "datedaily";
 	public static final String VIEWDAILYADMINARROWS = "admin/dailies/dailyarrows";
 	public static final String VIEWNOTDAILYADMIN = "admin/dailies/notdailyadmin";
 	public static final String VIEWDAILYBOSSARROW = "boss/dailies/dailyarrow";

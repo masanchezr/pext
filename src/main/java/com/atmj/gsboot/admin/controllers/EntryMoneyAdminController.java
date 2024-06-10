@@ -2,8 +2,6 @@ package com.atmj.gsboot.admin.controllers;
 
 import java.util.Date;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +15,8 @@ import com.atmj.gsboot.services.entrymoney.EntryMoneyService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 import com.atmj.gsboot.util.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class EntryMoneyAdminController {
@@ -46,7 +46,6 @@ public class EntryMoneyAdminController {
 			entryMoneyService.saveEntryMoney(entryMoney);
 			model.addObject(ConstantsViews.DAILY, dailyService.getDaily(DateUtil.getDateFormatddMMyyyy(new Date())));
 			model.setViewName(ConstantsViews.VIEWDAILYADMINARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(new Date()));
 		}
 		return model;
 	}

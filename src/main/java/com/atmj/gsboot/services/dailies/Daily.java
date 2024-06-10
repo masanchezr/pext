@@ -1,15 +1,14 @@
 package com.atmj.gsboot.services.dailies;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import com.atmj.gsboot.dbaccess.entities.BarDrinkEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.EntryMoneyEntity;
 import com.atmj.gsboot.dbaccess.entities.GratificationEntity;
-import com.atmj.gsboot.dbaccess.entities.IncomeSportsBetsEntity;
 import com.atmj.gsboot.dbaccess.entities.IncomeMachineEntity;
+import com.atmj.gsboot.dbaccess.entities.IncomeSportsBetsEntity;
 import com.atmj.gsboot.dbaccess.entities.OperationEntity;
 import com.atmj.gsboot.dbaccess.entities.ReturnMoneyEmployeeEntity;
 import com.atmj.gsboot.dbaccess.entities.TPVEntity;
@@ -36,7 +35,7 @@ public class Daily {
 
 	private List<ReturnMoneyEmployeeEntity> returns;
 
-	private Date date;
+	private String sdate;
 
 	private List<GratificationEntity> gratifications;
 
@@ -84,14 +83,6 @@ public class Daily {
 
 	public void setIncome(List<BarDrinkEntity> income) {
 		this.income = income;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public List<IncomeSportsBetsEntity> getIncomesportsbets() {
@@ -148,5 +139,13 @@ public class Daily {
 
 	public void setMoneyadvance(List<ReturnMoneyEmployeeEntity> moneyadvance) {
 		this.moneyadvance = moneyadvance;
+	}
+
+	public String getSdate() {
+		return sdate;
+	}
+
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
 	}
 }

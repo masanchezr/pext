@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atmj.gsboot.services.dailies.Daily;
 import com.atmj.gsboot.services.dailies.DailyService;
 import com.atmj.gsboot.util.constants.ConstantsViews;
-import com.atmj.gsboot.util.date.DateUtil;
 
 /**
  * The Class DailyController.
@@ -34,7 +33,6 @@ public class DailyController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName("employee/daily/daily");
-			model.addObject(ConstantsViews.DATEDAILY, new DateUtil().getNow());
 		}
 		return model;
 	}

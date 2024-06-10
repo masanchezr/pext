@@ -72,7 +72,6 @@ public class OperationsAdminController {
 			result.rejectValue(Constants.AMOUNT, "operationnotallowed");
 		} else {
 			model.addObject(ConstantsViews.DAILY, operationService.update(op));
-			model.addObject(ConstantsViews.DATEDAILY, operation.getCreationdate());
 			model.setViewName(ConstantsViews.VIEWDAILYADMINARROWS);
 		}
 		return model;

@@ -16,7 +16,6 @@ import com.atmj.gsboot.services.incomemachines.IncomeMachineService;
 import com.atmj.gsboot.services.machines.MachineService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
-import com.atmj.gsboot.util.date.DateUtil;
 
 @Controller
 public class IncomeMachinesController {
@@ -49,7 +48,6 @@ public class IncomeMachinesController {
 		incomemachineService.save(mapper.map(imachine, IncomeMachineEntity.class));
 		model.addObject(ConstantsViews.DAILY, dailyService.getDailyEmployee());
 		model.setViewName("employee/daily/daily");
-		model.addObject(ConstantsViews.DATEDAILY, new DateUtil().getNow());
 		return model;
 	}
 

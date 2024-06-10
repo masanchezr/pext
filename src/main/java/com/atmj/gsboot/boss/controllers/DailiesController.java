@@ -77,15 +77,13 @@ public class DailiesController {
 		} else {
 			String view;
 			String stoday = DateUtil.getStringDateFormatddMMyyyy(new DateUtil().getNow());
-			String sdate = DateUtil.getStringDateFormatddMMyyyy(date);
-			if (stoday.compareTo(sdate) == 0) {
+			if (stoday.compareTo(daily.getSdate()) == 0) {
 				view = ConstantsViews.VIEWDAILYBOSSARROW;
 			} else {
 				view = ConstantsViews.VIEWDAILYBOSSARROWS;
 			}
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(view);
-			model.addObject(ConstantsViews.DATEDAILY, sdate);
 		}
 		return model;
 	}
@@ -106,7 +104,6 @@ public class DailiesController {
 				} else {
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(ConstantsViews.VIEWDAILYBOSSARROWS);
-					model.addObject(ConstantsViews.DATEDAILY, (DateUtil.getDateFormatddMMyyyy(date)));
 					existdaily = true;
 				}
 			} else {
@@ -120,7 +117,6 @@ public class DailiesController {
 	@GetMapping("/beforeday")
 	public ModelAndView beforeday() {
 		ModelAndView model = new ModelAndView();
-		Date date = DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1);
 		Daily daily = dailyService
 				.getDaily(DateUtil.addDays(DateUtil.getDateFormatddMMyyyy(new DateUtil().getNow()), -1));
 		if (daily.getFinalamount() == null) {
@@ -128,7 +124,6 @@ public class DailiesController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(ConstantsViews.VIEWDAILYBOSSARROWS);
-			model.addObject(ConstantsViews.DATEDAILY, date);
 		}
 		return model;
 	}
@@ -155,7 +150,6 @@ public class DailiesController {
 					}
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsViews.DATEDAILY, date);
 					existdaily = true;
 				}
 			} else {
