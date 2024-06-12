@@ -58,13 +58,18 @@ public class UserServiceImpl implements UserService {
 	public void newUser(User user) {
 		// buscamos primero el usuario por si lo que quisieramos hacer es un update
 		UserEntity entity = usersRepository.findByUsername(user.getUsername());
-		AuthorityEntity authority = authorityRepository.findByAuthority("ROLE_".concat(user.getRole()));
-		Set<AuthorityEntity> authorities = new HashSet<>();
 		user.setPassword(Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8().encode(user.getPassword()));
-		entity = usersRepository.save(mapper.map(user, UserEntity.class));
-		// volvemos a guardar, una vez que tenemos ya el user
-		authorities.add(authority);
-		entity.setAuthority(authorities);
+		if (entity == null) {
+			AuthorityEntity authority = authorityRepository.findByAuthority("ROLE_".concat(user.getRole()));
+			Set<AuthorityEntity> authorities = new HashSet<>();
+			entity = usersRepository.save(mapper.map(user, UserEntity.class));
+			// volvemos a guardar, una vez que tenemos ya el user
+			authorities.add(authority);
+			entity.setAuthority(authorities);
+		} else {
+			entity.setPassword(user.getPassword());
+			entity.setEnabled(user.isEnabled());
+		}
 		usersRepository.save(entity);
 	}
 

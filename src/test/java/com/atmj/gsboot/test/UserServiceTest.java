@@ -26,4 +26,13 @@ class UserServiceTest {
 			userService.newUser(user);
 		}
 	}
+
+	@Test
+	void updateUserTest() {
+		User user = new User();
+		user.setEnabled(false);
+		user.setPassword("1981");
+		user.setUsername("prueba10");
+		userService.newUser(user);
+	}
 }
