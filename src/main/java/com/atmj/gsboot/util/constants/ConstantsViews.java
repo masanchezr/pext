@@ -24,13 +24,13 @@ public class ConstantsViews {
 	public static final String VIEWNEWENTRYMONEY = "newentrymoney";
 	public static final String FORMSEARCH = "searchDateForm";
 	public static final String FORMINCIDENT = "incident";
-	public static final String ERRORSELECTAMOUNT = "{selectamount}";
-	public static final String ERRORSELECTDATE = "{selectdate}";
-	public static final String ERRORSELECTDESCRIPTION = "{selectdescription}";
+	public static final String ERRORSELECTAMOUNT = "selectamount";
+	public static final String ERRORSELECTDATE = "selectdate";
+	public static final String ERRORSELECTDESCRIPTION = "selectdescription";
 	public static final String TOTAL = "total";
 	public static final String VIEWNOTDAILY = "notdaily";
 	public static final String XFORWARDEDFOR = "X-FORWARDED-FOR";
-	public static final String ERRORSELECTID = "{selectid}";
+	public static final String ERRORSELECTID = "selectid";
 	public static final String OPERATIONS = "operations";
 	public static final String VIEWDAILYADMINARROW = "admin/dailies/dailyarrow";
 	public static final String ERRORSELECTNAME = "selectname";

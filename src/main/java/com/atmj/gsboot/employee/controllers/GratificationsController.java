@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.atmj.services.MetadataService;
 import com.atmj.gsboot.dbaccess.entities.FunctionalityEntity;
 import com.atmj.gsboot.dbaccess.entities.GratificationEntity;
 import com.atmj.gsboot.employee.forms.Gratification;
@@ -28,6 +25,9 @@ import com.atmj.gsboot.services.gratifications.GratificationService;
 import com.atmj.gsboot.services.machines.MachineService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
+import com.atmj.services.MetadataService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class GratificationsController {
@@ -97,7 +97,7 @@ public class GratificationsController {
 	@GetMapping("/employee/registernumber")
 	public ModelAndView registerNumber() {
 		ModelAndView model = new ModelAndView(VIEWREGISTERGRATIFICATION);
-		model.addObject(GRATIFICATION, new GratificationEntity());
+		model.addObject(GRATIFICATION, new Gratification());
 		return model;
 	}
 
