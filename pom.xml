@@ -11,7 +11,6 @@
 	<description>Proyecto para golden usera</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sourceEncoding>UTF-8</sourceEncoding>
 		<java.version>17</java.version>
 	</properties>
 	<profiles>
@@ -44,9 +43,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
