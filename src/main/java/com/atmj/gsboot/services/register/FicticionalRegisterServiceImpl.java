@@ -107,7 +107,7 @@ public class FicticionalRegisterServiceImpl implements FicticionalRegisterServic
 			Paragraph creationdate;
 			Paragraph timein;
 			Paragraph timeout;
-			document.add(new Paragraph("GOLDEN USERA S.L. Registro de empleados").setItalic());
+			document.add(new Paragraph("GOLDEN USERA S.L. Registro de empleados").simulateItalic());
 			table.addCell(new Cell().add(dni));
 			table.addCell(new Cell().add(name));
 			table.addCell(new Cell().add(date));
