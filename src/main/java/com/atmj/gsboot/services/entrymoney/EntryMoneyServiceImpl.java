@@ -36,14 +36,11 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	private ChangeMachineTotalRepository changemachinetotalrepository;
 
 	public void saveEntryMoney(EntryMoneyForm entryMoneyForm) {
-		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
-		BigDecimal amount = entryMoneyForm.getAmount();
-		entrymoney.setAmount(amount);
-		entrymoney.setCreationdate(new DateUtil().getNow());
-		entryMoneyRepository.save(entrymoney);
+		saveEntryMoneyEmployee(entryMoneyForm);
 		if (entryMoneyForm.getOrigin().equals(Constants.getOrigin()[0])) {
 			SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
 			SafeEntity newsafe = new SafeEntity();
+			BigDecimal amount = entryMoneyForm.getAmount();
 			newsafe.setTotal(safe.getTotal().subtract(amount));
 			newsafe.setAmount(amount.negate());
 			newsafe.setCreationdate(new DateUtil().getNow());
@@ -57,6 +54,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new DateUtil().getNow());
+		entrymoney.setDescription(entryMoneyForm.getOrigin());
 		entryMoneyRepository.save(entrymoney);
 	}
 
