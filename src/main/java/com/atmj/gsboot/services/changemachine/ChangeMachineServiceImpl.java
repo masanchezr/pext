@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -132,12 +134,16 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			readFileReportTicketsDate(in);
 		} catch (IOException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
+		} catch (URISyntaxException e2) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
 			logger.debug(java.util.logging.Level.SEVERE.getName());
 		}
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnectionEvents().getInputStream()))) {
 			readFileEvents(in);
 		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+		} catch (URISyntaxException e1) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
 			logger.debug(java.util.logging.Level.SEVERE.getName());
@@ -199,7 +205,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		}
 	}
 
-	private URLConnection getConnectionEvents() throws IOException {
+	private URLConnection getConnectionEvents() throws IOException, URISyntaxException {
 		String ip = metadataservice.getValue("ipgoldenusera");
 		String address = "http://".concat(ip.concat(":3080/TicketServer/listLogs.php?"));
 		String restaddress = "&User=root&Pass".concat("word=ccm10");
@@ -209,7 +215,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
 		String authStringEnc = new String(authEncBytes);
 		address = address.concat(restaddress);
-		URL url = new URL(address);
+		URL url = new URI(address).toURL();
 		URLConnection connection = url.openConnection();
 		connection.setDoOutput(true);
 		connection.setRequestProperty("Authorization", BASIC.concat(authStringEnc));
@@ -222,8 +228,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	 * @param from
 	 * @return URLConnection
 	 * @throws IOException
+	 * @throws URISyntaxException
 	 */
-	private URLConnection getConnectionReportTicketsDate(Date from) throws IOException {
+	private URLConnection getConnectionReportTicketsDate(Date from) throws IOException, URISyntaxException {
 		String ip = metadataservice.getValue("ipgoldenusera");
 		String address = "http://".concat(ip.concat(":3080/TicketServer/reportTicketsDateTime.php?"));
 		String startdate = "StartDate=";
@@ -239,7 +246,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				.concat(DateUtil.getStringDateFormatHHmm(from)).concat(endate)
 				.concat(DateUtil.getStringDateFormatyyyyMMdd(new DateUtil().getNow())).concat(space)
 				.concat(DateUtil.getStringDateFormatHHmm(new DateUtil().getNow())).concat(restaddress);
-		URL url = new URL(address);
+		URL url = new URI(address).toURL();
 		URLConnection connection = url.openConnection();
 		connection.setDoOutput(true);
 		connection.setRequestProperty("Authorization", BASIC.concat(authStringEnc));
