@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.atmj.gsboot.admin.forms.EntryMoneyForm;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineTotalEntity;
@@ -14,11 +17,7 @@ import com.atmj.gsboot.dbaccess.repositories.ChangeMachineRepository;
 import com.atmj.gsboot.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.atmj.gsboot.dbaccess.repositories.EntryMoneyRepository;
 import com.atmj.gsboot.dbaccess.repositories.SafeRepository;
-import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.date.DateUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class EntryMoneyServiceImpl implements EntryMoneyService {
@@ -37,16 +36,14 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 
 	public void saveEntryMoney(EntryMoneyForm entryMoneyForm) {
 		saveEntryMoneyEmployee(entryMoneyForm);
-		if (entryMoneyForm.getOrigin().equals(Constants.getOrigin()[0])) {
-			SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
-			SafeEntity newsafe = new SafeEntity();
-			BigDecimal amount = entryMoneyForm.getAmount();
-			newsafe.setTotal(safe.getTotal().subtract(amount));
-			newsafe.setAmount(amount.negate());
-			newsafe.setCreationdate(new DateUtil().getNow());
-			newsafe.setDescription("CAJA COMÚN");
-			safeRepository.save(newsafe);
-		}
+		SafeEntity safe = safeRepository.findFirstByOrderByIdsafeDesc();
+		SafeEntity newsafe = new SafeEntity();
+		BigDecimal amount = entryMoneyForm.getAmount();
+		newsafe.setTotal(safe.getTotal().subtract(amount));
+		newsafe.setAmount(amount.negate());
+		newsafe.setCreationdate(new DateUtil().getNow());
+		newsafe.setDescription("CAJA COMÚN");
+		safeRepository.save(newsafe);
 	}
 
 	public void saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm) {
@@ -54,7 +51,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new DateUtil().getNow());
-		entrymoney.setDescription(entryMoneyForm.getOrigin());
+		entrymoney.setDescription("CAJA FUERTE");
 		entryMoneyRepository.save(entrymoney);
 	}
 

@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atmj.gsboot.admin.forms.EntryMoneyForm;
 import com.atmj.gsboot.services.dailies.DailyService;
 import com.atmj.gsboot.services.entrymoney.EntryMoneyService;
-import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 import com.atmj.gsboot.util.date.DateUtil;
 
@@ -32,7 +31,7 @@ public class EntryMoneyAdminController {
 	public ModelAndView newentrymoney() {
 		ModelAndView model = new ModelAndView("admin/newentrymoney");
 		model.addObject(ConstantsViews.FORMENTRYMONEY, new EntryMoneyForm());
-		model.addObject("origin", Constants.getOrigin());
+		// model.addObject("origin", Constants.getOrigin());
 		return model;
 	}
 
