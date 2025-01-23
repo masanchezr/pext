@@ -39,10 +39,10 @@ import com.atmj.gsboot.dbaccess.repositories.ChangeMachineTotalRepository;
 import com.atmj.gsboot.dbaccess.repositories.MachinesRepository;
 import com.atmj.gsboot.dbaccess.repositories.TPVRepository;
 import com.atmj.gsboot.dbaccess.repositories.TakingsRepository;
-import com.atmj.gsboot.services.mails.EmailService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.date.DateUtil;
 import com.atmj.gsboot.util.string.Util;
+import com.atmj.services.EmailService;
 import com.atmj.services.MetadataService;
 
 @Service

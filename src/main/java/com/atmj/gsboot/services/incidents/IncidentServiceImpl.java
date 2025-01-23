@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.atmj.gsboot.dbaccess.entities.IncidentEntity;
 import com.atmj.gsboot.dbaccess.repositories.IncidentRepository;
-import com.atmj.gsboot.services.mails.EmailService;
 import com.atmj.gsboot.util.date.DateUtil;
+import com.atmj.services.EmailService;
 
 @Service
 public class IncidentServiceImpl implements IncidentService {
@@ -26,7 +26,7 @@ public class IncidentServiceImpl implements IncidentService {
 		incident.setCreationdate(new DateUtil().getNow());
 		incident.setState(Boolean.FALSE);
 		incident = incidentRepository.save(incident);
-		emailService.sendSimpleMessage("godomin1971@gmail.com", "NUEVA INCIDENCIA GOLDEN USERA",
+		emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "NUEVA INCIDENCIA GOLDEN USERA",
 				incident.getDescription());
 	}
 
