@@ -61,7 +61,6 @@ public class GoldenSecurityConfig {
 								AntPathRequestMatcher.antMatcher("/admin/updateoperation"),
 								AntPathRequestMatcher.antMatcher("/admin/pendingissues"),
 								AntPathRequestMatcher.antMatcher("/admin/totalsafe"),
-								AntPathRequestMatcher.antMatcher("/admin/reset"),
 								AntPathRequestMatcher.antMatcher("/admin/searchmonthreset"),
 								AntPathRequestMatcher.antMatcher("/admin/newmessage"),
 								AntPathRequestMatcher.antMatcher("/admin/messages"),
@@ -86,9 +85,9 @@ public class GoldenSecurityConfig {
 				AntPathRequestMatcher.antMatcher("/summaryexpenses"),
 				AntPathRequestMatcher.antMatcher("/searchregister"),
 				AntPathRequestMatcher.antMatcher("/searchrecharges"), AntPathRequestMatcher.antMatcher("/daily"),
-				AntPathRequestMatcher.antMatcher("/searchtpv"),
+				AntPathRequestMatcher.antMatcher("/searchtpv"), AntPathRequestMatcher.antMatcher("/changemachinetotal"),
 				AntPathRequestMatcher.antMatcher("/searchentrysortsafe"),
-				AntPathRequestMatcher.antMatcher("/enabledisableuser"),
+				AntPathRequestMatcher.antMatcher("/enabledisableuser"), AntPathRequestMatcher.antMatcher("/reset"),
 				AntPathRequestMatcher.antMatcher("/searchopenmachines"), AntPathRequestMatcher.antMatcher("/newtpv"),
 				AntPathRequestMatcher.antMatcher("/extrahours"), AntPathRequestMatcher.antMatcher("/manualpayments"))
 				.hasRole("BOSS").anyRequest().authenticated())

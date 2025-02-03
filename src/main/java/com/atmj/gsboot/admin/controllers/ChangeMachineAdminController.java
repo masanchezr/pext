@@ -1,7 +1,5 @@
 package com.atmj.gsboot.admin.controllers;
 
-import jakarta.validation.Valid;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +14,14 @@ import com.atmj.gsboot.admin.forms.ChangeMachine;
 import com.atmj.gsboot.admin.forms.EntryMoneyForm;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineEntity;
 import com.atmj.gsboot.dbaccess.entities.ChangeMachineTotalEntity;
-import com.atmj.gsboot.forms.SearchByDatesForm;
 import com.atmj.gsboot.services.awards.AwardService;
 import com.atmj.gsboot.services.changemachine.ChangeMachineService;
 import com.atmj.gsboot.services.dailies.DailyService;
 import com.atmj.gsboot.services.machines.MachineService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ChangeMachineAdminController {
@@ -74,19 +73,6 @@ public class ChangeMachineAdminController {
 			changeMachineService.entryToVisible(entryForm.getAmount());
 			return changemachinetotal();
 		}
-	}
-
-	@PostMapping("/admin/resetcm")
-	public ModelAndView resetcm(@ModelAttribute("dateForm") SearchByDatesForm date) {
-		changeMachineService.reset(date.getDatefrom());
-		return changemachinetotal();
-	}
-
-	@GetMapping("/admin/reset")
-	public ModelAndView reset() {
-		ModelAndView model = new ModelAndView("admin/changemachine/reset");
-		model.addObject("dateForm", new SearchByDatesForm());
-		return model;
 	}
 
 	@GetMapping("/admin/updatechangemachine{id}")

@@ -3,12 +3,13 @@ package com.atmj.gsboot.admin.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.CreatedDate;
 
+import com.atmj.gsboot.dbaccess.entities.MachineEntity;
 import com.atmj.gsboot.util.constants.ConstantsViews;
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 public class Safe {
 	private Long idsafe;
@@ -23,6 +24,8 @@ public class Safe {
 	private BigDecimal total;
 
 	private String description;
+
+	private MachineEntity machine;
 
 	public String getDescription() {
 		return description;
@@ -62,6 +65,14 @@ public class Safe {
 
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public MachineEntity getMachine() {
+		return machine;
+	}
+
+	public void setMachine(MachineEntity machine) {
+		this.machine = machine;
 	}
 
 }

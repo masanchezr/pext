@@ -1,7 +1,5 @@
 package com.atmj.gsboot.admin.controllers;
 
-import jakarta.validation.Valid;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +11,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atmj.gsboot.admin.forms.Safe;
 import com.atmj.gsboot.dbaccess.entities.SafeEntity;
 import com.atmj.gsboot.services.entrymoney.EntryMoneyService;
+import com.atmj.gsboot.services.machines.MachineService;
+import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class SafeController {
 
 	@Autowired
 	private EntryMoneyService safeService;
+
+	@Autowired
+	private MachineService machineservice;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -32,6 +37,7 @@ public class SafeController {
 	public ModelAndView newentrysafe() {
 		ModelAndView model = new ModelAndView("admin/safe/safe");
 		model.addObject(FORMSALE, new Safe());
+		model.addObject(Constants.MACHINES, machineservice.searchMachinesOrder());
 		return model;
 	}
 

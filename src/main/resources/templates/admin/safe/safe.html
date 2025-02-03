@@ -4,7 +4,8 @@
 <div th:fragment="content">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="#"><span th:text="#{safe}"></span></a></li>
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{safe}"></span></a></li>
 	</ol>
 	<form method="post" th:action="@{savesafe}" th:object="${safeForm}"
 		role="form">
@@ -18,6 +19,20 @@
 									th:placeholder="#{amount}" />
 								<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
 									th:errors="*{amount}"></p>
+							</div>
+							<div class="form-group">
+								<span th:text="#{machine}"></span> <select class="form-control"
+									th:field="*{machine.idmachine}">
+									<option th:each="m:${machines}" th:value="${m.idmachine}"
+										th:text="${m.name}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{description}"
+									th:placeholder="#{optionaldescription}" />
+								<p class="text-danger"
+									th:if="${#fields.hasErrors('description')}"
+									th:errors="*{description}"></p>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-danger" value="submit">

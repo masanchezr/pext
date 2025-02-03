@@ -52,28 +52,10 @@
 					aria-labelledby="headingChangeMachine"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{newentrydirect}"><span
-							th:text="#{newentrydirect}"></span></a> <a class="collapse-item"
-							th:href="@{newentrymachine}"><span
-							th:text="#{entrychangemachine}"></span></a> <a class="collapse-item"
-							th:href="@{newentryvisible}"><span th:text="#{entrydeposit}"></span></a><a
-							class="collapse-item" th:href="@{changemachinetotal}"><span
-							th:text="#{changemachinetotal}"></span></a><a class="collapse-item"
-							th:href="@{reset}"><span th:text="#{resetmonthend}"></span></a>
-					</div>
-				</div></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				aria-expanded="true" aria-controls="collpase" href="#"
-				data-bs-target="#collapseschedule" data-bs-toggle="collapse"><i
-					class="fa fa-calendar fa-fw"></i> <span th:text="#{schedule}"></span>
-			</a>
-				<div id="collapseschedule" class="collapse"
-					aria-labelledby="headingschedule" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a th:href="@{searchschedule}" class="collapse-item"><span
-							th:text="#{searchschedule}"></span></a> <a
-							th:href="@{searchregister}" class="collapse-item"> <span
-							th:text="#{register}"></span></a>
+						<a class="collapse-item" th:href="@{newentrymachine}"><span
+							th:text="#{entrychangemachine}"></span></a><a class="collapse-item"
+							th:href="@{changemachinetotal}"><span
+							th:text="#{changemachinetotal}"></span></a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a th:href="@{pendingissues}"

@@ -55,4 +55,26 @@ public class ChangeMachineController {
 		model.addObject(ConstantsViews.MODELCOLLECTION, changeMachineService.manualpayments(c.getId()));
 		return model;
 	}
+
+	@GetMapping("/reset")
+	public ModelAndView reset() {
+		ModelAndView model = new ModelAndView("boss/changemachine/reset");
+		model.addObject("dateForm", new SearchByDatesForm());
+		return model;
+	}
+
+	@PostMapping("/resetcm")
+	public ModelAndView resetcm(@ModelAttribute("dateForm") SearchByDatesForm date) {
+		changeMachineService.reset(date.getDatefrom());
+		return changemachinetotal();
+	}
+
+	@GetMapping("/changemachinetotal")
+	public ModelAndView changemachinetotal() {
+		ModelAndView model = new ModelAndView("boss/changemachine/changemachinetotal");
+		model.addObject("totalmonth", changeMachineService.getIncomeTotalMonth());
+		model.addObject(ConstantsViews.TOTAL, changeMachineService.getTotal());
+		model.addObject(ConstantsViews.AWARDS, changeMachineService.getAwards());
+		return model;
+	}
 }
