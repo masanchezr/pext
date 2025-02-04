@@ -42,7 +42,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		newsafe.setTotal(safe.getTotal().subtract(amount));
 		newsafe.setAmount(amount.negate());
 		newsafe.setCreationdate(new DateUtil().getNow());
-		newsafe.setDescription("CAJA COMÚN");
+		newsafe.setDescription("CAJA COMÚN ".concat(entryMoneyForm.getOrigin()));
 		safeRepository.save(newsafe);
 	}
 
@@ -51,7 +51,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		BigDecimal amount = entryMoneyForm.getAmount();
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new DateUtil().getNow());
-		entrymoney.setDescription("CAJA FUERTE");
+		entrymoney.setDescription("CAJA FUERTE ".concat(entryMoneyForm.getOrigin()));
 		entryMoneyRepository.save(entrymoney);
 	}
 
@@ -93,7 +93,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	/**
 	 * Entrada a depósito de máquina de cambio
 	 */
-	public BigDecimal saveSub(SafeEntity safe) {
+	public BigDecimal saveAddChangeMachine(SafeEntity safe) {
 		BigDecimal amount = safe.getAmount();
 		BigDecimal totalsafe = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
 		ChangeMachineTotalEntity changemachinetotal = changemachinetotalrepository
@@ -157,5 +157,15 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		calendar.set(Calendar.SECOND, 59);
 		until = calendar.getTime();
 		return safeRepository.findByCreationdateBetween(from, until);
+	}
+
+	@Override
+	public BigDecimal saveSub(SafeEntity safe) {
+		BigDecimal amount = safe.getAmount();
+		BigDecimal totalsafe = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
+		safe.setTotal(totalsafe.subtract(amount));
+		safe.setAmount(amount.negate());
+		safe.setCreationdate(new Date());
+		return safeRepository.save(safe).getTotal();
 	}
 }

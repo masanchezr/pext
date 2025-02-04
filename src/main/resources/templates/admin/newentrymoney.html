@@ -26,6 +26,13 @@
 								</button>
 							</div>
 						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<input class="form-control" th:field="*{origin}"
+									th:placeholder="#{description}" />
+								<p class="text-danger" th:if="${#fields.hasErrors('origin')}"
+									th:errors="*{origin}"></p></div>
+						</div>
 					</div>
 				</div>
 			</div>

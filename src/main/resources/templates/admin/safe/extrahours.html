@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:insert="~{admin/template :: page}">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{extrahours}"></span></a></li>
+	</ol>
+	<form method="post" th:action="@{saveextrahours}"
+		th:object="${extraHoursForm}" role="form">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<input class="form-control" th:field="*{amount}"
+									th:placeholder="#{amount}" />
+								<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
+									th:errors="*{amount}"></p>
+							</div>
+							<div class="form-group">
+								<span th:text="#{extrahoursdescription}" /></span>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<input class="form-control" th:field="*{description}"
+									th:placeholder="#{description}" />
+								<p class="text-danger"
+									th:if="${#fields.hasErrors('description')}"
+									th:errors="*{description}"></p>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-danger" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

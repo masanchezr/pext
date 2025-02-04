@@ -54,6 +54,26 @@ public class SafeController {
 		return model;
 	}
 
+	@GetMapping("/admin/extrahours")
+	public ModelAndView extraHours() {
+		ModelAndView model = new ModelAndView("admin/safe/extrahours");
+		model.addObject("extraHoursForm", new Safe());
+		return model;
+	}
+
+	@PostMapping("/admin/saveextrahours")
+	public ModelAndView saveExtraHours(@Valid Safe safe, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		if (result.hasErrors()) {
+			model.setViewName("admin/safe/extrahours");
+			model.addObject("extraHoursForm", safe);
+		} else {
+			model.addObject(ConstantsViews.TOTALAMOUNT, safeService.saveSub(mapper.map(safe, SafeEntity.class)));
+			model.setViewName(VIEWTOTALSAFE);
+		}
+		return model;
+	}
+
 	@GetMapping("/admin/newentrymachine")
 	public ModelAndView newentrymachine() {
 		ModelAndView model = new ModelAndView("admin/changemachine/newentrychangemachine");
@@ -68,7 +88,8 @@ public class SafeController {
 			model.setViewName("admin/changemachine/newentrychangemachine");
 			model.addObject(FORMSALE, safe);
 		} else {
-			model.addObject(ConstantsViews.TOTALAMOUNT, safeService.saveSub(mapper.map(safe, SafeEntity.class)));
+			model.addObject(ConstantsViews.TOTALAMOUNT,
+					safeService.saveAddChangeMachine(mapper.map(safe, SafeEntity.class)));
 			model.setViewName(VIEWTOTALSAFE);
 		}
 		return model;

@@ -20,11 +20,13 @@ public interface EntryMoneyService {
 
 	public BigDecimal saveAdd(SafeEntity safe);
 
-	public BigDecimal saveSub(SafeEntity safe);
+	public BigDecimal saveAddChangeMachine(SafeEntity safe);
 
 	public BigDecimal searchTotalSafe();
 
 	public List<SafeEntity> searchByDates(String datefrom);
 
 	public BigDecimal saveSubDirect(SafeEntity safe);
+
+	public BigDecimal saveSub(SafeEntity safe);
 }
