@@ -18,4 +18,9 @@ class EntryMoneyServiceTest {
 	void searchByDatesTest() {
 		assertNotNull(entryMoneyService.searchByDates("02-05-2018"));
 	}
+
+	@Test
+	void searchTodayTest() {
+		assertNotNull(entryMoneyService.searchToday());
+	}
 }
