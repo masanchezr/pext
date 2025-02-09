@@ -121,4 +121,12 @@ public class SafeController {
 		model.addObject(ConstantsViews.TOTALAMOUNT, safeService.searchTotalSafe());
 		return model;
 	}
+
+	@GetMapping("/admin/resultentrysortsafe")
+	public ModelAndView resultentrysortsafe() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("resultsearch", safeService.searchToday());
+		model.setViewName("admin/safe/resultentrysortsafe");
+		return model;
+	}
 }

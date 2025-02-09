@@ -29,4 +29,6 @@ public interface EntryMoneyService {
 	public BigDecimal saveSubDirect(SafeEntity safe);
 
 	public BigDecimal saveSub(SafeEntity safe);
+
+	public List<SafeEntity> searchToday();
 }

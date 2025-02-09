@@ -168,4 +168,22 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		safe.setCreationdate(new Date());
 		return safeRepository.save(safe).getTotal();
 	}
+
+	@Override
+	public List<SafeEntity> searchToday() {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		Date from;
+		Date until;
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 1);
+		from = calendar.getTime();
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		calendar.set(Calendar.SECOND, 59);
+		until = calendar.getTime();
+		return safeRepository.findByCreationdateBetween(from, until);
+	}
 }
