@@ -16,8 +16,6 @@ public interface EntryMoneyService {
 
 	public void saveEntryMoneyEmployee(EntryMoneyForm entryMoneyForm);
 
-	public void saveEntryMachine(EntryMoneyForm entryMoney);
-
 	public BigDecimal saveAdd(SafeEntity safe);
 
 	public BigDecimal saveAddChangeMachine(SafeEntity safe);

@@ -393,11 +393,9 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 
 	@Override
 	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
-		if ("127.0.0.1".equals(ip)) {
-			ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-			total.setVisible(total.getVisible().subtract(amount));
-			changeMachineTotalRepository.save(total);
-		}
+		ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+		total.setVisible(total.getVisible().subtract(amount));
+		changeMachineTotalRepository.save(total);
 	}
 
 	@Override

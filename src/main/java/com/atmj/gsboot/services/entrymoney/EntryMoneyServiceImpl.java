@@ -59,26 +59,6 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		return entryMoneyRepository.findByCreationdateBetween(from, until);
 	}
 
-	public void saveEntryMachine(EntryMoneyForm entryMoney) {
-		ChangeMachineTotalEntity machinetotal = new ChangeMachineTotalEntity();
-		ChangeMachineEntity machine = new ChangeMachineEntity();
-		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
-		BigDecimal amount = entryMoney.getAmount();
-		entrymoney.setAmount(amount.negate());
-		entrymoney.setCreationdate(new DateUtil().getNow());
-		entrymoney.setDescription("Máquina de cambio");
-		entryMoneyRepository.save(entrymoney);
-		machine.setAmount(amount);
-		machine.setCreationdate(new DateUtil().getNow());
-		machine.setIdchangemachine(changemachinerepository
-				.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc().getIdchangemachine() + 1);
-		machinetotal.setCreationdate(new DateUtil().getNow());
-		machinetotal.setDeposit(changemachinetotalrepository.findFirstByOrderByIdchangemachinetotalDesc().getDeposit()
-				.add(entryMoney.getAmount()));
-		changemachinerepository.save(machine);
-		changemachinetotalrepository.save(machinetotal);
-	}
-
 	public BigDecimal saveAdd(SafeEntity safe) {
 		BigDecimal total = safeRepository.findFirstByOrderByIdsafeDesc().getTotal();
 		safe.setCreationdate(new DateUtil().getNow());
@@ -116,7 +96,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	}
 
 	/**
-	 * Entrada a directa a máquina de cambio
+	 * Entrada directa a máquina de cambio
 	 */
 	public BigDecimal saveSubDirect(SafeEntity safe) {
 		BigDecimal amount = safe.getAmount();
