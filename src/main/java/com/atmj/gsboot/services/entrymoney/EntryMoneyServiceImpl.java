@@ -79,10 +79,13 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		ChangeMachineTotalEntity changemachinetotal = changemachinetotalrepository
 				.findFirstByOrderByIdchangemachinetotalDesc();
 		ChangeMachineEntity entity = new ChangeMachineEntity();
+		ChangeMachineTotalEntity totalcm = new ChangeMachineTotalEntity();
 		Long id = changemachinerepository.findFirstByAwardIsNullAndMachineIsNullOrderByIdchangemachineDesc()
 				.getIdchangemachine();
 		Date today = new DateUtil().getNow();
-		changemachinetotal.setDeposit(amount.add(changemachinetotal.getDeposit()));
+		totalcm.setDeposit(amount.add(changemachinetotal.getDeposit()));
+		totalcm.setCreationdate(today);
+		totalcm.setVisible(changemachinetotal.getVisible());
 		entity.setCreationdate(today);
 		entity.setAmount(amount);
 		entity.setIdchangemachine(id + 1);
@@ -91,7 +94,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		safe.setAmount(amount.negate());
 		safe.setDescription("CHANGEMACHINE");
 		changemachinerepository.save(entity);
-		changemachinetotalrepository.save(changemachinetotal);
+		changemachinetotalrepository.save(totalcm);
 		return safeRepository.save(safe).getTotal();
 	}
 

@@ -394,8 +394,13 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	@Override
 	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
 		ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-		total.setVisible(total.getVisible().subtract(amount));
-		changeMachineTotalRepository.save(total);
+		// Creamos nuevo para registrarlo todo, cuando averigue que es lo que pasa lo
+		// puedo quitar
+		ChangeMachineTotalEntity newTotal = new ChangeMachineTotalEntity();
+		newTotal.setVisible(total.getVisible().subtract(amount));
+		newTotal.setDeposit(total.getDeposit());
+		newTotal.setCreationdate(new Date());
+		changeMachineTotalRepository.save(newTotal);
 	}
 
 	@Override
@@ -419,9 +424,11 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 	@Override
 	public void entryToVisible(BigDecimal amount) {
 		ChangeMachineTotalEntity entity = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-		entity.setDeposit(entity.getDeposit().subtract(amount));
-		entity.setVisible(entity.getVisible().add(amount));
-		changeMachineTotalRepository.save(entity);
+		ChangeMachineTotalEntity newTotal = new ChangeMachineTotalEntity();
+		newTotal.setDeposit(entity.getDeposit().subtract(amount));
+		newTotal.setVisible(entity.getVisible().add(amount));
+		newTotal.setCreationdate(new Date());
+		changeMachineTotalRepository.save(newTotal);
 	}
 
 	@Override
