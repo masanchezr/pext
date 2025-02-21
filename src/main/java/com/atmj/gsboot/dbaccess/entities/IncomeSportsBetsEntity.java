@@ -27,7 +27,7 @@ public class IncomeSportsBetsEntity {
 	@CreatedDate
 	private Date creationdate;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	@Column(name = Constants.DESCRIPTION)

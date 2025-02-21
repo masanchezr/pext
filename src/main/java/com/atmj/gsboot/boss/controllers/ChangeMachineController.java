@@ -11,6 +11,7 @@ import com.atmj.gsboot.boss.forms.CollectionForm;
 import com.atmj.gsboot.forms.SearchByDatesForm;
 import com.atmj.gsboot.services.changemachine.ChangeMachineService;
 import com.atmj.gsboot.services.takings.TakeService;
+import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 
 @Controller
@@ -26,7 +27,7 @@ public class ChangeMachineController {
 	public ModelAndView searchRecharges() {
 		ModelAndView model = new ModelAndView("boss/recharges/searchrecharges");
 		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
-		model.addObject("takings", takeService.getAllTakings());
+		model.addObject(Constants.TAKINGS, takeService.getAllTakings());
 		return model;
 	}
 
@@ -44,7 +45,7 @@ public class ChangeMachineController {
 		ModelAndView model = new ModelAndView("boss/manualpayments/selecttake");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchByDatesForm());
 		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
-		model.addObject("takings", changeMachineService.getAllTakings());
+		model.addObject(Constants.TAKINGS, changeMachineService.getAllTakings());
 		return model;
 	}
 

@@ -67,7 +67,7 @@ public class ChangeMachineAdminController {
 		if (total.getDeposit().compareTo(entryForm.getAmount()) < 0) {
 			ModelAndView model = new ModelAndView("admin/changemachine/newentrydeposittovisible");
 			model.addObject("money", new EntryMoneyForm());
-			result.rejectValue("amount", "amountplusthan");
+			result.rejectValue(Constants.AMOUNT, "amountplusthan");
 			return model;
 		} else {
 			changeMachineService.entryToVisible(entryForm.getAmount());

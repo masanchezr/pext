@@ -2,6 +2,8 @@ package com.atmj.gsboot.dbaccess.entities;
 
 import java.util.Date;
 
+import com.atmj.gsboot.util.constants.Constants;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "takings")
+@Table(name = Constants.TAKINGS)
 public class TakeEntity {
 
 	@Id

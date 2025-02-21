@@ -52,7 +52,7 @@ public class GratificationEntity {
 	@JoinColumn(name = "idmachine", referencedColumnName = "idmachine")
 	private MachineEntity machine;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private Integer amount;
 
 	public Long getIdgratification() {

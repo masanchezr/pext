@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atmj.gsboot.boss.forms.CollectionForm;
 import com.atmj.gsboot.services.operations.OperationService;
 import com.atmj.gsboot.services.takings.TakeService;
+import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 
 @Controller
@@ -25,7 +26,7 @@ public class ExpensesController {
 	public ModelAndView searchexpenses() {
 		ModelAndView model = new ModelAndView("boss/expenses/searchexpenses");
 		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
-		model.addObject("takings", takeService.getAllTakings());
+		model.addObject(Constants.TAKINGS, takeService.getAllTakings());
 		return model;
 	}
 

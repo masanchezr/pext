@@ -80,4 +80,12 @@ public class Constants {
 
 	public static final Integer EATANDDRINKS = 7;
 
+	public static final String sTPV = "TPV";
+
+	public static final String LOCALHOST = "127.0.0.1";
+
+	public static final String EXISTS = "exists";
+
+	public static final String TAKINGS = "takings";
+
 }

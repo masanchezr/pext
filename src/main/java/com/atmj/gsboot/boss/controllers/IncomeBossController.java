@@ -16,6 +16,7 @@ import com.atmj.gsboot.services.incomemachines.IncomeMachineService;
 import com.atmj.gsboot.services.incomesportsbets.IncomeSportsBetsService;
 import com.atmj.gsboot.services.returnmoneyemployees.ReturnMoneyEmployeeService;
 import com.atmj.gsboot.services.takings.TakeService;
+import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 
 @Controller
@@ -40,7 +41,7 @@ public class IncomeBossController {
 	public ModelAndView summaryincome() {
 		ModelAndView model = new ModelAndView("boss/income/searchincome");
 		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
-		model.addObject("takings", takeService.getAllTakings());
+		model.addObject(Constants.TAKINGS, takeService.getAllTakings());
 		return model;
 	}
 

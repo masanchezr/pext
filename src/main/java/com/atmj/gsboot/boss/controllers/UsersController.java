@@ -68,7 +68,7 @@ public class UsersController {
 			model.addObject(ConstantsViews.USER, user);
 			if (userService.findUser(user.getUsername()) != null) {
 				model.setViewName(VIEWNEWUSER);
-				result.rejectValue(Constants.USERNAME, "exists");
+				result.rejectValue(Constants.USERNAME, Constants.EXISTS);
 			} else {
 				model.setViewName("boss/users/saveuser/resultuser");
 				userService.newUser(user);

@@ -49,7 +49,7 @@ public class TPVController {
 	public ModelAndView searchtpv() {
 		ModelAndView model = new ModelAndView("boss/tpv/searchtpv");
 		model.addObject(ConstantsViews.MODELCOLLECTION, new CollectionForm());
-		model.addObject("takings", takeService.getAllTakings());
+		model.addObject(Constants.TAKINGS, takeService.getAllTakings());
 		return model;
 	}
 
@@ -59,8 +59,8 @@ public class TPVController {
 		Long id = c.getId();
 		Date from = takeService.getFrom(id);
 		Date until = takeService.findById(id).getTakedate();
-		model.addObject("amount", tpvservice.sumByCreationdate(from, until));
-		model.addObject("operations", tpvservice.getOperationsTpv(from, until));
+		model.addObject(Constants.AMOUNT, tpvservice.sumByCreationdate(from, until));
+		model.addObject(ConstantsViews.OPERATIONS, tpvservice.getOperationsTpv(from, until));
 		model.setViewName("boss/tpv/resulttpv");
 		return model;
 	}
@@ -86,7 +86,7 @@ public class TPVController {
 			if (tpvservice.exists(tpv.getIdtpv())) {
 				model.setViewName(VIEWNEWTPV);
 				model.addObject(FORMTPV, tpv);
-				result.rejectValue(Constants.IDTPV, "exists");
+				result.rejectValue(Constants.IDTPV, Constants.EXISTS);
 				model.addObject(ConstantsViews.PAYMENTS, paymentservice.findAll());
 			} else {
 				Date datetpv = DateUtil.getDate(tpv.getSdate());
@@ -94,7 +94,7 @@ public class TPVController {
 				Calendar now = Calendar.getInstance();
 				calendartpv.setTime(datetpv);
 				model.addObject(ConstantsViews.DAILY, tpvservice.save(mapper.convertToEntity(tpv)));
-				changeMachineService.subtractChangeMachineTotal("127.0.0.1", tpv.getAmount());
+				changeMachineService.subtractChangeMachineTotal(Constants.LOCALHOST, Constants.sTPV, tpv.getAmount());
 				if (calendartpv.get(Calendar.YEAR) == now.get(Calendar.YEAR)
 						&& calendartpv.get(Calendar.MONTH) == now.get(Calendar.MONTH)
 						&& calendartpv.get(Calendar.DAY_OF_MONTH) == now.get(Calendar.DAY_OF_MONTH)) {

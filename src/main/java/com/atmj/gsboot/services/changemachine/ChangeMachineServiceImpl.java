@@ -294,7 +294,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 				amount = new BigDecimal(samount.substring(0, samount.length() - 1).replaceFirst(",", ""));
 				node = (TextNode) nodes.get(11).childNode(0);
 				scomments = node.getWholeText();
-				if (award.equals("TPV") && Util.isNumeric(scomments)) {
+				if (award.equals(Constants.sTPV) && Util.isNumeric(scomments)) {
 					idtpv = Long.valueOf(scomments);
 					loadTPV(ip, date, amount, idtpv);
 				} else {
@@ -319,7 +319,7 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 			tpv.setAmount(amount);
 			tpv.setIdtpv(idtpv);
 			tpvrepository.save(tpv);
-			subtractChangeMachineTotal(ip, amount);
+			subtractChangeMachineTotal(ip, Constants.sTPV, amount);
 		}
 	}
 
@@ -388,19 +388,16 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		cm.setCreationdate(date);
 		cm.setAmount(amount);
 		changeMachineRepository.save(cm);
-		subtractChangeMachineTotal(ip, amount);
+		subtractChangeMachineTotal(ip, award, amount);
 	}
 
 	@Override
-	public void subtractChangeMachineTotal(String ip, BigDecimal amount) {
-		ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
-		// Creamos nuevo para registrarlo todo, cuando averigue que es lo que pasa lo
-		// puedo quitar
-		ChangeMachineTotalEntity newTotal = new ChangeMachineTotalEntity();
-		newTotal.setVisible(total.getVisible().subtract(amount));
-		newTotal.setDeposit(total.getDeposit());
-		newTotal.setCreationdate(new Date());
-		changeMachineTotalRepository.save(newTotal);
+	public void subtractChangeMachineTotal(String ip, String award, BigDecimal amount) {
+		if (!award.equals("DATAFONO") || (award.equals("DATAFONO") && ip.equals(Constants.LOCALHOST))) {
+			ChangeMachineTotalEntity total = changeMachineTotalRepository.findFirstByOrderByIdchangemachinetotalDesc();
+			total.setVisible(total.getVisible().subtract(amount));
+			changeMachineTotalRepository.save(total);
+		}
 	}
 
 	@Override

@@ -29,12 +29,12 @@ public interface ChangeMachineService {
 
 	public void entryToVisible(BigDecimal amount);
 
-	void subtractChangeMachineTotal(String ip, BigDecimal amount);
-
 	Iterable<TakeEntity> getAllTakings();
 
 	public List<CollectionEntity> manualpayments(Long idtake);
 
 	public List<ChangeMachineEntity> recharges(Date from, Date takedate);
+
+	void subtractChangeMachineTotal(String ip, String award, BigDecimal amount);
 
 }
