@@ -35,6 +35,6 @@ public interface ChangeMachineService {
 
 	public List<ChangeMachineEntity> recharges(Date from, Date takedate);
 
-	void subtractChangeMachineTotal(String ip, String award, BigDecimal amount);
+	void subtractChangeMachineTotal(String ip, BigDecimal amount);
 
 }
