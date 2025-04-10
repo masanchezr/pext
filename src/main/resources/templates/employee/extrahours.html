@@ -34,7 +34,7 @@
 								<div class="form-group has-error">
 									<label class="control-label" for="inputSuccess"
 										th:if="${#fields.hasErrors('description')}"
-										th:errors="description"></label>
+										th:errors="*{description}"></label>
 								</div>
 							</div>
 						</div>
