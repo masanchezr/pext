@@ -23,7 +23,6 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.gsboot.dbaccess.entities.AwardsChangeMachineEntity;
@@ -48,31 +47,36 @@ import com.atmj.services.MetadataService;
 @Service
 public class ChangeMachineServiceImpl implements ChangeMachineService {
 
-	@Autowired
-	private EmailService emailService;
+	private final EmailService emailService;
 
-	@Autowired
-	private MetadataService metadataservice;
+	private final MetadataService metadataservice;
 
-	@Autowired
-	private ChangeMachineRepository changeMachineRepository;
+	private final ChangeMachineRepository changeMachineRepository;
 
-	@Autowired
-	private ChangeMachineTotalRepository changeMachineTotalRepository;
+	private final ChangeMachineTotalRepository changeMachineTotalRepository;
 
-	@Autowired
-	private MachinesRepository machinesRepository;
+	private final MachinesRepository machinesRepository;
 
-	@Autowired
-	private TakingsRepository takingsRepository;
+	private final TakingsRepository takingsRepository;
 
-	@Autowired
-	private TPVRepository tpvrepository;
+	private final TPVRepository tpvrepository;
 
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ChangeMachineServiceImpl.class);
 
 	private static final String BASIC = "Basic ";
+
+	public ChangeMachineServiceImpl(EmailService emailService, MetadataService metadataservice,
+			ChangeMachineRepository changeMachineRepository, ChangeMachineTotalRepository changeMachineTotalRepository,
+			MachinesRepository machinesRepository, TakingsRepository takingsRepository, TPVRepository tpvrepository) {
+		this.emailService = emailService;
+		this.metadataservice = metadataservice;
+		this.changeMachineRepository = changeMachineRepository;
+		this.changeMachineTotalRepository = changeMachineTotalRepository;
+		this.machinesRepository = machinesRepository;
+		this.takingsRepository = takingsRepository;
+		this.tpvrepository = tpvrepository;
+	}
 
 	@Override
 	public void reset(String sdate) {
@@ -132,18 +136,14 @@ public class ChangeMachineServiceImpl implements ChangeMachineService {
 		try (BufferedReader in = new BufferedReader(
 				new InputStreamReader(getConnectionReportTicketsDate(from).getInputStream()))) {
 			readFileReportTicketsDate(in);
-		} catch (IOException e) {
-			logger.error(java.util.logging.Level.SEVERE.getName());
-		} catch (URISyntaxException e2) {
+		} catch (IOException | URISyntaxException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
 			logger.debug(java.util.logging.Level.SEVERE.getName());
 		}
 		try (BufferedReader in = new BufferedReader(new InputStreamReader(getConnectionEvents().getInputStream()))) {
 			readFileEvents(in);
-		} catch (IOException e) {
-			logger.error(java.util.logging.Level.SEVERE.getName());
-		} catch (URISyntaxException e1) {
+		} catch (IOException | URISyntaxException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
 		} finally {
 			logger.debug(java.util.logging.Level.SEVERE.getName());

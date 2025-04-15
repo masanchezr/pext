@@ -35,8 +35,10 @@ class ChangeMachineServiceTest {
 		c.set(Calendar.DAY_OF_MONTH, 30);
 		Assertions.assertNotNull(changeMachineService.recharges(c.getTime(), now));
 	}
-	/**
-	 * @Test void loadDataTicketServerTest() {
-	 *       changeMachineService.loadDataTicketServer(); }
-	 **/
+
+	@Test
+	void loadDataTicketServerTest() {
+		changeMachineService.loadDataTicketServer();
+	}
+
 }
