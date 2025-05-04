@@ -1,6 +1,5 @@
 package com.atmj.gsboot.boss.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +15,16 @@ import com.atmj.gsboot.validators.SearchDatesFormValidator;
 @Controller
 public class SafeBossController {
 
-	@Autowired
 	private EntryMoneyService safeService;
 
-	@Autowired
 	private SearchDatesFormValidator validator;
 
 	private static final String VIEWSEARCHENTRYSORTSAFE = "boss/safe/searchentrysortsafe";
+
+	public SafeBossController(EntryMoneyService safeService, SearchDatesFormValidator validator) {
+		this.safeService = safeService;
+		this.validator = validator;
+	}
 
 	@GetMapping("/safetotal")
 	public ModelAndView safetotal() {

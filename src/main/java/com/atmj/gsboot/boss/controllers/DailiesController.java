@@ -3,7 +3,6 @@ package com.atmj.gsboot.boss.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +24,17 @@ import com.atmj.gsboot.validators.SearchDatesFormValidator;
 public class DailiesController {
 
 	/** The daily service. */
-	@Autowired
 	private DailyService dailyService;
 
-	@Autowired
 	private SearchDatesFormValidator validator;
 
 	private static final String FORMSEARCHDAILY = "searchDailyForm";
 	private static final String VIEWSEARCHDAILY = "boss/dailies/searchdaily";
+
+	public DailiesController(DailyService dailyService, SearchDatesFormValidator validator) {
+		this.dailyService = dailyService;
+		this.validator = validator;
+	}
 
 	@GetMapping("/daily")
 	public ModelAndView daily() {

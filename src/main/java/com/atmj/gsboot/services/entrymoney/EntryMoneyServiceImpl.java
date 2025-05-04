@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.gsboot.admin.forms.EntryMoneyForm;
@@ -22,17 +21,22 @@ import com.atmj.gsboot.util.date.DateUtil;
 @Service
 public class EntryMoneyServiceImpl implements EntryMoneyService {
 
-	@Autowired
 	private EntryMoneyRepository entryMoneyRepository;
 
-	@Autowired
 	private SafeRepository safeRepository;
 
-	@Autowired
 	private ChangeMachineRepository changemachinerepository;
 
-	@Autowired
 	private ChangeMachineTotalRepository changemachinetotalrepository;
+
+	public EntryMoneyServiceImpl(EntryMoneyRepository entryMoneyRepository, SafeRepository safeRepository,
+			ChangeMachineRepository changemachinerepository,
+			ChangeMachineTotalRepository changemachinetotalrepository) {
+		this.entryMoneyRepository = entryMoneyRepository;
+		this.safeRepository = safeRepository;
+		this.changemachinerepository = changemachinerepository;
+		this.changemachinetotalrepository = changemachinetotalrepository;
+	}
 
 	public void saveEntryMoney(EntryMoneyForm entryMoneyForm) {
 		saveEntryMoneyEmployee(entryMoneyForm);

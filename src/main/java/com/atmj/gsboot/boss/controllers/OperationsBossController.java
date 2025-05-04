@@ -1,7 +1,6 @@
 package com.atmj.gsboot.boss.controllers;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,23 +22,28 @@ import com.atmj.gsboot.validators.OperationsValidator;
 @Controller
 public class OperationsBossController {
 
-	@Autowired
 	private AwardService awardService;
 
-	@Autowired
 	private MachineService machineService;
 
-	@Autowired
 	private PaymentService paymentService;
 
-	@Autowired
 	private OperationService operationService;
 
-	@Autowired
 	private OperationsValidator validator;
 
-	@Autowired
 	private ModelMapper mapper;
+
+	public OperationsBossController(AwardService awardService, MachineService machineService,
+			PaymentService paymentService, OperationService operationService, OperationsValidator validator,
+			ModelMapper mapper) {
+		this.awardService = awardService;
+		this.machineService = machineService;
+		this.paymentService = paymentService;
+		this.operationService = operationService;
+		this.validator = validator;
+		this.mapper = mapper;
+	}
 
 	@GetMapping("/updateoperation{id}")
 	public ModelAndView updateoperationboss(@PathVariable("id") long id) {
