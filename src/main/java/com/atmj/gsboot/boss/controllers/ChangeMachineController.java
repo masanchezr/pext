@@ -1,7 +1,7 @@
 package com.atmj.gsboot.boss.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +14,19 @@ import com.atmj.gsboot.services.takings.TakeService;
 import com.atmj.gsboot.util.constants.Constants;
 import com.atmj.gsboot.util.constants.ConstantsViews;
 
+import jakarta.validation.Valid;
+
 @Controller
 public class ChangeMachineController {
 
-	@Autowired
 	private ChangeMachineService changeMachineService;
 
-	@Autowired
 	private TakeService takeService;
+
+	public ChangeMachineController(ChangeMachineService changeMachineService, TakeService takeService) {
+		this.changeMachineService = changeMachineService;
+		this.takeService = takeService;
+	}
 
 	@GetMapping("/searchrecharges")
 	public ModelAndView searchRecharges() {
@@ -65,9 +70,15 @@ public class ChangeMachineController {
 	}
 
 	@PostMapping("/resetcm")
-	public ModelAndView resetcm(@ModelAttribute("dateForm") SearchByDatesForm date) {
-		changeMachineService.reset(date.getDatefrom());
-		return changemachinetotal();
+	public ModelAndView resetcm(@Valid @ModelAttribute("dateForm") SearchByDatesForm date, BindingResult e) {
+		if (e.hasErrors()) {
+			ModelAndView model = new ModelAndView("boss/changemachine/reset");
+			model.addObject("dateForm", date);
+			return model;
+		} else {
+			changeMachineService.reset(date.getDatefrom());
+			return changemachinetotal();
+		}
 	}
 
 	@GetMapping("/changemachinetotal")

@@ -20,6 +20,7 @@
 								<th th:text="#{amount}"></th>
 								<th th:text="#{total}"></th>
 								<th th:text="#{description}"></th>
+								<th th:text="#{machine}"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -30,6 +31,7 @@
 								<td><span th:text="${result.total}"></span><i
 									class="fa fa-euro-sign"></i></td>
 								<td th:text="${result.description}"></td>
+								<td th:text="${result.machine.nameticket}"></td>
 							</tr>
 						</tbody>
 					</table>

@@ -1,18 +1,16 @@
 package com.atmj.gsboot.forms;
 
+import com.atmj.gsboot.util.constants.ConstantsViews;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import com.atmj.gsboot.util.constants.ConstantsViews;
-
 public class SearchByDatesForm {
 
-	@NotNull
-	@NotEmpty(message = ConstantsViews.ERRORSELECTDATE)
+	@NotNull(message = "{" + ConstantsViews.ERRORSELECTDATE + "}")
+	@NotEmpty(message = "{" + ConstantsViews.ERRORSELECTDATE + "}")
 	private String datefrom;
 
-	@NotNull
-	@NotEmpty(message = ConstantsViews.ERRORSELECTDATE)
 	private String dateuntil;
 
 	public String getDatefrom() {
