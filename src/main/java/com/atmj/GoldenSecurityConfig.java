@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.atmj.gsboot.services.users.UserDetailServiceImpl;
 
@@ -16,29 +15,29 @@ import com.atmj.gsboot.services.users.UserDetailServiceImpl;
 @EnableWebSecurity
 public class GoldenSecurityConfig {
 
-	@Autowired
 	private UserDetailServiceImpl userDetailsService;
+	private static final String ADMIN = "ADMIN";
+
+	public GoldenSecurityConfig(UserDetailServiceImpl userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
 
 	@Bean
 	public SecurityFilterChain employeeFilterChain(HttpSecurity http) throws Exception {
 		http.securityMatcher("/employee/**")
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(AntPathRequestMatcher.antMatcher("/employee/admin"),
-								AntPathRequestMatcher.antMatcher("/employee/myincidents"),
-								AntPathRequestMatcher.antMatcher("/employee/in"),
-								AntPathRequestMatcher.antMatcher("/employee/daily"),
-								AntPathRequestMatcher.antMatcher("/employee/out"),
-								AntPathRequestMatcher.antMatcher("/employee/newoperation"),
-								AntPathRequestMatcher.antMatcher("/employee/newconcept"),
-								AntPathRequestMatcher.antMatcher("/employee/newincome"),
-								AntPathRequestMatcher.antMatcher("/employee/newgratification"),
-								AntPathRequestMatcher.antMatcher("/employee/registernumber"),
-								AntPathRequestMatcher.antMatcher("/employee/lastgratifications"),
-								AntPathRequestMatcher.antMatcher("/employee/newpaymentchangemachine"),
-								AntPathRequestMatcher.antMatcher("/employee/newmoneyadvance"),
-								AntPathRequestMatcher.antMatcher("/employee/newopenmachine"),
-								AntPathRequestMatcher.antMatcher("/employee/extrahours"))
-						.hasRole("USER").anyRequest().authenticated())
+				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/employee/admin").hasRole("USER")
+						.requestMatchers("/employee/myincidents").hasRole("USER").requestMatchers("/employee/in")
+						.hasRole("USER").requestMatchers("/employee/daily").hasRole("USER")
+						.requestMatchers("/employee/out").hasRole("USER").requestMatchers("/employee/newoperation")
+						.hasRole("USER").requestMatchers("/employee/newconcept").hasRole("USER")
+						.requestMatchers("/employee/newincome").hasRole("USER")
+						.requestMatchers("/employee/newgratification").hasRole("USER")
+						.requestMatchers("/employee/registernumber").hasRole("USER")
+						.requestMatchers("/employee/lastgratifications").hasRole("USER")
+						.requestMatchers("/employee/newpaymentchangemachine").hasRole("USER")
+						.requestMatchers("/employee/newmoneyadvance").hasRole("USER")
+						.requestMatchers("/employee/newopenmachine").hasRole("USER")
+						.requestMatchers("/employee/extrahours").hasRole("USER").anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin.loginPage("/employee/login").permitAll()
 						.defaultSuccessUrl("/employee/admin", true).failureForwardUrl("/403employee"))
 				.logout(logout -> logout.logoutUrl("/employee/j_spring_security_logout")
@@ -50,25 +49,20 @@ public class GoldenSecurityConfig {
 	@Bean
 	public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
 		http.securityMatcher("/admin/**")
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(AntPathRequestMatcher.antMatcher("/admin/admin"),
-								AntPathRequestMatcher.antMatcher("/admin/newcalendar"),
-								AntPathRequestMatcher.antMatcher("/admin/daily"),
-								AntPathRequestMatcher.antMatcher("/admin/newentrysafe"),
-								AntPathRequestMatcher.antMatcher("/admin/newentrymachine"),
-								AntPathRequestMatcher.antMatcher("/admin/againday*"),
-								AntPathRequestMatcher.antMatcher("/admin/beforeday*"),
-								AntPathRequestMatcher.antMatcher("/admin/updateoperation"),
-								AntPathRequestMatcher.antMatcher("/admin/pendingissues"),
-								AntPathRequestMatcher.antMatcher("/admin/totalsafe"),
-								AntPathRequestMatcher.antMatcher("/admin/searchmonthreset"),
-								AntPathRequestMatcher.antMatcher("/admin/newmessage"),
-								AntPathRequestMatcher.antMatcher("/admin/messages"),
-								AntPathRequestMatcher.antMatcher("/admin/searchticketsByDay"),
-								AntPathRequestMatcher.antMatcher("/admin/changemachinetotal"),
-								AntPathRequestMatcher.antMatcher("/admin/newentryvisible"),
-								AntPathRequestMatcher.antMatcher("/admin/searchregister"))
-						.hasRole("ADMIN").anyRequest().authenticated())
+				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/admin/admin").hasRole(ADMIN)
+						.requestMatchers("/admin/newcalendar").hasRole(ADMIN).requestMatchers("/admin/daily")
+						.hasRole(ADMIN).requestMatchers("/admin/newentrysafe").hasRole(ADMIN)
+						.requestMatchers("/admin/newentrymachine").hasRole(ADMIN).requestMatchers("/admin/againday*")
+						.hasRole(ADMIN).requestMatchers("/admin/beforeday*").hasRole(ADMIN)
+						.requestMatchers("/admin/updateoperation").hasRole(ADMIN)
+						.requestMatchers("/admin/pendingissues").hasRole(ADMIN).requestMatchers("/admin/totalsafe")
+						.hasRole(ADMIN).requestMatchers("/admin/searchmonthreset").hasRole(ADMIN)
+						.requestMatchers("/admin/newmessage").hasRole(ADMIN).requestMatchers("/admin/messages")
+						.hasRole(ADMIN).requestMatchers("/admin/searchticketsByDay").hasRole(ADMIN)
+						.requestMatchers("/admin/changemachinetotal").hasRole(ADMIN)
+						.requestMatchers("/admin/newentryvisible").hasRole(ADMIN)
+						.requestMatchers("/admin/searchregister").hasRole(ADMIN)
+						.requestMatchers("/admin/resultentrysortsafe").hasRole(ADMIN).anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin.loginPage("/admin/login").permitAll()
 						.defaultSuccessUrl("/admin/admin", true).failureForwardUrl("/403admin"))
 				.logout(logout -> logout.logoutUrl("/admin/j_spring_security_logout").logoutSuccessUrl("/admin/login")
@@ -79,17 +73,15 @@ public class GoldenSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain bossFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers(
-				AntPathRequestMatcher.antMatcher("/adminboss"), AntPathRequestMatcher.antMatcher("/newuser"),
-				AntPathRequestMatcher.antMatcher("/newentrymoney"), AntPathRequestMatcher.antMatcher("/summaryincome"),
-				AntPathRequestMatcher.antMatcher("/summaryexpenses"),
-				AntPathRequestMatcher.antMatcher("/searchregister"),
-				AntPathRequestMatcher.antMatcher("/searchrecharges"), AntPathRequestMatcher.antMatcher("/daily"),
-				AntPathRequestMatcher.antMatcher("/searchtpv"), AntPathRequestMatcher.antMatcher("/changemachinetotal"),
-				AntPathRequestMatcher.antMatcher("/searchentrysortsafe"),
-				AntPathRequestMatcher.antMatcher("/enabledisableuser"), AntPathRequestMatcher.antMatcher("/reset"),
-				AntPathRequestMatcher.antMatcher("/searchopenmachines"), AntPathRequestMatcher.antMatcher("/newtpv"),
-				AntPathRequestMatcher.antMatcher("/extrahours"), AntPathRequestMatcher.antMatcher("/manualpayments"))
+		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/adminboss").hasRole("BOSS")
+				.requestMatchers("/newuser").hasRole("BOSS").requestMatchers("/newentrymoney").hasRole("BOSS")
+				.requestMatchers("/summaryincome").hasRole("BOSS").requestMatchers("/summaryexpenses").hasRole("BOSS")
+				.requestMatchers("/searchregister").hasRole("BOSS").requestMatchers("/searchrecharges").hasRole("BOSS")
+				.requestMatchers("/daily").hasRole("BOSS").requestMatchers("/searchtpv").hasRole("BOSS")
+				.requestMatchers("/changemachinetotal").hasRole("BOSS").requestMatchers("/searchentrysortsafe")
+				.hasRole("BOSS").requestMatchers("/enabledisableuser").hasRole("BOSS").requestMatchers("/reset")
+				.hasRole("BOSS").requestMatchers("/searchopenmachines").hasRole("BOSS").requestMatchers("/newtpv")
+				.hasRole("BOSS").requestMatchers("/extrahours").hasRole("BOSS").requestMatchers("/manualpayments")
 				.hasRole("BOSS").anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin.loginPage("/login").permitAll().defaultSuccessUrl("/adminboss", true)
 						.failureForwardUrl("/403"))
@@ -108,8 +100,7 @@ public class GoldenSecurityConfig {
 	 */
 	@Bean
 	public WebSecurityCustomizer webSecurityCostumizer() {
-		return web -> web.ignoring().requestMatchers(AntPathRequestMatcher.antMatcher("/styles/**"),
-				AntPathRequestMatcher.antMatcher("/img/**"), AntPathRequestMatcher.antMatcher("/js/**"));
+		return web -> web.ignoring().requestMatchers("/styles/**", "/img/**", "/js/**");
 	}
 
 	@Autowired
